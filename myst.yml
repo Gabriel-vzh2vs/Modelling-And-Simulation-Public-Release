@@ -29,6 +29,7 @@ project:
         - file: Chapter_System-Modelling/Placeholder.md
     - title: Lab
       children:
+        - file: Chapter_Lab/SoftwareInstallation.md
         - file: Chapter_Lab/Placeholder.md
     - title: Distribution Modelling
       children:
@@ -57,3 +58,5 @@ site:
   # options:
   #   favicon: favicon.ico
   #   logo: site_logo.png
+bibliography:
+  - bibliography.bib
