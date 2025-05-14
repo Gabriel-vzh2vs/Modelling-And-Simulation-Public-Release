@@ -1,6 +1,6 @@
 # Introduction
 +++ {"part": "abstract"}
-This book aims to introduce advanced undergraduates and early graduate students to the field of Discrete-Event Simulation.
+This book covers theory and applications related to modeling and simulation. The level of the exposition is suited for advanced undergraduate students and graduate students.
 +++
 
 ```{tableofcontents}

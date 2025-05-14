@@ -2,12 +2,78 @@
 This Prelab is made to help you install a discrete event simulation software and XLRisk (Monte Carlo Excel Plugin) on your personal machine!
 
 ## XLRisk (For Mac and Windows)
+XLRisk is a free and open source Monte Carlo Excel Plugin that is similar to \@Risk! It allows the user to define distributions with parameters and use the Monte Carlo Method to simulate systems.
 
+Here is the documentation for using its functions after you install it: https://github.com/pyscripter/XLRisk/wiki/RiskFunctions.
 
 ### Windows
+1. Download XLRisk from https://github.com/pyscripter/XLRisk/raw/master/XLRisk.xlam.
+2. Left-Click the file in your downloads folder and click properties, a window will pop-up, and untick “blocked”, then press apply, this is the window after unblocking it:
+:::{figure} ../Figs/Chapter_Lab/XLriskWindowsDialogue.png
+:scale: 10 %
+:align: center
+:label: XLRiskWin
+:::
+3. Open Excel, and go to Options, and click on Add-ins, and you should get this screen: 
+:::{figure} ../Figs/Chapter_Lab/ExcelAddinsDialogue.png
+:scale: 20 %
+:align: center
+:label: XLRiskWin1
+:::
+4. Click on “Go...” And you will get this small popup, in this small pop-up window, click on “Browse” and go to your downloads folder and click on XLRisk.xlam:
+
+:::{figure} ../Figs/Chapter_Lab/XLRiskActivateDialogue.png
+:scale: 20 %
+:align: center
+:label: XLRiskWin2
+:::
+
+5. After that the XLRisk tab will appear at the top of your Excel window! 
 
 ### Mac
-
+1. Download XLRisk from https://github.com/pyscripter/XLRisk/raw/master/XLRisk.xlam.
+2. Open Excel, Click on “Excel” which is also marked with a red rectangle, then click on Preferences which is marked with a blue rectangle below:
+:::{figure} ../Figs/Chapter_Lab/XLriskMacStep2.png
+:scale: 20 %
+:align: center
+:label: XLRisk
+:::
+3. You should see a screen that says “Preferences” appear, and once it appears, click on “View”:
+:::{figure} ../Figs/Chapter_Lab/XLriskMacStep3.png
+:scale: 20 %
+:align: center
+:label: XLRiskMac
+:::
+4. Once you are in the view preferences screen (screenshot below), click on the “In Ribbon, Show Developer tab” checkbox:
+:::{figure} ../Figs/Chapter_Lab/XLriskMacStep4.png
+:scale: 20 %
+:align: center
+:label: XLRiskMac1
+:::
+5. Now exit the preferences window, and your Excel will now look like the screenshot below – click on the Developer Tab:
+:::{figure} ../Figs/Chapter_Lab/XLriskMacStep5.png
+:scale: 20 %
+:align: center
+:label: XLRiskMac2
+:::
+6. Now, that you are in the developer tab, you can now click on “Excel Add-Ins” which is highlighted with a blue box below:
+:::{figure} ../Figs/Chapter_Lab/XLriskMacStep6.png
+:scale: 20 %
+:align: center
+:label: XLRiskMac3
+:::
+7. Now, we are almost done with the setup process, once you click on the Excel Add-Ins, there will be a pop-up window – click browse and select the file “XLRisk.xlsm” and it will appear in the Excel Add-Ins window as the screenshot below shows:
+:::{figure} ../Figs/Chapter_Lab/XLriskMacStep7.png
+:scale: 20 %
+:align: center
+:label: XLRiskMac4
+:::
+8. Now, XLrisk will now be installed in your Excel, and your excel should now look like this:
+:::{figure} ../Figs/Chapter_Lab/XLriskMacStep8.png
+:scale: 20 %
+:align: center
+:label: XLRiskMac5
+:::
 
 ## Choices of Simulation Software
 There are several choices of discrete-event simulation software that come with advantages and disadvantages, which some of which are summarized in this table below:
@@ -47,9 +113,11 @@ The Email from SIMIO showing that they have granted you a License.
 #### On Virtualization for Mac
 ##### UTM
 
-1. 
+1. a
+2. a
+3. a
 
-##### 
+##### VirtualBox
 
 ### AnyLogic Installation
 ### Henning-Gabe Course Package Installation
