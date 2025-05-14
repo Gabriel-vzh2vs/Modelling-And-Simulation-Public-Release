@@ -3,7 +3,7 @@ version: 1
 project:
   id: 0510fb82-6795-4981-bdc5-1e0040ec1eaf
   # title: Modelling and Simulation
-  # description: This book is made for advanced undergraduate students and graduate students to understand simulation.
+  # description: This book covers theory and applications related to modeling and simulation. The level of the exposition is suited for advanced undergraduate students and graduate students.
   # keywords: []
   # authors: [Henning, Gabriel Lawrence]
   # github: https://github.com/Gabriel-vzh2vs/Modelling-And-Simulation-Public-Release
@@ -16,9 +16,9 @@ project:
         - file: Front-Matter/example2.md
     - title: Introduction To Simulation
       children:
-        - file: Introduction-to-Simulation/buffons_needle.ipynb
-        - file: Introduction-to-Simulation/section_introduction.md
-    - title: Probability And Stats
+        - file: Chapter_Introduction-to-Simulation/section_introduction.md
+        - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
+    - title: Probability And Statistics
       children:
         - file: Chapter_Probability-and-Stats/Placeholder.md
     - title: Simulation In Practice
@@ -51,7 +51,7 @@ project:
     - title: Variance Reduction Techniques
       children:
         - file: Chapter_Variance-Reduction-Techniques/Placeholder.md
-    
+
 site:
   template: book-theme
   # options:
