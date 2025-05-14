@@ -1,4 +1,4 @@
-# PreLab 0
+# PreLab 0: Software Install
 This Prelab is made to help you install a discrete event simulation software and XLRisk (Monte Carlo Excel Plugin) on your personal machine!
 
 ## XLRisk (For Mac and Windows)
@@ -95,7 +95,6 @@ This first set of instructions is for Microsoft Windows! If you do not have Micr
 :scale: 20 %
 :align: center
 :label: SIMIOForm
-This is a picture of SIMIO's Student Licensing Form.
 :::
 
 2. After you get the license in your email, then follow this link: https://www.simio.com/academic-licensing/getting-academic-software/ - click on “Download Simio Academic 64 bit”
@@ -113,9 +112,29 @@ The Email from SIMIO showing that they have granted you a License.
 #### On Virtualization for Mac
 ##### UTM
 
-1. a
-2. a
-3. a
+1. Download UTM from this link: https://github.com/utmapp/UTM/releases/latest/download/UTM.dmg or from the App Store
+2. Drag the UTM icon to Applications in the installation window:
+:::{figure} ../Figs/Chapter_Lab/SIMIO_email.png
+:scale: 20 %
+:align: center
+:label: UTMStep1
+The Email from SIMIO showing that they have granted you a License.
+:::
+3. Now, Download Windows from a reputable source, in this example, we used the University's provided Windows 11 File. 
+4. Once, you have downloaded Microsoft Windows, go to your spotlight/Launchpad and click on UTM, as the following image shows:
+:::{figure} ../Figs/Chapter_Lab/SIMIO_email.png
+:scale: 20 %
+:align: center
+:label: UTMStep2
+The Email from SIMIO showing that they have granted you a License.
+:::
+5. You will get a prompt stating “this is an app from the internet, are you sure you want to open it?” open it, and you will be presented with this screen:
+:::{figure} ../Figs/Chapter_Lab/SIMIO_email.png
+:scale: 20 %
+:align: center
+:label: UTMStep3
+The Email from SIMIO showing that they have granted you a License.
+6. Now, that you are on this screen, click on “Create a New Virtual Machine, and click on the “emulate” option – this will allow you to run Windows in a virtual machine at the cost of speed, on the next screen, click “Windows”.
 
 ##### VirtualBox
 
