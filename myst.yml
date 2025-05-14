@@ -20,7 +20,7 @@ project:
         - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
     - title: Probability And Statistics
       children:
-        - file: Chapter_Probability-and-Stats/Placeholder.md
+        - file: Chapter_Probability-and-Stats/probability_statistics.md
     - title: Simulation In Practice
       children:
         - file: Chapter_Simulation-In-Practice/Placeholder.md
