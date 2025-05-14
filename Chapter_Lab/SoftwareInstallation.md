@@ -84,6 +84,7 @@ There are several choices of discrete-event simulation software that come with a
 | **AnyLogic** | - Supports multiple simulation methodologies (agent-based, discrete event, queuing systems) <br> - Cross-platform compatibility (Windows, macOS, Linux) <br> - Extensive libraries and pre-made blocks <br> - Strong visualization capabilities |Can be resource-intensive <br> - Student Version Libraries are Limited to 6 Hours of Runtime <br> - Occasional bugs and crashes with libraries and addons |
 | **SimPy \& Salabim** | - Open-source and free to use <br> - Simple and lightweight <br> - Easy to integrate with other Python libraries | - Limited to discrete event simulation <br> - No built-in visualization tools <br> - Requires programming knowledge |
 
+(SIMIO-Install)=
 ### SIMIO Installation
 ```{warning}
 This first set of instructions is for Microsoft Windows! If you do not have Microsoft Windows, skip this section until otherwise instructed. 
@@ -114,29 +115,110 @@ The Email from SIMIO showing that they have granted you a License.
 
 1. Download UTM from this link: https://github.com/utmapp/UTM/releases/latest/download/UTM.dmg or from the App Store
 2. Drag the UTM icon to Applications in the installation window:
-:::{figure} ../Figs/Chapter_Lab/SIMIO_email.png
+:::{figure} ../Figs/Chapter_Lab/UTM1.png
 :scale: 20 %
 :align: center
 :label: UTMStep1
-The Email from SIMIO showing that they have granted you a License.
 :::
 3. Now, Download Windows from a reputable source, in this example, we used the University's provided Windows 11 File. 
 4. Once, you have downloaded Microsoft Windows, go to your spotlight/Launchpad and click on UTM, as the following image shows:
-:::{figure} ../Figs/Chapter_Lab/SIMIO_email.png
+:::{figure} ../Figs/Chapter_Lab/UTM2.png
 :scale: 20 %
 :align: center
 :label: UTMStep2
 The Email from SIMIO showing that they have granted you a License.
 :::
 5. You will get a prompt stating “this is an app from the internet, are you sure you want to open it?” open it, and you will be presented with this screen:
-:::{figure} ../Figs/Chapter_Lab/SIMIO_email.png
+:::{figure} ../Figs/Chapter_Lab/UTM3.png
 :scale: 20 %
 :align: center
 :label: UTMStep3
-The Email from SIMIO showing that they have granted you a License.
+:::
 6. Now, that you are on this screen, click on “Create a New Virtual Machine, and click on the “emulate” option – this will allow you to run Windows in a virtual machine at the cost of speed, on the next screen, click “Windows”.
-
+:::{figure} ../Figs/Chapter_Lab/UTM4.png
+:scale: 20 %
+:align: center
+:label: UTMStep4
+:::
+7. After you click “Windows”, a new screen will appear, on this screen click browse and go into downloads and click the Windows 11 installation file you downloaded earlier (en-us… .iso), then press continue after you have the .iso file. 
+:::{figure} ../Figs/Chapter_Lab/UTM5.png
+:scale: 20 %
+:align: center
+:label: UTMStep5
+:::
+8. On the next page, “Hardware”, make sure you give your machine 8 GB of RAM (if you have a lower end Mac, give it 4 GB) and give it at least 2 CPU cores - press the up arrow to allocate cores, then press continue and then press continue again as the default of 64 GB should be enough for Windows, and then press continue and save until the popup window closes. 
+:::{figure} ../Figs/Chapter_Lab/UTM6.png
+:scale: 20 %
+:align: center
+:label: UTMStep6
+:::
+9. Wait until the pending task completes, and then press the “play” button and then install Windows, it will give you instructions on how to do so.  
+:::{figure} ../Figs/Chapter_Lab/UTM7.png
+:scale: 20 %
+:align: center
+:label: UTMStep7
+:::
+10. At the end of this process, you should reach the Windows 11 desktop, and once you see it, follow the Windows Instructions from here: {ref}`SIMIO-Install`.
 ##### VirtualBox
-
-### AnyLogic Installation
+1. Download VirtualBox from here: https://download.virtualbox.org/virtualbox/7.1.4/VirtualBox-7.1.4-165100-OSX.dmg 
+2. Once downloaded, click on the .dmg file in downloads, which is boxed in this image:
+:::{figure} ../Figs/Chapter_Lab/VirtualBox1.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep1
+:::
+3. This window should open, follow the instructions from it to install VirtualBox:
+:::{figure} ../Figs/Chapter_Lab/VirtualBox2.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep2
+:::
+4. Once VirtualBox is done installing, you might get a dialogue asking you to install python3, click “install”:
+:::{figure} ../Figs/Chapter_Lab/VirtualBox3.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep3
+:::
+5. Download a copy of Windows from a reputable location.
+6. Open VirtualBox from spotlight or Launchpad, as seen below:
+:::{figure} ../Figs/Chapter_Lab/VirtualBox4.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep4
+:::
+7. Once VirtualBox is open, click on the button that says “new” to make a new virtual machine (don’t worry about what that means):
+:::{figure} ../Figs/Chapter_Lab/VirtualBox5.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep5
+:::
+8. Once in the new virtual machine menu, in name, type “Windows 11”, then click on the blue box on the same line as “ISO Image”, and then click other:
+:::{figure} ../Figs/Chapter_Lab/VirtualBox6.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep6
+:::
+9. When the Finder window pops up, click on Downloads, and pick “en-us_windows…” which will be the only selectable option for most people, and then once you find it, click “open”, then next:
+:::{figure} ../Figs/Chapter_Lab/VirtualBox7.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep6
+:::
+10. Now, you will get the “Unattended Guest OS Install Setup” screen, you should change the hostname to Windows11 and click on the password box and change it from “changeme” to something else. 
+:::{figure} ../Figs/Chapter_Lab/VirtualBox8.png
+:scale: 20 %
+:align: center
+:label: VirtualBoxStep7
+:::
+11. Now once the Virtual Machine is ready for use meaning it shows the Windows 11 Desktop, follow the instructions in {ref}`SIMIO-Install`.
+### AnyLogic Installation (Windows, Mac, and Linux)
+1. Go to https://www.anylogic.com/downloads/personal-learning-edition-download/, and fill out the form with your school or professional email and details. 
+2. After doing this, you will receive an email from Anylogic (check your spam) that looks like this:
+:::{figure} ../Figs/Chapter_Lab/Anylogic1.png
+:scale: 20 %
+:align: center
+:label: AnyLogic1
+:::
+3. Follow the Instructions to Install like any other program!
 ### Henning-Gabe Course Package Installation
+This will be developed at a later point. 
