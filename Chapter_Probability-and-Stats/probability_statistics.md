@@ -2,8 +2,7 @@
 # Probability and Statistics #
 ```{math}
 
-\newcommand{\wins}{\text{win-s}}
-\def\Pr{\operatorname{Pr}}
+\def\wins{{win-s}}
 \def\extra{(*)\xspace}
 \def\th{${}^{\text{th}}$\xspace}
 \def\exp{E}
@@ -213,11 +212,11 @@ courses on probability. Here $A$ and $B$ denotes events.
 
 __The probability of $A \cup B$:__ For all events $A$ and $B$ we
 have
-```{raw} latex
+
 \begin{equation*}
 \Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \;.
 \end{equation*}
-```
+
 
 
 :::{prf:definition} Conditional probability
@@ -380,7 +379,10 @@ succession. Note that we sometimes abbreviate random variable as ``r.v.''.
 -  Covariance and correlation of jointly distributed random variables.
 
 
-**Random variable:** Let $\Omega$ be a sample space of an
+:::{prf:definition} Random variable
+:label: def:random_variable
+
+Let $\Omega$ be a sample space of an
 experiment with a family of events~$\mathcal{F}$. A random variable $X$ on
 $\Omega$ is a function:\footnote{\extra subject to certain conditions
 that you will find described in the extra reading on page ???}
@@ -389,13 +391,15 @@ that you will find described in the extra reading on page ???}
   X \colon \Omega \longrightarrow \mathbb{R}
 \end{equation*}
 ```
+:::
 It is customary to use uppercase letter to denote random variables such
 as $X$, $Y$, and $Z$. The random variable $X$ thus assigns to each
 sample point $\omega \in \Omega$ a value $X(\omega)$.
 
 
+:::{prf:example} 4.3 (Law) - expanded:
 
-**Example 4.3 (Law) - expanded:** In this experiment we roll a
+In this experiment we roll a
 pair of normal dice. The sample space in this case is
 ```{raw} latex
 \begin{equation*}
@@ -406,6 +410,7 @@ Here $(a,b) \in \Omega$ encodes that $a$ appeared on the first die and
 $b$ on the second. We define $X \colon \Omega \longrightarrow
 \mathbb{R}$ to be the sum of the dice, that is $X\bigl((a,b)\bigr) =
 a+b$.
+:::
 
 We may also define the random variable $Y \colon \Omega
 \longrightarrow \mathbb{R}$ by $Y\bigl((a,b)\bigr) = 1$ if $a=b$ and
@@ -419,8 +424,11 @@ coin toss experiment, we define three random variable. We let $X_n$ be
 1 if the nickel was $H$ and 0 otherwise; we let $X_d$ be 1 if the dime
 was $H$ and 0 otherwise; and we let $Z$ be the total number of heads,
 which we may write as $Z = X_n + X_d$. The values of the random
-variables are specified in Table~\ref{tab:rv_cointoss}.
+variables are specified in {ref}`tab:rv_cointoss`.
+
+```{table}
 ```{raw} latex
+:label: tab:rv_cointoss
 \begin{table}[ht]
   \centerline{
     \begin{tabular}{|c|c|c|c|}
@@ -438,6 +446,7 @@ variables are specified in Table~\ref{tab:rv_cointoss}.
   \label{tab:rv_cointoss}
 \end{table}
 ```
+
 
 \textbf{Distribution function:} The distribution function (or
 cumulative distribution function, or cdf for short) of a random
