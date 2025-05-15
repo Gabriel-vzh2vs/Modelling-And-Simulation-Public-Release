@@ -1,4 +1,6 @@
-# PreLab 0: Software Install
+# Pre-Labs
+
+# Pre-Lab 0 
 This Prelab is made to help you install a discrete event simulation software and XLRisk (Monte Carlo Excel Plugin) on your personal machine!
 
 ## XLRisk (For Mac and Windows)
@@ -222,3 +224,15 @@ The Email from SIMIO showing that they have granted you a License.
 3. Follow the Instructions to Install like any other program!
 ### Henning-Gabe Course Package Installation
 This will be developed at a later point. 
+
+
+# Pre-Lab 1
+# Pre-Lab 2
+# Pre-Lab 3
+# Pre-Lab 4
+# Pre-Lab 5
+# Pre-Lab 6
+# Pre-Lab 7
+# Pre-Lab 8
+# Pre-Lab 9
+# Pre-Lab 10

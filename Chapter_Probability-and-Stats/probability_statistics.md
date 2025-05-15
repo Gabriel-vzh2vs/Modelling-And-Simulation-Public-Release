@@ -302,7 +302,7 @@ and $A_3$ for urn III. We then have (by the law of total probability):
 \end{align*}
 :::
 
-:::{prf:example} Monty Hall continued - for the last time)
+:::{prf:example} Monty Hall continued - for the last time
 
 To illustrate the law of total probability, let $A_1$ denote (as
 before) the event that the prize is behind door~1. Then~$A_1^c =
