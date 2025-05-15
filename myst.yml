@@ -61,6 +61,6 @@ site:
   #   favicon: favicon.ico
   #   logo: site_logo.png
 bibliography:
-  - bibliography.bib
+  - references.bib
 myst_enable_extensions:
   - ansmath
