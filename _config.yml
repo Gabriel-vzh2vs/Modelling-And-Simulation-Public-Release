@@ -1,0 +1,16 @@
+sphinx:
+  config:
+    mathjax3_config:
+      tex:
+        macros:
+          "N": "\\mathbb{N}"
+	  "Pr": "\\operatorname{Pr}"
+	  "exp": "{E}"
+	  "var": "\\operatorname{Var}"
+	  "cov": "\\operatorname{Cov}"
+
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - amsmath
