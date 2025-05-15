@@ -1,28 +1,17 @@
 ```{math}
 
-<<<<<<< HEAD
 \newcommand{\wins}{\text{win-s}}
-=======
-
-```{math}
-
->>>>>>> 15ac223 (Clean-up)
 \def\Pr{\operatorname{Pr}}
 \def\extra{(*)\xspace}
 \def\th{${}^{\text{th}}$\xspace}
 \def\exp{E}
 \def\var{\operatorname{Var}}
 \def\cov{\operatorname{Cov}}
-<<<<<<< HEAD
 ```
 
 (sec:prob_stats)=
 # Probability and Statistics #
 
-=======
-\def\wins{\operatorname{Wins}}
-```
->>>>>>> 15ac223 (Clean-up)
 
 
 This chapter is meant as a brief review of material from the
@@ -181,7 +170,6 @@ sample space $\Omega$ has three elements:
 \end{equation}
 ```
 Here $A_i$ denotes the experiment outcome (or sample point) where the
-<<<<<<< HEAD
 prize is behind door $i$. We construct the family~$\mathcal{F}$ in
 Table~\ref{tab:montyhall}. (\extra You may notice once more that
 $\mathcal{F}$ is the power set of $\Omega$, a common choice when the
@@ -203,56 +191,18 @@ Assume the contestant picks the first door. The event that corresponds to
 $2/3$. Similarly, ``win-by-not-switching'' corresponds to $\{A_1\}$
 which has probability $1/3$. $\Box$
 :::
-=======
-prize is behind door $i$. We construct the family $\mathcal{F}$ in
-Table \ref{tab:montyhall}. (\extra You may notice once more that
-$\mathcal{F}$ is the power set of $\Omega$, a common choice when the
-sample space is finite.)
-
-```{raw} latex
-\begin{table}[ht]
-  \centerline{
-    \begin{tabular}{|l|l|l|l|}
-    \hline
-    $A \in \mathcal{F}$ & $\Pr(A)$ & $A \in \mathcal{F}$ & $\Pr(A)$ \\
-    \hline
-    $\varnothing$ & 0 & $\Omega$ & 1 \\
-    $\{A_1\}$ & 1/3 &     $\{A_1, A_2\}$ & 2/3 \\
-    $\{A_2\}$ & 1/3 &     $\{A_2, A_3\}$ & 2/3 \\
-    $\{A_3\}$ & 1/3 &     $\{A_2, A_3\}$ & 2/3 \\
-    \hline
-    \end{tabular}
-    }
-  \caption{The family $\mathcal{F}$ for the Monty Hall problem.}
-  \label{tab:montyhall}
-\end{table}
-```
-
-Assume the contestant picks the first door. The event that corresponds to
-"win-by-switching" is $\{A_2, A_3\}$ which has probability
-$2/3$. Similarly, "win-by-not-switching" corresponds to $\{A_1\}$
-which has probability $1/3$.
->>>>>>> 15ac223 (Clean-up)
 
 (sec:prob_stats_defs)=
 ## Common terms and definitions
 
-<<<<<<< HEAD
 The following terms and facts should be familiar from your introductory
 courses on probability. Here $A$ and $B$ denotes events.
 %%
-=======
-## Common terms and definitions ##
-The following terms and facts should be familiar from your introductory
-courses on probability. Here $A$ and $B$ denotes events.
-
->>>>>>> 15ac223 (Clean-up)
 -  The event that at least one of events $A$ and $B$ occur is $A
   \cup B$, the union of $A$ and $B$.
 -  The event that both events $A$ and $B$ occurs is $A \cap B$, the
   intersection of $A$ and $B$.
 -  The event that $A$ does not occur is $A^c$, the complement of $A$.
-<<<<<<< HEAD
 -  The event $\Omega$ is called the __certain event__.
 -  The event $\varnothing$ is called the __impossible event__.
 -  Events $A$ and $B$ are __disjoint__ if $A\cap B =
@@ -265,19 +215,6 @@ courses on probability. Here $A$ and $B$ denotes events.
 
 
 __The probability of $A \cup B$:__ For all events $A$ and $B$ we
-=======
--  The event $\Omega$ is called the _certain event_.
--  The event $\varnothing$ is called the _impossible event_.
--  Events $A$ and $B$ are _disjoint_ if $A\cap B =
-  \varnothing$. (Here $\varnothing$ denotes the empty set.) For
-  example, the two events $A= \{(H,H),(T,H)\}$ and $B=\{(H,H),(H,T)\}$
-  in the coin-tossing example are _not disjoint_: $A \cap B =
-  \{(H,H)\}$.
--  Events $A$ and $B$ are _independent_ if $\Pr(A \cap B) = \Pr(A)
-  \times \Pr(B)$;
-
-**The probability of $A \cup B$:** For all events $A$ and $B$ we
->>>>>>> 15ac223 (Clean-up)
 have
 ```{raw} latex
 \begin{equation*}
@@ -286,7 +223,6 @@ have
 ```
 
 
-<<<<<<< HEAD
 :::{prf:definition} Conditional probability
 :label: def:prob_space
 
@@ -308,23 +244,6 @@ One may rewrite the expression {eq}`eq:conditional` as
 
 
 Note that if $A$ and $B$ are independent (see definition above), then
-=======
-**Conditional probability:** For events $A$ and $B$, the
-conditional probability of $A$ given $B$ is defined by
-```{raw} latex
-\begin{equation*}
-\Pr(A|B) = \frac{\Pr(A\cap B}{\Pr(B)}\;, \quad \text{ if $\Pr(B) > 0$}\;,
-\end{equation*}
-```
-and is undefined if $\Pr(B) = 0$. One may rewrite this expression as
-```{raw} latex
-\begin{equation*}
-\Pr(A\cap B) = \Pr(A|B)\Pr(B) \;.
-\end{equation*}
-```
-Note that if $A$ and $B$ are independent (see above), then
-```{raw} latex
->>>>>>> 15ac223 (Clean-up)
 \begin{equation*}
   \Pr(A|B) =
   \frac{\Pr(A\cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A) \;.
@@ -334,33 +253,20 @@ In other words, knowing that the event $B$ has occurred does not
 impact the probability of the event $A$ from occurring.
 
 
-<<<<<<< HEAD
 __Law of total probability:__ Let $A_1$, $A_2$, $\ldots$, $A_n$
-=======
-
-**Law of total probability:** Let $A_1$, $A_2$, $\ldots$, $A_n$
->>>>>>> 15ac223 (Clean-up)
 be events (yes, elements of $\mathcal{F}$) such that the following two
 conditions are met: (1) $A_i$ and $A_j$ are disjoint when $i\ne j$,
 and (2) $\Omega = A_1 \cup A_2 \cup \cdots \cup A_n$. Then for any
 event $B$ we have:
-<<<<<<< HEAD
 ```{math}
 :label: eq:total_prob
 \begin{equation}
   \Pr(B) = \sum_{i=1}^n \Pr(B \cap A_i) = \sum_{i=1}^n \Pr(B | A_i)\Pr(A_i)
 \end{equation}
-=======
-```{raw} latex
-\begin{equation*}
-  \Pr(B) = \sum_{i=1}^n \Pr(B \cap A_i) = \sum_{i=1}^n \Pr(B | A_i)\Pr(A_i)
-\end{equation*}
->>>>>>> 15ac223 (Clean-up)
 ```
 Note that the last equality follows from the definition of conditional
 probability.
 
-<<<<<<< HEAD
 
 :::{prf:example} {cite}`Taylor:84`
 :label: ex:urns
@@ -376,26 +282,6 @@ labeled I, II and III containing silver and gold coins as in {ref}`tab:urns`.
 |I   |              4 |               8 |
 |II  |              3 |               9 |
 |III |              6 |               6 |
-=======
-**Example: (\cite{Taylor:84})** Consider the case with three urns
-labeled I, II and III containing silver and gold coins as in Table \ref{tab:urns}.
-```{raw} latex
-\begin{table}[ht]
-  \centerline{
-    \begin{tabular}{|c|c|c|}
-      \hline
-      Urn & \#(gold coins) & \#(silver coins)\\
-      \hline
-      I & 4 & 8 \\
-      II& 3 & 9 \\
-      III & 6 & 6\\
-      \hline
-    \end{tabular}
-  }
-  \caption{The example with urns and coins.}
-  \label{tab:urns}
-\end{table}
->>>>>>> 15ac223 (Clean-up)
 ```
 Question: a coin is selected by first picking an urn, all urns being
 equally likely, and then by picking one coin from the resulting urn at
@@ -415,7 +301,6 @@ and $A_3$ for urn III. We then have (by the law of total probability):
   &= \frac{4}{12}\cdot \frac{1}{3} + \frac{3}{12} \cdot\frac{1}{3} + \frac{6}{12}\cdot\frac{1}{3} \\
   &= \frac{13}{36}
 \end{align*}
-<<<<<<< HEAD
 :::
 
 :::{prf:example} Monty Hall continued - for the last time)
@@ -423,22 +308,9 @@ and $A_3$ for urn III. We then have (by the law of total probability):
 To illustrate the law of total probability, let $A_1$ denote (as
 before) the event that the prize is behind door~1. Then~$A_1^c =
 \{A_2, A_3\}$. The two conditions in the law of total probability are
-=======
-```
-
-```{math}
-\def\wins{\text{win-s}}
-```
-
-\textbf{Example (Monty Hall continued - for the last time):} To
-illustrate the law of total probability, let $A_1$ denote (as before)
-the event that the prize is behind Door 1. Then~$A_1^c = \{A_2,
-A_3\}$. The two conditions in the law of total probability are
->>>>>>> 15ac223 (Clean-up)
 satisfied since (1) $A_1 \cap A_1^c = \varnothing$, and (2) $\Omega =
 A_1 \cup A_1^c$. (These two equalities are always true, of course.)
 
-<<<<<<< HEAD
 Having picked door~1, we now want to compute the probability of
 winning by switching, denoted by $\Pr(win-s)$, using the law of total
 probability. This gives
@@ -455,37 +327,13 @@ The last equality follows since $\Pr(win-s|A_1)$, the probability of
 winning by switching, having chosen door~1, and given that the event
 $A_1$ occurred (the prize is behind door~1), is 0.  $\Box$
 :::
-=======
-Having picked Door 1, we now want to compute the probability of
-winning by switching, denoted by $\Pr(\text{wins})$, using the law of total
-probability. This gives
-```{raw} latex
-\begin{align*}
-  \Pr(\text{wins})
-  &= \Pr(\text{wins}\cap A_1) + \Pr(\text{wins}\cap A_1^c) \\
-  &= \Pr(\text{wins}|A_1)\Pr(A_1) + \Pr(\text{wins}|A_1^c)\Pr(A_1^c)\\
-  &= 0 \cdot 1/3 + 1 \cdot 2/3 = 2/3 \;.
-\end{align*}
-```
-The last equality follows since $\Pr(\text{wins}|A_1)$, the probability of
-winning by switching, having chosen door 1, and given that the event
-$A_1$ occurred (the prize is behind door 1), is 0. 
->>>>>>> 15ac223 (Clean-up)
 
 :::{prf:example} {cite}`Ross:24`
 
-<<<<<<< HEAD
 Two cards are selected randomly from a deck of 52 playing cards. (a)
 What is the probability that the two cards constitute a pair? (b) What
 is the conditional probability that they constitute a pair given that
 they are of different suits?
-=======
-
-**Example: (\cite{Ross:24})** Two cards are selected randomly
-from a deck of 52 playing cards. (a) What is the probability that the
-two cards constitute a pair? (b) What is the conditional probability
-that they constitute a pair given that they are of different suits?
->>>>>>> 15ac223 (Clean-up)
 
 (a) Let $A$ denote the event where the two cards constitute a
 pair. When drawing the second card, there are a total of 51
@@ -505,21 +353,13 @@ second card, 39 of which of suit that differs from the first
 card. Therefore $\Pr(B) = 39/51$, and we conclude that $\Pr(A |B) =
 \Pr(A \cap B)/\Pr(B) = (3/51)\Bigl/(39/51) = 3/39 = 1/13$.
 
-<<<<<<< HEAD
 __Bonus question:__ are the events $A$ and $B$ independent? Why
-=======
-**Bonus question:** are the events $A$ and $B$ independent? Why
->>>>>>> 15ac223 (Clean-up)
 or why not?
 :::
 
-<<<<<<< HEAD
 
 (sec:prob_random_variables)=
 ## Random variables
-=======
-### Random variables ###
->>>>>>> 15ac223 (Clean-up)
 
 Random variables are often introduced introductory probability courses
 and in introductory statistics courses. Chapter 4 of {cite}`Law:13`
@@ -570,11 +410,7 @@ a+b$.
 We may also define the random variable $Y \colon \Omega
 \longrightarrow \mathbb{R}$ by $Y\bigl((a,b)\bigr) = 1$ if $a=b$ and
 $0$ otherwise. A zero-one random variable like this is often called an
-<<<<<<< HEAD
 __indicator random variable}. (You may remember this from the
-=======
-_indicator random variable_. (You may remember this from the
->>>>>>> 15ac223 (Clean-up)
 first lecture on Buffon's needle.)
 
 
@@ -603,8 +439,6 @@ variables are specified in Table~\ref{tab:rv_cointoss}.
 \end{table}
 ```
 
-\medskip
-
 \textbf{Distribution function:} The distribution function (or
 cumulative distribution function, or cdf for short) of a random
 variable $X$ over a sample space $\Omega$ is the function $F \colon
@@ -616,9 +450,7 @@ With more than one random variable, we may write $F_X$, $F_Y$, and so
 on.
 
 
-\medskip
-
-## Discrete and continuous random variables:# #
+## Discrete and continuous random variables: ##
 
 A random variable is a _discrete random variable_ if there is a
 finite or denumerable set of distinct values $x_1$, $x_2$, $\ldots$ such that
@@ -663,8 +495,6 @@ Finally, if $F(x)$ is differentiable, then
  f(x) = \frac{d}{dx} F(x) = F'(x), \quad  -\infty < x < \infty \;.
 \end{equation*}
 ```
-
-\medskip
 
 **Example: (\cite[2.13]{Ross:24}** - a general version of Law
   4.7)} The uniform random variable on the interval $(a,b) \subset
@@ -948,7 +778,7 @@ _covariance stationary_ stochastic processes which we will likely
 return to when analyzing queuing systems.
 
 
-# Some less typical examples and advanced concepts#
+## Some less typical examples and advanced concepts ##
 
 This material in this section is optional and will not be included in
 homework or exams. It is meant for those who want to know some more
