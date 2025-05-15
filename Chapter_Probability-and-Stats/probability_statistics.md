@@ -1,3 +1,5 @@
+(sec:prob_stats)=
+# Probability and Statistics #
 ```{math}
 
 \newcommand{\wins}{\text{win-s}}
@@ -9,15 +11,10 @@
 \def\cov{\operatorname{Cov}}
 ```
 
-(sec:prob_stats)=
-# Probability and Statistics #
-
-
-
 This chapter is meant as a brief review of material from the
 Probability and Statistics courses that you have had (or are taking),
 and that will be used in this course. Some of this material is covered
-in the textbook (Law) in Chapter~4. It will be beneficial to review
+in the textbook (Law) in Chapter 4. It will be beneficial to review
 (or preview) this from these courses. The description may be a little
 bit more formal than what you are used to. This is done to help
 clarify concepts.
@@ -170,8 +167,8 @@ sample space $\Omega$ has three elements:
 \end{equation}
 ```
 Here $A_i$ denotes the experiment outcome (or sample point) where the
-prize is behind door $i$. We construct the family~$\mathcal{F}$ in
-Table~\ref{tab:montyhall}. (\extra You may notice once more that
+prize is behind door $i$. We construct the family $\mathcal{F}$ in
+{ref}`tab:montyhall`. (\extra You may notice once more that
 $\mathcal{F}$ is the power set of $\Omega$, a common choice when the
 sample space is finite.)
 %%
@@ -238,12 +235,15 @@ and is undefined if $\Pr(B) = 0$.
 :::
 
 One may rewrite the expression {eq}`eq:conditional` as
+```{raw} latex
 \begin{equation*}
 \Pr(A\cap B) = \Pr(A|B)\Pr(B) \;.
 \end{equation*}
+```
 
 
 Note that if $A$ and $B$ are independent (see definition above), then
+```{raw} latex
 \begin{equation*}
   \Pr(A|B) =
   \frac{\Pr(A\cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A) \;.
