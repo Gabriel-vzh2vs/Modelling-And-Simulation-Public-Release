@@ -60,3 +60,5 @@ site:
   #   logo: site_logo.png
 bibliography:
   - bibliography.bib
+myst_enable_extensions:
+  - ansmath
