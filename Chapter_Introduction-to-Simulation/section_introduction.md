@@ -2,26 +2,27 @@
 (sec:intro_sim)=
 # Simulation and Modeling #
 
-What do we mean by simulation and modeling? It will always be with
-reference to some _system_ that we want to study. While we may
-sometimes be able to experiment directly with the system, there are
-many reasons why one will not be able to rely on this approach
-alone. This is where __models__ and __modeling__ enter the picture.
+What do we mean by simulation and modeling? We first note that these
+activities will always be with reference to some _system_ that we want
+to study. Sometimes, we may may be able to experiment directly with
+the system, but as you can imagine there are many reasons why one will
+not be able to rely on this approach alone. This is where __models__,
+__modeling__, and __simulation__ enter the picture.
 
 ## Modeling ##
 
-To analyze the system $S$ a first step is to develop a _model_ for
+To analyze a system $S$ a first step is to develop a _model_ for
 $S$. This model can be a _physical_ model such as a scaled down
 version of an airplane wing placed in a wind-tunnel. One may then
 measure lift and other forces as a function of wind speed, angles of
 attack, and so on. However, building physical models is time-consuming
 and costly. Moreover, obtaining all the kinds of measurements one
-needs under all conditions that one is required to examine can be both
-challenging and time-consuming. For some systems, building physical
-models may by very unrealistic. Examples of such include planning and
-response to scenarios involving natural and human-initiated disaster
-events. As a result, we will develop _mathematical models_ to capture
-and represent the system. The overview of approaches are shown in
+needs under all relevant conditions can be both challenging and
+time-consuming. For some systems, building physical models may be
+unrealistic, examples including planning and response for scenarios
+involving natural and human-initiated disaster events. Based on this,
+we will develop _mathematical models_ to capture and represent the
+system. The overview of approaches are shown in
 {numref}`modelingOverview`.
 
 :::{figure} ../Figs/system-analysis-approaches.png
@@ -33,36 +34,19 @@ Elements involved in the process of modeling and simulation of a system.
 In practice, complex modeling projects will often rely on a
 combination of physical- and mathematical models.  The focus of this
 book, however, is on the mathematical models, associated theory, and
-the construction of _simulation models_ and the analytics and
-methodologies that go with these. These are indicated by the red paths
-in {numref}`modelingOverview`.
+the construction of _simulation models_, as indicated by the
+red paths in {numref}`modelingOverview`. We will also focus on
+analysis methodologies spanning modeling and simulation.
 
 ## Mathematical models ##
 
 What is a mathematical model of a system $S$? In short, it is a
 mathematical description of $S$, its properties, structure, and how it
-operates or evolves with time. Models come in many varieties. For
-example, their time evoluation may be captured through ordinary- or
-partial differential equations, or they may evolve in discrete time
-steps.
-
-For some mathematical models you may be able to derive an analytic or
-closed form solution, perhaps with help from software performing
-symbolic computations such as Mathematica and SageMath. While one
-should certainly embrace this when possible, this situation is
-relatively rare, but see the section {ref}`sec:intro_validation`
-below.
-
-We should also clarify that when we say mathematical model we really
-mean a formally specified model. A precise, algorithmic description of
-a system may often be a more natural way to capture it. For a complex
-system, it is not uncommon to employ a combination of mathematical and
-algorithmic descriptions. We note that the term _formal methods_ (see,
-e.g., <https://en.wikipedia.org/wiki/Formal_methods>) has a specific
-meaning in computer science and, by association, so does _formal
-models_. For this reason, we stick with the term mathematical model,
-and we take this to also include algorithmic descriptions.
-
+operates or evolves with time. We will denote models by $M$, $M_1$ or
+$M'$. Models come in many varieties. For example, their time
+evoluation may be captured through ordinary- or partial differential
+equations, or they may evolve in discrete time steps. Naturally, there
+are also hybrid models involving both paradigms.
 
 Models of even quite basic systems will have one or more _stochastic
 components_. Analysis of such models is a central part of this book,
@@ -74,10 +58,44 @@ or a book on this topic.
 ```{note} add references here and link to prob/stats.
 ```
 
+We should also clarify that when we say mathematical model we really
+mean a formally specified model. A precise, algorithmic description of
+a system may often be a more natural way to capture it. For a complex
+system, it is not uncommon to employ a combination of mathematical and
+algorithmic descriptions. We note that the term _formal methods_ (see,
+e.g., <https://en.wikipedia.org/wiki/Formal_methods>) has a specific
+meaning in computer science and, by association, so does _formal
+models_. For this reason, we stick with the term mathematical model,
+and we take this to also include algorithmic descriptions.
+
+What is a good model? We address that under {ref}`sec:intro_validation`.
+
+For some mathematical models you may be able to derive an analytic or
+closed form solution, perhaps with help of software performing
+symbolic computations such as Mathematica and SageMath. While one
+should certainly embrace and take advantage of this whenever possible,
+this situation is relatively rare. This is where simulations come into play.
+
+
 (sec:intro_simulation)=
 ## Simulation ##
 
+In this book, a __simulation__ will be a program or script that
+implements a model $M$. One may execute a simulation, possibly
+providing input data and configurations, and generating output
+data. Common terminology includes "running a simulation", "a
+simulation run", and "simulation output data". If we want to emphasize
+that we are not simply operating any old piece of code or executable,
+but that it actually is tied to a model, we may use the phrase
+__simulation model__.
 
+Examples of simulations.
+- XLRisk
+- Python
+- C++
+-
+
+black box, white box <https://en.wikipedia.org/wiki/White_box_(software_engineering)>
 
 
 (sec:intro_validation)=
@@ -85,6 +103,9 @@ or a book on this topic.
 
 In practice, one may be able to determine certain properties or invariants
 
+
+, but see the section {ref}`sec:intro_validation`
+below.
 
 ## Verification ##
 
