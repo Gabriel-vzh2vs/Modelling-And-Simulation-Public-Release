@@ -5,11 +5,16 @@ The labs serve a dual purpose in this text, they enable the reader apply lessons
 # Lab 1: Computing $\pi$ with Monte Carlo Methods (Excel)
 ## Problem Statement
 
+## Tips and Tricks
+
+## Questions to Think about: 
+
 
 ## Questions to Think about: 
 # Lab 2: Retirement Calculations with Monte Carlo Methods (XLRisk)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 
@@ -17,6 +22,7 @@ The labs serve a dual purpose in this text, they enable the reader apply lessons
 # Lab 3: Building a Portfolio with Monte Carlo Methods (XLRisk)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 
@@ -27,41 +33,49 @@ The labs serve a dual purpose in this text, they enable the reader apply lessons
 # Lab 4: Posterior Probablity Estimation with Monte Carlo Methods (Python + Excel)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 # Lab 5: Foundations of Modelling (SIMIO, Anylogic, or Python)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 
 # Lab 6: Markovian Queuing Methods (Python's CTW, SIMIO, or Anylogic)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 # Lab 7: General and Deterministic Queuing Methods (SIMIO, CTW, or Anylogic)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 # Lab 8: Introduction to ODEs in Simulation and Modelling (PySim/Salabim, Anylogic, or SIMIO)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 # Lab 9: Modelling the Spread of Illness via SEIR Models (PySim/Salabim, Anylogic, or SIMIO)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 # Lab 10: Agent-Based Modelling (PySim/Salabim or Anylogic)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
 # Lab 11: Optimization through SImulation (PySim/Salabim, Anylogic, or SIMIO)
 ## Problem Statement
 
+## Tips and Tricks
 
 ## Questions to Think about: 
