@@ -1,6 +1,6 @@
 # Projects
 
-These projects are meant to bridge the theory of simulation and application into several summative assessments. Additionally, this section will have methods for evalution for students and instructors. It is recommended to select two of the five projects selected here with one belonging to the fundamental set, and another belonging to the extension set. 
+These projects are meant to bridge the theory of simulation and application into several summative assessments. Additionally, this section will have methods for evaluation for students and instructors. It is recommended to select two of the five projects selected here with one belonging to the fundamental set, and another belonging to the extension set. 
 
 The current projects focus on developing these skills:
 1. Doing Basic Modelling;
@@ -28,7 +28,7 @@ And this project relies on the following prerequisities:
 3. c
 
 ## Model Information ##
-We are planning a trip to Fantasy Island  and we have to consider several different variates for our trip, and more detail is in the attached Excel Sheet: 
+We are planning a trip to Fantasy Island and we have to consider several different variates for our trip, and more detail is in the attached Excel Sheet: 
 - The plane fare 
 - The accommodation costs (hotel) 
 - Food 
