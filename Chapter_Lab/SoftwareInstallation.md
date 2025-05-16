@@ -1,6 +1,6 @@
 # Pre-Labs
 
-# Pre-Lab 0 
+# Pre-Lab 0: Walkthrough of Software Installation 
 This Prelab is made to help you install a discrete event simulation software and XLRisk (Monte Carlo Excel Plugin) on your personal machine!
 
 ## XLRisk (For Mac and Windows)
@@ -226,13 +226,68 @@ The Email from SIMIO showing that they have granted you a License.
 This will be developed at a later point. 
 
 
-# Pre-Lab 1
-# Pre-Lab 2
-# Pre-Lab 3
-# Pre-Lab 4
-# Pre-Lab 5
-# Pre-Lab 6
-# Pre-Lab 7
-# Pre-Lab 8
-# Pre-Lab 9
-# Pre-Lab 10
+# Pre-Lab 1: Fundemental Excel Skills (Reading)
+
+## The Cell ##
+
+## Formulas ##
+
+## Ranges ##
+
+## References ##
+
+# Pre-Lab 2: Tutorial for XLRisk (Reading \& Doing)
+
+## Functions ##
+
+## Correlations ##
+
+## Trials ##
+
+## Results ##
+
+## Skew and Kurtosis ##
+
+# Pre-Lab 3: Advanced Excel Functions (Doing)
+
+## Live Formulas ##
+
+# Pre-Lab 4: Python Review (Reading)
+## Juypter Notebook ##
+
+## Conda ##
+
+## Examples ##
+
+# Pre-Lab 5: Introduction to Simulation Software (Reading \& Doing)
+## SIMIO ##
+
+## Anylogic ## 
+
+## Python ## 
+
+# Pre-Lab 6: A Quick Review of Queuing Theory (Reading)
+
+## Birth and Death Processes##
+
+## Kendall's Notation ##
+
+# Pre-Lab 7: Review of Distributions (Reading)
+
+## When to Pick a Distribution ##
+
+## Phitter, Dfit, and Fitter ##
+
+# Pre-Lab 8: Review of Ordinary Differential Equations (Reading)
+
+## What is an ODE ##
+
+## Application to Simulation ###
+
+## Examples of ODEs in Basic Simulation ##
+
+# Pre-Lab 9: Becoming Proficient at Simulation Software (Doing)
+
+# Pre-Lab 10: A Short Introduction to Agent-Based Modelling (Reading \& Doing)
+
+## What is an Agent? ##

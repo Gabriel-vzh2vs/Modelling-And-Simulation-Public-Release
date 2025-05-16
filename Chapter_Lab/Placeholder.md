@@ -18,9 +18,9 @@ This project focuses on developing the following skills:
 And this project relies on the following prerequisities:
 
 ### Labs ###
-1. a
-2. b
-3. c
+1. [Lab1](./GMPforReports.ipynb)
+2. [Lab2](./GMPforReports.ipynb)
+3. [Lab3](./GMPforReports.ipynb)
 
 ### Chapters ###
 1. a
@@ -59,20 +59,23 @@ In this case, documеntation consists of thе writtеn rеport, and an annotated
 
 ## Evaluation ##
 
-# Project 2 (Extension)
+# Project 2: Modelling a Multi-Server Queuing System (Extension)
 This project focuses on developing the following skills:
-1. Modelling in the context of queues;
+1. Basic Modelling in the context of queues;
 2. Distribution Fitting;
 3. Interpeting System Metrics;
 4. Using Specialized Simulation Software;
 5. e
 
 And this project relies on the following prerequisities:
-1. a
-2. b
-3. c
-4. d
-5. e
+### Labs ###
+1. [Lab5](./GMPforReports.ipynb)
+2. [Lab6](./GMPforReports.ipynb)
+3. [Lab7](./GMPforReports.ipynb)
+### Lectures ###
+1. [Lab5](./GMPforReports.ipynb)
+2. [Lab6](./GMPforReports.ipynb)
+3. [Lab7](./GMPforReports.ipynb)
 
 You are a consultant for an Oslo-Based high-end consulting firm that has a simulation division, and one of your clients, a supermarket chain named Valg 1000, comes to your consultancy and asks for a simulation study to identify several inefficiencies in their checkout process, which are both hurting customer experience and their profits. 
 
@@ -117,9 +120,9 @@ This project focuses on developing the following skills:
 And this project relies on the following prerequisities:
 
 ### Labs ###
-1. a
-2. b
-3. c
+1. [Lab5](./GMPforReports.ipynb)
+2. [Lab6](./GMPforReports.ipynb)
+3. [Lab7](./GMPforReports.ipynb)
 
 ### Chapters ###
 1. a
@@ -135,16 +138,15 @@ This project focuses on developing the following skills:
 2. And learning how to use Monte Carlo Methods to build basic simulations.
 
 And this project relies on the following prerequisities:
-
 ### Labs ###
-1. a
-2. b
-3. c
+1. [Lab5](./GMPforReports.ipynb)
+2. [Lab6](./GMPforReports.ipynb)
+3. [Lab7](./GMPforReports.ipynb)
+### Lectures ###
+1. [Lab5](./GMPforReports.ipynb)
+2. [Lab6](./GMPforReports.ipynb)
+3. [Lab7](./GMPforReports.ipynb)
 
-### Chapters ###
-1. a
-2. b
-3. c
 
 
 
@@ -155,13 +157,12 @@ This project focuses on developing the following skills:
 2. And learning how to use Monte Carlo Methods to build basic simulations.
 
 And this project relies on the following prerequisities:
-
 ### Labs ###
-1. a
-2. b
-3. c
+1. [Lab5](./GMPforReports.ipynb)
+2. [Lab6](./GMPforReports.ipynb)
+3. [Lab7](./GMPforReports.ipynb)
+### Lectures ###
+1. [Lab5](./GMPforReports.ipynb)
+2. [Lab6](./GMPforReports.ipynb)
+3. [Lab7](./GMPforReports.ipynb)
 
-### Chapters ###
-1. a
-2. b
-3. c
