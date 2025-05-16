@@ -268,7 +268,7 @@ This will be developed at a later point.
 
 # Pre-Lab 6: A Quick Review of Queuing Theory (Reading)
 
-## Birth and Death Processes##
+## Birth and Death Processes ##
 
 ## Kendall's Notation ##
 

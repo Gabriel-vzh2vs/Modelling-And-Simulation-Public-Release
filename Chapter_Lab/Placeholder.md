@@ -9,7 +9,7 @@ The current projects focus on developing these skills:
 4. Performing Distribution Fitting;
 5. Analyzing and Interpeting System Metrics.
 
-# Project 1 (Fundamental): Budgeting with Monte Carlo Methods
+# Project 1 (Fundamental Project): Budgeting with Monte Carlo Methods
 
 This project focuses on developing the following skills:
 1. How to structure \& create a simulation study;
@@ -59,7 +59,7 @@ In this case, documеntation consists of thе writtеn rеport, and an annotated
 
 ## Evaluation ##
 
-# Project 2: Modelling a Multi-Server Queuing System (Extension)
+# Project 2 (Extension Project): Modelling a Multi-Server Queuing System 
 This project focuses on developing the following skills:
 1. Basic Modelling in the context of queues;
 2. Distribution Fitting;
