@@ -248,9 +248,13 @@ This will be developed at a later point.
 
 ## Skew and Kurtosis ##
 
-# Pre-Lab 3: Advanced Excel Functions (Doing)
+# Pre-Lab 3: Advanced Excel Functions (Doing \& Reading)
 
 ## Live Formulas ##
+
+## Debugging ##
+
+## Examples ##
 
 # Pre-Lab 4: Python Review (Reading)
 ## Juypter Notebook ##
@@ -260,6 +264,7 @@ This will be developed at a later point.
 ## Examples ##
 
 # Pre-Lab 5: Introduction to Simulation Software (Reading \& Doing)
+
 ## SIMIO ##
 
 ## Anylogic ## 
@@ -267,6 +272,8 @@ This will be developed at a later point.
 ## Python ## 
 
 # Pre-Lab 6: A Quick Review of Queuing Theory (Reading)
+
+## Exponential Distribution ##
 
 ## Birth and Death Processes ##
 
@@ -287,6 +294,11 @@ This will be developed at a later point.
 ## Examples of ODEs in Basic Simulation ##
 
 # Pre-Lab 9: Becoming Proficient at Simulation Software (Doing)
+
+## Building Queues ###
+
+## 
+
 
 # Pre-Lab 10: A Short Introduction to Agent-Based Modelling (Reading \& Doing)
 
