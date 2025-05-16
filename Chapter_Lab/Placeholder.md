@@ -1,5 +1,9 @@
 # Projects
 
+```{code}
+print(1+2)
+```
+
 These projects are meant to bridge the theory of simulation and application into several summative assessments. Additionally, this section will have methods for evaluation for students and instructors. It is recommended to select two of the five projects selected here with one belonging to the fundamental set, and another belonging to the extension set. 
 
 The current projects focus on developing these skills:
