@@ -358,7 +358,7 @@ or why not?
 
 
 (sec:prob_random_variables)=
-## Random variables
+## Random variables ##
 
 Random variables are often introduced introductory probability courses
 and in introductory statistics courses. Chapter 4 of {cite}`Law:13`
@@ -759,7 +759,7 @@ will need this result when we conduct output analysis of simulations.
 
 # Stochastic Processes #
 
-You may have learned about stochastic processes in a stochastic modelling course 
+You may have learned about stochastic processes in a stochastic modelling course
 (such as the University of Virginia's Stochastic Decision Models or Ross'
 Stochastic Processes Book)
 course. A brief overview is given here.
