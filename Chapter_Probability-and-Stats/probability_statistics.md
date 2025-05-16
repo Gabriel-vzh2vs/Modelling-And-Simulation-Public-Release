@@ -68,14 +68,14 @@ The triple $(\Omega, \mathcal{F}, \Pr)$ is called a __probability space__.
 :::
 
 
-Why this level formality? Whereas some introductory courses in
+Why this level of formality? Whereas some introductory courses in
 probability choose to omit mentioning, e.g., the family of events
 $\mathcal{F}$, and may not mention the phrase _probability space_, we
 think that being clear actually helps organize and structure the
 concepts, which in turn helps support understanding. For example, the
 probability measure is defined on the family of events $\mathcal{F}$,
 not on the sample set $\Omega$. When the instructor (and/or a textbook
-author) chooses to ``not needlessly complicate matters'', the reader
+author) chooses to "not needlessly complicate matters", the reader
 is left to figure all this out on their own, somehow implicitly an
 unknowingly. And while it often works quite well, it never feels
 satisfactory to leave this ambiguity. (Puts away soapbox.)
@@ -759,7 +759,9 @@ will need this result when we conduct output analysis of simulations.
 
 # Stochastic Processes #
 
-You will learn about stochastic processes in Robert Riggs' SDM
+You may have learned about stochastic processes in a stochastic modelling course 
+(such as the University of Virginia's Stochastic Decision Models or Ross'
+Stochastic Processes Book)
 course. A brief overview is given here.
 
 A stochastic process is a collection of random variables indexed by a
@@ -774,7 +776,7 @@ When one wants to be very precise, one may write the stochastic
 process as $\{X(\omega, t) : t \in T\}$ to point out that it is a
 function of two variables, $t\in T$ and $\omega \in \Omega$.
 
-In 3062 there will be two main cases. The easiest case is when the
+In this work, there will be two main cases. The easiest case is when the
 random variables $X(t)$ are independent and identically
 distributed. This is the case for the example with Buffon's needle.
 
