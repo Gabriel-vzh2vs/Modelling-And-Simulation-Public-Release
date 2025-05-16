@@ -32,6 +32,7 @@ project:
         - file: Chapter_Lab/SoftwareInstallation.md
         - file: Chapter_Lab/Labs.md
         - file: Chapter_Lab/Placeholder.md
+        - file: Chapter_Lab/GMPforReports.ipynb
         - file: Chapter_Lab/Software-Specifics.md
     - title: Distribution Modelling
       children:
