@@ -5,7 +5,7 @@ project:
   title: Modelling and Simulation
   description: This book covers theory and applications related to modeling and simulation. The level of the exposition is suited for advanced undergraduate students and graduate students.
   keywords: []
-  # authors: [Henning, Gabriel Lawrence]
+  # authors: [Henning S. Mortveit, Gabriel A. Lawrence]
   github: https://github.com/Gabriel-vzh2vs/Modelling-And-Simulation-Public-Release
   # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
   toc:
@@ -23,6 +23,14 @@ project:
     - title: Probability And Statistics
       children:
         - file: Chapter_Probability-and-Stats/probability_statistics.md
+    - title: Output Analysis
+      children:
+        - file: Chapter_Output_Analysis/introduction.md
+        - file: Chapter_Output_Analysis/mean_variance.md
+        - file: Chapter_Output_Analysis/confidence_intervals.md
+        - file: Chapter_Output_Analysis/sample_size_estimation.md
+        - file: Chapter_Output_Analysis/bonferroni.md
+        - file: Chapter_Output_Analysis/dependent_variables.md
     - title: Simulation In Practice
       children:
         - file: Chapter_Simulation-In-Practice/Placeholder.md
@@ -42,9 +50,6 @@ project:
     - title: Random Variate Generation And Number Generation
       children:
         - file: Chapter_Random-Variate-Generation-And-Number-Generation/Placeholder.md
-    - title: Output Analysis
-      children:
-        - file: Chapter_Output_Analysis/Placeholder.md
     - title: Advanced Topics
       children:
         - file: Chapter_Advanced-Topics/Placeholder.md
