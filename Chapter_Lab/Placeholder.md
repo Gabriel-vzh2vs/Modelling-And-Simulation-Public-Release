@@ -57,16 +57,12 @@ Customers will on average arrive in the check-out area of the store through the 
 
 Each check-out lane will serve customers according to a service process with a mean of 3 minutes, they did not perform statistical tests or models on this data, and the data is attached below, and they are relying on you to do the proper statistical tests and modeling: 
 
-```{download}
-../Source_Code/Chapter_Lab/Service_Time_Data.xlsx
-```
+:download:`<../Source_Code/Chapter_Lab/Service_Time_Data.xlsx>` # Working on this...
+
 
 Due to a contract with the union, Arbeiderforbund, there must be the same 4 cashier stations open at any given time (to ensure a minimum amount of payment to the workers), and there are a total of 10 stations in each of the supermarkets. Your client wants the non-union mandated stations to be checked every 15 minutes to ensure that they are receiving customers, which your client defines as: "A queue is considered to be receiving customers if the overall average queue length is less than or equal to one, the additional lane will close after each customer in that lane has been served".  
 
 Your supervisor gives you a hint that "If the length of the queue in each open check-out lane is two or more, and if another check-out lane can be opened, another check-out lane will be opened."  
-
-
-Your supervisor also hints that it might be useful to think of the servers as two types, with four type A (union) Stations, and 6 type B (non-union stations), and copy and paste them to reduce the risk of Repetitive Stress Injury. 
 
 ## Metrics ##
 
