@@ -19,6 +19,7 @@ project:
     - title: Introduction To Simulation
       children:
         - file: Chapter_Introduction-to-Simulation/section_introduction.md
+        - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
         - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
     - title: Probability And Statistics
       children:
