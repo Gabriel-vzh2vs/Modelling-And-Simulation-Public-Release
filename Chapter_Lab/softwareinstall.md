@@ -1,8 +1,10 @@
 # Software Installation
-In this section, we will describe how to install a discrete event simulation software and XLRisk (Monte Carlo Excel Plugin) on your personal machine.
+In this section, we will describe how to install a discrete event simulation software and XLRisk 
+(Monte Carlo Excel Plugin) on your personal machine.
 
 ## XLRisk (For Mac and Windows)
-XLRisk is a free and open source Monte Carlo Excel Plugin that is similar to \@Risk! It allows the user to define distributions with parameters and use the Monte Carlo Method to simulate systems.
+XLRisk is a free and open source Monte Carlo Excel Plugin that is similar to \@Risk! 
+It allows the user to define distributions with parameters and use the Monte Carlo Method to simulate systems.
 
 Here is the documentation for using its functions after you install it: https://github.com/pyscripter/XLRisk/wiki/RiskFunctions.
 
@@ -90,7 +92,9 @@ There are several choices of discrete-event simulation software that come with a
 This first set of instructions is for Microsoft Windows! If you do not have Microsoft Windows, skip this section until otherwise instructed. 
 ```
 
-1. If you are reading this as a student, go to this link, https://forms.simio.com/f/student-license, use your school email in the academic email section and fill it out with your name (if your name is complex, aka more than three names, use your given and first family name); Use the claim code that your instructor provides you in the form.
+1. If you are reading this as a student, go to this link, https://forms.simio.com/f/student-license, 
+use your school email in the academic email section and fill it out with your name 
+(if your name is complex, aka more than three names, use your given and first family name); Use the claim code that your instructor provides you in the form.
 
 :::{image} ../Figs/Chapter_Lab/StudentLicenseRequest.png
 :width: 20 %
