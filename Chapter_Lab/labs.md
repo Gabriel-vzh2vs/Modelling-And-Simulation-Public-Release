@@ -1,7 +1,29 @@
 # Labs
-The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples, and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models through self-assessment or by formal assessment by an external grader. It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through. Additionally, lab descriptions are written with a modified ODD (Overview, Design concepts and Details) protocol that is shortened based on the model's requirements (e.g: sections that do not apply to the model). 
+The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples, and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models through self-assessment or by formal assessment by an external grader. It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through. Additionally, lab descriptions are written with a modified ODD (Overview, Design concepts and Details) protocol that is shortened based on the model's requirements (e.g: sections that do not apply to the model, or sections that are left to the reader to complete). 
+:::{note}
+:class: dropdown
+
+In this section, difficulty is expressed by a symbol and a color, which are dual indicators
+meaning that they will always go together (i.e you will never see a color with a different symbol, )
+- Green and Pen: Labs that we consider approachable and should take the average prepared student less than 1 hour to complete;
+- Orange and Megaphone: Labs that we consider will take a bit of thought, we recommend taking 1 to 2 hours to complete this task;
+- Red and Circle
+Additionally, if you do not complete the pre-lab, you can move each difficulty level up by one (e.g: Green and Pen goes to Orange and Megaphone).
+:::
+
+:::{admonition} Lab 1
+:class: Attention
+This is an Attension Note.
+:::
+
+:::{admonition} Lab 1
+:class: Danger
+This is an Attension Note.
+:::
 
 
+:::{admonition} Lab 1
+:class: tip
 # Lab 1: Computing $\pi$ with Monte Carlo Methods (Excel or Python)
 ## Purpose and Patterns
 
@@ -22,14 +44,15 @@ Note, this model does not have agents or collectives, as this is not an ABM (Age
 
 ### State Variables
 
+Table:
 ```{raw} latex
 
 ```
 
 ### Scales
+(Based on State Variables)
 
 ## Process Overview and Scheduling
-
 
 ## Design Concepts
 
@@ -40,6 +63,7 @@ Note, this model does not have agents or collectives, as this is not an ABM (Age
 ## Questions left to the reader to answer
 1. What happens to the estimate of $\pi$ when $N$, the number of points increases or decreases? 
 2. Why did we use the ODD approach for organizing our model despite its simplicity?  
+:::
 
 # Lab 2: Retirement Calculations with Monte Carlo Methods (XLRisk or Python)
 ## Purpose and Patterns
