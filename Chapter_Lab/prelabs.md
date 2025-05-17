@@ -1,6 +1,7 @@
 # Pre-Labs
 
-
+The pre-labs are made to aid the reader with the concepts presented in the Labs Section of the book; additionally, they are the bridge between 
+the theory seen throughout this work and the practice that is somewhat unique to the chapter of the book
 
 
 # Pre-Lab 1: Fundemental Excel Skills (Reading)
