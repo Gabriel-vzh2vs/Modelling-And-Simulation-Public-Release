@@ -48,6 +48,7 @@ project:
         - file: Chapter_Lab/Software-Specifics.md
     - title: Distribution Modelling
       children:
+        - file: Chapter_Distribution-Modelling/index.md
         - file: Chapter_Distribution-Modelling/Placeholder.md
     - title: Random Variate Generation And Number Generation
       children:
