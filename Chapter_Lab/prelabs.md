@@ -1,8 +1,8 @@
 # Pre-Labs
 
 Pre-labs are made to aid the reader with the concepts presented in the 
-Laboratory Section of this text. These pre-labs consist of informal, structured 
-activities linked with the lab with the same number (e.g: Pre-Lab 1 connects to Lab-1). 
+Laboratory Section of this book. These pre-labs consist of structured 
+activities linked with the lab with the same number (e.g: Pre-Lab 1 connects to Lab 1). 
 
 There are two categories of Pre-Lab: Read and Do. Pre-Labs marked with "Read" are 
 functionally equivalent to a typical section of the book as in the reader sees examples
@@ -15,8 +15,13 @@ completing a pre-lab for each lab at a 1 to 1 ratio (meaning, if you do 7 labs,
 you should do 7 pre-labs). However, if you are self-studying, you can choose which 
 pre-labs you do based on your knowledge level. 
 
+
 # Pre-Lab 1: Fundemental Excel Skills and Data Management (Read)
 
+
+::::{tab-set}
+
+:::{tab-item} Fundemental Excel Skills
 ## The Cell ##
 
 ## Formulas ##
@@ -24,6 +29,14 @@ pre-labs you do based on your knowledge level.
 ## Ranges ##
 
 ## References ##
+:::
+
+:::{tab-item} Data Management
+## Bread ##
+:::
+
+::::
+
 
 # Pre-Lab 2: Tutorial for XLRisk (Do)
 
@@ -50,19 +63,38 @@ pre-labs you do based on your knowledge level.
 ## Walk-Through ##
 
 # Pre-Lab 4: Python Review (Read)
-## Juypter Notebook ##
+::::{tab-set}
 
-## Conda ##
+:::{tab-item} Juypter Notebook
+:::
 
-## Examples ##
+:::{tab-item} Conda
+
+:::
+
+:::{tab-item} Examples
+
+:::
+
+::::
 
 # Pre-Lab 5: Introduction to Simulation Software (Do)
 
-## SIMIO ##
+::::{tab-set}
 
-## Anylogic ## 
+:::{tab-item} SIMIO
+:::
 
-## Python ## 
+:::{tab-item} Anylogic
+
+:::
+
+:::{tab-item} Python
+
+:::
+
+::::
+
 
 # Pre-Lab 6: A Quick Review of Queuing Theory (Reading)
 

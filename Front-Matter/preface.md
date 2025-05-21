@@ -46,7 +46,7 @@ Spreadsheet-based simulations are used in many professional
 settings. We have included examples and exercises that are suited for
 tools like Excel. Here you will greatly benefit from plugins such as
 [XLRisk](https://github.com/pyscripter/XLRisk), described in more
-detail in {ref}`sec:xlrisk`.
+detail in {ref}`sec:lab`.
 
 There are dedicated, professional simulation tools for many systems
 classes such as queueing systems. The authors think that one should

@@ -48,6 +48,7 @@ project:
         - file: Chapter_Lab/Software-Specifics.md
     - title: Distribution Modelling
       children:
+        - file: Chapter_Distribution-Modelling/index.md
         - file: Chapter_Distribution-Modelling/Placeholder.md
     - title: Random Variate Generation And Number Generation
       children:
@@ -63,7 +64,10 @@ project:
         - file: Chapter_Finite-State-Machines/Placeholder.md
     - title: Variance Reduction Techniques
       children:
-        - file: Chapter_Variance-Reduction-Techniques/Placeholder.md
+        - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
+        - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
+        - file: Chapter_Variance-Reduction-Techniques/stratifiedsampling.md
+        - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
     - title: Appendix
       children:
         - file: Chapter_Appendix/placeholder.md
