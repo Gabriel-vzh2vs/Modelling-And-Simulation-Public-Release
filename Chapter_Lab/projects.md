@@ -18,7 +18,7 @@ This project focuses on developing the following skills:
 And this project relies on the following prerequisities:
 
 ### Labs ###
-1. [Lab1](./GMPforReports.ipynb)
+1. [Lab1](./labs.md/)
 2. [Lab2](./GMPforReports.ipynb)
 3. [Lab3](./GMPforReports.ipynb)
 
