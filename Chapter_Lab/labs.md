@@ -167,7 +167,7 @@ $x$ and $y$; this process allows for the usage of Monte Carlo Integration within
 defined region (the unit circle embedded within a square with side length of 2).
 During the simulation, stochaticity is used to define the sample ($x, y$ points) that
 defines the estimate of $\hat{\pi}$ and the visual representations of the points
-through the subprocesses defined trho
+through the subprocesses defined through the processes section. 
 
 ## Input Data
 
