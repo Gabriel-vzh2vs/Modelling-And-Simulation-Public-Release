@@ -40,10 +40,10 @@ project:
         - file: Chapter_System-Modelling/Placeholder.md
     - title: Lab
       children:
-        - file: Chapter_Lab/Lab0.md
-        - file: Chapter_Lab/SoftwareInstallation.md
-        - file: Chapter_Lab/Labs.md
-        - file: Chapter_Lab/Placeholder.md
+        - file: Chapter_Lab/softwareinstall.md
+        - file: Chapter_Lab/prelabs.md
+        - file: Chapter_Lab/labs.md
+        - file: Chapter_Lab/projects.md
         - file: Chapter_Lab/GMPforReports.ipynb
         - file: Chapter_Lab/Software-Specifics.md
     - title: Distribution Modelling
