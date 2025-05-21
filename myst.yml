@@ -19,8 +19,11 @@ project:
     - title: Introduction To Simulation
       children:
         - file: Chapter_Introduction-to-Simulation/section_introduction.md
-        - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
         - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
+        - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
+        - file: Chapter_Introduction-to-Simulation/monte_carlo_method.md
+        - file: Chapter_Introduction-to-Simulation/vacation_planning.md
+        - file: Chapter_Introduction-to-Simulation/summary_and_roadmap.md
     - title: Probability And Statistics
       children:
         - file: Chapter_Probability-and-Stats/probability_statistics.md
@@ -52,7 +55,8 @@ project:
         - file: Chapter_Distribution-Modelling/Placeholder.md
     - title: Random Variate Generation And Number Generation
       children:
-        - file: Chapter_Random-Variate-Generation-And-Number-Generation/Placeholder.md
+        - file: Chapter_Random-Number-And-Variate-Generation/introduction.md
+        - file: Chapter_Random-Number-And-Variate-Generation/Placeholder.md
     - title: Advanced Topics
       children:
         - file: Chapter_Advanced-Topics/Placeholder.md
@@ -77,4 +81,7 @@ site:
 bibliography:
   - references.bib
 myst_enable_extensions:
-  - ansmath
+  - amsmath
+sphinx:
+  extra_extensions:
+  - myst_nb_bokeh

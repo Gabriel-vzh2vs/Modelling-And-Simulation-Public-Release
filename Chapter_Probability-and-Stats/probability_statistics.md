@@ -1,7 +1,7 @@
 (sec:prob_stats)=
 # Probability and Statistics #
-```{math}
 
+```{math}
 \def\wins{{win-s}}
 \def\extra{(*)\xspace}
 \def\th{${}^{\text{th}}$\xspace}
