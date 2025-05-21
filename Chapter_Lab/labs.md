@@ -1,12 +1,11 @@
 # Labs
-The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples,
-and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models
+The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples, 
+and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models 
 through self-assessment or by formal assessment by an external grader. 
-It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through.
+It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through. 
 Additionally, lab descriptions are written with a modified ODD (Overview, Design concepts and Details) protocol that is shortened
-based on the model's requirements
-(e.g: sections that do not apply to the model, or sections that are left to the reader to complete).
-
+based on the model's requirements 
+(e.g: sections that do not apply to the model, or sections that are left to the reader to complete). 
 :::{note} A Note on Difficulty Levels
 :class: dropdown
 
@@ -159,10 +158,7 @@ state variables $z$, $x$, and $y$.
 ### Basic Principles
 
 This model depicts a classic problem of numerical integration using random numbers to
-compute a multidimensional definite integral using $N$ uniform samples also known as Monte Carlo Integration through Crude Monte Carlo (CMC). 
-Moreover, this process leverages the Law of Large Numbers that allows for the average of the indictor variable, $\hat{\pi}$ to converge to $\pi$ with a sufficient number of trials. 
-In this case, we define the Law of Large Numbers as Weak Law of Large Numbers: the observation that the average of the results obtained 
-from a large number of i.i.d random samples converges to the value, if it exists, which is supported by Proof 1 and its Visualization 1 in the appendix. (Cite later: Khinchin, 1929) Additionally, the foundations of Monte Carlo Integration are further elaborated in one of the prerequisite chapters, Buffon's Needle (waiting on Professor Henning to Make this Citable).
+compute a multidimensional definite integral using $N$ uniform samples also known as Monte Carlo Integration through Crude Monte Carlo (CMC). Moreover, this process leverages the Law of Large Numbers that allows for the average of the indictor variable, $\hat{\pi}$ to converge to $\pi$ with a sufficient number of trials. In this case, we define the Law of Large Numbers as Weak Law of Large Numbers: the observation that the average of the results obtained from a large number of i.i.d random samples converges to the value, if it exists, which is supported by Proof 1 and its Visualization 1 in the appendix. (Cite later: Khinchin, 1929) Additionally, the foundations of Monte Carlo Integration are further elaborated in one of the prerequisite chapters, Buffon's Needle (waiting on Professor Henning to Make this Citable).
 
 ### Stochaticity
 
@@ -171,7 +167,7 @@ $x$ and $y$; this process allows for the usage of Monte Carlo Integration within
 defined region (the unit circle embedded within a square with side length of 2).
 During the simulation, stochaticity is used to define the sample ($x, y$ points) that
 defines the estimate of $\hat{\pi}$ and the visual representations of the points
-through the subprocesses defined through the processes section. 
+through the subprocesses defined trho
 
 ## Input Data
 
@@ -189,7 +185,6 @@ print(a)
 1. What happens to the estimate of $\pi$ when $N$, the number of points increases or decreases? 
 2. Why did we use the ODD approach for organizing our model despite its simplicity?  
 :::
-
 
 :::{admonition} Lab 2
 :class: tip dropdown
