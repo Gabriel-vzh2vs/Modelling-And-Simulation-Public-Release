@@ -1,2 +1,5 @@
 # MyST build outputs
 _build
+
+# JupyterBook
+Chapter_Lab/.ipynb_checkpoints

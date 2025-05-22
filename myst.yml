@@ -67,6 +67,8 @@ project:
     - title: Finite State Machines
       children:
         - file: Chapter_Finite-State-Machines/Placeholder.md
+        - file: Chapter_Finite-State-Machines/deterministic-finite-automata
+        - file: Chapter_Finite-State-Machines/nondeterministic-finite-automata
     - title: Variance Reduction Techniques
       children:
         - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
