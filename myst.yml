@@ -15,7 +15,6 @@ project:
       children:
         - file: Front-Matter/preface.md
         - file: Front-Matter/toc.md
-        - file: Front-Matter/example2.md
     - title: Introduction To Simulation
       children:
         - file: Chapter_Introduction-to-Simulation/section_introduction.md
@@ -27,6 +26,9 @@ project:
     - title: Probability And Statistics
       children:
         - file: Chapter_Probability-and-Stats/probability_statistics.md
+    - title: System Modelling
+      children:
+        - file: Chapter_System-Modelling/introduction.md
     - title: Output Analysis
       children:
         - file: Chapter_Output_Analysis/introduction.md
@@ -39,9 +41,6 @@ project:
       children:
         - file: Chapter_Simulation-In-Practice/introduction.md
         - file: Chapter_Simulation-In-Practice/Placeholder.md
-    - title: System Modelling
-      children:
-        - file: Chapter_System-Modelling/Placeholder.md
     - title: Lab
       children:
         - file: Chapter_Lab/softwareinstall.md
