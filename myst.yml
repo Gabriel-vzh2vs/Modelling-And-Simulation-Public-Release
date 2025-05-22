@@ -37,6 +37,7 @@ project:
         - file: Chapter_Output_Analysis/dependent_variables.md
     - title: Simulation In Practice
       children:
+        - file: Chapter_Simulation-In-Practice/introduction.md
         - file: Chapter_Simulation-In-Practice/Placeholder.md
     - title: System Modelling
       children:
