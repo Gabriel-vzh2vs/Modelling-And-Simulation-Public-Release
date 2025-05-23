@@ -1,46 +1,84 @@
 
-(sec:buffons_needle)=
-# Buffon's needle #
+(sec:buffons_needle_summary)=
+# Buffon's Needle - Summary and Key Points #
 
 
-The goal of this section is to give a tour of concepts related to
-simulation and modeling. And what better way to start that than with
-[Buffon's needle](https://en.wikipedia.org/wiki/Buffon%27s_needle_problem)?
+In {ref}`sec:buffons_needle` we went through the motions of modeling,
+implementing, and simulating a system followed by estimating $p$, the
+probability that the needle falls across two strips. This example
+includes most of the key elements of simulation-based analysis. It is
+time to reflect:
 
-__Description:__ The experiment has a table made of parallel strips of
-wood all of the same width $d$. One also has a needle of length $\ell
-< d$. The needle is tossed repeatedly onto the table $n$ times, and
-for each case one records whether the needle crosses two strips when
-it has come to rest. The original goal was to estimate the propability
-$p$ that the needle crosses strips. This is illustrated in Figure
-{ref}`df`. As we will see, this experiment can also be used to
-estimate $\pi$.
+## Validation ##
 
-__Modeling:__ How can we capture the above system $S$ as a precise
-mathematical model? We can start by introducing a coordinate system on
-the table as shown in the figure. For a needle toss, we let $x$ denote
-the distance from the leftmost endpoint $P$ of the needle to the
-nearest left-edge of the wood strip containing $P$. Next, we let
-$\theta$ denote the angle that the needle forms with the $x$-axis.
+First, is the model $\mathbb{I}(X,\Theta)$ that we introduced in
+{ref}`eq:buffon_indicator` a __valid__ model? It seems quite
+reasonable, although things could go wrong if the person (or device)
+tossing the needle onto the table does this in some kind of biased
+way. How would you test if there is a bias?  Here one might collect a
+sample of size $k$ of pairs $(x, \theta)$ and formally test if the
+observed values of $x$ and $\theta$ are consistent with the specified
+statistical distributions. Perhaps one will use a __$\chi^2$-test__ or
+a __Kolmogorov-Smirnov__ (K-S) test for this. We will return to this in
+the chapter {ref}`sec:distribution_modeling`.
+
+Our model is __stochastic__, and our estimate of $p$ (or $\pi$) is a
+point estimate. What can we say about the variance of our estimate?
+How well have we estimated $\pi$? From {ref}`fig:buffon_needle_pi` we
+see a fair bit of fluctation as we vary the sample size $n$. We would
+like to provide some guarantee on the estimate in the form of error
+bounds. This is the topic of {ref}`sec:output_analysis` where we cover
+__confidence intervals__ and theory that goes with this.
+
+:::{figure} #fig:bNeedlePi
+:label: fig:buffon_needle_pi
+
+Estimating $\pi$ using the needle experiment by Buffon. The $x$-axis
+shows the sample size.
+
+:::
+
+A question related to output analysis is the following: How large does
+$n$ have to be to ensure a prescribed accuracy? We will return to this
+later, and also in exercises.
 
 
-```{code-cell} python3
-print(2 + 3)
-```
+## Verification ##
+
+Is the model in {ref}`code:bNeedle` correctly implemented? It is a
+fairly straightforward code. There is one possible error: when
+estimating $\pi$, we may end up dividing by zero. (Question: how can
+this happen?) Even though this is quite unlikely, and maybe of little
+consequence here, for a more complex simulation model, failing to
+include such tests can lead to a great deal of grievance. In
+{ref}`sec:building_simulation_models` we look more closely at good
+practices and patterns for simulation model development.
 
 
+### Random number generation ###
 
+There are other assumptions that have been made. One comes through the
+use of the python $\texttt{random}$ library. Is
+$\texttt{random.random}$ a high quality random number generator (RNG)?
+Can we trust it? Yes. But as we will see in
+{ref}`sec:random_number_generation`, this was not always so
+straightforward throughout the history of scientific computing. There
+are many examples of RNGs that rose to fame only to later be thrown in
+the dustbin.Nowadays (which is 2025), most established tools have
+quite solid RNGs. But not all tools, some of which are in widespread
+use.
 
-__Simulation:__ Independence
+Concerns related to random number generation are also present if you
+have to develop a new tool like Simio, Arena, AnyLogic, or Matlab, or
+perhaps a new programming language. In this case, you will still have
+to think hard about properly generating random numbers and variates.
+We will have more to say about this general topic in
+{ref}`sec:random_number_generation`. There we also cover generation of
+random variates from distributions other than $U(0,1)$.
 
+## Probability and statistics ##
 
-__Output analysis:__
-
-
-__Reflection:__ Did we make any assumptions?
-
-
-
-```{literalinclude} ../src/python/buffons-needle.py
-:language: python
-```
+The example with Buffon's needle illustrates standard applications of
+probability and statistics. While we have included the chapter
+{ref}`sec:prob_stats` this is by no means a substitute for a course or
+a textbook.

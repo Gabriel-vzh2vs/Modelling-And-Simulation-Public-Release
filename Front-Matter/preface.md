@@ -86,6 +86,14 @@ Henning S. Mortveit
 
 
 
+
+
+
+```{literalinclude} ../src/python/buffons-needle.py
+:language: python
+```
+
+
 ```{bibliography}
 :filter: docname in docnames
 ```
