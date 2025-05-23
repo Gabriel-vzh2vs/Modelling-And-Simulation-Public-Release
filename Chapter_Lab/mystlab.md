@@ -1,11 +1,27 @@
-# Labs
-The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples,
-and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.17.1
+kernelspec:
+  name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
+---
+
++++ {"editable": true, "slideshow": {"slide_type": ""}}
+
+# (Things will break!) Labs-staging
+The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples, 
+and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models 
 through self-assessment or by formal assessment by an external grader. 
-It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through.
+It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through. 
 Additionally, lab descriptions are written with a modified ODD (Overview, Design concepts and Details) protocol that is shortened
-based on the model's requirements
-(e.g: sections that do not apply to the model, or sections that are left to the reader to complete).
+based on the model's requirements 
+(e.g: sections that do not apply to the model, or sections that are left to the reader to complete). 
 :::{note} A Note on Difficulty Levels
 :class: dropdown
 
@@ -19,23 +35,11 @@ meaning that they will always go together (i.e: you will never see a color with 
 Additionally, if you do not complete the pre-lab, you can move each difficulty level up by one (e.g: Green and Pen goes to Orange and Megaphone).
 :::
 
++++
+
 :::{admonition} Lab 1
 :class: tip dropdown
-
-(lab-1)=
 # Lab 1: Computing $\pi$ with Monte Carlo Methods (Excel or Python)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-1`
-
-### Chapters
-
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
 
 ## Purpose and Patterns
 
@@ -81,6 +85,8 @@ Percent Error & [0 - $\infty$] & Double & The percent difference ($\frac{|\hat{\
 \hline
 \end{tabular}
 ```
+
++++
 
 ## Process Overview and Scheduling
 
@@ -166,19 +172,15 @@ state variables $z$, $x$, and $y$.
 \end{enumerate}
 ```
 
+
++++
+
 ## Design Concepts
 
 ### Basic Principles
 
 This model depicts a classic problem of numerical integration using random numbers to
-compute a multidimensional definite integral using $N$ uniform samples also known as Monte Carlo Integration through Crude Monte Carlo (CMC).
-Moreover, this process leverages the Law of Large Numbers that allows for the average of the indictor variable, $\hat{\pi}$ to
-converge to $\pi$ with a sufficient number of trials. In this case, we define the Law of Large Numbers as
-Weak Law of Large Numbers: the observation that the average of the results obtained from a large number of
-i.i.d random samples converges to the value, if it exists,
-which is supported by Proof 1 and its Visualization 1 in the appendix. (Cite later: Khinchin, 1929)
-Additionally, the foundations of Monte Carlo Integration are further elaborated in one of the prerequisite chapters,
-Buffon's Needle (waiting on Professor Henning to Make this Citable).
+compute a multidimensional definite integral using $N$ uniform samples also known as Monte Carlo Integration through Crude Monte Carlo (CMC). Moreover, this process leverages the Law of Large Numbers that allows for the average of the indictor variable, $\hat{\pi}$ to converge to $\pi$ with a sufficient number of trials. In this case, we define the Law of Large Numbers as Weak Law of Large Numbers: the observation that the average of the results obtained from a large number of i.i.d random samples converges to the value, if it exists, which is supported by Proof 1 and its Visualization 1 in the appendix. (Cite later: Khinchin, 1929) Additionally, the foundations of Monte Carlo Integration are further elaborated in one of the prerequisite chapters, Buffon's Needle (waiting on Professor Henning to Make this Citable).
 
 ### Stochaticity
 
@@ -194,426 +196,42 @@ through the subprocesses defined through the processes section.
 There is no input data beyond then number of samples and the regions defined in
 the functions that define the subprocesses.
 
++++
+
 ## Questions left to the reader to answer
 
 1. What happens to the estimate of $\pi$ when $N$, the number of points increases or decreases? 
 2. Why did we use the ODD approach for organizing our model despite its simplicity?  
 :::
 
-:::{admonition} Lab 2
-:class: tip dropdown
-
-(lab-2)=
-# Lab 2: Retirement Calculations with Monte Carlo Methods (XLRisk or Python)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-2`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-## Purpose and Patterns
-This model's purpose is to demonstrate an application of the Monte Carlo Method
-
-### Statement of Model Purpose
-
-### Patterns
-
-#### Pattern 1. Base Deterministic Model
-
-This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units. In this pattern, we obtain $\pi$ from our calculations in Excel when we consider the region of interest for the indicator variable to be the union of the circle and square. **This is the pattern that you should try to replicate in your environment.**
-
-#### Pattern 2. Crude Monte Carlo
-
-This pattern describes a different region for monte carlo integration, as it fails to calculate $\pi$ as the circle surpasses the area of the square, and now it calculates the area of the square instead as the area of integration is defined through the greater of the two regions.
-
-#### Pattern 3. Latin Hypercube (XLrisk)
-
-This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units. In this pattern, we obtain $\pi$ from our calculations in Excel when we consider the region of interest for the indicator variable to be the union of the circle and square. **This is the pattern that you should try to replicate in your environment.**
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
-
-:::{admonition} Lab 3
-:class: tip dropdown
-(lab-3)=
-# Lab 3: Building a Portfolio with Monte Carlo Methods (XLRisk or Python)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-3`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-
-1. Are the sample variance and deviation similar enough to the population variance and deviation to state that we have a sufficient $N$ for normality?
-2. What are your 25% percentile, median, and 75% percentile values, and what do they say about the extreme values?
-Moreover, would you say that this portfolio would pay off (have a positive value if we subtract the $E[X] = 10,000$ from the FV), in a week,
-which is our length of simulation.
-3. Given the Kurtosis of the Model from XLrisk, what would you say about extreme events with this portfolio?
-4. If you change the mixture of the stocks from all equal to only one stock, for example, MSTR, what happens to the variance, and why?
-And how does connect to portfolio strategies in the real world?
-:::
-
-:::{admonition} Lab 4
-:class: danger dropdown
-(lab-4)=
-# Lab 4: Posterior Probability Estimation with Monte Carlo Methods (Python + Excel)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-4`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-## Purpose and Patterns
-
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
-
-:::{admonition} Lab 5
-:class: attention dropdown
-(lab-5)=
-# Lab 5: Foundations of Modelling (SIMIO, Anylogic, or Python)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-5`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
-
-:::{admonition} Lab 6
-:class: tip dropdown
-(lab-6)=
-# Lab 6: Markovian Queuing Methods (Ciw, SIMIO, or Anylogic)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-6`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
-
-:::{admonition} Lab 7
-:class: attention dropdown
-(lab-7)=
-# Lab 7: General and Deterministic Queuing Methods (SIMIO, CTW, or Anylogic)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-7`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
-
-:::{admonition} Lab 8
-:class: attention dropdown
-(lab-8)=
-# Lab 8: Introduction to ODEs in Simulation and Modelling (PySim/Salabim, Anylogic, or SIMIO)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-8`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
-
-:::{admonition} Lab 9
-:class: danger dropdown
-(lab-9)=
-# Lab 9: Modelling the Spread of Illness via SEIR Models (PySim/Salabim, Anylogic, or SIMIO)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-9`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
-
-:::{admonition} Lab 10
-:class: danger dropdown
-(lab-10)=
-# Lab 10: Agent-Based Modelling (PySim/Salabim or Anylogic)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-10`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-
-## Questions to Think about:
-:::
-
-:::{admonition} Lab 11
-:class: attention dropdown
-(lab-11)=
-# Lab 11: Optimization through Simulation (PySim/Salabim, Anylogic, or SIMIO)
-
-## Prerequisites
-
-### Pre-labs
-
-- {ref}`prelab-11`
-
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
-
-## Purpose and Patterns
-
-### Statement of Model Purpose
-
-### Patterns
-
-## Entities, State Variables, and Scales
-
-### State Variables
-
-### Scales
-
-## Process Overview and Scheduling
-
-## Design Concepts
-
-### Basic Principles
-
-## Input Data
-
-## Questions left to the reader to answer
-:::
++++
+
+## Example Outputs:
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+tags: [hide-input]
+---
+print("a")
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+---
+print("b")
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+---
+
+```

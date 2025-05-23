@@ -66,9 +66,10 @@ project:
         - file: Chapter_Finite-State-Machines/nondeterministic-finite-automata
     - title: Variance Reduction Techniques
       children:
+        - file: Chapter_Variance-Reduction-Techniques/whyvariancereduction.md
+        - file: Chapter_Variance-Reduction-Techniques/stratifiedsampling.md
         - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
         - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
-        - file: Chapter_Variance-Reduction-Techniques/stratifiedsampling.md
         - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
     - title: Appendix
       children:
