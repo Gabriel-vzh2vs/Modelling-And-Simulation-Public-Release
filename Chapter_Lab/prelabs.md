@@ -22,16 +22,23 @@ pre-labs you do based on your knowledge level.
 
 :::{tab-item} Fundamental Excel Skills
 ## The Cell
-
+a
 ## Formulas
-
+b
 ## Ranges
-
+c
 ## References
+d
 :::
 
 :::{tab-item} Data Management
 ## Bread
+a
+## Topic 2
+
+## Topic 3
+
+## Topic 4
 :::
 
 ::::
@@ -39,28 +46,28 @@ pre-labs you do based on your knowledge level.
 (prelab-2)=
 # Pre-Lab 2: Tutorial for XLRisk (Do)
 
-## Functions ##
+## Functions
 
-## Correlations ##
+## Correlations
 
-## Trials ##
+## Trials
 
-## Results ##
+## Results
 
-## Skew and Kurtosis ##
+## Skew and Kurtosis
 
-## Walk-Through ##
+## Walk-Through
 
 (prelab-3)=
-# Pre-Lab 3: Advanced Excel Functions (Do)
+# Pre-Lab 3: Advanced Excel Functions or Fundamentals of Debugging (Do)
 
-## Live Formulas ##
+## Live Formulas
 
-## Debugging ##
+## Debugging
 
-## Examples ##
+## Examples
 
-## Walk-Through ##
+## Walk-Through
 
 (prelab-4)=
 # Pre-Lab 4: Python Review (Read)
