@@ -43,7 +43,7 @@ Additionally, if you do not complete the pre-lab, you can move each difficulty l
 ### Statement of Model Purpose
 
 This model's purpose is to demonstrate the concept of Monte Carlo Integration through calculating $\pi$
-through random sampling from a uniform variable.
+through random sampling from a uniform random variable.
 
 ### Patterns
 
@@ -53,7 +53,10 @@ This pattern describes how $\pi$ is calculated with well-defined shapes without 
 
 #### Pattern 2. Unit Circle of Radius 2 and Square with Side Length 1
 
-This pattern describes a different region for monte carlo integration, as it fails to calculate $\pi$ as the circle surpasses the area of the square, and now it calculates the area of the square instead as the area of integration is defined through the greater of the two regions.
+This pattern describes a different region for monte carlo integration,
+as it fails to calculate $\pi$ as the circle surpasses the area of the square, and now it
+calculates the area of the square instead as the area of integration is defined
+through the greater of the two regions.
 
 ## Entities, State Variables, and Scales
 
@@ -61,7 +64,7 @@ This pattern describes a different region for monte carlo integration, as it fai
 
 In this context, the state variables relate to trials, in this instance,
 a trial is represented as a point in a 2-dimensional plane.
-And overtime, once you have enough trials, the aggregate of the points converges into
+Once you have enough trials, the aggregate of the points converges into
 a circle.
 
 ```{raw} latex
@@ -100,7 +103,7 @@ differently than a point that is marked with its calculated value, along with
 summing on z to calculate $D_{in}$, using this state variable along
 with the total number of points in the circle to define the new state variables:
 $D_{out}$, $\hat{\pi}$ (through the ratio, $\frac{D_{in}}{D_{out}}$), and
-percent error, with the process defined in state variables and scale.
+percent error with the process defined in state variables and scale.
 
 The state variables are updated once at the beginning of the simulation when
 the system is initialized. During this process, the user determines the number
@@ -335,8 +338,8 @@ skew_kurtosis.
     \item \textbf{Monte Carlo Experiment Execution:}
     \begin{enumerate}
         \item The \textbf{experiment} subprocess manages multiple runs of the simulation.
-        \item It repeats the stochastic variable generation (Step 1.b) and interest calculation (Step 3) processes for a user-defined number of experiments ($n$).
-        \item The `user_input` process (Step 2) is excluded from these repetitions, as initial conditions are set once per set of experiments.
+        \item It repeats the stochastic variable generation (Step 2.b) and interest calculation (Step 3) processes for a user-defined number of experiments ($n$).
+        \item The `user_input` process (Step 1) is excluded from these repetitions, as initial conditions are set once per set of experiments.
         \item The results from each of the $n$ experiments (specifically the series of $p_t$ values, or at least the final $p_{40}$) are stored in a data storage structure.
     \end{enumerate}
 

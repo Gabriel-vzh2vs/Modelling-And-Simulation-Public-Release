@@ -4,7 +4,7 @@
 A glossary of common terms used throughout our text.
 
 ```{glossary}
-Experiments
+**Experiments**
     refer to a single, complete execution of the simulation process driven 
     by a  set of randomly generated inputs. Additionally, The collection 
     of many  experiments forms the basis of the Monte Carlo Method.
@@ -12,7 +12,7 @@ Experiments
     in the domain to a  point in the output space (Co-domain), 
     via the model function.
 
-Kurtosis ($\gamma_2$)
+**Kurtosis** ($\gamma_2$)
     measures the "tailedness" (or "tail-heaviness") 
     of the probability distribution of a real-valued random variable. 
     It describes the sharpness of the peak and the weight of the tails 
@@ -27,7 +27,7 @@ Kurtosis ($\gamma_2$)
     and values tend to be more clustered around the mean but less 
     peaked than a normal distribution.
 
-Skewness ($\gamma_1$)
+**Skewness** ($\gamma_1$)
     measures the asymmetry of the probability distribution of a 
     real-valued random variable about its mean. Skewness has two types.
     *Positive* Skewness means that the distribution has a longer or fatter 
@@ -37,14 +37,14 @@ Skewness ($\gamma_1$)
     on the left side and the mass of the distribution is concentrated on the 
     right. The mean is typically less than the median.
 
-The Strong Law of Large Numbers
+**The Strong Law of Large Numbers**
     implies that for almost every sequence of outcomes, 
     the sample average $\bar{X_n}$ will eventually 
     converge to $\mu$ as the number of trials $n$ goes to infinity. 
     The set of outcome sequences for which  $\bar{X_n}$ does not 
     converge to $\mu$ has a total probability of zero.
 
-The Weak Law of Large Numbers
+**The Weak Law of Large Numbers**
     says that for a sufficiently large number of trials 
     n, the probability that the sample average $\bar{X_n}$ will be off by greater 
     than $\epsilon$  from the true mean $\mu$ becomes very small, approaching zero. 
