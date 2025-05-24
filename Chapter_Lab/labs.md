@@ -42,13 +42,14 @@ Additionally, if you do not complete the pre-lab, you can move each difficulty l
 
 ### Statement of Model Purpose
 
-This model's purpose is to demonstrate the concept of Monte Carlo Integration through a canonical example of calculating $\pi$ through random sampling from a uniform space. Furthermore, this mechanism of Monte Carlo Integration can be expressed as a transformation of Buffon's Needle as known as Buffon's Noodle uses _experiments_ to measure $\pi$, leveraging the following formula for number of samples that reside within a unit circle that resides within an arbitrarily-defined rectangle.
+This model's purpose is to demonstrate the concept of Monte Carlo Integration through calculating $\pi$
+through random sampling from a uniform variable.
 
 ### Patterns
 
 #### Pattern 1. Unit Circle of Radius 1 and Square with Side Length 2
 
-This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units. In this pattern, we obtain $\pi$ from our calculations in Excel when we consider the region of interest for the indicator variable to be the union of the circle and square. **This is the pattern that you should try to replicate in your environment.**
+This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units. In this pattern, we obtain $\pi$ from our calculations in Excel when we consider the region of interest for the indicator variable to be the union of the circle and square. **This is the pattern that you should try to replicate**
 
 #### Pattern 2. Unit Circle of Radius 2 and Square with Side Length 1
 
@@ -56,13 +57,12 @@ This pattern describes a different region for monte carlo integration, as it fai
 
 ## Entities, State Variables, and Scales
 
-Note, this model does not have agents or collectives, as this is not an ABM (Agent-Based model).
-
 ### State Variables and Scale
 
 In this context, the state variables relate to trials, in this instance,
 a trial is represented as a point in a 2-dimensional plane.
-And overtime, once you have enough trials, the aggregate of the points become a circle.
+And overtime, once you have enough trials, the aggregate of the points converges into
+a circle.
 
 ```{raw} latex
 \begin{tabular}{llll}
@@ -87,7 +87,7 @@ Percent Error & [0 - $\infty$] & Double & The percent difference ($\frac{|\hat{\
 
 ### Processes
 
-The model is developed to demonstrate the entire process of Monte Carlo Integration.
+The model is developed to demonstrate the process of Monte Carlo Integration.
 It is structured within three subprocesses, one related to the generation of samples
 (updated samples from a uniform distribution into two variables, x and y) and their
 placement onto a 2-D chart to show the uniformity of the random number generator,
@@ -109,7 +109,7 @@ of points, which changes the accuracy of the simulation.
 ### Scheduling (Lab 1)
 
 The simulation starts when the sheet or program is initialized by the user.
-Once it has been initialized, the first subprocess begins starting the
+Once it has been initialized, the first subprocess begins by starting the
 random number generation for the first two state variables, $x$ and $y$
 is the first task, because the subsequent state variables and subprocesses
 depend on these initial variables. Afterwards, the subprocess for the placement of
