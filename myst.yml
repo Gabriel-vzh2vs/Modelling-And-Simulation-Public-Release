@@ -78,6 +78,7 @@ project:
     - title: Appendix
       children:
         - file: Chapter_Appendix/placeholder.md
+        - file: Chapter_Appendix/glossary.md
 
 site:
   template: book-theme

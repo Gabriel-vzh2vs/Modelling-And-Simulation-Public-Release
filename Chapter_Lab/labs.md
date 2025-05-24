@@ -36,6 +36,7 @@ Additionally, if you do not complete the pre-lab, you can move each difficulty l
 
 - {ref}`sec:preface`
 - {ref}`sec:prob_stats`
+- {ref}`sec:buffons_needle_summary`
 
 ## Purpose and Patterns
 
@@ -174,11 +175,11 @@ This model depicts a classic problem of numerical integration using random numbe
 compute a multidimensional definite integral using $N$ uniform samples also known as Monte Carlo Integration through Crude Monte Carlo (CMC).
 Moreover, this process leverages the Law of Large Numbers that allows for the average of the indictor variable, $\hat{\pi}$ to
 converge to $\pi$ with a sufficient number of trials. In this case, we define the Law of Large Numbers as
-Weak Law of Large Numbers: the observation that the average of the results obtained from a large number of
+Khinchin's Weak Law of Large Numbers: the observation that the average of the results obtained from a large number of
 i.i.d random samples converges to the value, if it exists,
-which is supported by Proof 1 and its Visualization 1 in the appendix. (Cite later: Khinchin, 1929)
+which is supported by Proof 1 and its Visualization 1 in the appendix. {ref}`shum2024laws`
 Additionally, the foundations of Monte Carlo Integration are further elaborated in one of the prerequisite chapters,
-Buffon's Needle (waiting on Professor Henning to Make this Citable).
+{ref}`sec:buffons_needle_summary`.
 
 ### Stochaticity
 
