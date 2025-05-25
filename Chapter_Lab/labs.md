@@ -1,3 +1,4 @@
+(sec:labs)=
 # Labs
 
 The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples,
@@ -180,7 +181,7 @@ Moreover, this process leverages the Law of Large Numbers that allows for the av
 converge to $\pi$ with a sufficient number of trials. In this case, we define the Law of Large Numbers as
 Khinchin's Weak Law of Large Numbers: the observation that the average of the results obtained from a large number of
 i.i.d random samples converges to the value, if it exists,
-which is supported by Proof 1 and its Visualization 1 in the appendix. {ref}`shum2024laws`
+which is supported by Proof 1 in the appendix {ref}`sec:proofs`. {cite}`shum2024laws`
 Additionally, the foundations of Monte Carlo Integration are further elaborated in one of the prerequisite chapters,
 {ref}`sec:buffons_needle_summary`.
 
@@ -285,10 +286,11 @@ The model is developed to demonstrate an application of the Monte Carlo Method t
 returns for an retirement account while showing the impact of extreme events on model behaviors
 and metrics.
 
-It is structured within six subprocesses activate depending on which pattern the model is exhibiting,
+It is structured within six subprocesses which activate depending on which pattern the model is exhibiting,
 with two subprocesses being related to stochaticity which produces random variates via inverse transform
-for the normal and triangular distributions in the first (normal_variable) and second (triangular_variable) subprocesses respectively
-with their random variates being stored into a matrix. The next subprocess (user_input) is the subprocess that handles input data
+for the normal and triangular distributions in the first (normal_variable) and second (triangular_variable) subprocesses, 
+respectively, with their random variates being stored into a matrix. 
+The next subprocess (user_input) is the subprocess that handles input data
 from the user and stores it within a matrix or
 list. This subprocess, user_input, provides information for the next subprocess, interest_calculation,
 representing the expression $p_{t+1} = p \cdot (1+r) + s \ \forall t$ which calculates the expression's
@@ -401,26 +403,54 @@ The user inputs the following data points:
 
 ## Lab 3 Prerequisites
 
-### Pre-labs
+### Pre-labs for Lab 3
 
+- {ref}`prelab-2`
 - {ref}`prelab-3`
 
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
+### Mandatory Chapters for Lab 3
 
-## Purpose and Patterns
+- {ref}`sec:prob_stats`
+- {ref}`sec:monte_carlo_method`
+- {ref}`sec:building_simulation_models`
 
-### Statement of Model Purpose
+### Recommended Chapters for Lab 3
 
-### Patterns
+- {ref}`sec:random_number_generation`
+- {ref}`sec:distribution_modeling`
 
-## Entities, State Variables, and Scales
+## Purpose and Patterns (Lab 3)
 
-### State Variables
+### Statement of Model Purpose (Lab 3)
 
-### Scales
+This model's purpose is three-fold, to demonstrate an application of Monte Carlo Methods for
+calculating projected returns based on specific stocks while determining possible risks for selecting a strategy,
+to select parameters based on real-world data while verifying the parameter's validity, and to show
+how to process and  analyze real-world data.
+
+### Patterns (Lab 3)
+
+#### Pattern 1. Monte Carlo Method in the Context of Stock Data
+
+## Entities, State Variables, and Scales (Lab 3)
+
+### State Variables and Scales (Lab 3)
+
+```{raw} latex
+\begin{tabular}{llll}
+\hline
+\textbf{Variable} & \textbf{Scale} & \textbf{Type} & \textbf{Description} \\
+\hline
+$p_{0}$ & $[0 - \infty]$ & Double & The initial value of the principal. \\
+$r$ & $[-\infty - \infty]$ & Double & The rate of return which is often [0-100] percent, but can be any number. \\
+$\bar{r}$ & $[0 - \infty]$ & Double & The average rate of return defined by the user. \\
+$\sigma$ & $[0 - \infty]$ & Double & The standard deviation of the rate of return defined by the user. \\
+$t$ & $[0 - 1]$ & Integer & The time horizon for the model. \\
+$p_{t}$ & $[-\infty - \infty]$ & Double & The value of the return at step t. \\
+$n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
+\hline
+\end{tabular}
+```
 
 ## Process Overview and Scheduling
 
@@ -428,7 +458,26 @@ The user inputs the following data points:
 
 ### Basic Principles
 
+This model depicts the usage of Monte Carlo Methods for building estimations of future
+retirement accounts - however, the purpose of this model is to show that simulation
+can be used to build predictions based on a limited set of data with epistemic
+uncertainty. Similar to Lab 1, this lab leverages the Law of Large Numbers to build
+pausable estimations for $P_{40}$, however, unlike lab 1, this model also uses non-uniform
+random variables (a function that maps outcomes from a sample space to values)
+to generate random variates that enter an function (the interest calculation) that
+estimates target state variables ($r$ and $p_0$) with a definite pattern. These ideas
+were covered in more detail in {ref}`sec:prob_stats`.
+
 ## Input Data
+
+The user inputs the following data points:
+
+- Initial Interest Rate
+- Parameters for Normal and Triangular Distributions
+- Time Horizon
+- Initial Principal
+- Number of Experiments
+
 
 ## Questions left to the reader to answer
 
@@ -437,8 +486,7 @@ The user inputs the following data points:
 3. Moreover, would you say that this portfolio would pay off (have a positive value if we subtract the $E[X] = 10,000$ from the FV), in a week,
 which is our length of simulation.
 4. Given the Kurtosis of the Model from XLrisk, what would you say about extreme events with this portfolio?
-5. If you change the mixture of the stocks from all equal to only one stock, for example, MSTR, what happens to the variance, and why?
-And how does connect to portfolio strategies in the real world?
+5. If you change the mixture of the stocks from all equal to only one stock, for example, MSTR, what happens to the variance, and why? And how does connect to portfolio strategies in the real world?
 :::
 
 :::{admonition} Lab 4
@@ -466,9 +514,23 @@ And how does connect to portfolio strategies in the real world?
 
 ## Entities, State Variables, and Scales
 
-### State Variables
+### State Variables and Scales (Lab 4)
 
-### Scales
+```{raw} latex
+\begin{tabular}{llll}
+\hline
+\textbf{Variable} & \textbf{Scale} & \textbf{Type} & \textbf{Description} \\
+\hline
+$p_{0}$ & $[0 - \infty]$ & Double & The initial value of the principal. \\
+$r$ & $[-\infty - \infty]$ & Double & The rate of return which is often [0-100] percent, but can be any number. \\
+$\bar{r}$ & $[0 - \infty]$ & Double & The average rate of return defined by the user. \\
+$\sigma$ & $[0 - \infty]$ & Double & The standard deviation of the rate of return defined by the user. \\
+$t$ & $[0 - 1]$ & Integer & The time horizon for the model. \\
+$p_{t}$ & $[-\infty - \infty]$ & Double & The value of the return at step t. \\
+$n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
+\hline
+\end{tabular}
+```
 
 ## Process Overview and Scheduling
 
@@ -563,7 +625,7 @@ And how does connect to portfolio strategies in the real world?
 :::{admonition} Lab 7
 :class: attention dropdown
 (lab-7)=
-# Lab 7: General and Deterministic Queuing Methods (SIMIO, CTW, or Anylogic)
+# Lab 7: General and Deterministic Queuing Methods (SIMIO, Ciw, or Anylogic)
 
 ## Lab 7 Prerequisites
 
