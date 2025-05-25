@@ -3,3 +3,6 @@ _build
 
 # JupyterBook
 Chapter_Lab/.ipynb_checkpoints
+
+# Vscode
+/.vscodex
