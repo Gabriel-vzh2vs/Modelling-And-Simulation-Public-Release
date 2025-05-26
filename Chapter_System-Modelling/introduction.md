@@ -159,6 +159,7 @@ predator and prey is then captured as follows by
 N_{i,j,t+1} &=f\bigl( N'_{i,j,t}, P'_{i,j,t}\bigr) \;,\\
 P_{i,j,t+1} &=g\bigl( N'_{i,j,t}, P'_{i,j,t}\bigr)\;.
 \end{align*}
+```
 
 In this example, both time and states are discrete.
 
