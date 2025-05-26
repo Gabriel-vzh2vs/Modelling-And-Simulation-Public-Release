@@ -40,7 +40,7 @@ project:
     - title: Simulation In Practice
       children:
         - file: Chapter_Simulation-In-Practice/introduction.md
-        - file: Chapter_Simulation-In-Practice/Placeholder.md
+        - file: Chapter_Simulation-In-Practice/validation.md
     - title: Lab
       children:
         - file: Chapter_Lab/intro-to-labs.md
@@ -53,20 +53,17 @@ project:
     - title: Distribution Modelling
       children:
         - file: Chapter_Distribution-Modelling/index.md
-        - file: Chapter_Distribution-Modelling/Placeholder.md
     - title: Random Variate Generation And Number Generation
       children:
         - file: Chapter_Random-Number-And-Variate-Generation/introduction.md
-        - file: Chapter_Random-Number-And-Variate-Generation/Placeholder.md
     - title: Advanced Topics
       children:
         - file: Chapter_Advanced-Topics/Placeholder.md
     - title: Agent Based Modelling
       children:
-        - file: Chapter_Agent-Based-Modelling/Placeholder.md
+        - file: Chapter_Agent-Based-Modelling/introduction.md
     - title: Finite State Machines
       children:
-        - file: Chapter_Finite-State-Machines/Placeholder.md
         - file: Chapter_Finite-State-Machines/deterministic-finite-automata.md
         - file: Chapter_Finite-State-Machines/nondeterministic-finite-automata.md
     - title: Variance Reduction Techniques
@@ -78,15 +75,11 @@ project:
         - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
     - title: Appendix
       children:
-        - file: Chapter_Appendix/placeholder.md
         - file: Chapter_Appendix/glossary.md
         - file: Chapter_Appendix/supporting-material.md
   bibliography:
     - references.bib
     - bibliography.bib
-  extra_extensions:
-    - myst_nb_bokeh
-    - ansmath
 site:
   template: book-theme
   # options:

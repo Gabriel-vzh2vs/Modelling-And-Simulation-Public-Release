@@ -1,8 +1,6 @@
 (sec:glossary)=
 
----
-title: Glossary
----
+# Glossary
 
 A glossary of common terms used throughout our text.
 

@@ -55,13 +55,16 @@ d
 ::::
 
 (prelab-2)=
-# Pre-Lab 2: Tutorial for XLRisk (Do)
+# Pre-Lab 2: Tutorial for Monte Carlo Methods (Do)
+
+This pre-lab uses XLrisk as the main implementation method; however,
+these all of these tasks can be done within python as well
+through monaco or pyMC (either one combined with the Copulas package).
+
 
 ## Functions
 
 ## Correlations
-
-## 
 
 ## Trials
 
@@ -119,43 +122,96 @@ d
 (prelab-6)=
 # Pre-Lab 6: A Quick Review of Queuing Theory (Reading)
 
-## Kendall's Notation
-
-How are queues represented? For example, what does $m/m/1$ mean?
-
-
 ## Exponential Distribution
 
 In probability courses and textbooks you may have heard about the exponential
-distribution, one of the most prototypical queuing systems (m/m/1) relies on the
+distribution, one of the most prototypical queuing systems ($M/M/1$) relies on the
 exponential distribution for its service times and inter-arrival rates.
 
 Now, what are the properties that make exponential distributions useful for
 
-## Birth and Death Processes
+## Birth-Death Processes and Queues
+
+A Birth-Death Process is the fundamental idea underpinning queuing theory
+as every $M/M/1$, which was one of the first queues observed, is a birth-death
+process. The first informal written description of a $M/M/1$ was in France, 
+
+## Kendall's Notation for Queues
+
+How are queues formally represented? For example, what does $M/M/1$ mean?
+
+In general, every queue can be represented in the format A/B/c/K/N/D
+with the last three often excluded in most literature.
+
+:::{table}
+:label: Kendall-Notation
+
+| Position | Description                      | Common Symbols                                                                                                |
+| :------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| **A** | **Arrival Process** | M (Markovian/Poisson), D (Deterministic/Constant), E$_k$ (Erlang), G or GI (General/General Independent)                      |
+| **B** | **Service Time Distribution** | M (Markovian/Exponential), D (Deterministic/Constant), E$_k$ (Erlang), G (General)                                  |
+| **c** | **Number of Servers** | Integer value (1, 2, 3, ..., $\infty$)                                                                                      |
+| **K** | **System Capacity** (Optional)      | Integer value (maximum number of customers in the system, including those being served), $\infty$ if omitted     |
+| **N** | **Calling Population** (Optional)   | Integer value (size of the population from which customers arrive), $\infty$ (if omitted)                        |
+| **D** | **Queue Discipline** (Optional)     | FIFO/FCFS (First-In, First-Out/First-Come, First-Served), LIFO/LCFS (Last-In, First-Out/Last-Come, First-Served), SIRO (Service In Random Order), PRI (Priority) |
+
+:::
+
+Using the {ref}`Kendall-Notation` above, we can determine that a $M/M/1$ queue is a
+queue with a Markovian Arrival Process, a Service time that is Markovian,
+and one server. Moreover, using this information, we know that the inter-arrival
+times are exponential, and the time it takes to serve someone the queue is
+also exponential, and that means we can calculate queue behaviors through
+closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
+
+:::{table}
+:label: MM1Performance-Metrics
+
+| Performance Measure                      | Symbol        | Formula                                         |
+| :--------------------------------------- | :------------ | :---------------------------------------------- |
+| Arrival Rate                             | $\lambda$     | Given                                           |
+| Service Rate                             | $\mu$         | Given or $\frac{1}{\text{service time}}$         |
+| Server Utilization (Traffic Intensity)   | $\rho$        | $\frac{\lambda}{\mu}$                           |
+| Probability of an Empty System           | $P_0$   | $1 - \rho$                                            |
+| Probability of $n$ customers in the system | $P_n$       | $P_0 \rho^n = (1-\rho)\rho^n$                   |
+| Average Number of Customers in the System | $L$ or $L_s$ | $\frac{\lambda}{\mu - \lambda} = \frac{\rho}{1-\rho}$ |
+| Average Number of Customers in the Queue  | $L_q$        | $\frac{\lambda^2}{\mu(\mu - \lambda)} = \frac{\rho^2}{1-\rho}$ |
+| Average Time a Customer Spends in the System | $W$ or $W_s$ | $\frac{1}{\mu - \lambda} = \frac{L}{\lambda}$     |
+| Average Time a Customer Spends in the Queue  | $W_q$     | $\frac{\lambda}{\mu(\mu - \lambda)} = \frac{L_q}{\lambda}$ |
+| Probability that the number of customers in the system is greater than or equal to *n* | $P(\text{N} \ge n)$ | $\rho^n$ |
+| Probability that the waiting time in the queue is greater than *t* (for $t \ge 0$) | $P(T_q > t)$ | $\rho e^{-(\mu-\lambda)t}$|
+| Probability that the system time is greater than *t* (for $t \ge 0$) | $P(T_s > t)$ | $e^{-(\mu-\lambda)t}$|
+
+:::
+
+Let's look at an example of a $M/M/1$ queue to show the power of these facts. 
+
+```{admonition} M/M/1 Example:
+:type: tip
+  An example of an admonition with a _title_.
+```
 
 (prelab-7)=
-# Pre-Lab 7: Review of Distributions (Reading)
-
-## When and How to Pick a Distribution
-
-There are hundreds of methods for selecting a distribution with some being more
-rigorous than others ranging from the most rigorous {cite}`Krzysztofowicz:25`
-(parts of Krzysztofowicz's work is shown in {ref}`sec:distribution_modeling`
-mixed with Maximum Likelihood Estimation, a subset of Maximum A Posteriori
-for estimating parameters).
+# Pre-Lab 7: Automated Distribution Fitters (Do)
 
 ## On Automated Distribution Fitters (i.e: Phitter, Fitter)
 
 Through simulation literature and real-world applications, it is relatively rare to see
 methods as seen with {cite}`Krzysztofowicz:25` for one reason, the vast majority of the
 literature is not building novel distributions or meta-Gaussians, but instead often use one of
-the three tests to pick from an existing distributions
+these four tests to pick from an existing distributions.
 
-- The Chi-Square Goodness Of Fit Test (this test can be deceptive, read {ref}`sec:distribution_modeling`)
-for more information about this.
-- 
-- 
+- The $\chi^2$ Goodness Of Fit Test (this test can be deceptive, read {ref}`sec:distribution_modeling`)
+for more information about this, and that you should consider not using this for continuous distributions.
+- Kolmogorov–Smirnov test (the test for comparing data to continuous distributions, which has the limitation
+of sensitivity to differences near the median between an empirical and parametric distribution)
+- Anderson–Darling Test 
+- Cramér–von Mises Criterion
+
+
+
+## The Exercises
+
 
 (prelab-8)=
 # Pre-Lab 8: Review of Ordinary Differential Equations (Do)
@@ -179,23 +235,68 @@ a function to its derivatives, an example is
 1 + 1 = 2
 ```
 
-Additionally, there are several types of DEs, some of which you are likely
-familiar with 
+Additionally, there are several types of DEs, the first two
+of which you are likely familiar with
+
+- ODE (Ordinary Differential Equations)
+- PDE (Partial Differential Equations)
+- SDE (Stochastic Differential Equations)
+
+In this work, we define ODEs as 
 
 ## ODEs for Modelling
 
-These examples of using ODEs for modelling come a variety of places
+These examples of using ODEs, PDEs, and SDEs for modelling are inspired by
+{cite}`harte1988consider`, which might sound a bit silly if you read the title,
+but it is a landmark work in modelling and problem-solving in
+Environmental Science.
+
+::::{tab-set}
+
+:::{tab-item} Example 1: Depleting Resources
+
+:::
+
+:::{tab-item} Example 2: A Warming Sphere
+
+:::
+
+::::
+
+## PDEs for Modelling
+
+::::{tab-set}
+
+:::{tab-item} Example 1: Heat flow in a uniform rod
+
+:::
+
+:::{tab-item} Example 2: Brownian motion
+
+:::
+
+::::
+
+## SDEs for Modelling
+
+These examples of using SDEs for modelling come a variety of places
 with this segment being mainly inspired by {cite}`harte1988consider`, which
 might sound a bit silly as a title, but it is a landmark work in
 modelling and problem-solving in Environmental Science.
 
-Example 1:
+::::{tab-set}
 
-Example 2:
+:::{tab-item} Example 1: Poisson (point) process
 
-Example 3:
+:::
 
-Example 4:
+:::{tab-item} Example 2
+
+:::
+
+::::
+
+
 
 ## Solving DEs with Python
 
@@ -203,7 +304,7 @@ Example 4:
 
 DEs can be used to approximate behaviors for different outcomes
 
-## Basic Simulation and Modelling Exercises with Solutions
+## DE-based Simulation and Modelling Exercises with Solutions
 
 ::::{tab-set}
 

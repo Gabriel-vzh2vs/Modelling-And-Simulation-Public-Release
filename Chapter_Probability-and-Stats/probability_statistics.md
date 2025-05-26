@@ -23,9 +23,8 @@ The notes were prepared using {cite}`Chen:25,Taylor:84,Law:13,Ross:24`
 
 ## Probability space ##
 
-You have had an introduction to probability in APMA 3100. Here we will
-refresh key elements and cover the following concepts which together
-form a probability space:
+Here we will refresh key elements from your introduction to probability course
+and cover the following concepts which together form a probability space:
 - An __experiment__;
 - The __sample space__ of an experiment, a set whose elements
   are the __sample points__;
@@ -82,7 +81,7 @@ satisfactory to leave this ambiguity. (Puts away soapbox.)
 
 
 :::{prf:example} Coin-tossing
-:label: ex:somelabel
+:label: ex:coin-tossing
 
 Consider an experiment that
 consists of tossing a nickel and a dime and then recording for each
@@ -119,7 +118,7 @@ a rule that only makes sense if $A^c$ is $\mathcal{F}$ whenever $A \in \mathcal{
 
 
 :::{prf:example} Coin-tossing (continued)
-:label: ex:somelabel
+:label: ex:coin-tossing-2
 
 For the coin tossing example we
 may let $\mathcal{F}$ to be the set of all subset of $\Omega$ (which
@@ -218,9 +217,8 @@ have
 \end{equation*}
 
 
-
 :::{prf:definition} Conditional probability
-:label: def:prob_space
+:label: def:cond_prob
 
 For events $A$ and $B$, the
 conditional probability of $A$ given $B$ is defined by
@@ -391,21 +389,23 @@ that you will find described in the extra reading on page ???}
   X \colon \Omega \longrightarrow \mathbb{R}
 \end{equation*}
 ```
+
 :::
 It is customary to use uppercase letter to denote random variables such
 as $X$, $Y$, and $Z$. The random variable $X$ thus assigns to each
 sample point $\omega \in \Omega$ a value $X(\omega)$.
 
-
 :::{prf:example} 4.3 (Law) - expanded:
 
 In this experiment we roll a
 pair of normal dice. The sample space in this case is
+
 ```{raw} latex
 \begin{equation*}
 \Omega = \{(1,1), (1,2), \ldots, (1,6), (2,1), \ldots, (6,6)\} \;.
 \end{equation*}
 ```
+
 Here $(a,b) \in \Omega$ encodes that $a$ appeared on the first die and
 $b$ on the second. We define $X \colon \Omega \longrightarrow
 \mathbb{R}$ to be the sum of the dice, that is $X\bigl((a,b)\bigr) =
@@ -426,7 +426,6 @@ was $H$ and 0 otherwise; and we let $Z$ be the total number of heads,
 which we may write as $Z = X_n + X_d$. The values of the random
 variables are specified in {ref}`tab:rv_cointoss`.
 
-```{table}
 ```{raw} latex
 :label: tab:rv_cointoss
 \begin{table}[ht]
@@ -455,7 +454,6 @@ variable $X$ over a sample space $\Omega$ is the function $F \colon
 \end{equation*}
 With more than one random variable, we may write $F_X$, $F_Y$, and so
 on.
-
 
 ## Discrete and continuous random variables: ##
 
