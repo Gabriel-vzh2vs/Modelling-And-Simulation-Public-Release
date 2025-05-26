@@ -43,12 +43,13 @@ project:
         - file: Chapter_Simulation-In-Practice/Placeholder.md
     - title: Lab
       children:
+        - file: Chapter_Lab/intro-to-labs.md
         - file: Chapter_Lab/softwareinstall.md
         - file: Chapter_Lab/prelabs.md
         - file: Chapter_Lab/labs.md
         - file: Chapter_Lab/projects.md
         - file: Chapter_Lab/GMPforReports.ipynb
-        - file: Chapter_Lab/Software-Specifics.md
+        - file: Chapter_Lab/software-specifics.md
     - title: Distribution Modelling
       children:
         - file: Chapter_Distribution-Modelling/index.md
@@ -66,8 +67,8 @@ project:
     - title: Finite State Machines
       children:
         - file: Chapter_Finite-State-Machines/Placeholder.md
-        - file: Chapter_Finite-State-Machines/deterministic-finite-automata
-        - file: Chapter_Finite-State-Machines/nondeterministic-finite-automata
+        - file: Chapter_Finite-State-Machines/deterministic-finite-automata.md
+        - file: Chapter_Finite-State-Machines/nondeterministic-finite-automata.md
     - title: Variance Reduction Techniques
       children:
         - file: Chapter_Variance-Reduction-Techniques/whyvariancereduction.md
@@ -78,16 +79,16 @@ project:
     - title: Appendix
       children:
         - file: Chapter_Appendix/placeholder.md
-
+        - file: Chapter_Appendix/glossary.md
+        - file: Chapter_Appendix/supporting-material.md
+  bibliography:
+    - references.bib
+    - bibliography.bib
+  extra_extensions:
+    - myst_nb_bokeh
+    - ansmath
 site:
   template: book-theme
   # options:
   #   favicon: favicon.ico
   #   logo: site_logo.png
-bibliography:
-  - references.bib
-myst_enable_extensions:
-  - amsmath
-sphinx:
-  extra_extensions:
-  - myst_nb_bokeh

@@ -1,3 +1,4 @@
+(sec:projects)=
 # Projects
 
 These projects are meant to bridge the theory of simulation and application into several summative assessments. Additionally,
@@ -59,7 +60,7 @@ You also need to figure out the distributions to pick from for each of these cat
 (project-2)=
 # Project 2 (Extension Project _Queuing-Based Project_): Modelling and Simulating a Supermarket Queue
 
-## Project 2 Skill Sets:
+## Project 2-linked Skills
 
 This project focuses on developing the following skills:
 
@@ -131,7 +132,6 @@ Demonstrates a clear, insightful, and original thesis. Arguments are compelling,
 Presents a clear thesis. Arguments are generally well-supported and logical. May show some minor weaknesses in addressing counterarguments or in the depth of analysis. &
 % Description for Needs Improvement
 Thesis is unclear, unoriginal, or not well-defined. Arguments are weak, poorly supported, or illogical. Fails to address counterarguments or does so superficially. \\
-\addlinespace % Adds a little space between criteria rows
 
 \textbf{Criterion 2: Evidence & Analysis} &
 % Description for Excellent
@@ -140,7 +140,6 @@ Utilizes a wide range of high-quality, relevant sources. Evidence is expertly in
 Uses appropriate sources. Evidence is generally well-integrated and analyzed to support claims. Shows good understanding of the material, though analysis could be deeper. &
 % Description for Needs Improvement
 Relies on insufficient, irrelevant, or low-quality sources. Evidence is poorly integrated, not analyzed, or misapplied. Shows limited understanding of the material. \\
-\addlinespace
 
 \textbf{Criterion 3: Structure & Organization} &
 % Description for Excellent
@@ -149,7 +148,6 @@ Organization is exceptionally clear and logical. Paragraphs are well-developed, 
 Organization is clear. Paragraphs are mostly well-developed and cohesive with adequate transitions. Introduction and conclusion are functional. &
 % Description for Needs Improvement
 Organization is unclear or illogical. Paragraphs lack development, coherence, or transitions. Introduction or conclusion is weak or missing. \\
-\addlinespace
 
 \textbf{Criterion 4: Clarity, Mechanics, & Style} &
 % Description for Excellent
@@ -158,8 +156,6 @@ Writing is clear, concise, and engaging. Language is precise and sophisticated. 
 Writing is generally clear. Language is appropriate. Minor errors in grammar, spelling, punctuation, or citation style may be present but do not significantly hinder understanding. &
 % Description for Needs Improvement
 Writing is unclear, awkward, or difficult to follow. Frequent or significant errors in grammar, spelling, punctuation, or citation style impede understanding. \\
-\addlinespace
-
 % Add more criteria as needed following the pattern above
 
 \bottomrule
@@ -174,7 +170,7 @@ This project focuses on developing the following skills:
 1. How to structure \& create a simulation study;
 2. And learning how to use Monte Carlo Methods to build basic simulations.
 
-And this project relies on the following prerequisities:
+And this project relies on the following prerequisites:
 
 ### Labs
 
@@ -188,14 +184,13 @@ And this project relies on the following prerequisities:
 2. b
 3. c
 
-## Model Information
+## Project 3 Model Information
 
 This model is based loosely on {cite:p}`griffiths2010simulation` for its base description. You are a consultant working for the
 English healthcare system (England NHS) for the Bedfordshire Hospitals NHS Foundation Trust who is attempting to
 reduce cancellations of elective surgeries and reducing staffing while maintaining a reasonable amount of
 bed-occupancy and waiting times. Moreover, the scope of your project is the beds in
 the hospital along with their sources (Emergency Room, Radiology, Elective Surgery, and Hospital Transfers).
-
 
 ## Metrics of Interest
 
@@ -205,6 +200,7 @@ the hospital along with their sources (Emergency Room, Radiology, Elective Surge
 # Project 4 (Fundamental)
 
 This project focuses on developing the following skills:
+
 1. How to structure \& create a simulation study;
 2. And learning how to use Monte Carlo Methods to build basic simulations.
 
@@ -221,7 +217,7 @@ And this project relies on the following prerequisities:
 2. [Lab6](./GMPforReports.ipynb)
 3. [Lab7](./GMPforReports.ipynb)
 
-## Model Information
+## Project 4 Model Information
 
 ## Metrics of Interest
 
@@ -247,7 +243,7 @@ And this project relies on the following prerequisities:
 2. [Lab6](./GMPforReports.ipynb)
 3. [Lab7](./GMPforReports.ipynb)
 
-## Model Information
+## Project 5 Model Information
 
 ## Metrics of Interest
 
@@ -273,7 +269,7 @@ And this project relies on the following prerequisites:
 2. [Lab6](./GMPforReports.ipynb)
 3. [Lab7](./GMPforReports.ipynb)
 
-## Model Information
+## Project 6 Model Information
 
 ## Metrics of Interest
 

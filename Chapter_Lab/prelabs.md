@@ -1,3 +1,4 @@
+(sec:pre-labs)=
 # Pre-Labs
 
 Pre-labs are made to aid the reader with the concepts presented in the
@@ -21,17 +22,34 @@ pre-labs you do based on your knowledge level.
 ::::{tab-set}
 
 :::{tab-item} Fundamental Excel Skills
+
 ## The Cell
+
+a
 
 ## Formulas
 
+b
+
 ## Ranges
 
+c
+
 ## References
+
+d
+
 :::
 
 :::{tab-item} Data Management
-## Bread
+
+## Data Structures
+
+## Data Cleaning
+
+## Topic 3
+
+## Topic 4
 :::
 
 ::::
@@ -39,28 +57,30 @@ pre-labs you do based on your knowledge level.
 (prelab-2)=
 # Pre-Lab 2: Tutorial for XLRisk (Do)
 
-## Functions ##
+## Functions
 
-## Correlations ##
+## Correlations
 
-## Trials ##
+## 
 
-## Results ##
+## Trials
 
-## Skew and Kurtosis ##
+## Results
 
-## Walk-Through ##
+## Skew and Kurtosis
+
+## Walk-Through
 
 (prelab-3)=
-# Pre-Lab 3: Advanced Excel Functions (Do)
+# Pre-Lab 3: Advanced Excel Functions or Fundamentals of Debugging (Do)
 
-## Live Formulas ##
+## Live Formulas
 
-## Debugging ##
+## Debugging
 
-## Examples ##
+## Examples
 
-## Walk-Through ##
+## Walk-Through
 
 (prelab-4)=
 # Pre-Lab 4: Python Review (Read)
@@ -99,27 +119,119 @@ pre-labs you do based on your knowledge level.
 (prelab-6)=
 # Pre-Lab 6: A Quick Review of Queuing Theory (Reading)
 
-## Exponential Distribution ##
+## Kendall's Notation
 
-## Birth and Death Processes ##
+How are queues represented? For example, what does $m/m/1$ mean?
 
-## Kendall's Notation ##
+
+## Exponential Distribution
+
+In probability courses and textbooks you may have heard about the exponential
+distribution, one of the most prototypical queuing systems (m/m/1) relies on the
+exponential distribution for its service times and inter-arrival rates.
+
+Now, what are the properties that make exponential distributions useful for
+
+## Birth and Death Processes
 
 (prelab-7)=
 # Pre-Lab 7: Review of Distributions (Reading)
 
-## When to Pick a Distribution ##
+## When and How to Pick a Distribution
 
-## Phitter, Dfit, and Fitter ##
+There are hundreds of methods for selecting a distribution with some being more
+rigorous than others ranging from the most rigorous {cite}`Krzysztofowicz:25`
+(parts of Krzysztofowicz's work is shown in {ref}`sec:distribution_modeling`
+mixed with Maximum Likelihood Estimation, a subset of Maximum A Posteriori
+for estimating parameters).
+
+## On Automated Distribution Fitters (i.e: Phitter, Fitter)
+
+Through simulation literature and real-world applications, it is relatively rare to see
+methods as seen with {cite}`Krzysztofowicz:25` for one reason, the vast majority of the
+literature is not building novel distributions or meta-Gaussians, but instead often use one of
+the three tests to pick from an existing distributions
+
+- The Chi-Square Goodness Of Fit Test (this test can be deceptive, read {ref}`sec:distribution_modeling`)
+for more information about this.
+- 
+- 
 
 (prelab-8)=
-# Pre-Lab 8: Review of Ordinary Differential Equations (Reading)
+# Pre-Lab 8: Review of Ordinary Differential Equations (Do)
 
-## What is an ODE ##
+Previously in this text, we discussed and worked with queuing networks, the
+Monte Carlo Method, System Dynamics, Distribution Modelling,
+Random Variates, Random Number Generation, and Output Analysis
+which are ubiquitous throughout simulation; however, these are
+required but not sufficient for understanding the field of simulation,
+because you will often see ODEs, SDEs, and PDEs being used to model behavior,
+and a simulation practitioner (or any engineer) should be familiar
+with them. This pre-lab focuses on giving a basic review of
+ODEs and their application in simulation and modelling.
 
-## Application to Simulation ###
+## What even are DEs, ODEs, PDEs, and SDEs?
 
-## Examples of ODEs in Basic Simulation ##
+In general, a differential equation (DE) is an equation that relates
+a function to its derivatives, an example is
+
+```{math}
+1 + 1 = 2
+```
+
+Additionally, there are several types of DEs, some of which you are likely
+familiar with 
+
+## ODEs for Modelling
+
+These examples of using ODEs for modelling come a variety of places
+with this segment being mainly inspired by {cite}`harte1988consider`, which
+might sound a bit silly as a title, but it is a landmark work in
+modelling and problem-solving in Environmental Science.
+
+Example 1:
+
+Example 2:
+
+Example 3:
+
+Example 4:
+
+## Solving DEs with Python
+
+## Application to Simulation
+
+DEs can be used to approximate behaviors for different outcomes
+
+## Basic Simulation and Modelling Exercises with Solutions
+
+::::{tab-set}
+
+:::{tab-item} Exercise 1
+
+:::
+
+:::{tab-item} Exercise 2
+
+:::
+
+:::{tab-item} Exercise 3
+
+:::
+
+:::{tab-item} Solution 1
+
+:::
+
+:::{tab-item} Solution 2
+
+:::
+
+:::{tab-item} Solution 3
+
+:::
+
+::::
 
 (prelab-9)=
 # Pre-Lab 9: Becoming Proficient at Simulation Software (Do)
@@ -138,3 +250,11 @@ pre-labs you do based on your knowledge level.
 ## What is an Agent? ##
 
 ## Walk-Through ##
+
+
+(prelab-11)=
+# Pre-Lab 11: A Review of Optimization (Read)
+
+## What does it mean to Optimize?
+
+## 

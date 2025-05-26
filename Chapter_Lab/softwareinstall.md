@@ -1,3 +1,4 @@
+(sec:softwaresetup)=
 # Software Installation
 In this section, we will describe how to install a discrete event simulation software and XLRisk 
 (Monte Carlo Excel Plugin) on your personal machine.

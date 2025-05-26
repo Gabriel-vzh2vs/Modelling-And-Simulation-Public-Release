@@ -15,13 +15,13 @@ kernelspec:
 +++ {"editable": true, "slideshow": {"slide_type": ""}}
 
 # (Things will break!) Labs-staging
-The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples, 
-and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models 
-through self-assessment or by formal assessment by an external grader. 
-It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through. 
+The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples,
+and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models
+through self-assessment or by formal assessment by an external grader.
+It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through.
 Additionally, lab descriptions are written with a modified ODD (Overview, Design concepts and Details) protocol that is shortened
 based on the model's requirements 
-(e.g: sections that do not apply to the model, or sections that are left to the reader to complete). 
+(e.g: sections that do not apply to the model, or sections that are left to the reader to complete).
 :::{note} A Note on Difficulty Levels
 :class: dropdown
 

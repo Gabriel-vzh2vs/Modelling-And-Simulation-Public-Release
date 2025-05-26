@@ -1,4 +1,5 @@
-# Software Cheat Sheet
+(sec:software)=
+# Software Resources and Information
 
 # Excel
 

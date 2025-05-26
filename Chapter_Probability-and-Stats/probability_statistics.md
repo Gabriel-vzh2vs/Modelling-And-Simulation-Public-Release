@@ -430,7 +430,6 @@ variables are specified in {ref}`tab:rv_cointoss`.
 ```{raw} latex
 :label: tab:rv_cointoss
 \begin{table}[ht]
-  \centerline{
     \begin{tabular}{|c|c|c|c|}
       \hline
       $\omega \in \Omega$ & $X_n(\omega)$ & $X_d(\omega)$ & $Z(\omega)$ \\
@@ -441,7 +440,6 @@ variables are specified in {ref}`tab:rv_cointoss`.
       $(T,T)$ & 0 & 0 & 0 \\
       \hline
     \end{tabular}
-  }
   \caption{The random variables in the coin tossing experiment.}
   \label{tab:rv_cointoss}
 \end{table}
@@ -799,7 +797,6 @@ of the details behind random variables.
 **Example (coin-tossing):** We return to the coin tossing
 example. Recall the table:
 ```{raw} latex
-  \centerline{
   \begin{tabular}{|l|l|l|l|}
     \hline
     $A \in \mathcal{F}$ & $\Pr(A)$ & $A \in \mathcal{F}$ & $\Pr(A)$ \\
@@ -814,13 +811,11 @@ example. Recall the table:
     $\{(H,H),(T,T)\}$ & 1/2 & $\{(H,T),(T,H)\}$ & 1/2 \\
     \hline
   \end{tabular}
-  }
   ```
 
 We define three random variables $X_n$, $X_d$ and $Z = X_n + X_d$
 with values as specified in the following table:
 ```{raw} latex
-\centerline{
   \begin{tabular}{|c|c|c|c|}
     \hline
     $\omega \in \Omega$ & $X_n(\omega)$ & $X_d(\omega)$ & $Z(\omega)$ \\
@@ -831,7 +826,6 @@ with values as specified in the following table:
     $(T,T)$ & 0 & 0 & 0 \\
     \hline
   \end{tabular}
-}
 ```
 
 We want to find the distribution function for the random variable
@@ -925,7 +919,7 @@ automatically.
 
 
 
-**Example: (a biased coin)** Include this?? Gabe: I think that might be good to include, particular if we reuse the coin idea when talking about binominals as convulations.
+**Example: (a biased coin)** Include this?? Gabe: I think that might be good to include, particular if we reuse the coin idea when talking about binomials as convulations.
 
 **Example (Buffon's needle):** In the lecture we modeled the
 needle toss using the function. In this case, we have a product
