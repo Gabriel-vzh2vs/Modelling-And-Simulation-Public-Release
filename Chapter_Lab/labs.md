@@ -3,11 +3,17 @@
 
 The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples,
 and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models
-through self-assessment or by formal assessment by an external grader. 
-It is recommended to do seven to eight labs within a course, as some labs may take longer to fully understand and go through.
-Additionally, lab descriptions are written with a modified ODD (Overview, Design concepts and Details) protocol that is shortened
-based on the model's requirements
-(e.g: sections that do not apply to the model, or sections that are left to the reader to complete).
+through self-assessment or by formal assessment by an external grader. It is recommended to do seven to eight labs within a
+course of self-study or in the context of a formal course in simulation.
+
+Moreover, these labs written as technology-agnostic - meaning that you could theoretically use any toolkit to
+complete these tasks; however, we have included recommendations for specific technological implementations as a guide for
+readers as the authors used them in the creation of the labs.
+
+In accordance with technological agnosticism and to show how literature presents their case studies, lab descriptions are written
+with a modified ODD (Overview, Design concepts and Details) protocol that is shortened based on the model's
+requirements (e.g: sections that do not apply to the model, or sections that are left to the reader to complete).
+
 :::{note} A Note on Difficulty Levels
 :class: dropdown
 
@@ -50,7 +56,10 @@ through random sampling from a uniform random variable.
 
 #### Pattern 1. Unit Circle of Radius 1 and Square with Side Length 2
 
-This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units. In this pattern, we obtain $\pi$ from our calculations in Excel when we consider the region of interest for the indicator variable to be the union of the circle and square. **This is the pattern that you should try to replicate**
+This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units.
+In this pattern, we obtain $\pi$ from our calculations in Excel when we consider
+the region of interest for the indicator variable to be the union of the circle and square.
+**This is the pattern that you should try to replicate**
 
 #### Pattern 2. Unit Circle of Radius 2 and Square with Side Length 1
 
@@ -289,7 +298,7 @@ and metrics.
 It is structured within six subprocesses which activate depending on which pattern the model is exhibiting,
 with two subprocesses being related to stochaticity which produces random variates via inverse transform
 for the normal and triangular distributions in the first (normal_variable) and second (triangular_variable) subprocesses, 
-respectively, with their random variates being stored into a matrix. 
+respectively, with their random variates being stored into a matrix.
 The next subprocess (user_input) is the subprocess that handles input data
 from the user and stores it within a matrix or
 list. This subprocess, user_input, provides information for the next subprocess, interest_calculation,
@@ -426,11 +435,13 @@ The user inputs the following data points:
 This model's purpose is three-fold, to demonstrate an application of Monte Carlo Methods for
 calculating projected returns based on specific stocks while determining possible risks for selecting a strategy,
 to select parameters based on real-world data while verifying the parameter's validity, and to show
-how to process and  analyze real-world data.
+how to process and analyze real-world data.
 
 ### Patterns (Lab 3)
 
 #### Pattern 1. Monte Carlo Method in the Context of Stock Data
+
+
 
 ## Entities, State Variables, and Scales (Lab 3)
 
@@ -500,10 +511,12 @@ which is our length of simulation.
 
 - {ref}`prelab-4`
 
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
+### Mandatory Chapters for Lab 4
+
+- {ref}`sec:prob_stats`
+- {ref}`sec:monte_carlo_method`
+- {ref}`sec:distribution_modeling`
+
 
 ## Purpose and Patterns
 
@@ -554,10 +567,16 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 
 - {ref}`prelab-5`
 
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
+### Mandatory Chapters for Lab 3
+
+- {ref}`sec:prob_stats`
+- {ref}`sec:monte_carlo_method`
+- {ref}`sec:building_simulation_models`
+
+### Recommended Chapters for Lab 3
+
+- {ref}`sec:random_number_generation`
+- {ref}`sec:distribution_modeling`
 
 
 ## Purpose and Patterns
@@ -710,12 +729,13 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 
 ### Pre-labs
 
+- {ref}`prelab-8`
 - {ref}`prelab-9`
 
 ### Chapters
 - {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
+- {ref}`sec:system_modeling`
+- 
 
 ## Purpose and Patterns
 

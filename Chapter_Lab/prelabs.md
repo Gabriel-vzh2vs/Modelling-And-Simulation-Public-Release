@@ -19,9 +19,21 @@ pre-labs you do based on your knowledge level.
 (prelab-1)=
 # Pre-Lab 1: Fundamental Excel Skills and Data Management (Read)
 
+The first pre-lab will introduce some important details you should know
+about Excel if you choose to use it, and will teach the readers who do not
+want (or can not) use Excel about data management, a critical skill for
+using a computer effectively for computing tasks such as simulation.
+
 ::::{tab-set}
 
-:::{tab-item} Fundamental Excel Skills
+:::{tab-item} Fundamental Excel Skills (Excel Users)
+
+Excel is a useful tool for doing basic data cleaning, making toy models,
+looking at excel files made by other people, using visual basic, running
+statistical tests in prototyping, or for visualizing matrix algebra. It is
+ubiquitous in business, education, and more because has a minimal learning curve
+to get started with basic operations, but it is difficult to master. So it is
+important for any reader (or engineer) to learn.
 
 ## The Cell
 
@@ -39,9 +51,22 @@ c
 
 d
 
+## When you should consider using Something Else
+
+An important part of any tool is using it appropriately. This might become a
+soapbox unlike every other pre-lab, which this text tends to avoid being at times.
+
+Do not use Excel when you need to
+
+- store data that needs to be assessed by other software (use DBMSs like PostgreSQL, MariaDB)
+- have speed at processing data and information (use programming languages like Rust, Python with Pypy)
+- simulate complex systems, particularly ones with any form of DE, (use simulation software like PySim, Anylogic, SIMIO)
+- 
+- 
+
 :::
 
-:::{tab-item} Data Management
+:::{tab-item} Data Management (Everyone)
 
 ## Data Structures
 
@@ -57,14 +82,39 @@ d
 (prelab-2)=
 # Pre-Lab 2: Tutorial for Monte Carlo Methods (Do)
 
-This pre-lab uses XLrisk as the main implementation method; however,
-these all of these tasks can be done within python as well
-through monaco or pyMC (either one combined with the Copulas package).
+This pre-lab uses XLrisk (for Excel users) and monaco + pandas (for Python Users)
+as the main implementation method; however, these all of these tasks can be
+done within other packages in python such as the pyMC and copulas packages.
 
+In this pre-lab we will discuss the Monte Carlo Method with its implementations
+and do a short example of coin-flipping that loosely relates to Lab-2. Keep in mind that
+the XLRisk and monaco + pandas sections are almost identical on purpose.
+
+::::{tab-set}
+
+:::{tab-item} XLRisk
 
 ## Functions
 
-## Correlations
+In XLRisk, there is a series of functions for defining a random variate, of which the bare
+minimum for this pre-lab are here, with a more extensive list in {ref}`sec:software`.
+
+- =RiskBernolli() # For a Bernoulli Variate (you can also use =binominal() )
+- =RiskCorMat() # For Copulas
+
+## Correlations between distributions (Copula)
+
+In this case, we consider copulas as forcing a distribution to assume the
+behavior of another one. An example of this would be if a person goes to an expensive hotel, it is more
+likely that they would get expensive food, tours, and everything else on their trip.  
+
+Copulas are joint cumulative d.fs for which the marginal d.f of each variable is $U[0,1]$ across the co-domain.
+
+And the gaussian copula, aka two gaussian distributions linked together with a copula, looks like this:
+
+image from hell, norway
+
+In XLrisk, this is represented through RiskCorMat, which takes a matrix and applies it to a
 
 ## Trials
 
@@ -73,6 +123,30 @@ through monaco or pyMC (either one combined with the Copulas package).
 ## Skew and Kurtosis
 
 ## Walk-Through
+
+:::
+
+:::{tab-item} monaco + Pandas
+
+## monaco Functions
+
+In monaco, there is a series of functions that make up 
+
+## monaco Correlations
+
+## monaco Trials
+
+## monaco Presentation of Results
+
+## Skew and Kurtosis through Pandas
+
+## monaco Example Walk-Through
+
+:::
+
+::::
+
+
 
 (prelab-3)=
 # Pre-Lab 3: Advanced Excel Functions or Fundamentals of Debugging (Do)
@@ -128,13 +202,20 @@ In probability courses and textbooks you may have heard about the exponential
 distribution, one of the most prototypical queuing systems ($M/M/1$) relies on the
 exponential distribution for its service times and inter-arrival rates.
 
-Now, what are the properties that make exponential distributions useful for
+The exponential distribution is defined as the following:
+
+:::{math}
+B
+:::
+
+Now, what are the properties that make exponential distributions useful for queuing?
+
 
 ## Birth-Death Processes and Queues
 
 A Birth-Death Process is the fundamental idea underpinning queuing theory
 as every $M/M/1$, which was one of the first queues observed, is a birth-death
-process. The first informal written description of a $M/M/1$ was in France, 
+process.
 
 ## Kendall's Notation for Queues
 
@@ -184,11 +265,11 @@ closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
 
 :::
 
-Let's look at an example of a $M/M/1$ queue to show the power of these facts. 
+Let's look at an example of a $M/M/1$ queue to show the power of these facts.
 
 ```{admonition} M/M/1 Example:
 :type: tip
-  An example of an admonition with a _title_.
+  A M/M/1 Queue
 ```
 
 (prelab-7)=
@@ -199,22 +280,33 @@ Let's look at an example of a $M/M/1$ queue to show the power of these facts.
 Through simulation literature and real-world applications, it is relatively rare to see
 methods as seen with {cite}`Krzysztofowicz:25` for one reason, the vast majority of the
 literature is not building novel distributions or meta-Gaussians, but instead often use one of
-these four tests to pick from an existing distributions.
+these four tests to pick from an existing distributions. Keep in mind that in general these
+tests are comparing an empirical (observed data) distribution to a parametric (defined by a
+closed-form formula) distribution.
 
 - The $\chi^2$ Goodness Of Fit Test (this test can be deceptive, read {ref}`sec:distribution_modeling`)
 for more information about this, and that you should consider not using this for continuous distributions.
 - Kolmogorov–Smirnov test (the test for comparing data to continuous distributions, which has the limitation
 of sensitivity to differences near the median between an empirical and parametric distribution)
-- Anderson–Darling Test 
+- Anderson–Darling Test (similar to the K-S test, but is more sensitive to differences
+between the tails of the empirical and parametric distributions)
 - Cramér–von Mises Criterion
-
-
 
 ## The Exercises
 
+Egg
 
 (prelab-8)=
-# Pre-Lab 8: Review of Ordinary Differential Equations (Do)
+# Pre-Lab 8: Overview of Differential Equations in Simulation (Read)
+
+:::{admonition} Advisory: Chapter Reading
+:class: warning dropdown
+
+It is highly recommended that the reader read {ref}`sec:system_modeling`
+before reading this pre-lab, as it provides more details and critical context
+about the topics discussed as this pre-lab covers a bit about modelling.
+
+:::
 
 Previously in this text, we discussed and worked with queuing networks, the
 Monte Carlo Method, System Dynamics, Distribution Modelling,
@@ -226,30 +318,81 @@ and a simulation practitioner (or any engineer) should be familiar
 with them. This pre-lab focuses on giving a basic review of
 ODEs and their application in simulation and modelling.
 
-## What even are DEs, ODEs, PDEs, and SDEs?
+In general, DEs can be used to approximate real-world behaviors into
+deterministic (ODE/PDE) or Stochastic behaviors (SDEs/IDEs);
+however, even the deterministic models may have unresolved behaviors
+(as most PDEs and higher-order ODEs do not have closed-form solutions).
+
+## What are DEs (i.e: ODEs, PDEs, SDEs, and IDEs)?
 
 In general, a differential equation (DE) is an equation that relates
-a function to its derivatives, an example is
+a function to its derivatives, an example is the canonical ordinary
+differential equation:
 
 ```{math}
-1 + 1 = 2
+y^{'} + p(x)y = q(x)
 ```
 
-Additionally, there are several types of DEs, the first two
-of which you are likely familiar with
+ODEs by definition are a differential equation (DE) dependent
+on a independent variable with its unknowns consisting of
+of at least one function and the derivatives of those function(s).
 
-- ODE (Ordinary Differential Equations)
-- PDE (Partial Differential Equations)
-- SDE (Stochastic Differential Equations)
+Additionally, there are other types of DEs that expand on the idea of
+ODEs, the first one of which you are likely familiar with:
 
-In this work, we define ODEs as 
+- PDEs (Partial Differential Equations)
+- SDEs (Stochastic Differential Equations)
+- IDEs (Integro-differential equations)
+
+Here is a table describing the differences between the several types of DEs (non-ODE)
+with further examples given throughout the rest of the pre-lab:
+
+:::{table}
+:label: DEs-Types
+
+| Feature                                   | PDEs (Partial Differential Equations)                                     | SDEs (Stochastic Differential Equations)                                  | IDEs (Integro-Differential Equations)                                     |
+| :---------------------------- |:------------------------------------------------------------------------ | :------------------------------------------------------------------------ | :------------------------------------------------------------------------ |
+| **Unknown Function Depends On**  | Two or more independent variables (e.g., $u(x,t)$ or $f(x,y,z)$).         | One or more independent variables, and also on random processes.        | One or more independent variables.                                        |
+| **Derivatives Involved**   | Partial derivatives (e.g., $\frac{\partial u}{\partial x}$, $\frac{\partial^2 u}{\partial t^2}$, $\frac{\partial^2 u}{\partial x \partial y}$). | Ordinary or partial derivatives, plus terms involving stochastic differentials (e.g., $dW_t$ for Wiener process). | Ordinary or partial derivatives, and also integrals of the unknown function. |
+| **General Form Example** | $F(x, t, u, u_x, u_t, u_{xx}, u_{tt}, u_{xt}, \dots) = 0$                   | $dX_t = a(t, X_t)dt + b(t, X_t)dW_t$                                  | $\frac{dy}{dx} = f(x, y(x), \int_{a}^{b} K(x,s,y(s))ds)$                     |
+| **Key Characteristics** | - Describes systems evolving in multiple dimensions or involving rates of change with respect to multiple variables. <br> - Solutions are functions of multiple variables. <br> - Often more complex to solve than ODEs; boundary conditions are crucial. | - Incorporate random noise or fluctuations. <br> - Solutions are stochastic processes (collections of random variables). <br> - Used to model systems with inherent uncertainty. <br> - Often uses stochastic calculus (e.g., Itô calculus). | - Combine differential and integral operators acting on the unknown function. <br> - Arise when the rate of change depends on the accumulated past history or spatial distribution of the quantity. <br> - Can be linear or non-linear. |
+| **Typical Applications** | - Heat flow (Heat equation) <br> - Wave propagation (Wave equation) <br> - Electrostatics (Laplace's/Poisson's equation) <br> - Fluid dynamics (Navier-Stokes equations) <br> - Quantum mechanics (Schrödinger equation) | - Financial modeling (stock prices, option pricing - e.g., Black-Scholes model) <br> - Physical systems with thermal fluctuations (Brownian motion, Langevin equation) <br> - Biological systems with noise (e.g., gene expression) <br> - Signal processing with noise | - Population dynamics with memory effects <br> - Epidemiology (spread of diseases with non-local interactions) <br> - Viscoelasticity <br> - Radiative transfer <br> - Neural networks with delays or spatial integration |
+| **Solution Notes** | - Analytical methods for simpler cases and specific geometries (e.g., separation of variables, Fourier transforms, Green's functions). <br> - Numerical methods are very common (e.g., finite difference, finite element, finite volume). | - Analytical solutions are rare, often limited to linear SDEs. <br> - Focus on properties of the solution process (e.g., mean, variance). <br> - Numerical methods (e.g., Euler-Maruyama, Milstein schemes) are used for simulation. | - Sometimes transformed into pure ODEs or PDEs if the kernel is deterministic or separable. <br> - Numerical methods often involve discretizing both the derivative and the integral. <br> - Volterra and Fredholm integro-differential equations are common types. |
+
+:::
 
 ## ODEs for Modelling
 
-These examples of using ODEs, PDEs, and SDEs for modelling are inspired by
+These examples of using ODEs for modelling are inspired by
 {cite}`harte1988consider`, which might sound a bit silly if you read the title,
-but it is a landmark work in modelling and problem-solving in
-Environmental Science.
+but it is a landmark work in modelling and problem-solving in Environmental Science.
+
+Additionally, ODEs come within several different types of ODEs that are solved
+differently analytically - however, most automated solvers will usually use the
+same methods and are instead limited by stiffness or the lack of a closed-form
+solution. Here's a summary of the different forms of ODE and their analytic solution:
+
+:::{table}
+:label: ODE-Types
+
+| ODE Type                      | General Form / Definition                                                                 | Key Characteristics / Solution Notes                                                                                                                               |
+| :---------------------------- | :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **First-Order ODEs** |                                                                                           | Involves only the first derivative of the dependent variable.                                                                                                      |
+| Separable Equations           | $\frac{dy}{dx} = g(x)h(y)$ or $M(x)dx + N(y)dy = 0$                                        | Can be rearranged so each side of the equation contains only one variable and its differential. Solved by direct integration.                                       |
+| Linear Equations              | $\frac{dy}{dx} + P(x)y = Q(x)$                                                            | $P(x)$ and $Q(x)$ are functions of $x$ (or constants). Solved using an integrating factor: $I(x) = e^{\int P(x)dx}$.                                                   |
+| Homogeneous Equations (Type 1)| $\frac{dy}{dx} = F(\frac{y}{x})$                                                          | Can be transformed into a separable equation by the substitution $v = \frac{y}{x}$ (so $y = vx$).                                                                   |
+| Exact Equations               | $M(x,y)dx + N(x,y)dy = 0$, where $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$ | There exists a function $f(x,y)$ such that $df = Mdx + Ndy = 0$. The solution is $f(x,y) = C$. If not exact, sometimes an integrating factor can be found.        |
+| Bernoulli Equations           | $\frac{dy}{dx} + P(x)y = Q(x)y^n$, where $n \neq 0, 1$                                      | Non-linear. Can be transformed into a linear equation by the substitution $v = y^{1-n}$.                                                                            |
+| Riccati Equations             | $\frac{dy}{dx} = P(x)y^2 + Q(x)y + R(x)$                                                  | Non-linear. No general solution method unless a particular solution $y_1(x)$ is known. Then $y = y_1 + u$ transforms it to a Bernoulli eq. for $u$.                   |
+| **Higher-Order Linear ODEs** | $a_n(x)\frac{d^ny}{dx^n} + a_{n-1}(x)\frac{d^{n-1}y}{dx^{n-1}} + \dots + a_1(x)\frac{dy}{dx} + a_0(x)y = g(x)$ | Involves derivatives of order 2 or higher. $g(x)=0$ is homogeneous; $g(x) \neq 0$ is non-homogeneous.                                                              |
+| Homogeneous with Constant Coefficients | $ay'' + by' + cy = 0$ (for 2nd order)                                                   | Solved using the characteristic (auxiliary) equation $ar^2 + br + c = 0$. Solutions depend on the nature of the roots (real distinct, real repeated, complex).      |
+| Non-homogeneous with Constant Coefficients | $ay'' + by' + cy = g(x)$ (for 2nd order)                                                | General solution is $y = y_c + y_p$, where $y_c$ is the complementary solution (from the homogeneous part) and $y_p$ is a particular solution (found by undetermined coefficients or variation of parameters). |
+| Cauchy-Euler (Equidimensional) Equation | $ax^2y'' + bxy' + cy = g(x)$ (for 2nd order)                                              | Can be transformed into a linear ODE with constant coefficients by the substitution $x = e^t$.                                                                   |
+| **Systems of ODEs** | $\frac{d\mathbf{y}}{dt} = \mathbf{F}(t, \mathbf{y})$, where $\mathbf{y}$ is a vector of functions | Describes the interaction of multiple dependent variables. Linear systems with constant coefficients can be solved using eigenvalues and eigenvectors.                |
+| **Non-linear ODEs (General)** |                                                                                           | Equations that do not satisfy the conditions for linearity. Often difficult to solve analytically; may require qualitative analysis, numerical methods, or series solutions. |
+| Autonomous Equations          | $\frac{dy}{dx} = f(y)$  |  Autonomous differential equations are separable and can be solved by direct integration.
+
+:::
 
 ::::{tab-set}
 
@@ -263,7 +406,9 @@ Environmental Science.
 
 ::::
 
-## PDEs for Modelling
+## PDEs for Modelling and Simulation
+
+PDEs ...
 
 ::::{tab-set}
 
@@ -277,62 +422,47 @@ Environmental Science.
 
 ::::
 
-## SDEs for Modelling
+## SDEs for Modelling and Simulation
 
-These examples of using SDEs for modelling come a variety of places
-with this segment being mainly inspired by {cite}`harte1988consider`, which
-might sound a bit silly as a title, but it is a landmark work in
-modelling and problem-solving in Environmental Science.
+SDEs ....
 
 ::::{tab-set}
 
-:::{tab-item} Example 1: Poisson (point) process
+:::{tab-item} Example 1: Poisson process
 
 :::
 
-:::{tab-item} Example 2
+:::{tab-item} Example 2: 
 
 :::
 
 ::::
 
+## IDEs for Modelling and Simulation
 
+IDEs ...
+
+::::{tab-set}
+
+:::{tab-item} Example 1: SEIR Model
+
+:::
+
+:::{tab-item} Example 2: Volterra and Fredholm
+
+:::
+
+::::
 
 ## Solving DEs with Python
 
-## Application to Simulation
+### ODE45
 
-DEs can be used to approximate behaviors for different outcomes
+### Runge-Kutta Methods
 
-## DE-based Simulation and Modelling Exercises with Solutions
+### Approximations
 
-::::{tab-set}
 
-:::{tab-item} Exercise 1
-
-:::
-
-:::{tab-item} Exercise 2
-
-:::
-
-:::{tab-item} Exercise 3
-
-:::
-
-:::{tab-item} Solution 1
-
-:::
-
-:::{tab-item} Solution 2
-
-:::
-
-:::{tab-item} Solution 3
-
-:::
-
-::::
 
 (prelab-9)=
 # Pre-Lab 9: Becoming Proficient at Simulation Software (Do)

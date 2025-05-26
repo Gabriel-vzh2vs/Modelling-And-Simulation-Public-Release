@@ -116,51 +116,9 @@ Your firm's resident mathematician, a Dane named Dr. Erlang, recommends that you
 
 - The average system utilization, average length of lines, and average delay.
 
-## Suggested Project 2 Evaluation Matrix
+## Suggested Project 2 Criteria
 
-```{raw} latex
-\begin{tabular}{l >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth}}
-\toprule
-\textbf{Criteria} & \textbf{Excellent (A)} & \textbf{Proficient (B)} & \textbf{Needs Improvement (C/D)} \\
-\cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(l){4-4}
-% You can add point values here if desired, e.g., Excellent (90-100%)
 
-\textbf{Criterion 1: Argumentation & Thesis} &
-% Description for Excellent
-Demonstrates a clear, insightful, and original thesis. Arguments are compelling, well-supported by evidence, and logically structured. Addresses counterarguments effectively. &
-% Description for Proficient
-Presents a clear thesis. Arguments are generally well-supported and logical. May show some minor weaknesses in addressing counterarguments or in the depth of analysis. &
-% Description for Needs Improvement
-Thesis is unclear, unoriginal, or not well-defined. Arguments are weak, poorly supported, or illogical. Fails to address counterarguments or does so superficially. \\
-
-\textbf{Criterion 2: Evidence & Analysis} &
-% Description for Excellent
-Utilizes a wide range of high-quality, relevant sources. Evidence is expertly integrated and analyzed critically to support claims. Demonstrates sophisticated understanding of the material. &
-% Description for Proficient
-Uses appropriate sources. Evidence is generally well-integrated and analyzed to support claims. Shows good understanding of the material, though analysis could be deeper. &
-% Description for Needs Improvement
-Relies on insufficient, irrelevant, or low-quality sources. Evidence is poorly integrated, not analyzed, or misapplied. Shows limited understanding of the material. \\
-
-\textbf{Criterion 3: Structure & Organization} &
-% Description for Excellent
-Organization is exceptionally clear and logical. Paragraphs are well-developed, cohesive, and transition smoothly. Introduction and conclusion are effective and engaging. &
-% Description for Proficient
-Organization is clear. Paragraphs are mostly well-developed and cohesive with adequate transitions. Introduction and conclusion are functional. &
-% Description for Needs Improvement
-Organization is unclear or illogical. Paragraphs lack development, coherence, or transitions. Introduction or conclusion is weak or missing. \\
-
-\textbf{Criterion 4: Clarity, Mechanics, & Style} &
-% Description for Excellent
-Writing is clear, concise, and engaging. Language is precise and sophisticated. Free of errors in grammar, spelling, punctuation, and citation style. &
-% Description for Proficient
-Writing is generally clear. Language is appropriate. Minor errors in grammar, spelling, punctuation, or citation style may be present but do not significantly hinder understanding. &
-% Description for Needs Improvement
-Writing is unclear, awkward, or difficult to follow. Frequent or significant errors in grammar, spelling, punctuation, or citation style impede understanding. \\
-% Add more criteria as needed following the pattern above
-
-\bottomrule
-\end{tabular}
-```
 
 (project-3)=
 # Project 3 (Extension Project _Queuing-Based Project_): Simulating and Modelling a Intensive Care Unit
