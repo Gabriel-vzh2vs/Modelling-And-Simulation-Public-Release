@@ -11,7 +11,12 @@ and reference frame.
 ## Model classes ##
 
 At a high level, models are often classified as __continuous__ or
-__discrete__. Broadly speaking, continuous refers to the nature of the
+__discrete__.
+
+
+### Continuous versus discrete ###
+
+Broadly speaking, continuous refers to the nature of the
 variables of the model as well as how they may evolve. The
 distinctions are perhaps best illustrated through examples.
 
@@ -113,9 +118,9 @@ term might be a __hybrid model__.
 ````{prf:example} Predator prey models - Ver. 3
 :label: ex:predator_prey_fully_discrete
 
-{cite}`Rodrigues:12` gives another version of the predator prey
-model. In this case, the two-dimensional space is represented using a
-lattice where the cells of the lattice are indexed as $(i,j)$ as shown
+{cite}`Rodrigues:12` gives yet another version of the predator prey
+model. In this case, they represent two-dimentions space  using a
+lattice where the cells of the lattice are indexed by pairs $(i,j)$ as shown
 in {ref}`fig:lv_lattice`.
 
 ```{figure}
@@ -128,13 +133,13 @@ An illustration of the lattice of {ref}`ex:predator_prey_fully_discrete`.
 
 As in {ref}`ex:predator_prey_discrete` time is discrete
 $t\in\mathbb{N}$.  To each cell $(i,j)$ of the lattice one associates
-two integer states $N_{i,j,t}$ and $P_{i,j,t}$ denoting the number of prey
+the two integer states $N_{i,j,t}$ and $P_{i,j,t}$ denoting the number of prey
 and predators at cell $(i,j)$ at time $t$.
 
-The dynamics mapping this system from time $t$ to $t+1$ is specified
+The dynamics tjat maps this system from time $t$ to $t+1$ is specified
 by a 2-step process. The first step is referred to as dispersal and
-captures how members of $N$ and $P$ population migrate between cells
-and is modeled as
+captures how members of $N$ and $P$ population migrate between
+cells. It is modeled as
 
 ```{math}
 \begin{align*}
@@ -145,14 +150,21 @@ P'_{i,j,t}
 \end{align*}
 ```
 
-where $V_{i,j} = {(i−1, j), (i+1, j), (i, j−1), (i, j+1)}$.
+where $V_{i,j} = {(i−1, j), (i+1, j), (i, j−1), (i, j+1)}$ denotes the
+set of neighbor cells of cell $(i,j)$. The interaction between
+predator and prey is then captured as follows by
 
-N_{x,y,t+1} =f\left(N_{x,y,t}^{^{\prime}},P_{x,y,t}^{^{\prime }}\right),
+```{math}
+\begin{align*}
+N_{i,j,t+1} &=f\bigl( N'_{i,j,t}, P'_{i,j,t}\bigr) \;,\\
+P_{i,j,t+1} &=g\bigl( N'_{i,j,t}, P'_{i,j,t}\bigr)\;.
+\end{align*}
 
-N_{x,y,t+1} =f\left(N_{x,y,t}^{^{\prime}},P_{x,y,t}^{^{\prime }}\right),
+In this example, both time and states are discrete.
 
 ````
 
+__Summary:__
 
 
 
