@@ -8,7 +8,7 @@ in this book, it is still beneficial to establish a basic foundation
 and reference frame.
 
 
-## Model classes ##
+## Types of model classes ##
 
 At a high level, models are often classified as __continuous__ or
 __discrete__.
@@ -167,44 +167,119 @@ In this example, both time and states are discrete.
 
 __Summary:__
 
+The three examples above illustrate aspects of what may be meant by
+"discrete" and "continuous" models. As you can see, using these as
+"wholesale" terms is simplistic. We would rather say that specific
+aspects of a model are discrete or continuous. A model containing both
+types will be called __hybrid__.
+
+
+### Stochastic versus deterministic models ###
+
+The model we saw in the previous section are all deterministic. A
+model that incorporates one or more random variables (see
+{ref}`def:random_variable`) will be called __stochastic__.
+
+
+### Network-based models ###
+
+This class of models can directly encode complex, non-heterogenous
+dependency among system constitutent.
+
+Reference to section on Graph dynamical systems.
 
 
 
-What governs the choice of model classes.
+### Agent-based models (ABMs) ###
 
-Let's be blunt:
-
-Analysis techniques. Numerical analysis
-
-
-
-Continuous
-
-Discrete
-
-Hybrid
-
-Agent-based modeling
-
-Finite state machines
-
-Stochastic models
+Agent-based models - we have devoted a whole section to this:
+{ref}`sec:ABM`. Broadly speaking, such models have agents that are
+embedded in an __environment__, and agents can interact with the
+environment and other agents via __actions__. Agents can modulate
+their __behavior__ based on feedback from the environment, where the
+feedback is presented as __rewards__ based on the agent's
+actions. (Reference BDI) We note that an ABM may be networked.  An
+agent-based model where agents perform a fixed action is called a
+__micro-simulation__.
 
 
-## Modeling and scale ##
+### Finite state machines ###
 
-Multi-scale and big-data. Nobody wants single-scaled models fueled by medium-sized data.
+A mini introduction
+
+
+### Modeling and scale ###
+
+No doubt, you have heard about terms such as __multi-scale__ models,
+and models relying on __big data__.  After all, who wants
+single-scaled models fueled by moderately sized data? 🙃
+
+
+
+## Techniques for analysing models ##
+
+Models based on ordinary- and partial differential equations have a
+long history dating back to Newton and Leibniz. They represent a
+cornerstone in modeling of continuous systems and come with a rich
+literature and set of techniques rooted in, e.g., topology, analysis,
+operator theory, and differential geometry.
+
+The structure of networked models and ABMs, on the other hand,
+typically have many discrete elements. As such, classical dynamical
+system theory does not readily apply and rely instead on, e.g., graph
+theory, combinatorics, and algebra. Work on such models may be
+regarded as more computational in nature than their "continuous
+cousins", since they apparently rely more on simulation.
+
+In practice, whether models are "continuous", "discrete", "networked"
+or "agent-based", __the analysis of virtually any complex model will
+be analyzed through computational experiments__. The gap from articles
+and textbooks to the needs of actual systems is generally large.
+Models rooted in ODEs or PDEs, for example, rely on a multitude of
+techniques from numerical analysis, and are solved (numerically)
+through computations (aka simulation). A stochastic queueing model,
+which one would likely regard as a "discrete" model, would similarly
+be analyzed computationally through approaches such as discrete event
+simulation, see {ref}`sec:queueing_systems`.
+
 
 
 ## Modeling in the real world ##
 
-A key aspect of modeling is validation. As we saw in
-{ref}`sec:intro_validation`, this is about ensuring that the model $M$
-is sufficiently detailed and precise so that we can adequately address
-the questions that we intend to answer about the system
-$S$. Verification, on the other hand, seeks to ensure that the model
-$M$ is accurately committed to code. One may regard verification and
-validation as conceptually separate processes. This point of view is
-perfectly fine for basic models. However, as one seeks to analyze
-complex system, one will often find that the modeling paradigms that
-one chooses to apply will be
+Faced with a set of questions about a system $S$, what governs the
+model selection process? Should the model be continuous or discrete?
+Should it be multi-scale? Model selection should be guided by a range
+of criteria, but first and foremost the questions about $S$ that one
+is tasked to answer, including the __precision__, __accuracy__,
+__resolution__ and __fidelity__ that is needed.  The characteristics
+of $S$ will further dictate what one pulls out from the modeling
+toolchest.
+
+While one may be drawn to the lure of closed-form solutions that
+sometimes happen for ODEs under textbook conditions, such biases can
+easily cause one to gravitate towards elegant solutions, albeit to
+oversimplified or an altogether different system. (And if we had to be
+blunt, we would argue that the classical training in mathematics and
+physics is a root cause of this preference.)
+
+Modeling for complex systems is an inherently, well ... complex,
+undertaking. It requires a breadth of knowledge about modeling
+paradigms, analysis techniques, model compatibility, and model
+shortcomings. Earlier, we mentioned that a key aspect of modeling is
+validation. As we saw in {ref}`sec:intro_validation`, this is about
+ensuring that the model $M$ is sufficiently detailed and precise so
+that we can adequately address the questions that we intend to answer
+about the system $S$. Verification, on the other hand, seeks to ensure
+that the model $M$ is accurately committed to code. One may regard
+verification and validation as conceptually separate processes. This
+point of view is perfectly fine for basic models. However, as one
+seeks to analyze complex system, one will often find that the modeling
+paradigms that one chooses to apply will have to be done with a keen
+eye on what the simulation models will look like as well as the
+hardware on which they will run.
+
+## Summary ##
+
+In this book we will only consider basic mathematicla
+modeling. Nonetheless, the perspective above is useful to keep in
+mind.
