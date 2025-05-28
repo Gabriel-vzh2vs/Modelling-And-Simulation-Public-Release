@@ -36,7 +36,7 @@ experiences, institutional policies, new advancements in educational science, or
 
 ### Pre-Lab Grading Rubric
 
-Generally, pre-labs should not be graded on a standard point scale, as they are made
+Generally, pre-labs should not be graded on a standard grade scale, as they are made
 to help the students understand the connection between concepts and practice. However,
 they should be assessed with "sufficient" completion in mind, meaning that the reader
 should have made an attempt to understand the material.
@@ -63,8 +63,10 @@ Only performed pre-lab tasks superficially, or not at all. \\
 ### Lab Grading Rubric
 
 Labs are between the more informal pre-labs and the formal project assessment
-meaning that it does depend on the structure of the reader's educational
-environment.
+meaning that grading does depend on the structure of the reader's educational
+environment. For example, using the pre-lab grading rubric could be appropriate
+for the labs if the labs are considered pass/fail, and the rubric below is created
+in the context when labs are assessed assignments equivalent to homeworks.
 
 ```{raw} latex
 \begin{tabular}{l >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth}}

@@ -96,6 +96,15 @@ It is a great option for readers with Windows Machines that are interested in Si
 
 ### Argo Functions
 
+## Excel Resources
+
+This provides a list of some Excel Resources that exist for public consumption, as
+Excel and its use cases are well-studied and documented in both academic and commerce.
+
+### Video Series
+
+### Textbooks
+
 # SIMIO (Windows-Only)
 
 ## SIMIO Resources
