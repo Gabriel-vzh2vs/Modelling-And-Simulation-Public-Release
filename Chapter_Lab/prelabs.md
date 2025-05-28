@@ -33,7 +33,20 @@ looking at excel files made by other people, using visual basic, running
 statistical tests in prototyping, or for visualizing matrix algebra. It is
 ubiquitous in business, education, and more because has a minimal learning curve
 to get started with basic operations, but it is difficult to master. So it is
-important for any reader (or engineer) to learn.
+important for any reader (or engineer) to learn. This pre-lab cannot and will not
+teach you all of Excel, only the parts you need to understand for this course.
+
+If you want to learn more about Excel or are confused by the topics in this pre-lab,
+watch the video embedded below or read {cite}`brown2017beginning`.
+
+<!-- for the editor: in the written form of this text, remove "watch the video embedded below or" -->
+
+```{iframe} https://www.youtube.com/watch?v=IInFoJxxPPA
+:width: 100%:
+This video is a hour long and describes all of the basic features of Excel, which a useful subset
+are written below.
+``` 
+<!-- for the editor: in the written form of this text, remove the ```{iframe} ....-->
 
 ## The Cell
 
@@ -58,12 +71,10 @@ soapbox unlike every other pre-lab, which this text tends to avoid being at time
 
 Do not use Excel when you need to
 
-- store data that needs to be assessed by other software (use DBMSs like PostgreSQL, MariaDB)
-- have speed at processing data and information (use programming languages like Rust, Python with Pypy)
-- simulate complex systems, particularly ones with any form of Differential Equation determining their behaviors, (use simulation software like PySim, Anylogic, SIMIO)
-- 
-- 
-
+- store data that needs to be assessed by other software or requires access control, instead use DBMSs like PostgreSQL, MariaDB.
+- have speed at processing data and information, instead use programming languages like Rust, Python with Pypy, or Java.
+- simulate complex systems, particularly ones with any form of Differential Equation determining their behaviors, instead use simulation software like PySim, Anylogic, SIMIO.
+- analyzing big data, for reference big data is greater than 500 entities in a list, instead use programming languages with frameworks to handle it like R, Python's Dask/PySpark, Apache's Flink/Samza/Storm.
 :::
 
 :::{tab-item} Data Management (Everyone)
@@ -268,7 +279,6 @@ closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
 Let's look at an example of a $M/M/1$ queue to show the power of these facts.
 
 ```{admonition} M/M/1 Example:
-:type: tip
   A M/M/1 Queue
 ```
 
