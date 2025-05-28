@@ -60,7 +60,7 @@ Do not use Excel when you need to
 
 - store data that needs to be assessed by other software (use DBMSs like PostgreSQL, MariaDB)
 - have speed at processing data and information (use programming languages like Rust, Python with Pypy)
-- simulate complex systems, particularly ones with any form of DE, (use simulation software like PySim, Anylogic, SIMIO)
+- simulate complex systems, particularly ones with any form of Differential Equation determining their behaviors, (use simulation software like PySim, Anylogic, SIMIO)
 - 
 - 
 
