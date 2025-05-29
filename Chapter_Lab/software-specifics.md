@@ -92,7 +92,8 @@ refer to that resources if more XLRisk variates could be helpful.
 ## Argo (Windows-Only)
 
 Argo is similar to XLRisk with a few changes to make it more efficient and flexible.
-It is a great option for readers with Windows Machines that are interested in Simulation.
+It is a great option for readers with Windows Machines that are interested in using
+Excel for simulation. (which is suitable for small toy models or prototypes)
 
 ### Argo Functions
 

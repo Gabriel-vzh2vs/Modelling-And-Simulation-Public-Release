@@ -223,5 +223,15 @@ use your school email in the academic email section and fill it out with your na
 :label: AnyLogic1
 :::
 3. Follow the Instructions to Install like any other program!
+
 ### Henning-Gabe Course Package Installation
-This will be developed at a later point. 
+
+This will be developed at a later point.
+
+#### Python Packages
+
+In general, any python package can be installed through pip, for example:
+
+```{code} python
+!pip install statsmodels matlibplot pymc3 jupyterlab
+```
