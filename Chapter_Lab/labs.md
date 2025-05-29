@@ -59,7 +59,7 @@ through random sampling from a uniform random variable.
 This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units.
 In this pattern, we obtain $\pi$ from our calculations in Excel when we consider
 indicator variable to be equal to one when an experiment is within the union of the unit circle
-and square with side-length 2. **This is the pattern that you should try to replicate**
+and square with side-length 2. **This is the pattern that you should try to replicate.**
 
 #### Pattern 2. Unit Circle of Radius 2 and Square with Side Length 1
 
@@ -254,13 +254,13 @@ $I = p \cdot (1+r)+s$ for a singular instance,
 this formula of simple interest is often seen in secondary education and financial institutions. However, this model assumes
 that there are no extreme events nor variances in interest, making its utility
 limited for modern retirement funding schemes. In this case, the model assumes that
-$p_0 = 10000$, $r = 25000$, $t = 40$, and $s = 10,000$ as the default values in US dollars.
+$p_0 = 25,000$, $r = 10 \% $, $t = 40$, and $s = 10,000$ as the default values in US dollars.
 Additionally, $p_{n+1}$ replaces $p$ for any sequence after the first iteration.
 
 #### Pattern 2. Single-Experiment Crude Monte Carlo with Stochastic Return
 
 This pattern takes Pattern 1, the base deterministic model and adds an element of stochaticity in the rate of return, as in this pattern, the rate of return is defined
-once per time segment through a $r = N(\bar{r}, \sigma)$ distribution with $\bar{r} = 10$ and $\sigma = 12$. This is considered a single experiment Monte Carlo. 
+once per time segment through a $r = N(\bar{r}, \sigma)$ distribution with $\bar{r} = 10$ and $\sigma = 12$. This is considered a single experiment Monte Carlo.
 
 #### Pattern 3. Crude Monte Carlo with Series of Experiments and Stochaticity in Rate of Return and Principal
 
@@ -298,7 +298,7 @@ and metrics.
 
 It is structured within six subprocesses which activate depending on which pattern the model is exhibiting,
 with two subprocesses being related to stochaticity which produces random variates via inverse transform
-for the normal and triangular distributions in the first (normal_variable) and second (triangular_variable) subprocesses, 
+for the normal and triangular distributions in the first (normal_variable) and second (triangular_variable) subprocesses,
 respectively, with their random variates being stored into a matrix.
 The next subprocess (user_input) is the subprocess that handles input data
 from the user and stores it within a matrix or
