@@ -136,7 +136,7 @@ $t\in\mathbb{N}$.  To each cell $(i,j)$ of the lattice one associates
 the two integer states $N_{i,j,t}$ and $P_{i,j,t}$ denoting the number of prey
 and predators at cell $(i,j)$ at time $t$.
 
-The dynamics tjat maps this system from time $t$ to $t+1$ is specified
+The dynamics that maps this system from time $t$ to $t+1$ is specified
 by a 2-step process. The first step is referred to as dispersal and
 captures how members of $N$ and $P$ population migrate between
 cells. It is modeled as
@@ -253,7 +253,7 @@ of criteria, but first and foremost the questions about $S$ that one
 is tasked to answer, including the __precision__, __accuracy__,
 __resolution__ and __fidelity__ that is needed.  The characteristics
 of $S$ will further dictate what one pulls out from the modeling
-toolchest.
+toolset.
 
 While one may be drawn to the lure of closed-form solutions that
 sometimes happen for ODEs under textbook conditions, such biases can
@@ -280,6 +280,6 @@ hardware on which they will run.
 
 ## Summary ##
 
-In this book we will only consider basic mathematicla
+In this book we will only consider basic mathematical
 modeling. Nonetheless, the perspective above is useful to keep in
 mind.

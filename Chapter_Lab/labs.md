@@ -6,7 +6,7 @@ and they allow for assessment of the reader's knowledge of the material either t
 through self-assessment or by formal assessment by an external grader. It is recommended to do seven to eight labs within a
 course of self-study or in the context of a formal course in simulation.
 
-Moreover, these labs written as technology-agnostic - meaning that you could theoretically use any toolkit to
+Moreover, these labs are written as technology-agnostic - meaning that you could theoretically use any toolkit to
 complete these tasks; however, we have included recommendations for specific technological implementations as a guide for
 readers as the authors used them in the creation of the labs.
 
@@ -723,7 +723,7 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 :::{admonition} Lab 9
 :class: danger dropdown
 (lab-9)=
-# Lab 9: Modelling the Spread of Illness via SEIR Models (PySim/Salabim, Anylogic, or SIMIO)
+# Lab 9: Modelling the Spread of Illness via SIR Models (PySim/Salabim, Anylogic, or SIMIO)
 
 ## Lab 9 Prerequisites
 

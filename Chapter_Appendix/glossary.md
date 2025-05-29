@@ -36,6 +36,11 @@ than a normal distribution. This means there's a lower probability of extreme va
 and values tend to be more clustered around the mean but less
 peaked than a normal distribution.
 
+Sample Spaces
+: refers to all the possible outcomes regarding an experiment or event. It requires
+three conditions (mutual exclusivity, collective exhaustiveness, and sufficient granularity)
+for all elements (outcomes/events) residing within the sample space.
+
 Skewness ($\mu_3$)
 : measures the asymmetry of the probability distribution of a
 real-valued random variable about its mean. Skewness has two types.
@@ -60,11 +65,6 @@ than $\epsilon$  from the true mean $\mu$ becomes very small, approaching zero.
 Therefore, there is no guarantee that $\bar{X_n}$ will converge to
 $\mu$, but rather that the chances of it straying significantly become increasingly
 unlikely as n grows.
-
-Sample Spaces
-: refers to all the possible outcomes regarding an experiment or event. It requires
-three conditions (mutual exclusivity, collective exhaustiveness, and sufficient granularity)
-for all elements (outcomes/events) residing within the sample space.
 
 Abstract Syntax Tree
 : A way of structuring and labeling documents according to a specification to ensure consistent behavior. The MyST document engine [defines its own document specification](https://mystmd.org/spec), and all MyST documents are first built into ASTs before being rendered into output formats (like HTML, PDF, etc).
