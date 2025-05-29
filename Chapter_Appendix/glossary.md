@@ -6,6 +6,13 @@ A glossary of common terms used throughout our text.
 
 Testing, 1, 2, 3!
 :::{glossary}
+
+CDF
+: see {term}`Cumulative Distribution Function`
+
+Cumulative Distribution Function
+: describes
+
 Experiments
 : refer to a single, complete execution of the simulation process driven
 by a set of randomly generated inputs. Additionally, The collection
@@ -55,7 +62,9 @@ $\mu$, but rather that the chances of it straying significantly become increasin
 unlikely as n grows.
 
 Sample Spaces
-: are spaces.
+: refers to all the possible outcomes regarding an experiment or event. It requires
+three conditions (mutual exclusivity, collective exhaustiveness, and sufficient granularity)
+for all elements (outcomes/events) residing within the sample space.
 
 Abstract Syntax Tree
 : A way of structuring and labeling documents according to a specification to ensure consistent behavior. The MyST document engine [defines its own document specification](https://mystmd.org/spec), and all MyST documents are first built into ASTs before being rendered into output formats (like HTML, PDF, etc).

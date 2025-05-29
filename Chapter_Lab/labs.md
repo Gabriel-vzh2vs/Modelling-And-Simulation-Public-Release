@@ -58,15 +58,15 @@ through random sampling from a uniform random variable.
 
 This pattern describes how $\pi$ is calculated with well-defined shapes without respect to units.
 In this pattern, we obtain $\pi$ from our calculations in Excel when we consider
-the region of interest for the indicator variable to be the union of the circle and square.
-**This is the pattern that you should try to replicate**
+indicator variable to be equal to one when an experiment is within the union of the unit circle
+and square with side-length 2. **This is the pattern that you should try to replicate**
 
 #### Pattern 2. Unit Circle of Radius 2 and Square with Side Length 1
 
-This pattern describes a different region for monte carlo integration,
+This pattern describes a different region for Monte Carlo Integration,
 as it fails to calculate $\pi$ as the circle surpasses the area of the square, and now it
 calculates the area of the square instead as the area of integration is defined
-through the greater of the two regions.
+through the greater of the two regions. **This is a malignant pattern.**
 
 ## Entities, State Variables, and Scales
 
@@ -74,8 +74,9 @@ through the greater of the two regions.
 
 In this context, the state variables relate to trials, in this instance,
 a trial is represented as a point in a 2-dimensional plane.
-Once you have enough trials, the aggregate of the points converges into
-a circle.
+Once you have enough trials, the indicator variable converges into
+$\pi$ by the fact that a sufficient number of points reside in the union of
+interest.
 
 ```{raw} latex
 \begin{tabular}{llll}
@@ -516,7 +517,6 @@ which is our length of simulation.
 - {ref}`sec:prob_stats`
 - {ref}`sec:monte_carlo_method`
 - {ref}`sec:distribution_modeling`
-
 
 ## Purpose and Patterns
 

@@ -17,6 +17,12 @@ completing a pre-lab for each lab at a 1 to 1 ratio (meaning, if you do 7 labs,
 you should do 7 pre-labs). However, if you are self-studying, you can choose which
 pre-labs you do based on your knowledge level.
 
+:::{note} Pre-Lab Status
+To Henning, this section is getting content at a decent speed. It should be
+fully-drafted by June 6th at the current rate of improvement. The topics are
+all there, along with basic information and sections.
+:::
+
 (prelab-1)=
 # Pre-Lab 1: Fundamental Excel Skills and Data Management (Read)
 
@@ -115,7 +121,8 @@ the XLRisk and monaco + pandas sections are almost identical on purpose.
 In XLRisk, there is a series of functions for defining a random variate, of which the bare
 minimum for this pre-lab are here, with a more extensive list in {ref}`sec:software`.
 
-- =RiskBernolli() # For a Bernoulli Variate (you can also use =binominal() )
+- =RiskBernolli() # For a Bernoulli Variate
+- =RiskUniform() # For a Uniform Variate
 - =RiskCorMat() # For Copulas
 
 ## Correlations between distributions (Copula)
@@ -180,6 +187,8 @@ with expectations. However, there are several methods to improve debugging
 and through this act, to improve the verification state of the system, which
 include:
 
+- 
+- Breakpoints
 - Automated Methods (Formal Methods, )
 
 ## Live Formulas
@@ -233,10 +242,10 @@ In probability courses and textbooks you may have heard about the exponential
 distribution, one of the most prototypical queuing systems ($M/M/1$) relies on the
 exponential distribution for its service times and inter-arrival rates.
 
-The exponential distribution is defined as the following:
+The exponential distribution's CDF is defined as the following:
 
 :::{math}
-B
+1-e^{x}
 :::
 
 Now, what are the properties that make exponential distributions useful for queuing?
