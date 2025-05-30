@@ -520,7 +520,6 @@ which is our length of simulation.
 
 ## Purpose and Patterns
 
-
 ### Statement of Model Purpose
 
 ### Patterns

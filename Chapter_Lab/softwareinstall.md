@@ -4,12 +4,14 @@ In this section, we will describe how to install a discrete event simulation sof
 (Monte Carlo Excel Plugin) on your personal machine.
 
 ## XLRisk (For Mac and Windows)
+
 XLRisk is a free and open source Monte Carlo Excel Plugin that is similar to \@Risk! 
 It allows the user to define distributions with parameters and use the Monte Carlo Method to simulate systems.
 
 Here is the documentation for using its functions after you install it: https://github.com/pyscripter/XLRisk/wiki/RiskFunctions.
 
 ### Windows
+
 1. Download XLRisk from https://github.com/pyscripter/XLRisk/raw/master/XLRisk.xlam.
 2. Left-Click the file in your downloads folder and click properties, a window will pop-up, and untick “blocked”, then press apply, this is the window after unblocking it:
 :::{image} ../Figs/Chapter_Lab/XLriskWindowsDialogue.png
@@ -31,9 +33,10 @@ Here is the documentation for using its functions after you install it: https://
 :label: XLRiskWin2
 :::
 
-5. After that the XLRisk tab will appear at the top of your Excel window! 
+5. After that the XLRisk tab will appear at the top of your Excel window!
 
 ### Mac
+
 1. Download XLRisk from https://github.com/pyscripter/XLRisk/raw/master/XLRisk.xlam.
 2. Open Excel, Click on “Excel” which is also marked with a red rectangle, then click on Preferences which is marked with a blue rectangle below:
 :::{image} ../Figs/Chapter_Lab/XLriskMacStep2.png
@@ -79,6 +82,7 @@ Here is the documentation for using its functions after you install it: https://
 :::
 
 ## Choices of Simulation Software
+
 There are several choices of discrete-event simulation software that come with advantages and disadvantages, which some of which are summarized in this table below:
 
 | **Software** | **Advantages** | **Disadvantages** |
@@ -115,7 +119,8 @@ use your school email in the academic email section and fill it out with your na
 4. Input the license key from your email into your SIMIO as the email instructs. 
 5. You now have SIMIO installed on your computer! 
 #### On Virtualization for Mac
-##### UTM (Apple Silcon)
+
+##### UTM (Apple Silicon)
 
 1. Download UTM from this link: https://github.com/utmapp/UTM/releases/latest/download/UTM.dmg or from the App Store
 2. Drag the UTM icon to Applications in the installation window:
@@ -162,7 +167,9 @@ use your school email in the academic email section and fill it out with your na
 :label: UTMStep7
 :::
 10. At the end of this process, you should reach the Windows 11 desktop, and once you see it, follow the Windows Instructions from here: {ref}`SIMIO-Install`.
+
 ##### VirtualBox (Apple Silcon with Arm Version \& Intel Macs)
+
 1. Download VirtualBox from here: https://download.virtualbox.org/virtualbox/7.1.4/VirtualBox-7.1.4-165100-OSX.dmg 
 2. Once downloaded, click on the .dmg file in downloads, which is boxed in this image:
 :::{image} ../Figs/Chapter_Lab/VirtualBox1.png
@@ -207,14 +214,16 @@ use your school email in the academic email section and fill it out with your na
 :align: center
 :label: VirtualBoxStep7
 :::
-10. Now, you will get the “Unattended Guest OS Install Setup” screen, you should change the hostname to Windows11 and click on the password box and change it from “changeme” to something else. 
+10. Now, you will get the “Unattended Guest OS Install Setup” screen, you should change the hostname to Windows11 and click on the password box and change it from “changeme” to something else.
 :::{image} ../Figs/Chapter_Lab/VirtualBox8.png
 :width: 20 %
 :align: center
 :label: VirtualBoxStep8
 :::
 11. Now once the Virtual Machine is ready for use meaning it shows the Windows 11 Desktop, follow the instructions in {ref}`SIMIO-Install`.
+
 ### AnyLogic Installation (Windows, Mac, and Linux)
+
 1. Go to https://www.anylogic.com/downloads/personal-learning-edition-download/, and fill out the form with your school or professional email and details. 
 2. After doing this, you will receive an email from Anylogic (check your spam) that looks like this - click on download:
 :::{image} ../Figs/Chapter_Lab/Anylogic1.png

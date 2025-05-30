@@ -52,6 +52,7 @@ project:
         - file: Chapter_Lab/projects.md
         - file: Chapter_Lab/GMPforReports.ipynb
         - file: Chapter_Lab/software-specifics.md
+        - file: Chapter_Lab/hidden-lab-graphics.ipynb # Trying to find a way of hiding a page.
     - title: Distribution Modelling
       children:
         - file: Chapter_Distribution-Modelling/index.md

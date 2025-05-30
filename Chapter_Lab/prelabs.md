@@ -12,10 +12,15 @@ Pre-Labs marked with "Do" ask the reader to complete an exercise step-by-step th
 helps the reader comprehend the tasks they need to do for the associated lab. Additionally,
 Pre-labs marked with "Do" may not be as theory-based as labs marked with "Read".
 
-Grading for the Pre-Labs is at the instructor's discretion; additionally, we recommend
-completing a pre-lab for each lab at a 1 to 1 ratio (meaning, if you do 7 labs,
-you should do 7 pre-labs). However, if you are self-studying, you can choose which
-pre-labs you do based on your knowledge level.
+Some pre-labs might be marked with "short", this means that they are pre-labs
+that rely on the rest of the book for support - often these are used to transition
+between topics and introduce different topics.
+
+Grading for the Pre-Labs is at the instructor's discretion as described in
+{ref}`sec:labs`; additionally, we recommend completing a pre-lab for each lab
+at a 1 to 1 ratio (meaning, if a reader does 7 labs, they should do 7 pre-labs,
+which is the expected number of pre-labs and labs for a course) However, if you
+are self-studying, you can choose which pre-labs you do based on your knowledge level.
 
 :::{note} Pre-Lab Status
 To Henning, this section is getting content at a decent speed. It should be
@@ -24,12 +29,12 @@ all there, along with basic information and sections.
 
 Partially-Drafted Pre-Labs
 
-- Pre-lab 1
-- Pre-lab 2
+- Pre-lab 1 (half-finished)
+- Pre-lab 2 
 - Pre-Lab 3
 - Pre-lab 6 (Provisionally Complete)
 - Pre-lab 7 (Provisionally Complete)
-- Pre-lab 8
+- Pre-lab 8 (This might be going into the weeds of Stochastic Calculus...)
 :::
 
 (prelab-1)=
@@ -158,7 +163,8 @@ appearances, depending on the marginal distributions this is an example from a c
 ```{figure} #fig:copula
 :label: fig:A
 
-An example of the correlation between Accommodation Prices and Meal Costs through a Correlation Matrix.
+An example of the correlation between Accommodation Prices and Meal Costs through a Correlation Matrix,
+this is related to {ref}`project-1`.
 
 ```
 
@@ -242,17 +248,35 @@ c
 ::::
 
 (prelab-4)=
-# Pre-Lab 4: Short Introduction to System Dynamics (Read)
+# Pre-Lab 4: Short Introduction to Modelling (Short Do)
 ::::{tab-set}
 
-:::{tab-item} Jupyter Notebook
+This pre-lab focuses on exposing the reader to different modelling schemas
+that will be explored later in future pre-labs, chapters, projects, and
+labs once their prerequisites are met. Essentially, this is a transition
+pre-lab away from Monte Carlo to help understand the foundations of modelling.
+
+:::{tab-item} System Dynamics
+
+## Why System Dynamics
+
+## Examples of System Dynamics
+
+## Toy Model for System Dynamics
+
 :::
 
-:::{tab-item} Conda
+:::{tab-item} Discrete Event Simulation
+
+## Why Model Discrete Events?
+
+## Examples of DES
+
+## Toy Model for DES
 
 :::
 
-:::{tab-item} Examples
+:::{tab-item} Agent-Based Modelling
 
 :::
 
@@ -353,7 +377,7 @@ closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
 :::
 
 (prelab-7)=
-# Pre-Lab 7: Automated Distribution Fitters (Quicker Do)
+# Pre-Lab 7: Automated Distribution Fitters (Short Do)
 
 ## On Automated Distribution Fitters (i.e: Phitter, Fitter)
 
@@ -532,16 +556,19 @@ PDEs ...
 
 ## SDEs for Modelling and Simulation
 
+
+
 SDEs ....
 
 ::::{tab-set}
 
 :::{tab-item} Example 1: Poisson process
 
+https://personal.ntu.edu.sg/nprivault/MA5182/stochastic-calculus-jump-processes.pdf (Source)
 :::
 
-:::{tab-item} Example 2: 
-
+:::{tab-item} Example 2: Cholera Epidemiology
+https://onlinelibrary.wiley.com/doi/10.1155/2023/7232395 (Source)
 :::
 
 ::::
@@ -556,7 +583,7 @@ IDEs ...
 
 :::
 
-:::{tab-item} Example 2: Volterra and Fredholm
+:::{tab-item} Example 2: City Growth and Emergence
 
 :::
 
