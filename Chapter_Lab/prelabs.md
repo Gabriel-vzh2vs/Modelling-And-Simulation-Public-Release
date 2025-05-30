@@ -18,7 +18,7 @@ between topics and introduce different topics.
 
 Grading for the Pre-Labs is at the instructor's discretion as described in
 {ref}`sec:labs`; additionally, we recommend completing a pre-lab for each lab
-at a 1 to 1 ratio (meaning, if a reader does 7 labs, they should do 7 pre-labs,
+at a 1 to 1 ratio (meaning, if a reader does 8 labs, they should do 8 pre-labs,
 which is the expected number of pre-labs and labs for a course) However, if you
 are self-studying, you can choose which pre-labs you do based on your knowledge level.
 
@@ -636,3 +636,15 @@ relies on {ref}`sec:system_modeling` for its theoretical foundations.
 ## How can you Optimize a Simulation?
 
 ## Optquest and Others
+
+
+(prelab-12)=
+# Pre-Lab 12: Comparison of Modelling Techniques (Do)
+
+## List of Common Modelling Techniques
+
+## Task 1
+
+## Task 2
+
+## Task 3

@@ -3,10 +3,12 @@
 
 The labs serve a dual purpose in this text, they enable the reader to apply lessons from this book to real-world examples,
 and they allow for assessment of the reader's knowledge of the material either through comparing models with reference models
-through self-assessment or by formal assessment by an external grader. It is recommended to do seven to eight labs within a
-course of self-study or in the context of a formal course in simulation.
+through self-assessment or by formal assessment by an external grader. It is recommended to do eight to eleven labs within a
+course of self-study or in the context of a formal course in simulation. In this case it is recommended that the number of labs
+that a reader does correlates with their educational goals, for example: eight to nine labs for am advanced undergraduate-level
+understanding of Simulation and Modelling, and ten to eleven labs being suitable for a graduate-level understanding.  
 
-Moreover, these labs are written as technology-agnostic - meaning that you could theoretically use any toolkit to
+Moreover, these labs are written to be technology-agnostic - meaning that you could theoretically use any toolkit to
 complete these tasks; however, we have included recommendations for specific technological implementations as a guide for
 readers as the authors used them in the creation of the labs.
 
@@ -442,7 +444,7 @@ how to process and analyze real-world data.
 
 #### Pattern 1. Monte Carlo Method in the Context of Stock Data
 
-
+This pattern 
 
 ## Entities, State Variables, and Scales (Lab 3)
 
@@ -604,7 +606,7 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 :::{admonition} Lab 6
 :class: tip dropdown
 (lab-6)=
-# Lab 6: Markovian Queuing Methods (Ciw, SIMIO, or Anylogic)
+# Lab 6: Applied Queuing Theory in Simulation (Ciw, SIMIO, or Anylogic)
 
 ## Lab 6 Prerequisites
 
@@ -643,7 +645,7 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 :::{admonition} Lab 7
 :class: attention dropdown
 (lab-7)=
-# Lab 7: General and Deterministic Queuing Methods (SIMIO, Ciw, or Anylogic)
+# Lab 7: Introduction to System Dynamics from Queuing (SIMIO, Ciw, or Anylogic)
 
 ## Lab 7 Prerequisites
 
@@ -682,7 +684,7 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 :::{admonition} Lab 8
 :class: attention dropdown
 (lab-8)=
-# Lab 8: Introduction to ODEs in Simulation and Modelling (PySim/Salabim, Anylogic, or SIMIO)
+# Lab 8: Modelling the Spread of Illness via SIR Models (PySim/Salabim, Anylogic, or SIMIO)
 
 ## Lab 8 Prerequisites
 
@@ -722,7 +724,7 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 :::{admonition} Lab 9
 :class: danger dropdown
 (lab-9)=
-# Lab 9: Modelling the Spread of Illness via SIR Models (PySim/Salabim, Anylogic, or SIMIO)
+# Lab 9: Introduction to Hybrid Modelling (System Dynamics + Discrete Event) (PySim/Salabim, Anylogic, or SIMIO) 
 
 ## Lab 9 Prerequisites
 
@@ -762,7 +764,7 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 :::{admonition} Lab 10
 :class: danger dropdown
 (lab-10)=
-# Lab 10: Agent-Based Modelling (Python via Mesa or Anylogic)
+# Lab 10: Introduction to Agent-Based Modelling (Python via Mesa or Anylogic)
 
 ## Lab 10 Prerequisites
 
@@ -811,6 +813,45 @@ $n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
 ### Pre-labs
 
 - {ref}`prelab-11`
+
+### Chapters
+- {ref}`sec:preface`
+- Simulation and Modelling
+- Buffon's Needle
+
+## Purpose and Patterns
+
+### Statement of Model Purpose
+
+### Patterns
+
+## Entities, State Variables, and Scales
+
+### State Variables
+
+### Scales
+
+## Process Overview and Scheduling
+
+## Design Concepts
+
+### Basic Principles
+
+## Input Data
+
+## Questions left to the reader to answer
+:::
+
+:::{admonition} Lab 12
+:class: attention dropdown
+(lab-12)=
+# Lab 12: Simulating an Election (Monte Carlo vs ABM) (PySim/Salabim, Anylogic, or SIMIO)
+
+## Lab 12 Prerequisites
+
+### Pre-labs
+
+- {ref}`prelab-12`
 
 ### Chapters
 - {ref}`sec:preface`

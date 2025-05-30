@@ -79,6 +79,7 @@ project:
     - title: Appendix
       children:
         - file: Chapter_Appendix/glossary.md
+        - file: Chapter_Appendix/index.md
         - file: Chapter_Appendix/supporting-material.md
   bibliography:
     - references.bib
