@@ -2,9 +2,8 @@
 
 # Glossary
 
-A glossary of common terms used throughout our text.
-
-Testing, 1, 2, 3!
+A glossary of common terms used throughout our text. These should be one or
+two lines long (there is going to be movement here to actual chapter pages.)
 :::{glossary}
 
 CDF
@@ -21,7 +20,7 @@ Mathematically, an experiment is a mapping from a sampled point
 in the domain to a  point in the output space (Co-domain),
 via the model function.
 
-Kurtosis ($\Beta_2$)
+Kurtosis
 : measures the "tailedness" (or "tail-heaviness")
 of the probability distribution of a real-valued random variable.
 It describes the sharpness of the peak and the weight of the tails
@@ -31,17 +30,20 @@ similar to that of a normal distribution. Tails are neither particularly
 heavy nor light. *Leptokurtic* ($\gamma_2 > 0$) The distribution has heavier
 tails and a sharper peak than a normal distribution. This means there is
 a higher probability of extreme values (outliers). *Platykurtic*
-($\gamma < 0) The distribution has lighter tails and a flatter peak
+($\gamma < 0$) The distribution has lighter tails and a flatter peak
 than a normal distribution. This means there's a lower probability of extreme values,
 and values tend to be more clustered around the mean but less
 peaked than a normal distribution.
+
+Random Variable
+: refers to 
 
 Sample Spaces
 : refers to all the possible outcomes regarding an experiment or event. It requires
 three conditions (mutual exclusivity, collective exhaustiveness, and sufficient granularity)
 for all elements (outcomes/events) residing within the sample space.
 
-Skewness ($\mu_3$)
+Skewness
 : measures the asymmetry of the probability distribution of a
 real-valued random variable about its mean. Skewness has two types.
 *Positive* Skewness means that the distribution has a longer or fatter

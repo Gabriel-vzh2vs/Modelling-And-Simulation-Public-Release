@@ -5,7 +5,7 @@ This is a chapter reference that can be used throughout the labs and the exercis
 in this book. It is located in the lab section, as most of the materials
 in this section relate to the pre-labs, labs, and projects.
 
-# Excel
+## Excel
 
 Excel is a spreadsheet program is a part of MS Office 365
 which is used for many, many things, even when it was not made for those
@@ -16,12 +16,13 @@ data storage all of which are of interest in this text. In this course,
 it is an option for visualizing concepts in simulation as a visualization of a
 matrix with transformations and embedded functions.
 
-## Excel Functions (Mostly Statistical)
+### Common Excel Functions
 
 This is a non-exhaustive table of Excel functions, but for this text, it is sufficient enough to
 perform any task needed with base Excel functions as other features are provided through Excel plugins.
 
 :::{table}
+
 | Excel Function | Description                                                                 | Parameters / Use Case                                                                                                                                                                                             |
 | :------------- | :-------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **VAR.P()** | Calculates variance based on the entire **population**.                       | **Parameters:** `number1`, `[number2]`, ... (The numbers or range representing the entire population). <br> **Use Case:** Measuring the dispersion of a complete dataset, like the scores of all students in a specific class. |
@@ -33,26 +34,32 @@ perform any task needed with base Excel functions as other features are provided
 | **T.INV()** | Returns the left-tailed inverse of the Student's **t-distribution**.          | **Parameters:** `probability`, `deg_freedom`. <br> (`probability` is the probability associated with the t-distribution; `deg_freedom` is the number of degrees of freedom). <br> **Use Case:** Finding the t-value for a given probability and degrees of freedom, often used in constructing confidence intervals or in hypothesis testing. |
 | **IF()** | Performs a **logical test** and returns one value for a TRUE result and another for a FALSE result. | **Parameters:** `logical_test`, `value_if_true`, `value_if_false`. <br> (`logical_test` is any value or expression that can be evaluated to TRUE or FALSE). <br> **Use Case:** Assigning grades based on scores (e.g., IF(Score>90, "A", "B")), categorizing data, or controlling calculations based on certain conditions. |
 | **XLOOKUP()** | **Searches a range or an array** for a match and returns the corresponding item from a second range or array. Default is an exact match. | **Parameters:** `lookup_value`, `lookup_array`, `return_array`, `[if_not_found]`, `[match_mode]`, `[search_mode]`. <br> **Use Case:** Finding specific information in a table, like looking up an employee's department based on their ID, or finding a product price given its name.  |
+
 :::
 
-## Excel Resources and Examples
+### Excel Resources and Examples
 
 In this subsection, we would like to point out some resources that may assist
 the reader in understanding how to use Excel and some of the plugins that were
 used when making this book.
 
-## XLRisk
+#### Excel Video Series
+
+#### Excel Textbooks
+
+### XLRisk
 
 XLRisk is a Free and Open Source VBA-based plugin that is made to compete with
 atRisk, a widely-used commercial program that does Monte Carlo Method calculations.
 
-### XLRisk Variates and Functions
+#### XLRisk Variates and Functions
 
 This is a almost exhaustive list of XLRisk Variates and Functions, that come from
 [XLRiskDocumentation](https://github.com/pyscripter/XLRisk/wiki/RiskFunctions)
 refer to that resources if more XLRisk variates could be helpful.
 
-#### XLRisk Variates
+
+##### XLRisk Variates
 
 :::{table}
 
@@ -76,7 +83,7 @@ refer to that resources if more XLRisk variates could be helpful.
 
 :::
 
-#### XLRisk Functions
+##### XLRisk Functions
 
 :::{table}
 
@@ -89,35 +96,34 @@ refer to that resources if more XLRisk variates could be helpful.
 
 :::
 
-## Excel Resources
+## AnyLogic
 
-This provides a list of some Excel Resources that exist for public consumption, as
-Excel and its use cases are well-studied and documented in both academic and commerce.
+### AnyLogic Resources
 
-### Video Series
+Anylogic has resources
 
-### Textbooks
+### Anylogic's Java
 
-# SIMIO (Windows-Only)
+## Python
 
-## SIMIO Resources
+### Built-In Functions and Statements
 
-SIMIO has quite a few resources to help make it more usable
+#### List of Built-In Types
 
-# AnyLogic (Anything with Java on it)
+Insert Table with the following structure: Name of the Type, Description, and Examples (Oh, this is going to hurt)
 
-## AnyLogic Resources
+#### List of Useful Built-In Functions
 
-Anylogic, similarly to SIMIO, also has resources 
+### Resources to Learn Python
 
-# Python Packages
+### Functions From External Python Packages
 
-## monaco
+#### monaco
 
-## pyMC
+#### pyMC
 
-## Ciw
+#### Ciw
 
-## Salabim
+#### Salabim
 
-## PySim
+#### PySim

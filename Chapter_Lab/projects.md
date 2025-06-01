@@ -8,7 +8,7 @@ Additionally, these projects are in a case-study format, meaning that there is n
 to convert the projects from the case-study with requirements to a system that could be in ODD-format depending on course goals.
 
 :::{note} Project Status
-To Henning, this section is in a state of chaos and change until June 3rd. After that point, this
+To Henning, this section is in a state of chaos and change until June 12th. After that point, this
 section should become more stable and mature.
 
 The close thing to consistency is Project 3 for the moment. (Projects 1 and 2 are being reworked to be in-line with
