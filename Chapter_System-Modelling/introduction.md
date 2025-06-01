@@ -251,7 +251,7 @@ techniques from numerical analysis, and are solved (numerically)
 through computations (aka simulation). A stochastic queueing model,
 which one would likely regard as a "discrete" model, would similarly
 be analyzed computationally through approaches such as discrete event
-simulation, see {ref}`sec:queueing_systems`.
+simulation, see {ref}`sec:queuing_systems`.
 
 
 
