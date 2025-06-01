@@ -1,3 +1,3 @@
 
 (sec:differential_equations)=
-## Differential Equations ##
+# Differential Equations #
