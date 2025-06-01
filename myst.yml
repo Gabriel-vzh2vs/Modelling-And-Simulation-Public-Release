@@ -72,7 +72,11 @@ project:
         - file: Chapter_Lab/hidden-lab-graphics.ipynb # Trying to find a way of hiding a page.
     - title: Advanced Topics
       children:
-        - file: Chapter_Advanced-Topics/Placeholder.md
+        - file: Chapter_Advanced-Topics/introduction.md
+        - file: Chapter_Advanced-Topics/unencapsulated_agency.md
+        - file: Chapter_Advanced-Topics/data_management.md
+        - file: Chapter_Advanced-Topics/surrogate_modeling.md
+        - file: Chapter_Advanced-Topics/simulation_ml.md
     - title: Appendix
       children:
         - file: Chapter_Appendix/glossary.md
