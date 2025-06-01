@@ -3,22 +3,26 @@
 
 You have likely done some form of modeling. As we indicated in the
 introduction under {ref}`sec:intro_sim`, models range in complexity
-from basic to highly highly involved. While we do emphasize modeling
-in this book, it is still beneficial to establish a basic foundation
-and reference frame.
+from basic to highly involved. The goal of this chapter is to
+establish a basic foundation for mathematical modeling. Followup
+literatre and more advanced references on this topic include
+{cite}`abc` and {cite}`efg`.
 
 
-## Types of model classes ##
+## Model classes ##
 
 At a high level, models are often classified as __continuous__ or
-__discrete__.
+__discrete__. As we will see, things are usually more nuanced than
+this. We will illustrate this and also include brief descriptions of
+other model classes and paradigms, some of which have their own
+chapters.
 
 
 ### Continuous versus discrete ###
 
-Broadly speaking, continuous refers to the nature of the
-variables of the model as well as how they may evolve. The
-distinctions are perhaps best illustrated through examples.
+Broadly speaking, continuous refers to the nature of the variables of
+the model as well as how they may evolve. This is perhaps best
+illustrated through examples.
 
 ````{prf:example} Predator prey models - Ver. 1
 :label: ex:predator_prey
@@ -28,7 +32,7 @@ equations](https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations)
 are a famous example of a set of __non-linear ordinary differential
 equations__ (ODEs). They govern the time-evolution of a pair of
 interacting species where one is the predator and one is the prey. The
-ODEs are given by:
+ODEs ({ref}`more-on-odes-here`)are given by:
 
 ```{math}
 :label: eq:lotka_volterra_ode
@@ -40,15 +44,15 @@ y'(t) = \frac{dy}{dt} &= -\gamma y + \delta xy
 
 Here $t \in \mathbb{R}$ denotes time, and the real-valued variable (or
 states) $x,y \ge 0$ capture the population densities of prey and
-predator, respectively. In addition, we have positive parameters
+predators, respectively. In addition, we have positive parameters
 $\alpha, \beta, \gamma, \delta \in \mathbb{R}$. The parameter $\beta$,
 for example, governs the rate of decline of the prey-population
-resulting from predators interacting (aka eating) prey which is
-captured through the cross-term $xy$. Similarly, $\delta$ is a
+resulting from predators interacting (aka eating) with prey, the
+latter captured through the cross-term $xy$. Similarly, $\delta$ is a
 parameter that governs the rate at which the predator population grows
 by interactig with prey, again represented by the cross-term $xy$. The
 remaining parameters $\alpha$ and $\gamma$ govern how prey
-(resp. predator) evolve on their own without interacting with the
+(resp. predators) evolve on their own without interacting with the
 other species. One may regard the Lotka-Volterra equations as the most
 basic non-linear model capturing this kind of two-species dynamic.
 
@@ -63,18 +67,20 @@ a __deterministic__ model.
 __Assumptions:__ Many assumptions were made to arrive at
 {ref}`eq:lotka_volterra_ode`. Below are some examples.
 
-- In the real system, the populations would be spread out spatially
+- In the real system, the populations would be spread out spatially.
 
 - The numbers of animals within both species have to be sufficiently
-  large to warrant an ODE approximation
+  large to warrant a model approximation using ODEs.
 
 - The interaction is capture through terms like $\beta xy$ and $\delta
-  xy$. One would expect a more general form, perhaps given by
-  functions $f_{\text{prey}}(x,y)$ and  $g_{\text{predator}}(x,y)$.
+  xy$. In general, one would expect a more general form, perhaps
+  captured by functions $f_{\text{prey}}(x,y)$ and
+  $g_{\text{predator}}(x,y)$.
 
 - In practice, there may be limited resources for the prey which would
-  make the single term $\alpha x$ unrealistic. It should possibly be
-  changed to a limited growth model.
+  make the single term $\alpha x$ unrealistic. If there are no
+  predators, this model would give exponential growth. A more
+  realistic model would contain terms preventing unbound growth.
 
 Can you give give additional examples of assumptions? Clearly one can
 make other choices when modeling a predator-prey system.
@@ -168,39 +174,44 @@ In this example, both time and states are discrete.
 __Summary:__
 
 The three examples above illustrate aspects of what may be meant by
-"discrete" and "continuous" models. As you can see, using these as
-"wholesale" terms is simplistic. We would rather say that specific
-aspects of a model are discrete or continuous. A model containing both
-types will be called __hybrid__.
+"discrete" and "continuous" models. As you can see, using these terms
+in a "wholesale" manner is simplistic. We would rather say that
+specific aspects of a model are discrete or continuous. A model
+containing both types will be called a __hybrid model__.
 
 
 ### Stochastic versus deterministic models ###
 
 The model we saw in the previous section are all deterministic. A
 model that incorporates one or more random variables (see
-{ref}`def:random_variable`) will be called __stochastic__.
+{ref}`def:random_variable`) will be called __stochastic__. Stochastic
+models are central to this book, and some of the theory needed to
+analyze and simulate such models are provided in {ref}`here`.
 
 
 ### Network-based models ###
 
-This class of models can directly encode complex, non-heterogenous
-dependency among system constitutent.
-
-Reference to section on Graph dynamical systems.
-
+In practice, the structure of many systems will not lend themselves to
+modeling using differential equations. One such class is networked
+systems which consists of entities coupled by edges in graph. An
+example of this is a supply chain network. The edges encode
+dependencies among the vertices. This class of models can directly
+encode complex, non-heterogenous dependencies among system
+constitutent. Analyzing this class of systems requires its own set of
+tools, something we address in {ref}`gds-page-comes-here`.
 
 
 ### Agent-based models (ABMs) ###
 
-Agent-based models - we have devoted a whole section to this:
-{ref}`sec:ABM`. Broadly speaking, such models have agents that are
-embedded in an __environment__, and agents can interact with the
-environment and other agents via __actions__. Agents can modulate
-their __behavior__ based on feedback from the environment, where the
-feedback is presented as __rewards__ based on the agent's
-actions. (Reference BDI) We note that an ABM may be networked.  An
-agent-based model where agents perform a fixed action is called a
-__micro-simulation__.
+We have devoted a whole section to agent-based models, see
+{ref}`sec:ABM`. Broadly speaking, such models have __agents__ that are
+embedded in an __environment__ where agents can interact with the
+environment and and possibly other agents via __actions__. Agents can
+modulate their __behavior__ based on feedback from the environment
+where the feedback is presented as __rewards__ based on the agent's
+actions. (Reference BDI {cite}`bdi`) We note that an ABM may be
+networked.  An agent-based model where all agents perform a fixed
+action is called a __micro-simulation__.
 
 
 ### Finite state machines ###
@@ -212,7 +223,7 @@ A mini introduction
 
 No doubt, you have heard about terms such as __multi-scale__ models,
 and models relying on __big data__.  After all, who wants
-single-scaled models fueled by moderately sized data? 🙃
+single-scale models fueled by moderately sized data? 🙃
 
 
 
