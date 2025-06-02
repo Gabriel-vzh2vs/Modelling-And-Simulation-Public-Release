@@ -330,9 +330,11 @@ true or false (which is equivalent to a preposition in mathematics), is false. C
 
 ```{code} python
 for i in 3 # For Loop Signature
-    print(f"{i}, ") # Operation in Loop
+    print(i) # Operation in Loop
 
-1 2 3
+1 
+2 
+3
 ```
 
 #### While Loop Example
@@ -343,7 +345,11 @@ while i < 5: # While Loop Signature
     print(i) # Operation 1 in Loop
     i += 1 # Operation 2 in Loop
 
-1 2 3 4 5
+0
+1 
+2 
+3 
+4
 ```
 
 ### Python and Databases

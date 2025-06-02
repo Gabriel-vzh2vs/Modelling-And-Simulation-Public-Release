@@ -5,7 +5,7 @@
 :::{note} Import from Pre-Lab
 To Henning, I have moved some of my Pre-Lab Materials into this chapter as suggested on
 May 30th. All of the existing content in this chapter should be considered provisional
-at best.
+at best. Also, the tables might be aggressive, so be aware of that.
 :::
 
 Previously in this text, we discussed and worked with queuing networks, the
