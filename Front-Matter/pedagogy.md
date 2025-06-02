@@ -2,7 +2,7 @@
 
 (sec:pedagogy)=
 
-This chapter discusses how an instructor can use this work in their courses 
+This chapter discusses how an instructor can use this work in their courses.
 
 ## Undergraduate Pedagogy
 

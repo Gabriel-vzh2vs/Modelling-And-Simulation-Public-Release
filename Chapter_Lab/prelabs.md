@@ -358,7 +358,8 @@ that exists in typical SQL and Non-SQL software packages such as MySQL, MariaDB,
 
 The reason why this is important is that SQLite is not as scalable for big data nor is it suitable for network applications.
 For these purposes, which are common with simulation and modelling, particularly in industry, this text recommends being
-familiar with at least one other method for interacting with databases; for example, a library named `databases` which supports
+familiar with at least one other method for interacting with databases; for example, a library named `sqlalchemy`
+[SQLAlchemy documentation](https://docs.sqlalchemy.org/en/20/tutorial/index.html) which supports
 MySQL, PostgreSQL and SQLite which is useful to turning a SQLite database into a scalable, server-ready server-client
 infrastructure.
 :::
@@ -447,7 +448,7 @@ In monaco, there is a series of functions that make up
 
 This example will be similar to the [monaco documentation](https://monaco.readthedocs.io/en/latest/), specifically a
 down-scaled version of the baseball example, as that is directly linked with physical phenomena, and can be modelled
-through Differential Equations, which will be covered later in {ref}`sec:modelling`.
+through Differential Equations, which will be covered later in {ref}`sec:differential_equations`.
 
 :::
 
@@ -469,19 +470,13 @@ include:
 - Unit Testing
 - Automated Methods (Formal Methods)
 
-Some of these methods are dicussed in more detail
-
-### Breakpoints
-
-### Concept: Unit Testing
-
-In this case 
-
-### Concept: Formal Methods
-
-### Examples with Walk-Throughs
+Some of these methods are discussed in more detail in {ref}`sec:output_analysis`
 
 ::::{tab-set}
+
+:::{tab-item} Input-Output Analysis
+a
+:::
 
 :::{tab-item} Breakpoints
 a
