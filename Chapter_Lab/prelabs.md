@@ -32,9 +32,9 @@ Partially-Drafted Pre-Labs
 - Pre-lab 1 (Provisionally Complete)
 - Pre-lab 2 
 - Pre-Lab 3
-- Pre-lab 6 (Provisionally Complete - In Progress of Moving Theory)
+- Pre-lab 6 (Reconstruction - In Progress of Moving Theory)
 - Pre-lab 7 (Provisionally Complete)
-- Pre-lab 8 (This might be going into the weeds of Stochastic Calculus)
+- Pre-lab 8 (Reconstruction - In Progress of Moving Theory)
 :::
 
 (prelab-1)=
@@ -571,83 +571,22 @@ Anylogic
 ::::
 
 (prelab-6)=
-## Pre-Lab 6: A Quick Review of Queuing Theory (Reading)
+## Pre-Lab 6: Applications of Queuing Theory (Reading  + Do)
 
-Pre-lab reconstruction....
+:::{admonition} Advisory: Pre-Lab 6 Chapter Reading
+:class: warning dropdown
 
-### Exponential Distribution
-
-In probability courses and textbooks you may have heard about the exponential
-distribution, one of the most prototypical queuing systems ($M/M/1$) relies on the
-exponential distribution for its service times and inter-arrival rates.
-
-The exponential distribution's CDF is defined as the following:
-
-:::{math}
-1-e^{x \lambda}
-:::
-
-Now, what are the properties that make exponential distributions useful for queuing?
-
-:::{table}
-
-| Property          | Description                                                                                                | Relevance to Queueing Models                                                                                                                                                                                                                            |
-|-------------------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Memoryless** | The probability of an event occurring in the future is independent of how much time has already elapsed. $P(T > s+t \mid T > s) = P(T > t)$. | Which Simplifies analysis significantly. For example, the remaining service time for a customer is independent of how long they've already been served. Similarly, the time until the next arrival doesn't depend on when the last arrival occurred. |
-| **Relationship to Poisson Process** | If the number of arrivals in a given time interval follows a Poisson distribution, then the inter-arrival times (the time between successive arrivals) are exponentially distributed. | Many real-world arrival patterns (e.g., customers at a bank, calls to a call center) can be reasonably approximated by a Poisson process, making the exponential distribution a natural choice for inter-arrival times.                        |
-| **Mathematical Tractability** | The mathematical form of the exponential distribution (PDF: $f(x) = \lambda e^{-\lambda x}$ for $x \ge 0$) often leads to simpler analytical solutions for queueing metrics like average wait time, queue length, and server utilization. | Allows for the derivation of closed-form analytic solutions for many queueing models (e.g., M/M/1, M/M/c).                                               |
-| **Constant Hazard Rate** | The instantaneous probability of an event (e.g., service completion or arrival) occurring is constant over time. The hazard rate is equal to the rate parameter $\lambda$. | Reflects situations where the likelihood of an event happening in a small time interval doesn't change based on how long the process has been running. This can be a reasonable assumption for many service or arrival processes.          |
-| **Single Parameter** | The distribution is characterized by a single parameter, $\lambda$ (the rate parameter), which is the inverse of the mean ($1/\mu$ where $\mu$ is the mean time between events). | Simplifies parameter estimation from observed data. Only one value needs to be determined to define the distribution for either arrival rates or service rates.                                                                            |
+It is highly recommended that the reader read {ref}`sec:queuing_systems`
+before reading this pre-lab, as it provides more details and critical context
+about the topics discussed as this pre-lab is about applying queuing, which
+is more difficult without context.
 
 :::
 
-### Kendall's Notation for Queues
+Pre-lab reconstruction, it might be more appropriate for a pre-lab to not
+contain theory, so this pre-lab is being reworked to have applications and
+coding.
 
-How are queues formally represented? For example, what does $M/M/1$ mean?
-
-In general, every queue can be represented in the format A/B/c/K/N/D
-with the last three often excluded in most literature.
-
-:::{table}
-:label: Kendall-Notation
-
-| Position | Description                      | Common Symbols                                                                                                |
-| :------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| **A** | **Arrival Process** | M (Markovian/Poisson), D (Deterministic/Constant), E$_k$ (Erlang), G or GI (General/General Independent)                      |
-| **B** | **Service Time Distribution** | M (Markovian/Exponential), D (Deterministic/Constant), E$_k$ (Erlang), G (General)                                  |
-| **c** | **Number of Servers** | Integer value (1, 2, 3, ..., $\infty$)                                                                                      |
-| **K** | **System Capacity** (Optional)      | Integer value (maximum number of customers in the system, including those being served), $\infty$ if omitted     |
-| **N** | **Calling Population** (Optional)   | Integer value (size of the population from which customers arrive), $\infty$ (if omitted)                        |
-| **D** | **Queue Discipline** (Optional)     | FIFO/FCFS (First-In, First-Out/First-Come, First-Served), LIFO/LCFS (Last-In, First-Out/Last-Come, First-Served), SIRO (Service In Random Order), PRI (Priority) |
-
-:::
-
-Using the {ref}`Kendall-Notation` above, we can determine that a $M/M/1$ queue is a
-queue with a Markovian Arrival Process, a Service time that is Markovian,
-and one server. Moreover, using this information, we know that the inter-arrival
-times are exponential, and the time it takes to serve someone the queue is
-also exponential, and that means we can calculate queue behaviors through
-closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
-
-:::{table}
-:label: MM1Performance-Metrics
-
-| Performance Measure                      | Symbol        | Formula                                         |
-| :--------------------------------------- | :------------ | :---------------------------------------------- |
-| Arrival Rate                             | $\lambda$     | Given                                           |
-| Service Rate                             | $\mu$         | Given or $\frac{1}{\text{service time}}$         |
-| Server Utilization (Traffic Intensity)   | $\rho$        | $\frac{\lambda}{\mu}$                           |
-| Probability of an Empty System           | $P_0$   | $1 - \rho$                                            |
-| Probability of $n$ customers in the system | $P_n$       | $P_0 \rho^n = (1-\rho)\rho^n$                   |
-| Average Number of Customers in the System | $L$ or $L_s$ | $\frac{\lambda}{\mu - \lambda} = \frac{\rho}{1-\rho}$ |
-| Average Number of Customers in the Queue  | $L_q$        | $\frac{\lambda^2}{\mu(\mu - \lambda)} = \frac{\rho^2}{1-\rho}$ |
-| Average Time a Customer Spends in the System | $W$ or $W_s$ | $\frac{1}{\mu - \lambda} = \frac{L}{\lambda}$     |
-| Average Time a Customer Spends in the Queue  | $W_q$     | $\frac{\lambda}{\mu(\mu - \lambda)} = \frac{L_q}{\lambda}$ |
-| Probability that the number of customers in the system is greater than or equal to *n* | $P(\text{N} \ge n)$ | $\rho^n$ |
-| Probability that the waiting time in the queue is greater than *t* (for $t \ge 0$) | $P(T_q > t)$ | $\rho e^{-(\mu-\lambda)t}$|
-| Probability that the system time is greater than *t* (for $t \ge 0$) | $P(T_s > t)$ | $e^{-(\mu-\lambda)t}$|
-
-:::
 
 (prelab-7)=
 ## Pre-Lab 7: Automated Distribution Fitters (Short Do)
@@ -702,7 +641,7 @@ Fitter/Phitter or a statistical package.
 ::::
 
 (prelab-8)=
-## Pre-Lab 8: Overview of Differential Equations in Simulation (Read)
+## Pre-Lab 8: Demonstration of Differential Equations in Simulation (Read)
 
 :::{admonition} Advisory: Chapter Reading
 :class: warning dropdown
@@ -710,88 +649,6 @@ Fitter/Phitter or a statistical package.
 It is highly recommended that the reader read {ref}`sec:system_modeling`
 before reading this pre-lab, as it provides more details and critical context
 about the topics discussed as this pre-lab covers a bit about modelling.
-
-:::
-
-Previously in this text, we discussed and worked with queuing networks, the
-Monte Carlo Method, System Dynamics, Distribution Modelling,
-Random Variates, Random Number Generation, and Output Analysis
-which are ubiquitous throughout simulation; however, these are
-required but not sufficient for understanding the field of simulation,
-because you will often see ODEs, SDEs, and PDEs being used to model behavior,
-and a simulation practitioner (or any engineer) should be familiar
-with them. This pre-lab focuses on giving a basic review of
-ODEs and their application in simulation and modelling.
-
-In general, DEs can be used to approximate real-world behaviors into
-deterministic (ODE/PDE) or Stochastic behaviors (SDEs/IDEs);
-however, even the deterministic models may have unresolved behaviors
-(as most PDEs and higher-order ODEs do not have closed-form solutions).
-
-### What are DEs (i.e: ODEs, PDEs, SDEs, and IDEs)?
-
-In general, a differential equation (DE) is an equation that relates
-a function to its derivatives, an example is the canonical ordinary
-differential equation:
-
-```{math}
-y^{'} + p(x)y = q(x)
-```
-
-ODEs by definition are a differential equation (DE) dependent
-on a independent variable with its unknowns consisting of
-of at least one function and the derivatives of those function(s).
-
-Additionally, there are other types of DEs that expand on the idea of
-ODEs, the first one of which you are likely familiar with:
-
-- PDEs (Partial Differential Equations)
-- SDEs (Stochastic Differential Equations)
-- IDEs (Integro-differential equations)
-
-Here is a table describing the differences between the several types of DEs (non-ODE)
-with further examples given throughout the rest of the pre-lab:
-
-:::{table}
-:label: DEs-Types
-
-| Feature                                   | PDEs (Partial Differential Equations)                                     | SDEs (Stochastic Differential Equations)                                  | IDEs (Integro-Differential Equations)                                     |
-| :---------------------------- |:------------------------------------------------------------------------ | :------------------------------------------------------------------------ | :------------------------------------------------------------------------ |
-| **Unknown Function Depends On**  | Two or more independent variables (e.g., $u(x,t)$ or $f(x,y,z)$).         | One or more independent variables, and also on random processes.        | One or more independent variables.                                        |
-| **Derivatives Involved**   | Partial derivatives (e.g., $\frac{\partial u}{\partial x}$, $\frac{\partial^2 u}{\partial t^2}$, $\frac{\partial^2 u}{\partial x \partial y}$). | Ordinary or partial derivatives, plus terms involving stochastic differentials (e.g., $dW_t$ for Wiener process). | Ordinary or partial derivatives, and also integrals of the unknown function. |
-| **General Form Example** | $F(x, t, u, u_x, u_t, u_{xx}, u_{tt}, u_{xt}, \dots) = 0$                   | $dX_t = a(t, X_t)dt + b(t, X_t)dW_t$                                  | $\frac{dy}{dx} = f(x, y(x), \int_{a}^{b} K(x,s,y(s))ds)$                     |
-| **Key Characteristics** | - Describes systems evolving in multiple dimensions or involving rates of change with respect to multiple variables. <br> - Solutions are functions of multiple variables. <br> - Often more complex to solve than ODEs; boundary conditions are crucial. | - Incorporate random noise or fluctuations. <br> - Solutions are stochastic processes (collections of random variables). <br> - Used to model systems with inherent uncertainty. <br> - Often uses stochastic calculus (e.g., Itô calculus). | - Combine differential and integral operators acting on the unknown function. <br> - Arise when the rate of change depends on the accumulated past history or spatial distribution of the quantity. <br> - Can be linear or non-linear. |
-| **Typical Applications** | - Heat flow (Heat equation) <br> - Wave propagation (Wave equation) <br> - Electrostatics (Laplace's/Poisson's equation) <br> - Fluid dynamics (Navier-Stokes equations) <br> - Quantum mechanics (Schrödinger equation) | - Financial modeling (stock prices, option pricing - e.g., Black-Scholes model) <br> - Physical systems with thermal fluctuations (Brownian motion, Langevin equation) <br> - Biological systems with noise (e.g., gene expression) <br> - Signal processing with noise | - Population dynamics with memory effects <br> - Epidemiology (spread of diseases with non-local interactions) <br> - Viscoelasticity <br> - Radiative transfer <br> - Neural networks with delays or spatial integration |
-| **Solution Notes** | - Analytical methods for simpler cases and specific geometries (e.g., separation of variables, Fourier transforms, Green's functions). <br> - Numerical methods are very common (e.g., finite difference, finite element, finite volume). | - Analytical solutions are rare, often limited to linear SDEs. <br> - Focus on properties of the solution process (e.g., mean, variance). <br> - Numerical methods (e.g., Euler-Maruyama, Milstein schemes) are used for simulation. | - Sometimes transformed into pure ODEs or PDEs if the kernel is deterministic or separable. <br> - Numerical methods often involve discretizing both the derivative and the integral. <br> - Volterra and Fredholm integro-differential equations are common types. |
-
-:::
-
-### ODEs for Modelling
-
-Additionally, ODEs come within several different types of ODEs that are solved
-differently analytically - however, most automated solvers will usually use the
-same methods and are instead limited by stiffness or the lack of a closed-form
-solution. Here's a summary of the different forms of ODE and their analytic solution:
-
-:::{table}
-:label: ODE-Types
-
-| ODE Type                      | General Form / Definition                                                                 | Key Characteristics / Solution Notes                                                                                                                               |
-| :---------------------------- | :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **First-Order ODEs** |                                                                                           | Involves only the first derivative of the dependent variable.                                                                                                      |
-| Separable Equations           | $\frac{dy}{dx} = g(x)h(y)$ or $M(x)dx + N(y)dy = 0$                                        | Can be rearranged so each side of the equation contains only one variable and its differential. Solved by direct integration.                                       |
-| Linear Equations              | $\frac{dy}{dx} + P(x)y = Q(x)$                                                            | $P(x)$ and $Q(x)$ are functions of $x$ (or constants). Solved using an integrating factor: $I(x) = e^{\int P(x)dx}$.                                                   |
-| Homogeneous Equations (Type 1)| $\frac{dy}{dx} = F(\frac{y}{x})$                                                          | Can be transformed into a separable equation by the substitution $v = \frac{y}{x}$ (so $y = vx$).                                                                   |
-| Exact Equations               | $M(x,y)dx + N(x,y)dy = 0$, where $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$ | There exists a function $f(x,y)$ such that $df = Mdx + Ndy = 0$. The solution is $f(x,y) = C$. If not exact, sometimes an integrating factor can be found.        |
-| Bernoulli Equations           | $\frac{dy}{dx} + P(x)y = Q(x)y^n$, where $n \neq 0, 1$                                      | Non-linear. Can be transformed into a linear equation by the substitution $v = y^{1-n}$.                                                                            |
-| Riccati Equations             | $\frac{dy}{dx} = P(x)y^2 + Q(x)y + R(x)$                                                  | Non-linear. No general solution method unless a particular solution $y_1(x)$ is known. Then $y = y_1 + u$ transforms it to a Bernoulli eq. for $u$.                   |
-| **Higher-Order Linear ODEs** | $a_n(x)\frac{d^ny}{dx^n} + a_{n-1}(x)\frac{d^{n-1}y}{dx^{n-1}} + \dots + a_1(x)\frac{dy}{dx} + a_0(x)y = g(x)$ | Involves derivatives of order 2 or higher. $g(x)=0$ is homogeneous; $g(x) \neq 0$ is non-homogeneous.                                                              |
-| Homogeneous with Constant Coefficients | $ay'' + by' + cy = 0$ (for 2nd order)                                                   | Solved using the characteristic (auxiliary) equation $ar^2 + br + c = 0$. Solutions depend on the nature of the roots (real distinct, real repeated, complex).      |
-| Non-homogeneous with Constant Coefficients | $ay'' + by' + cy = g(x)$ (for 2nd order)                                                | General solution is $y = y_c + y_p$, where $y_c$ is the complementary solution (from the homogeneous part) and $y_p$ is a particular solution (found by undetermined coefficients or variation of parameters). |
-| Cauchy-Euler (Equidimensional) Equation | $ax^2y'' + bxy' + cy = g(x)$ (for 2nd order)                                              | Can be transformed into a linear ODE with constant coefficients by the substitution $x = e^t$.                                                                   |
-| **Systems of ODEs** | $\frac{d\mathbf{y}}{dt} = \mathbf{F}(t, \mathbf{y})$, where $\mathbf{y}$ is a vector of functions | Describes the interaction of multiple dependent variables. Linear systems with constant coefficients can be solved using eigenvalues and eigenvectors.                |
-| **Non-linear ODEs (General)** |                                                                                           | Equations that do not satisfy the conditions for linearity. Often difficult to solve analytically; may require qualitative analysis, numerical methods, or series solutions. |
-| Autonomous Equations          | $\frac{dy}{dx} = f(y)$  |  Autonomous differential equations are separable and can be solved by direct integration.
 
 :::
 
