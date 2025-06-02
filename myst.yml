@@ -30,7 +30,7 @@ project:
     - title: System Modelling
       children:
         - file: Chapter_System-Modelling/introduction.md
-        - file: Chapter_System-Modelling/differential_equations.m
+        - file: Chapter_System-Modelling/differential_equations.md
         - file: Chapter_System-Modelling/agent_based_models.md
         - file: Chapter_System-Modelling/network_models.md
         - file: Chapter_System-Modelling/queuing_systems.md
