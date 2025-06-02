@@ -10,31 +10,45 @@
 \def\cov{\operatorname{Cov}}
 ```
 
-This chapter is meant as a brief review of material from the
-Probability and Statistics courses that you have had (or are taking),
-and that will be used in this course. Some of this material is covered
-in the textbook (Law) in Chapter 4. It will be beneficial to review
-(or preview) this from these courses. The description may be a little
-bit more formal than what you are used to. This is done to help
-clarify concepts.
-
-The notes were prepared using {cite}`Chen:25,Taylor:84,Law:13,Ross:24`
+This chapter is meant as a brief review of required background
+material typically taught in introductions to probability and
+statistics. You may skip this chapter on a first reading, and refer
+back to it as necessary. While we have attempted to make the book
+self-contained as far as this material goes, these short notes are no
+substitute for good courses on these topics. The notes were prepared
+using {cite}`Taylor:84,Law:13,Ross:24`. Our description is slighty
+more formal than some introductory books. For example, we choose to
+include the notion of probability spaces and $\sigma$-algebras. Some
+introductory books choose to not mention these concepts. Instead, very
+careful formulations are added while dancing around these concepts,
+never saying anything really wrong, but leaving it to the reader to
+sort this out on their own, sort of. We have chosen to provide the
+details, believing that it helps demystify things while adding
+conceptual clarity.
 
 
 ## Probability space ##
 
-Here we will refresh key elements from your introduction to probability course
-and cover the following concepts which together form a probability space:
-- An __experiment__;
-- The __sample space__ of an experiment, a set whose elements
-  are the __sample points__;
-- The __family of events__ whose elements are __events__;
-- The __probability measure__
+Here we will review the basic notion of a probability space:
 
-These concepts will be illustrated with basic examples. Note that some
-of these concepts are not always called out in introductory
-probability textbooks, but you can rest assured (or hope) that the
-author kept good track of these without when writing the book.
+- An __experiment__: a process for which invocation produces an
+  outcome. The process typically involves some uncertainties or
+  randomness.
+
+- The __sample space__ of an experiment: a set whose elements are
+  called __sample points__. Each experiment outcome maps uniquely to a
+  sample point.
+
+- A __family of events__ whose elements are __events__;
+
+- A __probability measure__
+
+These concepts will be illustrated with basic examples.
+
+<!-- Note that some of these concepts are not always called out in
+introductory probability textbooks, but you can rest assured (or hope)
+that the author kept good track of these without when writing the
+book. -->
 
 :::{prf:definition} Probability space
 :label: def:prob_space

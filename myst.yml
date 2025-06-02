@@ -30,7 +30,11 @@ project:
     - title: System Modelling
       children:
         - file: Chapter_System-Modelling/introduction.md
-        - file: Chapter_System-Modelling/queuingsystems.md
+        - file: Chapter_System-Modelling/differential_equations.m
+        - file: Chapter_System-Modelling/agent_based_models.md
+        - file: Chapter_System-Modelling/network_models.md
+        - file: Chapter_System-Modelling/queuing_systems.md
+        - file: Chapter_System-Modelling/finite_state_machines.md
     - title: Output Analysis
       children:
         - file: Chapter_Output_Analysis/introduction.md
@@ -39,10 +43,23 @@ project:
         - file: Chapter_Output_Analysis/sample_size_estimation.md
         - file: Chapter_Output_Analysis/bonferroni.md
         - file: Chapter_Output_Analysis/dependent_variables.md
+    - title: Random Number Generation and Random Variate Generation
+      children:
+        - file: Chapter_Random-Number-And-Variate-Generation/introduction.md
+    - title: Distribution Modelling
+      children:
+        - file: Chapter_Distribution-Modelling/index.md
     - title: Simulation In Practice
       children:
         - file: Chapter_Simulation-In-Practice/introduction.md
         - file: Chapter_Simulation-In-Practice/validation.md
+    - title: Variance Reduction Techniques
+      children:
+        - file: Chapter_Variance-Reduction-Techniques/whyvariancereduction.md
+        - file: Chapter_Variance-Reduction-Techniques/stratifiedsampling.md
+        - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
+        - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
+        - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
     - title: Lab
       children:
         - file: Chapter_Lab/intro-to-labs.md
@@ -53,15 +70,18 @@ project:
         - file: Chapter_Lab/GMPforReports.ipynb
         - file: Chapter_Lab/software-specifics.md
         - file: Chapter_Lab/hidden-lab-graphics.ipynb # Trying to find a way of hiding a page.
-    - title: Distribution Modelling
-      children:
-        - file: Chapter_Distribution-Modelling/index.md
-    - title: Random Variate Generation And Number Generation
-      children:
-        - file: Chapter_Random-Number-And-Variate-Generation/introduction.md
     - title: Advanced Topics
       children:
-        - file: Chapter_Advanced-Topics/Placeholder.md
+        - file: Chapter_Advanced-Topics/introduction.md
+        - file: Chapter_Advanced-Topics/unencapsulated_agency.md
+        - file: Chapter_Advanced-Topics/data_management.md
+        - file: Chapter_Advanced-Topics/surrogate_modeling.md
+        - file: Chapter_Advanced-Topics/simulation_ml.md
+    - title: Appendix
+      children:
+        - file: Chapter_Appendix/glossary.md
+        - file: Chapter_Appendix/index.md
+        - file: Chapter_Appendix/supporting-material.md
     - title: Agent Based Modelling
       children:
         - file: Chapter_Agent-Based-Modelling/introduction.md
@@ -69,18 +89,6 @@ project:
       children:
         - file: Chapter_Finite-State-Machines/deterministic-finite-automata.md
         - file: Chapter_Finite-State-Machines/nondeterministic-finite-automata.md
-    - title: Variance Reduction Techniques
-      children:
-        - file: Chapter_Variance-Reduction-Techniques/whyvariancereduction.md
-        - file: Chapter_Variance-Reduction-Techniques/stratifiedsampling.md
-        - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
-        - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
-        - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
-    - title: Appendix
-      children:
-        - file: Chapter_Appendix/glossary.md
-        - file: Chapter_Appendix/index.md
-        - file: Chapter_Appendix/supporting-material.md
   bibliography:
     - references.bib
     - bibliography.bib
@@ -89,7 +97,7 @@ site:
   parts:
     footer: | # Note that this footer will not work until June with 2.0.0a4 of JB 2.0.
       <div>
-        <p>&copy; Copyright 2025 Henning S. Mortveit and Gabriel A. Lawrence. All rights reserved.</p> 
+        <p>&copy; Copyright 2025 Henning S. Mortveit and Gabriel A. Lawrence. All rights reserved.</p>
       </div>
   options:
   #   favicon: favicon.ico
