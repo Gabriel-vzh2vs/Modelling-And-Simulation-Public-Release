@@ -22,10 +22,32 @@ include the notion of probability spaces and $\sigma$-algebras. Some
 introductory books choose to not mention these concepts. Instead, very
 careful formulations are added while dancing around these concepts,
 never saying anything really wrong, but leaving it to the reader to
-sort this out on their own, sort of. We have chosen to provide the
+figure this out on their own, sort of. We have chosen to provide the
 details, believing that it helps demystify things while adding
 conceptual clarity.
 
+## Sets ##
+
+where $\varnothing$ is
+  the empty set
+
+(Here $A^c =
+    \{\omega \in \Omega | \omega \not\in A\}$, the _complement_ of $A$
+    in $\Omega$.)
+
+A collection of subsets $\mathcal{F}$ of $\Omega$ that the following
+three conditions is called a __$\sigma$-algebra__.
+
+  1. $\Omega \in \mathcal{F}$;
+
+  2. If $A\in\mathcal{F}$ then $A^c \in \mathcal{F}$.
+
+  3. If $A_n \in \mathcal{F}$ for $n=1,2,\ldots$ then
+    $\cup_{i=1}^\infty A_n \in \mathcal{F}$.
+
+
+
+Comes here.
 
 ## Probability space ##
 
@@ -65,32 +87,37 @@ book. -->
 
 A __probability space__ consists of the following:
 
-- A __sample space__ $\Omega$, a set whose elements $\omega$ (called
-  __sample points__) correspond to the possible outcomes of an
-  experiment.
+- A __sample space__ $\Omega$, a set whose elements $\omega$ are
+  called __sample points__. (A sample point corresponds uniquely to an
+  outcome of the associated experiment.)
 
-- A family of __events__, that is, a collection $\mathcal{F}$ of
-  subsets of $\Omega$. We say that the event $A$ __occurs__ if the
-  outcome $\omega \in \Omega$ of the experiment is an element of $A$.
+- A collection $\mathcal{F}$ of subsets of $\Omega$ which is a
+  $\sigma$-algebra. The set $\mathcal{F}$ is called __the family of
+  events__ and its elements are called __events__. We say that the
+  event $A\in\mathcal{F}$ __occurs__ if the outcome $\omega \in
+  \Omega$ of the experiment is an element of $A$.
 
--  A __probability measure__ $\Pr$. This is a function defined
-  on the set $\mathcal{F}$, the family of events, that satisfies
-  $\Pr(\varnothing) = 0$, $\Pr(\Omega) = 1$ (where $\varnothing$ is
-  the empty set), as well as
-  \begin{equation*}
-    0 = \Pr(\varnothing) \le \Pr(A) \le \Pr(\Omega) = 1 \quad\text{for $A\in\mathcal{F}$}\;,
-  \end{equation*}
-  and
+- A __probability measure__ $\Pr$ which is a function $\Pr \colon
+  \mathcal{F} \longrightarrow [0,1]$ that satisfies $\Pr(\Omega) = 1$,
+  and that is __countably additive__, that is,
   \begin{equation*}
     \Pr( \cup_{n=1}^\infty A_n) = \sum_{n=1}^\infty \Pr(A_i)
   \end{equation*}
-  if the events $A_1$, $A_2$, $\ldots$ are disjoint, i.e., $A_i \cap
+  if the events $A_1$, $A_2$, $\ldots$ are pairwise disjoint, i.e., $A_i \cap
   A_j = \varnothing$ when $i\ne j$.
 
 The triple $(\Omega, \mathcal{F}, \Pr)$ is called a __probability space__.
 :::
 
 
+It follows that $\Pr(\varnothing) = 0$ and that
+
+\begin{equation*}
+    0 = \Pr(\varnothing) \le \Pr(A) \le \Pr(\Omega) = 1 \quad\text{for $A\in\mathcal{F}$}\;,
+\end{equation*}
+
+
+<!--
 Why this level of formality? Whereas some introductory courses in
 probability choose to omit mentioning, e.g., the family of events
 $\mathcal{F}$, and may not mention the phrase _probability space_, we
@@ -102,31 +129,32 @@ author) chooses to "not needlessly complicate matters", the reader
 is left to figure all this out on their own, somehow implicitly an
 unknowingly. And while it often works quite well, it never feels
 satisfactory to leave this ambiguity. (Puts away soapbox.)
+-->
 
-
-
-In practice, we impose additional properties on the collection
-of events $\mathcal{F}$. Specifically, we require that:
-1.  $\varnothing \in \mathcal{F}$ and $\Omega \in \mathcal{F}$;
-2.  $A^c \in \mathcal{F}$ whenever $A\in \mathcal{F}$. (Here $A^c =
-  \{\omega \in \Omega | \omega \not\in A\}$, the _complement_ of
-  $A$ in $\Omega$.)
-3.  $\cup_{i=1}^\infty A_n$ is in $\mathcal{F}$ whenever $A_n$ is in
-  $\mathcal{F}$ for $n=1,2,\ldots$.
-
-A collection of subsets $\mathcal{F}$ of $\Omega$ that satisfies
-(1)-(3) is called a __$\sigma$-algebra__.
-%%
 
 If you think back to calculations you may have done in your
 probability courses, many of them made implicit use of the fact that
-the conditions (1)-(3) would hold. One such example that
-should be familiar is the "fact" that
+the conditions (1)-(3) would hold (i.e., that $\mathcal{F}$ is a
+$\sigma$-algebra.) One such example is the familiar "fact" that
+
 \begin{equation*}
 \Pr(A) = 1 - \Pr(A^c) \;,
 \end{equation*}
-a rule that only makes sense if $A^c$ is $\mathcal{F}$ whenever $A \in \mathcal{F}$.
 
+a rule that only makes sense if $A^c$ is $\mathcal{F}$ whenever $A \in
+\mathcal{F}$. Similarly, you have likely seen
+
+\begin{equation*}
+\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \;,
+\end{equation*}
+
+which again only makes sense provided that $A \cup B$ and $A \cap B$
+are events whenever $A$ and $B$ are events. The conditions imposed on
+$\mathcal{F}$ are necessary elements to obtain a well-behaved
+structure for the types of considerations and arguments to follow. The
+same holds for the conditions on the probability measures.
+
+It is time for some examples.
 
 
 :::{prf:example} Coin-tossing
@@ -143,30 +171,25 @@ experiment is:
 
 Here the sample point $(H,T)$ captures the case
 where the nickel came up "heads" and the dime came up "tails". More
-formally, for an element $\omega = (\omega_1, \omega_2) \in \Omega$,
-$\omega_1$ captures the outcome of the nickel, while $\omega_2$
-captures the outcome of the dime.
+formally, the element $\omega = (\omega_1, \omega_2) \in \Omega$
+captures where $\omega_1$ is the result for the nickel while $\omega_2$
+is the result for the dime.
 
 :::
-
-Before we illustrate the family of events and the probability
-measures, we add some more structure.
-
 
 
 :::{prf:example} Coin-tossing (continued)
 :label: ex:coin-tossing-2
 
-For the coin tossing example we
-may let $\mathcal{F}$ to be the set of all subset of $\Omega$ (which
-is called the power set of $\Omega$).  In this case, the elements of
-$\mathcal{F}$, and their probabilities, are shown in
-Table~\ref{tab:coins}.
-%%
+Continuing {ref}`ex:coin-tossing` we let $\mathcal{F}$ be the set
+$2^\Omega$ of all subset of $\Omega$ (this is called the power set of
+$\Omega$).  In this case, the elements of $\mathcal{F}$ and their
+probabilities are shown in {ref}`tab-coins`.
 
 ```{table} The collection $\mathcal{F}$ of events for the coin-tossing example.
 :label: tab-coins
 :align: center
+
 | $A \in \mathcal{F}$| $\Pr(A)$ | $A \in \mathcal{F}$     | $\Pr(A)$ |
 | -------------------| ---------|-------------------------|----------|
 | $\varnothing$      | 0        | $\Omega$                | 1        |
@@ -183,33 +206,43 @@ Here are some examples of events:
 
 -  ``At least one heads'': $A_1 = \{(H,H),(H,T),(T,H)\}$ with
   $\Pr(A_1) = 3/4$;
+
 -  ``Exactly 1 heads and 1 tails'': $A_2 = \{(H,T), (T,H) \}$ with
   $\Pr(A_2) = 1/2$.
+
 -  ``The nickel is heads'': $A_3 = \{(H,T), (H,H) \}$ with
   $\Pr(A_3) = 1/2$.
+
+Naturally, since we have taken $\mathcal{F} = 2^\Omega$, we
+automatically have a $\sigma$-algebra. We refer to
+{ref}`ex-to-be-labeled` for a case where $\mathcal{F}$ is not the
+power set of $\Omega$.
 
 :::
 
 :::{prf:example} Monty Hall
 :label: ex:monty_hall
 
-For the Monty Hall ``experiment'', the
-sample space $\Omega$ has three elements:
+For the Monty Hall game show (or experiment), the sample space
+$\Omega$ has three elements
 
 ```{math}
 \begin{equation}
   \Omega = \{A_1, A_2, A_3\}
 \end{equation}
 ```
-Here $A_i$ denotes the experiment outcome (or sample point) where the
-prize is behind door $i$. We construct the family $\mathcal{F}$ in
-{ref}`tab:montyhall`. (\extra You may notice once more that
-$\mathcal{F}$ is the power set of $\Omega$, a common choice when the
-sample space is finite.)
+
+where $A_i$ denotes the experiment outcome (aka sample point) where
+the prize is behind door $i$. We construct $\mathcal{F}$ as in
+{ref}`tab:montyhall` to be the power set of $\Omega$ with matching
+probabilities. Since we take each of the $A_i$ to be equally likely,
+i.e., $\Pr(A_i) = 1/3$, there is only one way to set this up.
+
 %%
-```{table} The family $\mathcal{F}$ for the Monty Hall problem.
+```{table} The family of events $\mathcal{F}$ for the Monty Hall problem.
 :label: tab:montyhall
 :align: left
+
 |$A \in \mathcal{F}$ | $\Pr(A)$ | $A \in \mathcal{F}$ | $\Pr(A)$ |
 |--------------------|----------|---------------------|----------|
 |$\varnothing$       | 0        | $\Omega$            | 1        |
@@ -218,41 +251,49 @@ sample space is finite.)
 |$\{A_3\}$           | 1/3      | $\{A_2, A_3\}$      | 2/3      |
 ```
 
-Assume the contestant picks the first door. The event that corresponds to
-\``win-by-switching'' is $\{A_2, A_3\}$ which has probability
-$2/3$. Similarly, ``win-by-not-switching'' corresponds to $\{A_1\}$
-which has probability $1/3$. $\Box$
+Assume that contestant picks the first door. The event that
+corresponds to \``win-by-switching'' is $\{A_2, A_3\}$ which has
+probability $2/3$. Similarly, ``win-by-not-switching'' corresponds to
+the event $\{A_1\}$ which has probability $1/3$. $\Box$
+
 :::
 
 (sec:prob_stats_defs)=
 ## Common terms and definitions
 
-The following terms and facts should be familiar from your introductory
+The following definitions and facts are covered in introductory
 courses on probability. Here $A$ and $B$ denotes events.
 %%
 -  The event that at least one of events $A$ and $B$ occur is $A
   \cup B$, the union of $A$ and $B$.
+
 -  The event that both events $A$ and $B$ occurs is $A \cap B$, the
   intersection of $A$ and $B$.
+
 -  The event that $A$ does not occur is $A^c$, the complement of $A$.
+
 -  The event $\Omega$ is called the __certain event__.
+
 -  The event $\varnothing$ is called the __impossible event__.
--  Events $A$ and $B$ are __disjoint__ if $A\cap B =
-  \varnothing$. (Here $\varnothing$ denotes the empty set.) For
+
+- Events $A$ and $B$ are __disjoint__ if $A\cap B = \varnothing$. For
   example, the two events $A= \{(H,H),(T,H)\}$ and $B=\{(H,H),(H,T)\}$
   in the coin-tossing example are __not disjoint__: $A \cap B =
   \{(H,H)\}$.
+
 -  Events $A$ and $B$ are __independent__ if $\Pr(A \cap B) = \Pr(A)
   \times \Pr(B)$;
 
+- For all events $A$ and $B$ we have
 
-__The probability of $A \cup B$:__ For all events $A$ and $B$ we
-have
-
-\begin{equation*}
+```{math}
+:label: eq:prob_union
+\begin{equation}
 \Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \;.
-\end{equation*}
+\end{equation}
+```
 
+The generalization of {ref}`eq:prob_union` follows from the principle of __exclusion-inclusion__. {cite}`something` or see execise {ref}`something`.
 
 :::{prf:definition} Conditional probability
 :label: def:cond_prob
