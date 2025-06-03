@@ -29,26 +29,36 @@ conceptual clarity.
 
 ## Probability space ##
 
-Here we will review the basic notion of a probability space:
+In this section we review basic notions of probability
+spaces. Underlying the definition that we present shortly, is the
+notion of an __experiment__. An experiment is a process that produces
+an outcome. To be interesting, such processes typically involves some
+uncertainties or randomness. The axiomatic notion of a probability
+space is a way formalize this, and it does so in an incredibly
+powerful manner. If you have never seen this before, we recommend you
+take your time digesting the pieces, relate it to the examples that
+follow, but also to examples you may have encountered in your studies
+or work.
 
-- An __experiment__: a process for which invocation produces an
-  outcome. The process typically involves some uncertainties or
-  randomness.
-
+<!--
 - The __sample space__ of an experiment: a set whose elements are
   called __sample points__. Each experiment outcome maps uniquely to a
   sample point.
 
-- A __family of events__ whose elements are __events__;
+- A __family of events__: a set of subsets of the sample
+  space. Elements of this set are called __events__.
 
-- A __probability measure__
+- A __probability measure__: a function that assigns to each event a
+  number in $[0,1]\subset\mathbb{R}$.
 
 These concepts will be illustrated with basic examples.
+-->
 
 <!-- Note that some of these concepts are not always called out in
 introductory probability textbooks, but you can rest assured (or hope)
 that the author kept good track of these without when writing the
 book. -->
+
 
 :::{prf:definition} Probability space
 :label: def:prob_space
@@ -94,19 +104,6 @@ unknowingly. And while it often works quite well, it never feels
 satisfactory to leave this ambiguity. (Puts away soapbox.)
 
 
-:::{prf:example} Coin-tossing
-:label: ex:coin-tossing
-
-Consider an experiment that
-consists of tossing a nickel and a dime and then recording for each
-coin the outcome. We write $H$ for "heads" and $T$ for "tails". In
-this case, the sample space $\Omega$ of the experiment is:
-\begin{equation}
-\Omega = \{(H,H), (H,T), (T,H), (T,T)   \} \;.
-\end{equation}
-Here the sample point $(H,T)$ captures the case where the nickel came
-up "heads" and the dime came up "tails".
-:::
 
 In practice, we impose additional properties on the collection
 of events $\mathcal{F}$. Specifically, we require that:
@@ -129,6 +126,32 @@ should be familiar is the "fact" that
 \Pr(A) = 1 - \Pr(A^c) \;,
 \end{equation*}
 a rule that only makes sense if $A^c$ is $\mathcal{F}$ whenever $A \in \mathcal{F}$.
+
+
+
+:::{prf:example} Coin-tossing
+:label: ex:coin-tossing
+
+Consider an experiment that consists of tossing a nickel and a dime
+and then recording for each coin the outcome. We write $H$ for "heads"
+and $T$ for "tails". In this case, the sample space $\Omega$ of the
+experiment is:
+
+\begin{equation}
+\Omega = \{(H,H), (H,T), (T,H), (T,T)\} \;.
+\end{equation}
+
+Here the sample point $(H,T)$ captures the case
+where the nickel came up "heads" and the dime came up "tails". More
+formally, for an element $\omega = (\omega_1, \omega_2) \in \Omega$,
+$\omega_1$ captures the outcome of the nickel, while $\omega_2$
+captures the outcome of the dime.
+
+:::
+
+Before we illustrate the family of events and the probability
+measures, we add some more structure.
+
 
 
 :::{prf:example} Coin-tossing (continued)
