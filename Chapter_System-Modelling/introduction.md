@@ -32,7 +32,7 @@ equations](https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations)
 are a famous example of a set of __non-linear ordinary differential
 equations__ (ODEs). They govern the time-evolution of a pair of
 interacting species where one is the predator and one is the prey. The
-ODEs ({ref}`more-on-odes-here`)are given by:
+ODEs ({ref}`sec:differential_equations`)are given by:
 
 ```{math}
 :label: eq:lotka_volterra_ode

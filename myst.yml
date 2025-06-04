@@ -16,6 +16,7 @@ project:
       children:
         - file: Front-Matter/preface.md
         - file: Front-Matter/toc.md
+        - file: Front-Matter/pedagogy.md
     - title: Introduction To Simulation
       children:
         - file: Chapter_Introduction-to-Simulation/section_introduction.md
