@@ -1,5 +1,5 @@
 (sec:lab)=
-# Introduction to Simulation Lab
+# Lab Section Introduction
 
 The main purpose of the lab section is to help demonstrate the concepts discussed
 throughout the book through short exercises and readings {ref}`sec:pre-labs`,
@@ -47,5 +47,4 @@ labs, and projects. Then, the reader should do a pre-lab for each
 lab, and then once you do three or four labs, then should take on a
 project. The other sections will appear when needed within a pre-lab,
 lab or project.
-
 

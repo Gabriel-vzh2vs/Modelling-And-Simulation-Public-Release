@@ -61,12 +61,37 @@ project:
         - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
         - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
         - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
-    - title: Lab
+    - file: Chapter_Lab/intro-to-labs.md # Restructuring
       children:
-        - file: Chapter_Lab/intro-to-labs.md
         - file: Chapter_Lab/softwareinstall.md
         - file: Chapter_Lab/prelabs.md
+          children:
+            - file: Chapter_Lab/prelabs_folder/prelab1.md
+            - file: Chapter_Lab/prelabs_folder/prelab2.md
+            - file: Chapter_Lab/prelabs_folder/prelab3.md
+            - file: Chapter_Lab/prelabs_folder/prelab4.md
+            - file: Chapter_Lab/prelabs_folder/prelab5.md
+            - file: Chapter_Lab/prelabs_folder/prelab6.md
+            - file: Chapter_Lab/prelabs_folder/prelab7.md
+            - file: Chapter_Lab/prelabs_folder/prelab8.md
+            - file: Chapter_Lab/prelabs_folder/prelab9.md
+            - file: Chapter_Lab/prelabs_folder/prelab10.md
+            - file: Chapter_Lab/prelabs_folder/prelab11.md
+            - file: Chapter_Lab/prelabs_folder/prelab12.md
         - file: Chapter_Lab/labs.md
+          children:
+              - file: Chapter_Lab/labs_folder/lab1.md
+              - file: Chapter_Lab/labs_folder/lab2.md
+              - file: Chapter_Lab/labs_folder/lab3.md
+              - file: Chapter_Lab/labs_folder/lab4.md
+              - file: Chapter_Lab/labs_folder/lab5.md
+              - file: Chapter_Lab/labs_folder/lab6.md
+              - file: Chapter_Lab/labs_folder/lab7.md
+              - file: Chapter_Lab/labs_folder/lab8.md
+              - file: Chapter_Lab/labs_folder/lab9.md
+              - file: Chapter_Lab/labs_folder/lab10.md
+              - file: Chapter_Lab/labs_folder/lab11.md
+              - file: Chapter_Lab/labs_folder/lab12.md
         - file: Chapter_Lab/projects.md
         - file: Chapter_Lab/GMPforReports.ipynb
         - file: Chapter_Lab/software-specifics.md
