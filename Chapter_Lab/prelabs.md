@@ -34,7 +34,7 @@ Partially-Drafted Pre-Labs
 - Pre-Lab 3
 - Pre-lab 6 (Reconstruction - In Progress of Moving Theory)
 - Pre-lab 7 (Provisionally Complete)
-- Pre-lab 8 (Reconstruction - In Progress of Moving Theory)
+- Pre-lab 8 (Provisionally Complete)
 :::
 
 List of Pre-labs:

@@ -1,3 +1,18 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.10.3
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+
 (prelab-8)=
 # Pre-Lab 8: Demonstration of Differential Equations in Simulation and Modelling (Read)
 
@@ -358,15 +373,227 @@ plt.show()
 
 ## PDEs for Modelling and Simulation
 
-PDEs ...
+All ODEs are special cases[^2] of the greater family of Partial Differential Equations,
+and in this section of this pre-lab, the reader will be exposed to some common applications
+of Partial Differential Equations.
 
-::::{tab-set}
+### Example 1: The Heat Equation
 
-:::{tab-item} Example 1: Heat Equation
+The heat equation refers to a parabolic[^3] Partial Differential Equation that describes
+how heat is transmitted through different materials. Moreover, this equation has found its way
+into almost every Partial Differential Equation textbook and into many fields of study in different
+ways: the Black–Scholes equation is an implementation of the heat equation, Fokker–Planck equation in
+Brownian motion, and back to physics through Schrödinger's equation. Here's a link to a
+dynamic visualization [link](https://visualpde.com/sim/?preset=heatEquation).
+
+This text describes of the most common examples of the heat equation: the transportation of
+heat across a finite, one dimensional rod with homogeneous boundary conditions. The reader might
+be wondering, what does that mean? In this case, we are considering a metal rod that is made
+up of consistent material, with boundaries that perfectly remove heat from the system such as an ice
+block, and that the rod has a width approaching zero (one-dimensional).
+
+These conditions allow for the application of the following boundary problem in the context of an
+1-D Heat Equation:
+
+```{math}
+\frac{\partial u}{\partial t} = k \frac{\partial^2 u}{\partial x^2} &   & 0 < t; 0 \leq x \leq L 
+```
+
+```{figure} ../../Figs/Chapter_Lab/PDE_Example.png
+:label: fig:PDE_Example
+
+This is a visualization of the finite difference method compared with exact solutions
+for the 1-d heat equation described above.
+```
+
+```{admonition} Code for this PDE (Heat Equation)
+:class: tip dropdown
+
+```{code-block} python
+import numpy as np
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+# Method of Manufactured Solutions: exact solution
+def u_exact(x, t):
+    return np.exp(-t) * np.cos(x)
+
+# Parameters
+t_span = [0.0, 1.0]
+x_span = [0.0, 1.0]
+dx = 0.1
+nx = int(x_span[1] / dx) + 1
+x = np.linspace(x_span[0], x_span[1], nx)
+t_eval = np.arange(t_span[0], t_span[1] + 0.2, 0.2)
+
+# Initial condition for IVP
+u0 = u_exact(x, t_span[0])
+
+# PDE function (discretized in space)
+def pde_func(t, u):
+    dudt = np.zeros_like(u)
+    
+    # Central difference for 2nd derivative
+    for i in range(1, nx - 1):
+        dudt[i] = (u[i-1] - 2*u[i] + u[i+1]) / dx**2
+        
+    # Boundary conditions
+    dudt[0] = 0 # Corresponds to u(t, 0) boundary condition.
+    dudt[-1] = 0 # Corresponds to u(t, 1) boundary condition
+
+    return dudt
+
+# Create a function to handle the boundary conditions within the solver
+def ode_with_bcs(t, u):
+    dudt = pde_func(t, u)
+    u[0] = np.exp(-t)
+    u[-1] = np.exp(-t) * np.cos(1)
+    return dudt
+
+# Solve the ODE problem
+sol = solve_ivp(ode_with_bcs, t_span, u0, t_eval=t_eval, rtol=1e-6, atol=1e-6)
+
+# Plot results and compare with exact solution
+plt.figure(figsize=(10, 6))
+
+for i, t_point in enumerate(sol.t):
+    plt.plot(x, sol.y[:, i], 'o-', label=f'Numerical, t={t_point:.1f}')
+    plt.plot(x, u_exact(x, t_point), 'x--', label=f'Exact, t={t_point:.1f}')
+
+plt.xlabel('x')
+plt.ylabel('u(t, x)')
+plt.title('Heat Equation Numerical vs. Exact Solution')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+Now, assume that more detail is added to this problem where
+$k$ refers to the thermal conductivity of the material, and this example
+will assume that the thermal conductivity of a Copper - Aluminum Bronze (95% Cu, 5% Al)
+alloy which is $83$ Watts per meter-Kelvin[^4]. And a temperature of 200 C that is localized to
+20 percent of the rod's surface, to make it easier to visualize the heat equation along
+a 1-D line. Additionally, one of the typical methods for solving this heat equation is using
+[fourier series](https://en.wikipedia.org/wiki/Heat_equation#Solving_the_heat_equation_using_Fourier_series),
+but this work will use a different method, which is the finite difference method which was discussed above in
+the code.
+
+```{figure} ../../Figs/Chapter_Lab/heat_diffusion.gif
+:label: fig:hd_gif
+
+This is a visualization of the heat equation has been modified to meet the 
+requirements above.
+```
+
+:::{admonition} Code for the visualization above (Heat Diffusion)
+:class: tip dropdown
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.sparse import spdiags
+from scipy.sparse.linalg import spsolve
+import ipywidgets as widgets
+from IPython.display import display
+
+def solve_heat_equation(L=1, T=200.0, Nx=100, Nt=5000, center_temp=200):
+    """
+    Solves the 1D heat equation with a central point heat source as the initial condition.
+    """
+    x = np.linspace(0, L, Nx + 1)
+    t = np.linspace(0, T, Nt + 1)
+    dx = x[1] - x[0]
+    dt = t[1] - t[0]
+
+    # Thermal properties for Copper-Aluminum Bronze (95% Cu, 5% Al)
+    k = 83      # Thermal conductivity in W/mK
+    rho = 7450  # Density in kg/m^3
+    cp = 419    # Specific heat capacity in J/kgK
+    alpha = k / (rho * cp)
+
+    F = alpha * dt / dx**2
+
+    u = np.zeros((Nx + 1, Nt + 1))
+
+    # The rod starts at 0°C
+    u[:, 0] = 0.0
+    
+    # Heat a small region in the center of the rod to simulate a point source
+    center_index = Nx // 2
+    # Heat a region approximately 2% of the rod's length
+    heat_width = max(1, int(Nx * 0.02)) 
+    start_index = center_index - heat_width // 2
+    end_index = center_index + heat_width // 2
+    u[start_index:end_index + 1, 0] = center_temp
+
+    # Boundary conditions remain 0
+    u[0, :] = 0
+    u[Nx, :] = 0
+
+    # Create the diagonals for the sparse matrix A
+    main_diag = (1 + 2 * F) * np.ones(Nx - 1)
+    off_diag = -F * np.ones(Nx - 1)
+    A = spdiags([off_diag, main_diag, off_diag], [-1, 0, 1], Nx - 1, Nx - 1).tocsc()
+
+    # Solve the system of equations at each time step
+    for n in range(Nt):
+        b = u[1:Nx, n]
+        u[1:Nx, n + 1] = spsolve(A, b)
+
+    return x, t, u
+
+def plot_heat_distribution(t_val, center_temp):
+    """
+    Plots the temperature distribution at a specific time.
+    """
+    L = 1
+    T = 200.0   # Maximum time for the simulation
+    Nx = 100
+    Nt = 5000   # Number of time steps
+
+    x, t, u = solve_heat_equation(L, T, Nx, Nt, center_temp)
+    
+    # Find the index in the time array corresponding to the slider's value
+    t_index = np.argmin(np.abs(t - t_val))
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, u[:, t_index])
+    plt.title(f'Temperature Distribution at t = {t[t_index]:.2f} s')
+    plt.xlabel('Position along the rod (m)')
+    plt.ylabel('Temperature (°C)')
+    plt.ylim(-5, center_temp + 10)
+    plt.grid(True)
+    plt.show()
+
+# Create interactive widgets
+time_slider = widgets.FloatSlider(
+    value=0.1,
+    min=0.0,
+    max=200.0,
+    step=0.1,
+    description='Time (s):',
+    continuous_update=False,
+    readout_format='.1f',
+)
+
+temp_slider = widgets.FloatSlider(
+    value=200,
+    min=50,
+    max=500,
+    step=10,
+    description='Center Temp (°C):', 
+    continuous_update=False,
+)
+
+# Link the plotting function to the widgets
+widgets.interactive(plot_heat_distribution, t_val=time_slider, center_temp=temp_slider)
+```
 
 :::
 
-:::{tab-item} Example 2: Brownian motion
+### Example 2: Brownian motion
+
+Brownian Motion, the ghost of the past.
 
 ```{figure} #fig:MCvis_Brownian
 :label: fig:brownian_motion
@@ -374,10 +601,6 @@ PDEs ...
 This is an visualization of a Monte Carlo Method Instance (n = 100) on for Brownian Motion 
 using the aleatory Python package for simulation and visualization. 
 ```
-
-:::
-
-::::
 
 ## SDEs for Modelling and Simulation
 
@@ -399,7 +622,8 @@ using the aleatory Python package for simulation and visualization.
 :::
 
 :::{tab-item} Example 2: Cholera Epidemiology
-https://onlinelibrary.wiley.com/doi/10.1155/2023/7232395 (Source)
+In this study {cite}`iddrisu2023modeling`, they discussed a SDE modification of the componentized SI-B
+model, and this example will extract from that work and show an implementation of it.
 :::
 
 ::::
@@ -432,5 +656,20 @@ https://royalsocietypublishing.org/doi/10.1098/rsif.2022.0176 (Source)
 
 [^1]: The process of finding the rate constant is typically done through calculating the
 [reaction order](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Kinetics/03%3A_Rate_Laws/3.03%3A_The_Rate_Law/3.3.03%3A_Reaction_Order), then using data about
-previous reactions to calculate the values for the [rate equation](https://chem.libretexts.org/Bookshelves/General_Chemistry/Chemistry_1e_(OpenSTAX)/12%3A_Kinetics/12.04%3A_Rate_Laws) and then solving. This work is not a work on chemistry, so these
+previous reactions to calculate the values for the [rate equation](https://chem.libretexts.org/Bookshelves/General_Chemistry/Chemistry_1e_(OpenSTAX)/12%3A_Kinetics/12.04%3A_Rate_Laws) and then solving. This work is not a work on dynamics in chemical engineering, so these
 concepts will not be covered in detail.
+
+[^2]: This is controversial, but in a general sense,
+ODEs are a single independent variable and function species of a PDE.
+This leads to other differences between PDEs and ODEs such as geometry
+and the fact that uniqueness and existence theorems matter for solution methods
+unlike an ODE.
+
+[^3]: There are three general types of PDE: Elliptic (Steady-State such as Laplace's Equation),
+Parabolic (time-dependent and dynamic), and Hyperbolic (wave-like with well-defined IVPs). Read
+{ref}`sec:differential_equations` for more details, or if you want an extensive book on the topic,
+{cite}`bers1964partial`.
+
+[^4]: In customary units, this is 48 BTU/(h⋅ft⋅°F), if the reader is using customary
+units for engineering, at least one of the authors would recommend reconsidering that
+choice.

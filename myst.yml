@@ -128,6 +128,8 @@ site:
   options:
   #   favicon: favicon.ico
   #   logo: site_logo.png
+    # launch_buttons:
+    #   thebe                  : true
 
   # To export the file as a Springer-Style PDF
   # exports:
