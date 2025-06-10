@@ -270,51 +270,45 @@ courses on probability. Here $A$ and $B$ denotes events.
 -  The event that both events $A$ and $B$ occurs is $A \cap B$, the
   intersection of $A$ and $B$.
 
--  The event that $A$ does not occur is $A^c$, the complement of $A$.
+- The event that $A$ does not occur is $A^c$, the complement of $A$.
 
--  The event $\Omega$ is called the __certain event__.
+- The event $\Omega$ is called the __certain event__.
 
--  The event $\varnothing$ is called the __impossible event__.
+- The event $\varnothing$ is called the __impossible event__.
 
-- Events $A$ and $B$ are __disjoint__ if $A\cap B = \varnothing$. For
-  example, the two events $A= \{(H,H),(T,H)\}$ and $B=\{(H,H),(H,T)\}$
-  in the coin-tossing example are __not disjoint__: $A \cap B =
-  \{(H,H)\}$.
+- Events $A$ and $B$ are __disjoint__ if $A\cap B = \varnothing$.
 
--  Events $A$ and $B$ are __independent__ if $\Pr(A \cap B) = \Pr(A)
-  \times \Pr(B)$;
-
-- For all events $A$ and $B$ we have
-
-```{math}
-:label: eq:prob_union
-\begin{equation}
-\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \;.
-\end{equation}
-```
-
-The generalization of {ref}`eq:prob_union` follows from the principle of __exclusion-inclusion__. {cite}`something` or see execise {ref}`something`.
-
-:::{prf:definition} Conditional probability
+:::{prf:definition} Independence and conditional probability
 :label: def:cond_prob
 
-For events $A$ and $B$, the
-conditional probability of $A$ given $B$ is defined by
+Let $A, B \in\mathcal{F}$ be events. Then $A$ and $B$ are __independent__ if
+
+\begin{equation}
+\Pr(A \cap B) = \Pr(A) \times \Pr(B)\;.
+\end{equation}
+
+Also, the conditional probability of $A$ given $B$ is defined by
+
 ```{math}
 :label: eq:conditional
 \begin{equation}
-\Pr(A|B) = \frac{\Pr(A\cap B}{\Pr(B)}\;, \quad \text{ if $\Pr(B) > 0$}\;,
+\Pr(A|B) = \frac{\Pr(A\cap B)}{\Pr(B)}\;, \quad \text{ if $\Pr(B) > 0$}\;,
 \end{equation}
 ```
+
 and is undefined if $\Pr(B) = 0$.
+
 :::
 
-One may rewrite the expression {eq}`eq:conditional` as
-```{raw} latex
-\begin{equation*}
-\Pr(A\cap B) = \Pr(A|B)\Pr(B) \;.
-\end{equation*}
-```
+:::{prf:example} Coin-tossing (continued)
+:label: ex:coin-tossing-3
+
+The two events $A= \{(H,H),(T,H)\}$ and
+$B=\{(H,H),(H,T)\}$ in the coin-tossing example are __not
+  disjoint__: $A \cap B = \{(H,H)\}$.
+
+:::
+
 
 
 Note that if $A$ and $B$ are independent (see definition above), then
@@ -328,20 +322,23 @@ In other words, knowing that the event $B$ has occurred does not
 impact the probability of the event $A$ from occurring.
 
 
-__Law of total probability:__ Let $A_1$, $A_2$, $\ldots$, $A_n$
-be events (yes, elements of $\mathcal{F}$) such that the following two
-conditions are met: (1) $A_i$ and $A_j$ are disjoint when $i\ne j$,
-and (2) $\Omega = A_1 \cup A_2 \cup \cdots \cup A_n$. Then for any
-event $B$ we have:
+````{prf:theorem} Law of total probability
+
+Let $A_1$, $A_2$, $\ldots$, $A_n$ be events such that the $A_i \cap
+A_j = \varnothing$ for $i\ne j$, and $\Omega = A_1 \cup A_2 \cup
+\cdots \cup A_n$. Then for any event $B$ we have
+
 ```{math}
 :label: eq:total_prob
 \begin{equation}
-  \Pr(B) = \sum_{i=1}^n \Pr(B \cap A_i) = \sum_{i=1}^n \Pr(B | A_i)\Pr(A_i)
+  \Pr(B) = \sum_{i=1}^n \Pr(B \cap A_i) = \sum_{i=1}^n \Pr(B | A_i)\Pr(A_i) \;,
 \end{equation}
 ```
-Note that the last equality follows from the definition of conditional
+
+where the last equality follows from the definition of conditional
 probability.
 
+````
 
 :::{prf:example} {cite}`Taylor:84`
 :label: ex:urns
@@ -358,7 +355,8 @@ labeled I, II and III containing silver and gold coins as in {ref}`tab:urns`.
 |II  |              3 |               9 |
 |III |              6 |               6 |
 ```
-Question: a coin is selected by first picking an urn, all urns being
+
+__Question:__ a coin is selected by first picking an urn, all urns being
 equally likely, and then by picking one coin from the resulting urn at
 random. What is the probability of the event $G$ of picking a gold
 coin?
@@ -378,29 +376,29 @@ and $A_3$ for urn III. We then have (by the law of total probability):
 \end{align*}
 :::
 
-:::{prf:example} Monty Hall continued - for the last time
+:::{prf:example} Monty Hall, continued
 
 To illustrate the law of total probability, let $A_1$ denote (as
-before) the event that the prize is behind door~1. Then~$A_1^c =
-\{A_2, A_3\}$. The two conditions in the law of total probability are
-satisfied since (1) $A_1 \cap A_1^c = \varnothing$, and (2) $\Omega =
-A_1 \cup A_1^c$. (These two equalities are always true, of course.)
+before) the event that the prize is behind door 1. Then $A_1^c =
+\{A_2, A_3\}$, and we can use $A_1$ and $A_1^c$ with the law of total
+probability (this is always valid, of course).
 
 Having picked door~1, we now want to compute the probability of
-winning by switching, denoted by $\Pr(win-s)$, using the law of total
+winning by switching, denoted by $\Pr(\text{win-s})$, using the law of total
 probability. This gives
 
 \begin{align*}
   \Pr(win-s)
-  &= \Pr(win-s \cap A_1) + \Pr(win-s\cap A_1^c) \\
-  &= \Pr(win-s|A_1)\Pr(A_1) + \Pr(win-s|A_1^c)\Pr(A_1^c)\\
+  &= \Pr(\text{win-s} \cap A_1) + \Pr(\text{win-s}\cap A_1^c) \\
+  &= \Pr(\text{win-s}|A_1)\Pr(A_1) + \Pr(\text{win-s}|A_1^c)\Pr(A_1^c)\\
   &= 0 \cdot 1/3 + 1 \cdot 2/3 = 2/3 \;.
 \end{align*}
 
 
-The last equality follows since $\Pr(win-s|A_1)$, the probability of
-winning by switching, having chosen door~1, and given that the event
-$A_1$ occurred (the prize is behind door~1), is 0.  $\Box$
+The last equality follows since $\Pr(\text{win-s}|A_1)$, the probability of
+winning by switching, having chosen door 1, and given that the event
+$A_1$ occurred (the prize is behind door 1), is 0.  $\Box$
+
 :::
 
 :::{prf:example} {cite}`Ross:24`
@@ -428,27 +426,65 @@ second card, 39 of which of suit that differs from the first
 card. Therefore $\Pr(B) = 39/51$, and we conclude that $\Pr(A |B) =
 \Pr(A \cap B)/\Pr(B) = (3/51)\Bigl/(39/51) = 3/39 = 1/13$.
 
-__Bonus question:__ are the events $A$ and $B$ independent? Why
-or why not?
+Question:__ are the events $A$ and $B$ independent? Why or why not?
+
 :::
 
 
+```{note} Maybe turn this into a theorem and add inclusion-exclusion
+```
+
+- For all events $A$ and $B$ we have
+
+```{math}
+:label: eq:prob_union
+\begin{equation}
+\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B) \;.
+\end{equation}
+```
+
+The generalization of {ref}`eq:prob_union` follows from the principle of __exclusion-inclusion__. {cite}`something` or see execise {ref}`something`.
+
+
+```{prf:theorem} Bayes' rule
+
+Let $A_1$, $A_2$, $\ldots$, $A_n$ be disjoint events with $\Omega =
+A_1 \cup A_2 \cup \cdots \cup A_n$ and $\Pr(A_i)>0$ for all $i$. Then
+for any event $B$ with $\Pr(B) > 0$ we have
+
+\begin{align}
+\Pr(A_i|B) &= \frac{\Pr(A\cap B)}{\Pr(B)} = \frac{\Pr(B|A_i)\Pr(A_i)}{\Pr(B)} \\
+  &= \frac{\Pr(B|A_i)\Pr(A_i)}{\Pr(B \cap A_1) + \cdots + \Pr(B \cap A_n)}\\
+  &= \frac{\Pr(B|A_i)\Pr(A_i)}{\Pr(B|A_1)\Pr(A_1) + \cdots + \Pr(B |A_n)\Pr( A_n)} \;.
+\end{align}
+
+<!--
+One may rewrite the expression {eq}`eq:conditional` as
+```{raw} latex
+\begin{equation*}
+\Pr(A\cap B) = \Pr(A|B)\Pr(B) \;.
+\end{equation*}
+``` -->
+
+
+
+
+
 (sec:prob_random_variables)=
-## Random variables ##
+# Random variables #
 
 Random variables are often introduced introductory probability courses
-and in introductory statistics courses. Chapter 4 of {cite}`Law:13`
-provides a fast-paced overview of the topic. These notes are based on
-that book, but also on {cite}`Taylor:84`. Note that Law uses $S$ to
-denote the sample space. We will stick with~$\Omega$.
+and in introductory statistics courses. You will find a brief version
+of this in Chapter 4 of {cite}`Law:13` provides a fast-paced overview
+of the topic. These notes are based on several sources, including that
+book, but also on {cite}`Taylor:84,Law:13` and the Wikipedia. We cover
+the following topics:
 
-**Overview:** this section covers the following topics in quick
-succession. Note that we sometimes abbreviate random variable as ``r.v.''.
--  Random variable
--  The distribution function of a random variable
+-  Random variables
+-  The distribution function of a real-valued random variable
 -  Discrete random variables and continuous random variables
 -  Probability mass function and probability density function
--  Mean (aka expected value, aka expectation) of a random variable
+-  Expected value (or expectation) of a random variable
 -  Variance and standard deviation of a random variable
 -  Joint distribution functions
 -  Independence of random variables
@@ -458,22 +494,35 @@ succession. Note that we sometimes abbreviate random variable as ``r.v.''.
 :::{prf:definition} Random variable
 :label: def:random_variable
 
-Let $\Omega$ be a sample space of an
-experiment with a family of events~$\mathcal{F}$. A random variable $X$ on
-$\Omega$ is a function:\footnote{\extra subject to certain conditions
-that you will find described in the extra reading on page ???}
-```{raw} latex
+Let $\Omega$ be a sample space of an experiment with a family of
+events $\mathcal{F}$. A random variable $X$ on $\Omega$ is a
+real-valued function
+
+
 \begin{equation*}
   X \colon \Omega \longrightarrow \mathbb{R}
 \end{equation*}
-```
+
+
+for which  $\{\omega | X(\omega) < x\} \in \mathcal{F}$ for all $x\in \mathbb{R}$.
 
 :::
+
+```{note}
+
+The last condition in {ref}`def:random_variable` is a sufficient
+condition for $X$ to be _measurable_. Practically, we need to be able
+to assign probabilities to $X$ and this way is a natural way to work
+this out. We will not need this here, but we note that there are more
+general types of random variables than the real-values ones.
+
+```
+
 It is customary to use uppercase letter to denote random variables such
 as $X$, $Y$, and $Z$. The random variable $X$ thus assigns to each
 sample point $\omega \in \Omega$ a value $X(\omega)$.
 
-:::{prf:example} 4.3 (Law) - expanded:
+:::{prf:example} 4.3 {cite}`Law:13` - expanded
 
 In this experiment we roll a
 pair of normal dice. The sample space in this case is
@@ -488,21 +537,32 @@ Here $(a,b) \in \Omega$ encodes that $a$ appeared on the first die and
 $b$ on the second. We define $X \colon \Omega \longrightarrow
 \mathbb{R}$ to be the sum of the dice, that is $X\bigl((a,b)\bigr) =
 a+b$.
-:::
 
 We may also define the random variable $Y \colon \Omega
-\longrightarrow \mathbb{R}$ by $Y\bigl((a,b)\bigr) = 1$ if $a=b$ and
-$0$ otherwise. A zero-one random variable like this is often called an
-__indicator random variable}. (You may remember this from the
-first lecture on Buffon's needle.)
+\longrightarrow \mathbb{R}$ by
+
+\begin{equation*}
+Y\bigl((a,b)\bigr)
+= \begin{cases}
+1,& \text{if $a=b$, and}\\
+0,& \text{otherwise.}
+\end{cases}
+\end{equation*}
+
+A random variable like $Y$ that may only assume the values zero and
+one is often called an __indicator random variable__, see
+also {ref}`sec:buffons_needle` and $\mathbb{I}(X,Θ)$.
+
+:::
 
 
-**Example (the coin-toss experiment): \cite{Taylor:84}** For the
-coin toss experiment, we define three random variable. We let $X_n$ be
-1 if the nickel was $H$ and 0 otherwise; we let $X_d$ be 1 if the dime
-was $H$ and 0 otherwise; and we let $Z$ be the total number of heads,
-which we may write as $Z = X_n + X_d$. The values of the random
-variables are specified in {ref}`tab:rv_cointoss`.
+:::{prf:example} The coin-tossing experiment {cite}`Taylor:84` (continued)
+
+For the coin tossing experiment, we define three random variable. We let
+$X_n$ be 1 if the nickel was $H$ and 0 otherwise; we let $X_d$ be 1 if
+the dime was $H$ and 0 otherwise; and we let $Z$ be the total number
+of heads which we may write as $Z = X_n + X_d$. The values of the
+random variables are specified in {ref}`tab:rv_cointoss`.
 
 ```{raw} latex
 :label: tab:rv_cointoss
@@ -522,18 +582,27 @@ variables are specified in {ref}`tab:rv_cointoss`.
 \end{table}
 ```
 
+:::
 
-\textbf{Distribution function:} The distribution function (or
-cumulative distribution function, or cdf for short) of a random
-variable $X$ over a sample space $\Omega$ is the function $F \colon
-\mathbb{R} \longrightarrow [0,1]$ defined by
+:::{prf:definition} Distribution function
+
+The distribution function (or cumulative distribution function, or CDF (or cdf)
+for short) of a random variable $X$ over a sample space $\Omega$ is
+the function $F \colon \mathbb{R} \longrightarrow [0,1]$ defined by
+
 \begin{equation*}
  F(x) = \Pr(X \le x) \;.
 \end{equation*}
-With more than one random variable, we may write $F_X$, $F_Y$, and so
-on.
 
-## Discrete and continuous random variables: ##
+With more than one random variable, we may write $F_X$, $F_Y$, and so
+on to disambiguate.
+
+:::
+
+See {ref}`sec:rv_extra` where we discuss measurability.
+
+
+## Discrete and continuous random variables ##
 
 A random variable is a _discrete random variable_ if there is a
 finite or denumerable set of distinct values $x_1$, $x_2$, $\ldots$ such that
@@ -543,22 +612,30 @@ finite or denumerable set of distinct values $x_1$, $x_2$, $\ldots$ such that
 The function $p$ defined by $p(x_i) = a_i$ for $i=1,2,\ldots$ is the
 _probability mass function for $X$_. The distribution function
 for $X$ is given by
+
 ```{raw} latex
 \begin{equation*}
  F(x) = \sum_{x_i \le x} p(x_i) \;.
 \end{equation*}
 ```
 
-**Example: (Law 4.5)** Here $X$ is the discrete random variable
-given by $x_1 = 1$, $x_2 = 2$, $x_3=3$, $x_4 = 4$ and $p(x_1) = 1/6$,
-$p(x_2) = 1/3$, $p(x_3) = 1/3$ and $p(x_4) = 1/6$. \textbf{For the
-  reader:} draw the graph of (a) the probability mass function and (b) the
-distribution function of $X$.
+:::{prf:example} (Law 4.5)
 
+Here $X$ is the discrete random variable given by $x_1 = 1$, $x_2 =
+2$, $x_3=3$, $x_4 = 4$ and $p(x_1) = 1/6$, $p(x_2) = 1/3$, $p(x_3) =
+1/3$ and $p(x_4) = 1/6$. __For the reader:___ draw the graph of
+(a) the probability mass function and (b) the distribution function of
+$X$.
+
+:::
+
+```{note} slightly simplistic
+```
 
 A random variable $X$ for which $\Pr(\{X = x\}) = 0$ for all $x$ is
 called a _continuous random variable_. If there is a non-negative
 function $f(x) = f_X(x)$ defined on $\mathbb{R}$ such that
+
 ```{raw} latex
 \begin{equation*}
 \Pr( \{a < X \le b\} ) = \int_a^b f(x)dx \quad{\text{for}}\quad -\infty < a < b <\infty\,
@@ -635,6 +712,12 @@ $\sigma_X^2$. The variance of $X$ measures deviation from the mean
 $\mu_X$.
 
 The _standard deviation_ of $X$ is $\sigma_X = \sqrt{\operatorname{Var}[X]}$.
+
+
+```{note}
+skewness and kurtosis
+```
+
 
 
 The _median_ of a random variable is any value $\nu$ that satisfies
@@ -830,13 +913,14 @@ will need this result when we conduct output analysis of simulations.
 
 
 
-
+(sec:stochastic_process)=
 # Stochastic Processes #
 
-You may have learned about stochastic processes in a stochastic modelling course
-(such as the University of Virginia's Stochastic Decision Models or Ross'
-Stochastic Processes Book)
-course. A brief overview is given here.
+<!--
+You may have learned about stochastic processes in a stochastic
+modelling course (such as the University of Virginia's Stochastic
+Decision Models or Ross' Stochastic Processes Book) course. A brief
+overview is given here.-->
 
 A stochastic process is a collection of random variables indexed by a
 set $T$ (the _index set_) defined over a common probability space
@@ -844,34 +928,41 @@ $(\Omega, \mathcal{F}, \Pr)$ where $\Omega$, $\mathcal{F}$ and $\Pr$
 are as before. We write $\{X(t) : t \in T\}$. Often, $T$ represents
 time, and $X(t)$ is a random variable representing a value observed at
 time $t$.
-
-
 When one wants to be very precise, one may write the stochastic
 process as $\{X(\omega, t) : t \in T\}$ to point out that it is a
-function of two variables, $t\in T$ and $\omega \in \Omega$.
+function of two variables, namely $t\in T$ and $\omega \in \Omega$.
 
-In this work, there will be two main cases. The easiest case is when the
+In this book, there are two main cases. The easiest case is when the
 random variables $X(t)$ are independent and identically
-distributed. This is the case for the example with Buffon's needle.
+distributed. This is the case for {ref}`sec:buffons_needle`.
 
-A second case happens in queuing systems where $X(t)$ could be the size
-of a queue at time $t$. In this case, the random variables $X(t)$ are
-generally not independent. For this class, one may consider
-_stationary stochastic processes_ where all the random variables
-$X(t)$ are identically distributed. Another class is that of
-_covariance stationary_ stochastic processes which we will likely
-return to when analyzing queuing systems.
+The second case arises in for example queuing systems
+({ref}`queueing`). Here $X(t)$ could be the length of a queue at time
+$t$. In this case, the random variables $X(t)$ are generally not
+independent nor are they identically distributed. For this class, one
+may restrict attention to _stationary stochastic processes_ where all
+the random variables $X(t)$ are identically distributed. Or one may
+consider the class of _covariance stationary_ stochastic processes.
 
-
-## Some less typical examples and advanced concepts ##
-
-This material in this section is optional and will not be included in
-homework or exams. It is meant for those who want to know some more
-of the details behind random variables.
+```{note}
+Tie up pieces here.
+```
 
 
-**Example (coin-tossing):** We return to the coin tossing
-example. Recall the table:
+(sec:rv_extra)=
+# Examples of slightly more advanced concepts #
+
+The examples given here illustrate three parts: (1) when the sample
+space is not a subset of $\mathbb{R}$, (2) an example of a
+$\sigma$-algebra, and (3) showing that a random variable is
+measurable. The latter is not that involved in the case where
+$|\Omega| < \infty$, but it outlines what is involved.
+
+
+:::{prf:example} Coin-tossing (continued)
+
+We return to the coin tossing example. Recall the table:
+
 ```{raw} latex
   \begin{tabular}{|l|l|l|l|}
     \hline
@@ -887,7 +978,7 @@ example. Recall the table:
     $\{(H,H),(T,T)\}$ & 1/2 & $\{(H,T),(T,H)\}$ & 1/2 \\
     \hline
   \end{tabular}
-  ```
+```
 
 We define three random variables $X_n$, $X_d$ and $Z = X_n + X_d$
 with values as specified in the following table:
@@ -904,18 +995,22 @@ with values as specified in the following table:
   \end{tabular}
 ```
 
+:::
+
 We want to find the distribution function for the random variable
 $X_n$. In other words, we want to specify $F_{X_n}(x) = \Pr(\{\omega |
-X_n(\omega) \le x \})$ for all $x$. There are three cases (you see this
-from the table above for the $X_n$ column).
+X_n(\omega) \le x \})$ for all $x$. There are three cases (you see
+this from the table above for the $X_n$ column).
 
-Case 1: $x < 0$. Here $\{\omega | X_n(\omega) < x\} = \varnothing$ and
-$F_{X_n}(\{\omega | X_n(\omega) \le x\}) = 0$.
+__Case 1:__ $x < 0$. Here $\{\omega | X_n(\omega) < x\} = \varnothing$
+and therefore $F_{X_n}(\{\omega | X_n(\omega) \le x\}) = 0$.
 
-Case 2: $0\le x < 1$. For this case, $\{\omega | X_n(\omega) < x\} = \{(T,H), (T,T) \}$ an event with probability $1/2$, which means that $F_{X_n} = 1/2$.
+__Case 2:__ $0\le x < 1$. For this case, $\{\omega | X_n(\omega) < x\}
+= \{(T,H), (T,T) \}$ an event with probability $1/2$, which means that
+$F_{X_n} = 1/2$.
 
-Case 3: $x\ge 1$. Here we see that $\{\omega | X_n(\omega) < x\} =
-\Omega$ and therefore $F_{X_n} = 1$.
+__Case 3:__ $x\ge 1$. Here we see that $\{\omega | X_n(\omega) < x\} =
+\Omega$ and therefore that $F_{X_n} = 1$.
 
 We summarize this step-function as follows:
 ```{raw} latex
@@ -928,20 +1023,23 @@ We summarize this step-function as follows:
   \end{cases}
 \end{equation*}
 ```
-You may want to plot this function and reflect on the fact that the
-elements of $\Omega$ do not appear on the $x$-axis.
 
-To construct the distribution function $F_Z$ you will find that there are four cases:
+You should plot the CDF $F_{X_n}$. You will note that the elements of
+$\Omega$ do not appear on the $x$-axis and you may want to reflect on
+this as it is not a fact illustrated much in introductory books and
+courses.
 
-Case 1: $x<0$. $\{\omega | Z(\omega) < x\} = \varnothing$
+To construct the CDF $F_Z$ you will find that there are the four cases
 
-Case 2: $0\le x < 1$. $\{\omega | Z(\omega) < x\} = \{(T,T)\}$
+__Case 1:__ $x<0$ and $\{\omega | Z(\omega) < x\} = \varnothing$
 
-Case 3: $1 \le x < 2$. $\{\omega | Z(\omega) < x\} = \{(T,T), (T,H), (H,T)\}$
+__Case 2:__ $0\le x < 1$ and $\{\omega | Z(\omega) < x\} = \{(T,T)\}$
 
-Case 4: $x \ge 2$. $\{\omega | Z(\omega) < x\} = \Omega$
+__Case 3:__ $1 \le x < 2$ and $\{\omega | Z(\omega) < x\} = \{(T,T), (T,H), (H,T)\}$
 
-This leads to
+__Case 4:__ $x \ge 2$ and $\{\omega | Z(\omega) < x\} = \Omega$
+
+which lead to
 
 ```{raw} latex
 \begin{equation*}
@@ -955,29 +1053,33 @@ This leads to
 \end{equation*}
 ```
 
-\textbf{(**)} The $\sigma$-algebra generated by $X_n$ is
+The $\sigma$-algebra generated by $X_n$ is
+
 ```{raw} latex
 \begin{equation*}
 \mathcal{F}{(X_n)} = \{\varnothing, \Omega, \{(T,H),(T,T)\}, \{(H,T),(H,H)\}  \}\;.
 \end{equation*}
 ```
-What does that mean exactly? It means the following:
-$\mathcal{F}(X_n)$ is the smallest collection of events $\mathcal{F}$
-that we can pick such that the sets $\{\omega | X_n(\omega) \le
-x\}$ are contained in $\mathcal{F}$ for all choices of $x$.
 
-If there would be such a set that is not contained in $\mathcal{F}$,
-with a matching value $x$, then the value of the distribution function
-$F$ at $x$ would be undefined. Things do not work out.
+What does that mean exactly? It means the following:
+$\mathcal{F}(X_n)$ is the smallest collection of events from
+$\mathcal{F}$ that we can pick such that the sets $\{\omega |
+X_n(\omega) \le x\}$ are contained in $\mathcal{F}$ for all choices of
+$x$ and for which the closure properties hold for unions and
+complement. Again, if there would be such a set that is not contained
+in $\mathcal{F}$, for some value of $x$, then the value of the
+distribution function $F_{X_n}$ at $x$ would be undefined. Things do
+not work out.
 
 Earlier in this example, we took $\mathcal{F}$ to be the power-set of
 $\Omega$, that is, the set of all subsets of $\Omega$. That will
-certainly work, but as we just saw in the case of $X_n$, this
-may be an overkill.
+certainly always work, but as we just saw in the case of $X_n$, one
+may not necessarily have to do it this way.
 
 
-The $\sigma$-algebra generated by $Z$ is the following
-$8$-element subset of $\mathcal{F}$:
+The $\sigma$-algebra generated by $Z$ is the following $8$-element
+subset of $\mathcal{F}$:
+
 ```{raw} latex
 \begin{align*}
   \mathcal{F}{(Z)} =
@@ -986,17 +1088,19 @@ $8$-element subset of $\mathcal{F}$:
 \end{align*}
 ```
 
+__Summary:__ Again, the crux in all the above is that to have a random
+variable $X$, the set $\{ \omega | X(\omega) \le x\}$ needs to be an
+element of $\mathcal{F}$ for all~$x$. For most introductory courses on
+random variables, the cases considered are ``nice'' and this property
+holds automatically. It seems useful to know that there is more to it
+than the nice cases.
 
-Again, the crux in all the above is that to have a random variable
-$X$, the set $\{ \omega | X(\omega) \le x\}$ needs to be an element of
-$\mathcal{F}$ for all~$x$. For most introductory courses on random
-variables, the cases considered are ``nice'' and this property holds
-automatically.
 
 
+**Example: (a biased coin)** Include this?? Gabe: I think that might
+  be good to include, particular if we reuse the coin idea when
+  talking about binomials as convolations.
 
-**Example: (a biased coin)** Include this?? Gabe: I think that might be good to include, particular if we reuse the coin idea when talking about binomials as convulations.
-
-**Example (Buffon's needle):** In the lecture we modeled the
-needle toss using the function. In this case, we have a product
-probability space of $U(0,d)$ and $U(-\pi/2,\pi/2)$.
+**Example (Buffon's needle):** In the lecture we modeled the needle
+toss using the function. In this case, we have a product probability
+space of $U(0,d)$ and $U(-\pi/2,\pi/2)$.
