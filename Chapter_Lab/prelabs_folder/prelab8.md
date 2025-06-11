@@ -395,7 +395,7 @@ into almost every Partial Differential Equation textbook and into many fields of
 ways: the Black–Scholes equation is an implementation of the heat equation, Fokker–Planck equation in
 Brownian motion, and back to physics through Schrödinger's equation. Here's a link to a
 dynamic visualization [link](https://visualpde.com/sim/?preset=heatEquation). It can also be
-considered as a Markov Chain. 
+considered as a Markov Chain.
 
 This text describes of the most common examples of the heat equation: the transportation of
 heat across a finite, one dimensional rod with homogeneous boundary conditions. The reader might
@@ -605,7 +605,33 @@ widgets.interactive(plot_heat_distribution, t_val=time_slider, center_temp=temp_
 
 ### Example 2: SIR
 
-The compartmental model for disease spread has existed for over a century
+:::{admonition} Note: ABM Version
+:class: warning dropdown
+
+There is a ABM version of this model (and much better ones) in
+{ref}`prelab-10`. As this model is mostly made to show an application
+of a PDE that has some practical use as a tool to explain human behavior.
+
+:::
+
+The compartmental model for disease spread has existed for over a century and SIR was the
+first and simplest model to exist, it is often expressed as three ODEs (often called the SIR
+model without birth and death) however, that assumes a impossibly homogeneous population leading to
+different models which some are discussed throughout this work such as SIRVD (introduces death
+and immunity through vaccination), SIRVB (post-vaccine infections added), and more advanced models
+using ABM (discussed in later pre-labs such as {ref}`prelab-10` and {ref}`sec:agent_based_models`)
+and Bayesian Models.
+
+This example concerns a subtype of Bayesian SIR known as a spatially coupled SIR model which is
+expressed as a PDE because of the multiple independent variables with their equations (diffusivity
+which is the ease of infection through a population, infection rate and recovery rate). The series
+of Differential Equations are the following:
+
+```{math}
+\partial_{t} s = D \nabla^{2} s - \beta is\\
+\partial_t i = D \nabla^{2} y + \beta is - \gamma i\\
+\partial_t r = D \nabla^{2} r + \gamma i\\
+```
 
 
 
@@ -635,7 +661,8 @@ on its own), simulate the movement of particles in suspension in fluids[^5], pre
 star movement in galaxies, and is often used to solve PDEs as a Stochastic Differential
 Equation.
 
-In this case, this work considers the PDE variant of Brownian Motion (non-weiner process)
+In this case, this work considers the SDE variant of Brownian Motion (
+Weiner)
 to solve the heat equation from Example 1. Moreover, this example will discuss some of the
 mathematics involved in using the concept of Brownian Motion to solve PDEs _backwards_, which
 is an important quality of Brownian motion.
