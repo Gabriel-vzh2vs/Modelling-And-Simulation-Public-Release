@@ -474,11 +474,9 @@ One may rewrite the expression {eq}`eq:conditional` as
 # Random variables #
 
 Random variables are often introduced introductory probability courses
-and in introductory statistics courses. You will find a brief version
-of this in Chapter 4 of {cite}`Law:13` provides a fast-paced overview
-of the topic. These notes are based on several sources, including that
-book, but also on {cite}`Taylor:84,Law:13` and the Wikipedia. We cover
-the following topics:
+and in introductory statistics courses. This section is based on
+{cite}`Taylor:84,Law:13` and articles from the Wikipedia. We cover the
+following topics:
 
 -  Random variables
 -  The distribution function of a real-valued random variable
@@ -495,14 +493,12 @@ the following topics:
 :label: def:random_variable
 
 Let $\Omega$ be a sample space of an experiment with a family of
-events $\mathcal{F}$. A random variable $X$ on $\Omega$ is a
-real-valued function
-
+events $\mathcal{F}$. A real-valued random variable $X$ on $\Omega$ is a
+function
 
 \begin{equation*}
   X \colon \Omega \longrightarrow \mathbb{R}
 \end{equation*}
-
 
 for which  $\{\omega | X(\omega) < x\} \in \mathcal{F}$ for all $x\in \mathbb{R}$.
 
@@ -513,8 +509,8 @@ for which  $\{\omega | X(\omega) < x\} \in \mathcal{F}$ for all $x\in \mathbb{R}
 The last condition in {ref}`def:random_variable` is a sufficient
 condition for $X$ to be _measurable_. Practically, we need to be able
 to assign probabilities to $X$ and this way is a natural way to work
-this out. We will not need this here, but we note that there are more
-general types of random variables than the real-values ones.
+this out. We note that there are more general types of random
+variables than the real-values ones, but we will not need this here.
 
 ```
 
@@ -529,16 +525,16 @@ pair of normal dice. The sample space in this case is
 
 ```{raw} latex
 \begin{equation*}
-\Omega = \{(1,1), (1,2), \ldots, (1,6), (2,1), \ldots, (6,6)\} \;.
+\Omega = \{(1,1), (1,2), \ldots, (1,6), \ldots, (6,1), (6,2), \ldots, (6,6)\} \;.
 \end{equation*}
 ```
 
-Here $(a,b) \in \Omega$ encodes that $a$ appeared on the first die and
+Here $(a,b) \in \Omega$ encodes the outcome where $a$ appears on the first die and
 $b$ on the second. We define $X \colon \Omega \longrightarrow
 \mathbb{R}$ to be the sum of the dice, that is $X\bigl((a,b)\bigr) =
 a+b$.
 
-We may also define the random variable $Y \colon \Omega
+We define a second random variable $Y \colon \Omega
 \longrightarrow \mathbb{R}$ by
 
 \begin{equation*}
@@ -550,8 +546,8 @@ Y\bigl((a,b)\bigr)
 \end{equation*}
 
 A random variable like $Y$ that may only assume the values zero and
-one is often called an __indicator random variable__, see
-also {ref}`sec:buffons_needle` and $\mathbb{I}(X,Θ)$.
+one is called an __indicator random variable__, see also
+{ref}`sec:buffons_needle` and the quantity $\mathbb{I}(X,Θ)$.
 
 :::
 
@@ -584,34 +580,36 @@ random variables are specified in {ref}`tab:rv_cointoss`.
 
 :::
 
+
+
+
 :::{prf:definition} Distribution function
 
-The distribution function (or cumulative distribution function, or CDF (or cdf)
-for short) of a random variable $X$ over a sample space $\Omega$ is
-the function $F \colon \mathbb{R} \longrightarrow [0,1]$ defined by
+The distribution function (or cumulative distribution function, or CDF
+(or cdf) for short) of a real-valued random variable $X$ over a sample
+space $\Omega$ is the function $F \colon \mathbb{R} \longrightarrow
+[0,1]$ defined by
 
 \begin{equation*}
  F(x) = \Pr(X \le x) \;.
 \end{equation*}
 
-With more than one random variable, we may write $F_X$, $F_Y$, and so
+If there is more than one random variable we may write $F_X$, $F_Y$, and so
 on to disambiguate.
 
 :::
 
-See {ref}`sec:rv_extra` where we discuss measurability.
+See {ref}`sec:rv_extra` where we discuss aspects of measurability.
 
 
 ## Discrete and continuous random variables ##
 
-A random variable is a _discrete random variable_ if there is a
-finite or denumerable set of distinct values $x_1$, $x_2$, $\ldots$ such that
-\begin{equation*}
-  a_i = \Pr( X = x_i ) > 0 \quad \text{for $i=1,2,\ldots$ and}\quad \sum_i a_1 = 1 \;.
-\end{equation*}
-The function $p$ defined by $p(x_i) = a_i$ for $i=1,2,\ldots$ is the
-_probability mass function for $X$_. The distribution function
-for $X$ is given by
+A random variable $X$ is __discrete__ if the set $X(\Omega)$ is finite
+or countably infinite. Assume $X$ is a discrete random variable, let
+$X(\Omega) = \{x_1, x_2, \ldots\}$, and set $a_i = \Pr(\{X = x_i\}) =
+\Pr(\{\omega \in \Omega | X(w) = x_i\}$. By neccessity, $\sum_i a_i =
+1$. The __probability mass function for $X$__ for $X$ is defined by
+$p(x_i) = a_i$, and the distribution function for $X$ is given by
 
 ```{raw} latex
 \begin{equation*}
@@ -619,17 +617,17 @@ for $X$ is given by
 \end{equation*}
 ```
 
-:::{prf:example} (Law 4.5)
+:::{prf:example}
 
-Here $X$ is the discrete random variable given by $x_1 = 1$, $x_2 =
-2$, $x_3=3$, $x_4 = 4$ and $p(x_1) = 1/6$, $p(x_2) = 1/3$, $p(x_3) =
-1/3$ and $p(x_4) = 1/6$. __For the reader:___ draw the graph of
-(a) the probability mass function and (b) the distribution function of
-$X$.
+Let $X$ be the discrete random variable given by $X(\Omega) = \{x_1 =
+1, x_2 = 2, x_3=3, x_4 = 4\}$ and $p_X(x_1) = 1/6$, $p_X(x_2) = 1/3$,
+$p_X(x_3) = 1/3$ and $p_X(x_4) = 1/6$. __For the reader:__ draw the
+graph of (a) the probability mass function and (b) the distribution
+function of $X$.
 
 :::
 
-```{note} slightly simplistic
+```{note} This is slightly simplistic
 ```
 
 A random variable $X$ for which $\Pr(\{X = x\}) = 0$ for all $x$ is
@@ -656,8 +654,12 @@ Finally, if $F(x)$ is differentiable, then
 \end{equation*}
 ```
 
-**Example: (\cite[2.13]{Ross:24}** - a general version of Law
-  4.7)} The uniform random variable on the interval $(a,b) \subset
+If there is more than one random variable, we may write $f_X$, $f_Y$
+and so on to disambiguate.
+
+
+````{prf:example}
+The uniform random variable on the interval $(a,b) \subset
 \mathbb{R}$ has probability density function given by
 ```{raw} latex
 \begin{equation*}
@@ -680,15 +682,16 @@ We will construct the function $F(x)$. There are three cases:
   F(x) = \int_{-\infty}^x f(\xi) d\xi = \int_{a}^x \frac{1}{b-a} d\xi = \frac{1}{b-a}[\xi]_{a}^x = \frac{x-a}{b-a} \;.
 \end{equation*}
 ```
-**For the reader:** (a) draw $f(x)$ and $F(x)$. See also Law
+**For the reader:** (a) draw $f(x)$ and $F(x)$. See also {cite}`Law:13`
 Table 6.3. Chapter 6 of Law contains a wealth of distributions for
 common random variables.
+````
 
 
 
+## Expectation and Variance of a Random Variable ##
 
-**Expectation and Variance of a Random Variable:**
-The expectation of a random variable $X$, which is written $E(X)$ or $\mu_X$, is given by
+The expectation of a random variable $X$, written $E(X)$ or $\mu_X$, is given by
 \begin{equation*}
   \mu_X = E[X] =
   \begin{cases}
@@ -713,41 +716,33 @@ $\mu_X$.
 
 The _standard deviation_ of $X$ is $\sigma_X = \sqrt{\operatorname{Var}[X]}$.
 
-
-```{note}
-skewness and kurtosis
-```
-
-
-
-The _median_ of a random variable is any value $\nu$ that satisfies
+The __median__ of a random variable is any value $\nu$ that satisfies
 ```{raw} latex
 \begin{equation*}
  \Pr(\{X \ge \nu\} \ge 1/2\quad \text{and} \quad  \Pr(\{X \le \nu\} \ge 1/2 \;.
 \end{equation*}
 ```
 
-If $g$ is a function and $X$ is a random variable, then $Y = g(X)$ is a random variable and the expectation of $Y$ is $E[g(X)]$, which, in the case of $X$ discrete, becomes
-```{raw} latex
-\begin{equation*}
- E[g(X)] = \sum\limits_i g(x_i) p_X(x_i) \;.
-\end{equation*}
-```
-\extra Can you find an example of a random variable $X$ that is
-continuous and a function $g$ such that $Y=g(X)$ is discrete?
-
 
 We also incorporate some other quantities that we may encounter in the course:
-  -  The $m$\th moment of a random variable $X$ is $E(X^m)$, provided this quantity converges.
-  -  Skewness is defined as $E\Bigl[
+
+  - The $m^{\text{th}}$ moment of a random variable $X$ is $E(X^m)$,
+    provided this quantity converges.
+
+  - Skewness is defined as $E\Bigl[
     \Bigl(\frac{X-\mu}{\sigma}\Bigr)^3\Bigr]$. Skewness measures
     asymmetry of $X$ about its mean $\mu$.
+
+  - Kurtosis {term}`kurtosis` ```{note} TBDone```
+
 The Excel plugin XLRisk will report estimates for some of
 these quantities when you apply the Monte Carlo method.
 
 
+````{prf:example} $U(a,b)$ (continued)
 
-**Example: $X$ is $U(a,b)$ (continued):** For this continuous distribution we have
+For this continuous distribution we have
+
 ```{raw} latex
 \begin{equation*}
   E(X) = \int\limits_{-\infty}^{\infty} x f(x) dx
@@ -768,18 +763,39 @@ and variance given by
   &= \frac{(b-a)^2}{12}\;.
 \end{align*}
 ```
-Again, see Law Table 6.3.
+````
 
 
-**Joint distribution functions:** Let $X$ and $Y$ be random
-variables. Their _joint distribution function_ is the function
-$F_{XY}$ of two variables defined by
+## Functions of random variables ##
+
+If $g$ is a function and $X$ is a random variable, then $Y = g(X)$ is
+a random variable whose expectation is $E[g(X)]$. In the discrete case this becomes
+
 ```{raw} latex
+\begin{equation*}
+ E[g(X)] = \sum\limits_i g(x_i) p_X(x_i) \;.
+\end{equation*}
+```
+
+__Question:__ Provide an example of a random variable $X$ that is
+continuous and a function $g$ such that $Y=g(X)$ is discrete.
+
+
+
+
+## Joint distribution functions ##
+
+Let $X$ and $Y$ be random variables. Their __joint distribution
+function__ is the function $F_{XY}$ of two variables defined by
+
+```{math}
+:label: eq:joint2
+
 \begin{equation}
-  \label{eq:joint2}
   F_{XY}(x,y) = \Pr( X \le x \text{ and } Y \le y)\;.
 \end{equation}
 ```
+
 If there is a function $f_{XY}$ of two real variable such that
 ```{raw} latex
 \begin{equation*}
@@ -787,18 +803,19 @@ If there is a function $f_{XY}$ of two real variable such that
   \quad\text{for all $x$, $y$}\;,
 \end{equation*}
 ```
-then we call $f_{XY}$ a _joint probability density function_.
+then we call $f_{XY}$ a __joint probability density function__. We call
 
-We call
 ```{raw} latex
 \begin{equation*}
   F_X(x) = \lim_{y\to\infty} F(x,y)  \quad{\text{and}}\quad
   F_Y(y) = \lim_{x\to\infty} F(x,y)
 \end{equation*}
 ```
-the _marginal distribution function_ of $X$ and $Y$,
-respectively. If $F$ has a joint density function~$f$, then the
+
+the __marginal distribution function__ of $X$ and $Y$,
+respectively. If $F$ has a joint density function $f$, then the
 marginal density functions for $X$ and $Y$ are
+
 ```{raw} latex
 \begin{equation*}
   f_X(x) = \int\limits_{-\infty}^{\infty} f(x,y) dy
@@ -808,25 +825,23 @@ marginal density functions for $X$ and $Y$ are
 ```
 
 
-
 We note that the notion of joint distribution function extends
 directly to the case of $n$ random variable $X_1$, $X_2$, $\ldots$,
-$X_n$, as does the notion of independence.
+$X_n$.
 
 
 **The discrete case:** This is very similar to the continuous
-case: see Law (page 220) for the case where $X$ and $Y$ are discrete
-random variables.
+case but one uses probability mass functions.
 
 **The mixed case:** One may similarly construct the joint
 distribution function for the case where $X$ is continuous and $Y$ is
 discrete. If you start from the base definition of joint distribution
-function in Eq.~\eqref{eq:joint2} you should have no trouble providing
+function in {ref}`eq:joint2` you should have no trouble providing
 the various definitions.
 
 
 
-**Independence of random variables**
+## Independence of random variables ##
 
 
 If the joint distribution function of random variable $X$ and $Y$ satisfies
