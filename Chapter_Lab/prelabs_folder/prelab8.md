@@ -373,6 +373,16 @@ plt.show()
 
 ## PDEs for Modelling and Simulation
 
+:::{admonition} Note: Discretization
+:class: hint dropdown
+
+In many instances, PDEs are discretized (made into discrete systems of differential equations)
+particularly for numerical solutions. This note is here to advise the reader that more information
+about discretization is in {ref}`sec:system_modeling`, as some of the code and language in this section
+would be confusing without that context.
+
+:::
+
 All ODEs are special cases[^2] of the greater family of Partial Differential Equations,
 and in this section of this pre-lab, the reader will be exposed to some common applications
 of Partial Differential Equations.
@@ -384,7 +394,8 @@ how heat is transmitted through different materials. Moreover, this equation has
 into almost every Partial Differential Equation textbook and into many fields of study in different
 ways: the Black–Scholes equation is an implementation of the heat equation, Fokker–Planck equation in
 Brownian motion, and back to physics through Schrödinger's equation. Here's a link to a
-dynamic visualization [link](https://visualpde.com/sim/?preset=heatEquation).
+dynamic visualization [link](https://visualpde.com/sim/?preset=heatEquation). It can also be
+considered as a Markov Chain. 
 
 This text describes of the most common examples of the heat equation: the transportation of
 heat across a finite, one dimensional rod with homogeneous boundary conditions. The reader might
@@ -393,7 +404,7 @@ up of consistent material, with boundaries that perfectly remove heat from the s
 block, and that the rod has a width approaching zero (one-dimensional).
 
 These conditions allow for the application of the following boundary problem in the context of an
-1-D Heat Equation:
+1-D Heat Equation which is often used for solving Initial Value Problems:
 
 ```{math}
 \frac{\partial u}{\partial t} = k \frac{\partial^2 u}{\partial x^2} &   & 0 < t; 0 \leq x \leq L 
@@ -482,7 +493,8 @@ the code.
 :label: fig:hd_gif
 
 This is a visualization of the heat equation has been modified to meet the 
-requirements above.
+requirements above, and shows the _forward_ progression of simulated 
+heat throughout a 1-D rod. 
 ```
 
 :::{admonition} Code for the visualization above (Heat Diffusion)
@@ -591,16 +603,11 @@ widgets.interactive(plot_heat_distribution, t_val=time_slider, center_temp=temp_
 
 :::
 
-### Example 2: Brownian motion
+### Example 2: SIR
 
-Brownian Motion, the ghost of the past.
+The compartmental model for disease spread has existed for over a century
 
-```{figure} #fig:MCvis_Brownian
-:label: fig:brownian_motion
 
-This is an visualization of a Monte Carlo Method Instance (n = 100) on for Brownian Motion 
-using the aleatory Python package for simulation and visualization. 
-```
 
 ## SDEs for Modelling and Simulation
 
@@ -621,9 +628,26 @@ using the aleatory Python package for simulation and visualization.
 
 :::
 
-:::{tab-item} Example 2: Cholera Epidemiology
-In this study {cite}`iddrisu2023modeling`, they discussed a SDE modification of the componentized SI-B
-model, and this example will extract from that work and show an implementation of it.
+:::{tab-item} Example 2: Brownian Motion
+
+Brownian Motion is often used to predict stock prices (although it is dubious in accuracy
+on its own), simulate the movement of particles in suspension in fluids[^5], prediction of
+star movement in galaxies, and is often used to solve PDEs as a Stochastic Differential
+Equation.
+
+In this case, this work considers the PDE variant of Brownian Motion (non-weiner process)
+to solve the heat equation from Example 1. Moreover, this example will discuss some of the
+mathematics involved in using the concept of Brownian Motion to solve PDEs _backwards_, which
+is an important quality of Brownian motion.
+
+Brownian Motion is defined through the 
+
+```{figure} #fig:MCvis_Brownian
+:label: fig:brownian_motion
+
+This is an visualization of a Monte Carlo Method Instance (n = 100) on for Brownian Motion 
+using the aleatory Python package for simulation and visualization. 
+
 :::
 
 ::::
@@ -673,3 +697,5 @@ Parabolic (time-dependent and dynamic), and Hyperbolic (wave-like with well-defi
 [^4]: In customary units, this is 48 BTU/(h⋅ft⋅°F), if the reader is using customary
 units for engineering, at least one of the authors would recommend reconsidering that
 choice.
+
+[^5]: Air is a fluid.

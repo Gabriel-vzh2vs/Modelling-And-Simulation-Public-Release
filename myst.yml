@@ -115,6 +115,7 @@ project:
       children:
         - file: Chapter_Finite-State-Machines/deterministic-finite-automata.md
         - file: Chapter_Finite-State-Machines/nondeterministic-finite-automata.md
+        - file: Chapter_Finite-State-Machines/cellular-automata.md
   bibliography:
     - references.bib
     - bibliography.bib
