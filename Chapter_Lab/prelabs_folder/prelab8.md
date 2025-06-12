@@ -27,13 +27,9 @@ about the topics discussed as this pre-lab covers a bit about modelling.
 
 ## ODEs for Modelling and Simulation
 
-::::{tab-set} ODEs for Modelling
-
 These examples of using ODEs for modelling are inspired by
 {cite}`harte1988consider`, which might sound a bit silly if you read the title,
 but it is a landmark work in modelling and problem-solving in Environmental Science.
-
-:::{tab-item} Example 1: Depleting Resources
 
 ## Example 1: Depleting Resources
 
@@ -146,9 +142,6 @@ A visualization of the ODE representing the exhaustion of the coal reserves in t
 United States of America as an ODE model.
 ```
 
-:::
-
-:::{tab-item} Example 2: Chemical Kinetics
 
 ## Example 2: Chemical Kinetics
 
@@ -223,10 +216,10 @@ The graph of the general system of ODEs is below:
 This is a visualization of the system of ODEs above, which is provided by the code below:
 ```
 
-```{admonition} Code for the Specific Reaction
+```{admonition} Code for the Brusselator
 :class: tip dropdown
 
-::::{code-cell} python
+:::{code-cell} python
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
@@ -284,7 +277,9 @@ if __name__ == '__main__':
     t_eval = np.linspace(t_start, t_end, t_points)
 
     brusselator(A, B, X0, Y0, t_span, t_eval)
-::::
+:::
+
+```
 
 Which there are tons of solution methods, which one is provided through SymPy:
 
@@ -298,7 +293,7 @@ the Brusselator with the parameters related to the reaction described above.
 ```{admonition} Code for the Specific Reaction
 :class: tip dropdown
 
-:::::{code-cell} python
+:::{code-cell} python
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
@@ -365,13 +360,11 @@ plt.ylabel('Concentration (mol/L)')
 plt.legend()
 plt.grid(True)
 plt.show()
-:::::
+:::
 
 ```
 
-:::
-
-::::
+***
 
 ## PDEs for Modelling and Simulation
 
@@ -645,6 +638,8 @@ with parameters beta=0.3, gamma=0.9, diffusivity=0.1, and in this
 visualization using the py-pde package, the concept of an "infection"
 wave can be seen.
 ```
+
+***
 
 ## SDEs for Modelling and Simulation
 
