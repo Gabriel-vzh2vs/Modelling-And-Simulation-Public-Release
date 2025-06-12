@@ -24,7 +24,7 @@ are self-studying, you can choose which pre-labs you do based on your knowledge 
 
 :::{note} Pre-Lab Status
 To Henning, this section is getting content at a decent speed. It should be
-fully-drafted by June 10th at the current rate of improvement. The topics are
+fully-drafted by June 25th at the current rate of improvement. The topics are
 all there, along with basic information and sections.
 
 Partially-Drafted Pre-Labs

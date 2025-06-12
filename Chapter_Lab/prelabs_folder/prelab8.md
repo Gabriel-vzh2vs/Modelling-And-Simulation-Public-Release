@@ -648,13 +648,42 @@ wave can be seen.
 
 ## SDEs for Modelling and Simulation
 
-SDEs ....
+The concept of SDEs also known as Stochastic Calculus was first discovered by Kiyosi Itô
+during the Second World War and is fundamental to modern finance modelling and simulation,
+this text will discuss two of the most important SDEs: Poisson (point) processes and Brownian
+motion. There are many more SDEs that build on these two, such as the geometric Brownian motion
+SDE and other semi-martingales[^5] such as Langevin Equations, step functions, and the inputs for
+Feynman-Kac Formula that have many applications: diffusion, population dynamics, stochastic
+control theory, deep learning, Markov chains, and statistical mechanics.
 
 ::::{tab-set}
 
 :::{tab-item} Example 1: Poisson Point Process (Pure Birth Process)
 
-https://personal.ntu.edu.sg/nprivault/MA5182/stochastic-calculus-jump-processes.pdf (Source)
+This prelab section draws on some inspiration from {cite}`privault2022introduction`,
+specifically chapter 20, as it is a proper source on the behavior and depiction of
+Poisson Processes with some applications that might be applicable to some readers.
+
+As discussed in {ref}`sec:queuing_systems` and {ref}`prelab-6`, the Poisson process
+is a method of simulating arrivals into a Markovian queuing system which often occurs in
+service processes from maintenance processes to supermarket lines.
+
+Moreover, the mathematical requirements for a Poisson process are
+
+1. Independence of increments: $\forall 0 \le t_0 < t_1 < ... < t_n and n \ge 1$ the
+increments: $N_{t_1} - N_{t_0}, \dots, N_{t_n} - N_{t_{n-1}}$ are mutually independent
+random variables.
+2. Stationary increments: $N_{t+h} - N_{s+h}$ maintains
+the same distribution as $N_t - N_s \forall h > 0 \text{ and } 0 \le s \le t.$
+
+If a stochastic process follows the requirements above along with having the form
+
+```{math}
+\mathbb{P}(N_t - N_s = k) = e^{-(t-s)\lambda} \frac{((t-s)\lambda)^k}{k!}, \quad k \ge 0.
+```
+
+Then it is a Poisson Point Process that when simulated with $\lambda = 5$, it shall
+have similar results to the figure below.
 
 ```{figure} #fig:MCvis_poi
 :label: fig:poisson_process
@@ -668,7 +697,7 @@ using the aleatory Python package for simulation and visualization.
 :::{tab-item} Example 2: Brownian Motion
 
 Brownian Motion is often used to predict stock prices (although it is dubious in accuracy
-on its own), simulate the movement of particles in suspension in fluids[^5], prediction of
+on its own), simulate the movement of particles in suspension in fluids[^6], prediction of
 star movement in galaxies, and is often used to solve PDEs as a Stochastic Differential
 Equation.
 
@@ -677,7 +706,7 @@ to solve the heat equation from Example 1. Moreover, this example will discuss s
 mathematics involved in using the concept of Brownian Motion to solve PDEs _backwards_, which
 is an important quality of Brownian motion.
 
-Brownian Motion is typically defined through as a Levy Process[^6] (specifically as a
+Brownian Motion is typically defined through as a Levy Process[^7] (specifically as a
 Wiener process) with the following properties:
 
 1. That it starts at 0 $(P(W_0 = 0)= 1)$.
@@ -693,7 +722,7 @@ Brownian Motion was defined by Levy {cite}`morters2010brownian` as the following
 ```
 
 Which allows for the use of technology to simulate the behaviors of
-Brownian Motion. 
+Brownian Motion as seen below.
 
 ```{figure} #fig:MCvis_Brownian
 :label: fig:brownian_motion
@@ -704,32 +733,6 @@ using the aleatory Python package for simulation and visualization. This also sh
 :::
 
 ::::
-
-## IDEs for Modelling and Simulation
-
-IDEs ...
-
-::::{tab-set}
-
-:::{tab-item} Example 1: SEIR Model
-https://web.archive.org/web/20200321190642/http://people.oregonstate.edu/~medlockj/other/IDE.pdf (Source)
-
-:::
-
-:::{tab-item} Example 2: City Growth and Emergence
-https://royalsocietypublishing.org/doi/10.1098/rsif.2022.0176 (Source)
-
-:::
-
-::::
-
-## Solving DEs with Python
-
-### ODE45
-
-### Runge-Kutta Methods
-
-### Approximations and Their Methods
 
 [^1]: The process of finding the rate constant is typically done through calculating the
 [reaction order](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Kinetics/03%3A_Rate_Laws/3.03%3A_The_Rate_Law/3.3.03%3A_Reaction_Order), then using data about
@@ -751,8 +754,16 @@ Parabolic (time-dependent and dynamic), and Hyperbolic (wave-like with well-defi
 units for engineering, at least one of the authors would recommend reconsidering that
 choice.
 
-[^5]: Air is a fluid.
+[^5]: Warning, this is going to be very mathematical. A Martingale defines a stochastic process 
+where the expected value of an observation is equal to the previous value (e.g: the future expected 
+winnings are equal to the current amount independent of previous outcomes), and a Semi-Martingale defines 
+a combination of a real-defined function that is right-continuous with limits on the left (a Càdlàg) and 
+a Martingale defined within a deterministic rather than a stochastic scale, which compacts the space 
+that the Martingale exists in (this is known as a local Martingale). If the reader wants more details on this
+try: {cite}`ethier2009markov`.
 
-[^6]: Note for mathematicians, there are forms of Brownian Motion that are in no way defined
+[^6]: Air is a fluid.
+
+[^7]: Note for mathematicians, there are forms of Brownian Motion that are in no way defined
 as a Levy Process, such as geometric Brownian Motion because they violate the conditions of
 having stationary and independent increments. 
