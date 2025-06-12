@@ -506,7 +506,7 @@ heat throughout a 1-D rod.
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import spdiags
-from scipy.sparse.linalg import spsolve
+from scipy.sparse.linalg import spsolveKernel
 import ipywidgets as widgets
 from IPython.display import display
 
@@ -677,13 +677,29 @@ to solve the heat equation from Example 1. Moreover, this example will discuss s
 mathematics involved in using the concept of Brownian Motion to solve PDEs _backwards_, which
 is an important quality of Brownian motion.
 
-Brownian Motion is defined through the 
+Brownian Motion is typically defined through as a Levy Process[^6] (specifically as a
+Wiener process) with the following properties:
+
+1. That it starts at 0 $(P(W_0 = 0)= 1)$.
+2. $W$ has independent increments the same as the Markov Property:
+Any future increment $W_{T+u} - W_T, U \ge 0$ are independent of $W_{t}, t > T$.
+3. W has Gaussian increments: $$W_{T+u} - W_T$ is normally distributed with mean zero and variance $u$.
+4. W has continuous paths with regard to time with probability one.
+
+Brownian Motion was defined by Levy {cite}`morters2010brownian` as the following real-valued stochastic process with the definitions above along with the expression
+
+```{math}
+\mathbb{P}{X > x} = \frac{1}{\sqrt{2 \pi \sigma^2}} \int_x^{\infty} e^{\frac{u-\mu}{2 \sigma^{2}}} du, \forall x \in \mathbb{R}
+```
+
+Which allows for the use of technology to simulate the behaviors of
+Brownian Motion. 
 
 ```{figure} #fig:MCvis_Brownian
 :label: fig:brownian_motion
 
 This is an visualization of a Monte Carlo Method Instance (n = 100) on for Brownian Motion 
-using the aleatory Python package for simulation and visualization. 
+using the aleatory Python package for simulation and visualization. This also shows that the unconditional PDF is equivalent to $f_{W_{t}}(x) = \frac{1}{\sqrt{2 \pi t}} e^{\frac{-x^{2}}{2t}}$, the Gaussian PDF in context of time.
 
 :::
 
@@ -736,3 +752,7 @@ units for engineering, at least one of the authors would recommend reconsidering
 choice.
 
 [^5]: Air is a fluid.
+
+[^6]: Note for mathematicians, there are forms of Brownian Motion that are in no way defined
+as a Levy Process, such as geometric Brownian Motion because they violate the conditions of
+having stationary and independent increments. 
