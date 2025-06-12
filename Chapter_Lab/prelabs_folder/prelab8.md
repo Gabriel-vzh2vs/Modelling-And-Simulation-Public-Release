@@ -366,7 +366,9 @@ plt.legend()
 plt.grid(True)
 plt.show()
 :::::
+
 ```
+
 :::
 
 ::::
@@ -380,7 +382,6 @@ In many instances, PDEs are discretized (made into discrete systems of different
 particularly for numerical solutions. This note is here to advise the reader that more information
 about discretization is in {ref}`sec:system_modeling`, as some of the code and language in this section
 would be confusing without that context.
-
 :::
 
 All ODEs are special cases[^2] of the greater family of Partial Differential Equations,
@@ -420,7 +421,7 @@ for the 1-d heat equation described above.
 ```{admonition} Code for this PDE (Heat Equation)
 :class: tip dropdown
 
-```{code-block} python
+:::{code-block} python
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
@@ -477,6 +478,7 @@ plt.title('Heat Equation Numerical vs. Exact Solution')
 plt.legend()
 plt.grid(True)
 plt.show()
+:::
 ```
 
 Now, assume that more detail is added to this problem where
@@ -608,9 +610,9 @@ widgets.interactive(plot_heat_distribution, t_val=time_slider, center_temp=temp_
 :::{admonition} Note: ABM Version
 :class: warning dropdown
 
-There is a ABM version of this model (and much better ones) in
-{ref}`prelab-10`. As this model is mostly made to show an application
-of a PDE that has some practical use as a tool to explain human behavior.
+There is a ABM (graph and non-graph) version of this model in {ref}`prelab-10`.
+As this model is mostly made to show an application of a PDE that has some
+practical use as a tool to explain and model human behavior.
 
 :::
 
@@ -633,7 +635,16 @@ of Differential Equations are the following:
 \partial_t r = D \nabla^{2} r + \gamma i\\
 ```
 
+![PDE]( ../../Figs/Chapter_Lab/sir_from_storage.mp4)
 
+```{figure} # ../../Figs/Chapter_Lab/sir_from_storage.mp4
+:label: fig:SIR_PDE
+
+This is the graphical visualization of a Spatially-Coupled SIR PDE 
+with parameters beta=0.3, gamma=0.9, diffusivity=0.1, and in this 
+visualization using the py-pde package, the concept of an "infection"
+wave can be seen.
+```
 
 ## SDEs for Modelling and Simulation
 
@@ -661,8 +672,7 @@ on its own), simulate the movement of particles in suspension in fluids[^5], pre
 star movement in galaxies, and is often used to solve PDEs as a Stochastic Differential
 Equation.
 
-In this case, this work considers the SDE variant of Brownian Motion (
-Weiner)
+In this case, this work considers the SDE variant of Brownian Motion (Weiner)
 to solve the heat equation from Example 1. Moreover, this example will discuss some of the
 mathematics involved in using the concept of Brownian Motion to solve PDEs _backwards_, which
 is an important quality of Brownian motion.

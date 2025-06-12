@@ -13,4 +13,5 @@
 
 ### Emergence
 
-## Walk-Through of a Varicella Spread Model
+## Walk-Through of a SIR Model
+
