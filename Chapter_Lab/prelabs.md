@@ -27,15 +27,20 @@ To Henning, this section is getting content at a decent speed. It should be
 fully-drafted by June 25th at the current rate of improvement. The topics are
 all there, along with basic information and sections.
 
-Partially-Drafted Pre-Labs
+Pre-Lab Completion Tracker (33% done with pre-labs):
 
-- Pre-lab 1 (Provisionally Complete)
-- Pre-lab 2
-- Pre-Lab 3
-- Pre-lab 4 (Provisionally Complete)
-- Pre-lab 6 (Reconstruction - In Progress of Moving Theory)
-- Pre-lab 7 (Provisionally Complete)
-- Pre-lab 8 (Provisionally Complete)
+- Pre-lab 1 (Provisionally Complete) _drafted_
+- Pre-lab 2 (Partially-Drafted) *core focus to hasten book progress*
+- Pre-Lab 3 (Partially-Drafted) *core focus to hasten book progress*
+- Pre-lab 4 (Provisionally Complete) _drafted_
+- Pre-lab 5 (Considering Changing Topic) *at some point*
+- Pre-lab 6 (Reconstructing) *core focus to hasten book progress*
+- Pre-lab 7 (Provisionally Complete) _drafted_
+- Pre-lab 8 (Provisionally Complete) _drafted_
+- Pre-lab 9 (Considering Changing Topic) *at some point*
+- Pre-lab 10 (Topic Okay!) *secondary focus*
+- Pre-lab 11 (Topic Okay!) *secondary focus*
+- Pre-lab 12 (Topic Okay!) *secondary focus*
 :::
 
 List of Pre-labs:
