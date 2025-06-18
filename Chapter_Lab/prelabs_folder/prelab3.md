@@ -1,6 +1,11 @@
 (prelab-3)=
 # Pre-Lab 3: Fundamentals of Debugging For Simulation (Do)
 
+Now that this text has covered a substantial amount of theory,
+it is important for the reader to identify and consider malignant 
+patterns in simulation, which is what this pre-lab aims to aid in
+doing.
+
 A critical part of working with complex systems and software is debugging.
 In this case, this text defines debugging as a reliable, systematic method
 for figuring out what is not working within a system. Traditionally,

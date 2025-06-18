@@ -15,7 +15,7 @@ gives a sampler of different modelling methodologies.
 ## What is System Dynamics and Why?
 
 System dynamics refers to a method of _continuous_ modelling of real-world or
-hypothetical behavior ofl dynamical, nonlinear systems as a series of five components:
+hypothetical behavior of dynamical, nonlinear systems as a series of five components:
 
 1. States, which is anything that acts within a system,
 (e.g: a machine chopping wood which feeds into another machine for finishing)

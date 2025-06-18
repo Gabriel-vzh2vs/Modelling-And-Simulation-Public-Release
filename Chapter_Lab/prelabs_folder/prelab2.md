@@ -26,7 +26,11 @@ minimum for this pre-lab are here, with a more extensive list in {ref}`sec:softw
 
 In this pre-lab, we consider copulas as forcing a distribution to assume the
 behavior of another one, this is known as correlation. An example of this would be if a person goes to an
-expensive hotel, it is more likely that they would get expensive food, tours, and everything else on their trip.  
+expensive hotel, it is more likely that they would get expensive food, tours, and everything else on their trip.
+
+In more formal terms, based on Sklar's Theorem, a copula is a multivariate distribution such that marginalizing gives
+a uniform $[0,1]$, and the marginal distributions are inherently uncorrelated with other, and the correlation is
+exclusively provided by the copula
 
 Copulas are joint cumulative D.Fs for which the marginal D.F of each variable is bounded by $[0, 1]$ across the domain.
 

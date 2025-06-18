@@ -11,3 +11,33 @@ relies on {ref}`sec:system_modeling` for its theoretical foundations.
 ## System Dynamics-Based Models
 
 ## Hybrid Models
+
+::::{tab-set}
+
+:::{tab-item} Anylogic (Object-Orientated)
+
+Anylogic
+
+:::
+
+:::{tab-item} Netlogo
+
+:::
+
+:::{tab-item} OpenModelica
+
+:::
+
+:::{tab-item} Python
+
+## BPTK-Py (Systems Dynamics, Functional Programming)
+
+## Salabim (Discrete-Event Modelling, Object-Orientated)
+
+## SimPy (Discrete-Event Modelling, Functional Programming)
+
+## Mesa (Agent-Based Modelling, Object-Orientated)
+
+:::
+
+::::
