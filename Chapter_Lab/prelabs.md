@@ -34,7 +34,7 @@ Pre-Lab Completion Tracker (33% done with pre-labs):
 - Pre-Lab 3 (Partially-Drafted) *core focus to hasten book progress*
 - Pre-lab 4 (Provisionally Complete) _drafted_
 - Pre-lab 5 (Considering Changing Topic) *at some point*
-- Pre-lab 6 (Reconstructing) *core focus to hasten book progress*
+- Pre-lab 6 (Reconstructing) _drafted_
 - Pre-lab 7 (Provisionally Complete) _drafted_
 - Pre-lab 8 (Provisionally Complete) _drafted_
 - Pre-lab 9 (Considering Changing Topic) *at some point*

@@ -233,18 +233,19 @@ Hint: it is possible to model this system as a restricted Jackson system of queu
 
 Next, the factory would like to simulate the system to gather information about the blockages, and specifically
 the amount of time that a loaf sits unable to move onto the next workstation because of blockages - recommending
-that a simulation should be a factory shift long (8 hours). Additionally, the factory would also like to know
-how many breads fell off of the queues on average and their costs, recommending 42 trials
+that a simulation should be a weekly summation of a factory shift long (80 hours). Additionally, the factory
+would also like to know how many breads fell off of the queues on average and their costs, recommending 42 trials
 with a warm-up time of 60 minutes to reduce variance.
 
-Hint: Start with a single trial, verify it, and then do the 30 trials, and calculate the average cost
+Hint: Start with a single trial, verify it, and then do the 42 trials, and calculate the average cost
 from those 42 trials.
 :::
 
 :::{tab-item} Sol_2
 First, a reader should construct the objects representing the queue network with
 one workstation having an arrival distribution and a service distribution, and the rest
-having only a service distribution. Then, create a transition (routing) matrix that depicts the movement of the bread throughout the system in sequence with each
+having only a service distribution. Then, create a transition (routing) matrix that depicts the movement of the 
+bread throughout the system in sequence with each
 column representing each workstation (1, 2, 3, 4), which is equivalent to:
 
 ```{math}
@@ -256,7 +257,7 @@ column representing each workstation (1, 2, 3, 4), which is equivalent to:
 \end{bmatrix}
 ```
 
-Then two matrices of form $1 \cross 4$ representing the number of workers (servers) and
+Then two matrices of form $1x4$ representing the number of workers (servers) and
 queue size capacities for each workstation.
 
 ```{math}
@@ -277,15 +278,15 @@ In code, it can be represented as:
 import ciw
 
 Network = ciw.create_network(
-    arrival_distributions=[ciw.dists.Lognormal(mean=20.0, sd=5),
+    arrival_distributions=[ciw.dists.Exponential(rate = 1/20),
                            None,
                            None,
                            None,],
 
-    service_distributions=[ciw.dists.Uniform(lower=10, upper=30),
-                           ciw.dists.Uniform(lower=10, upper=30),
-                           ciw.dists.Uniform(lower=10, upper=30),
-                           ciw.dists.Uniform(lower=10, upper=30),],
+    service_distributions=[ciw.dists.Uniform(lower = 10, upper = 30),
+                           ciw.dists.Uniform(lower = 10, upper = 30),
+                           ciw.dists.Uniform(lower = 10, upper = 30),
+                           ciw.dists.Uniform(lower = 10, upper = 30),],
 
     routing=[[0.0, 1.0, 0.0, 0.0],
              [0.0, 0.0, 1.0, 0.0],
@@ -297,37 +298,42 @@ Network = ciw.create_network(
 )
 ```
 
-
-:::
-
-:::{tab-item} Example_3
-A factory machine produces items in batches. Over 25 consecutive production runs, the number of defective
-items found in each run are represented the data below
+Then we construct a single trial:
 
 ```{code} python
-14, 15, 11, 10, 12, 5, 10, 7, 10, 17, 7, 11, 
-13, 6, 8, 9, 13, 12, 7, 9, 9, 12, 11, 12, 9
+ciw.seed(42) # Seed for Replication
+Q = ciw.Simulation(Network) # Network Instances
+Q.simulate_until_max_time(4800) # 60 * 80 -> to minutes
+recs = Q.get_all_records() # All events in Queue
+blockages = [r.time_blocked for r in recs]
+print(max(blockages))
+
+wasted_bread = [r for r in recs if r.record_type=="rejection"] # Rejection == blocked from entering the queue
+[r.arrival_date for r in wasted_bread]
+print(len(wasted_bread))
 ```
 
-Estimate the sample mean and the standard deviation of the number of defective items. Then use the observed
-properties of the distribution (e.g: making a histogram, assessing its natural bounds), to determine the
-possible hypothesis for the posterior distribution. Then test these hypothesis using a software package like
-Fitter/Phitter or a statistical package.
-:::
-
-:::{tab-item} Sol_3
-A factory machine produces items in batches. Over 25 consecutive production runs, the number of defective
-items found in each run are represented the data below
+Which in this case after running it, states that there were no blockages
+in the system, but there was 31 instances of wasted bread, which is worth (31*0.5) =
+15.5 dollars.
 
 ```{code} python
-14, 15, 11, 10, 12, 5, 10, 7, 10, 17, 7, 11, 
-13, 6, 8, 9, 13, 12, 7, 9, 9, 12, 11, 12, 9
+wasted_bread = []
+
+for trial in range(42): # A single trial repeated 42 times with different seeds (see Variance Reduction for more information why this example did this)
+    ciw.seed(trial)
+    Q = ciw.Simulation(Network)
+    Q.simulate_until_max_time(4800)
+    recs = Q.get_all_records()
+    num_dropped = len([r for r in recs if r.record_type=="rejection" if r.arrival_date > 600])
+    wasted_bread.append(num_dropped)
+
+print(sum(wasted_bread) / len(wasted_bread))
 ```
 
-Estimate the sample mean and the standard deviation of the number of defective items. Then use the observed
-properties of the distribution (e.g: making a histogram, assessing its natural bounds), to determine the
-possible hypothesis for the posterior distribution. Then test these hypothesis using a software package like
-Fitter/Phitter or a statistical package.
+Which results with an average number of 22 breads wasted within the system which is about
+11 dollars, which is much lower than a single trial.
+
 :::
 
 ::::
