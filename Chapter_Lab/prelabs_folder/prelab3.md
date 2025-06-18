@@ -2,7 +2,7 @@
 # Pre-Lab 3: Fundamentals of Debugging For Simulation (Do)
 
 Now that this text has covered a substantial amount of theory,
-it is important for the reader to identify and consider malignant 
+it is important for the reader to identify and consider malignant
 patterns in simulation, which is what this pre-lab aims to aid in
 doing.
 
@@ -19,7 +19,9 @@ include:
 - Unit Testing
 - Automated Methods (Formal Methods)
 
-Some of these methods are discussed in more detail in {ref}`sec:output_analysis`
+Some of these methods are discussed in more detail in {ref}`sec:output_analysis`,
+and {ref}`sec:validation` as these methods are generally considered a branch of
+verification and validation. 
 
 ::::{tab-set}
 

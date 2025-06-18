@@ -167,7 +167,6 @@ This represents the output from the DES simulation that is made to simulate
 a SIR model using a DES framework - with each event being a recovery or infection.
 ```
 
-
 ```{admonition} Code for the Graphic Above
 :class: dropdown
 ```{code} python
