@@ -212,24 +212,92 @@ Often times, in the real-world, there is a series of queues (or processes) that 
 connected to each other such as in government institutions, and this example seeks
 to demonstrate how that can be modelled through queuing networks.
 
-This example is based on the [ciw documentation](https://ciw.readthedocs.io/en/latest/Tutorial/tutorial_iii.html)
-to a great extent
+This example is based on the [ciw documentation](https://ciw.readthedocs.io/en/latest/Tutorial/tutorial_iii.html).
 
+Consider the following, a factory is producing bread, and the production
+process has several components. On _average_, a pre-made bread dough takes an exponentially-distributed
+20 minutes to finish in an extremely hot, steam-injecting oven. The bread then enters a conveyor-belt
+with four workstations that apply and inject preservatives, flavor enhancers, and other ingredients
+for bread quality which takes a uniform time ranging from 10 to 30 minutes to allow for injection
+and resting.
+
+A workstation is limited to holding four bread loafs, if the workstation is full then any
+arriving loaves fall onto the floor and are thrown away due to health code regulations. If a bread loaf
+completes service at a workstation but there is no room on the next workstation's belt, the bread remains at
+the workstation until the belt is available once more (to prevent semi-finished bread from being wasted), and
+the workstation must stop work until the offending bread is removed through standard processes.
+
+Each time a bread is wasted, it costs the factory 50 cents in potential profit. In this case, the factory
+would like to know how many breads are being wasted to potentially reduce the hourly costs of this process.
+Hint: it is possible to model this system as a restricted Jackson system of queues.
+
+Next, the factory would like to simulate the system to gather information about the blockages, and specifically
+the amount of time that a loaf sits unable to move onto the next workstation because of blockages - recommending
+that a simulation should be a factory shift long (8 hours). Additionally, the factory would also like to know
+how many breads fell off of the queues on average and their costs, recommending 42 trials
+with a warm-up time of 60 minutes to reduce variance.
+
+Hint: Start with a single trial, verify it, and then do the 30 trials, and calculate the average cost
+from those 42 trials.
 :::
 
 :::{tab-item} Sol_2
-A factory machine produces items in batches. Over 25 consecutive production runs, the number of defective
-items found in each run are represented the data below
+First, a reader should construct the objects representing the queue network with
+one workstation having an arrival distribution and a service distribution, and the rest
+having only a service distribution. Then, create a transition (routing) matrix that depicts the movement of the bread throughout the system in sequence with each
+column representing each workstation (1, 2, 3, 4), which is equivalent to:
 
-```{code} python
-14, 15, 11, 10, 12, 5, 10, 7, 10, 17, 7, 11, 
-13, 6, 8, 9, 13, 12, 7, 9, 9, 12, 11, 12, 9
+```{math}
+\begin{bmatrix}
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
 ```
 
-Estimate the sample mean and the standard deviation of the number of defective items. Then use the observed
-properties of the distribution (e.g: making a histogram, assessing its natural bounds), to determine the
-possible hypothesis for the posterior distribution. Then test these hypothesis using a software package like
-Fitter/Phitter or a statistical package.
+Then two matrices of form $1 \cross 4$ representing the number of workers (servers) and
+queue size capacities for each workstation.
+
+```{math}
+\begin{bmatrix}
+1 & 1 & 1 & 1 \\
+\end{bmatrix}
+```
+
+```{math}
+\begin{bmatrix}
+4 & 4 & 4 & 4 \\
+\end{bmatrix}
+```
+
+In code, it can be represented as:
+
+```{code} python
+import ciw
+
+Network = ciw.create_network(
+    arrival_distributions=[ciw.dists.Lognormal(mean=20.0, sd=5),
+                           None,
+                           None,
+                           None,],
+
+    service_distributions=[ciw.dists.Uniform(lower=10, upper=30),
+                           ciw.dists.Uniform(lower=10, upper=30),
+                           ciw.dists.Uniform(lower=10, upper=30),
+                           ciw.dists.Uniform(lower=10, upper=30),],
+
+    routing=[[0.0, 1.0, 0.0, 0.0],
+             [0.0, 0.0, 1.0, 0.0],
+             [0.0, 0.0, 0.0, 1.0],
+             [0.0, 0.0, 0.0, 0.0]],
+
+    number_of_servers=[1, 1, 1, 1],
+    queue_capacities=[4, 4, 4, 4]
+)
+```
+
+
 :::
 
 :::{tab-item} Example_3
