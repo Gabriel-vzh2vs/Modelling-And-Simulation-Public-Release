@@ -471,7 +471,7 @@ One may rewrite the expression {eq}`eq:conditional` as
 
 
 (sec:prob_random_variables)=
-# Random variables #
+## Random variables ##
 
 Random variables are often introduced introductory probability courses
 and in introductory statistics courses. This section is based on
@@ -850,7 +850,7 @@ If the joint distribution function of random variable $X$ and $Y$ satisfies
   F(x,y) = F_X(x) \times F_Y(y) \quad \text{ for all $(x,y)$} \;,
 \end{equation*}
 ```
-then the random variable $X$ and $Y$ are _independent_.
+then the random variable $X$ and $Y$ are __independent__.
 
 If $X$ and $Y$ are independent with joint density function $f(x,y)$
 then we conclude from
@@ -865,42 +865,41 @@ f_{XY}(x,y) = f_{X}(x)f_{Y}(y) \;.
 
 
 
-**Covariance and correlations of jointly distributed random variables:** to measure dependence of jointly distributed random
-variables $X$ and $Y$, one may use _covariance_,
-written~$\sigma_{XY}$ and $\operatorname{Cov}[X,Y]$ and defined as
-```{raw} latex
+## Covariance and correlations of jointly distributed random variables ##
+
+To measure dependence of jointly distributed random variables $X$ and
+$Y$ one may use __covariance__, written $\operatorname{Cov}[X,Y]$ or
+$\sigma_{XY}$, and defined as
+
 \begin{equation*}
   \operatorname{Cov}[X,Y] = \sigma_{XY} = E[ (X-\mu_x)(Y-\mu_Y)] = E[XY] - \mu_X \mu_Y \;,
 \end{equation*}
-```
-where the latter equality follows directly from the definition of
-expectation.
 
-The random variables $X$ and $Y$ are _uncorrelated_ if
+where the latter equality follows directly from the definition of
+expectation. The random variables $X$ and $Y$ are __uncorrelated__ if
 $\sigma_{XY} = 0$. Independent random variables are uncorrelated, but
 the converse is not true.
 
-It is often useful to normalize $\sigma_{XY}$ (in parts to remove
-units), and one defines the correlation~$\rho_{XY}$ by
-```{raw} latex
+It is often useful to normalize $\sigma_{XY}$, in parts to remove
+units, and one defines the correlation $\rho_{XY}$ by
+
 \begin{equation*}
   \rho_{XY} = \frac{\sigma_{XY}}{\sigma_X \sigma_Y} \quad
   \text{for which we have}\quad -1 \le \rho_{XY} \le 1 \;.
 \end{equation*}
-```
 
 
 
-## Rules for evaluation of expectation, variance and covariance: ##
+## Rules for evaluation of expectation, variance and covariance ##
 
 Some useful results and facts. Here $X$, $Y$, $X_i$ and so on denote
-random variable, $c$, $c_i$ denotes constants (real numbers).
+random variable, $c$, and $c_i$ denotes constants (real numbers).
 
 -  $E[cX] = cE[X]$
 -  $E[X + Y] = E[X] + E[Y]$
 -  $\operatorname{Var}[X] \ge 0$
 -  $\operatorname{Var}[cX] = c^2 \operatorname{Var}[X]$
--  $\operatorname{Var}X+Y] = \operatorname{Var}[X] + \operatorname{Var}[Y] + 2 \operatorname{Cov}[X,Y]$
+-  $\operatorname{Var}[X+Y] = \operatorname{Var}[X] + \operatorname{Var}[Y] + 2 \operatorname{Cov}[X,Y]$
 -  $\operatorname{Cov}[X,Y] = \operatorname{Cov}[Y,X]$
 -  $\operatorname{Cov}[X + c, Y] = \operatorname{Cov}[Y,X]$
 -  $\operatorname{Cov}[c_1 X, c_2 Y] =  c_1 c_2 \operatorname{Cov}[X,Y]$
@@ -913,23 +912,23 @@ If $X$ and $Y$ are uncorrelated then $\operatorname{Var}[X + Y] = \operatorname{
 %% $
 ```
 
-```{raw} latex
 \begin{align*}
   \operatorname{Var}[X+Y]
   &= E[(X+Y)^2] - (\mu_X + \mu_Y)^2 \\
   &= (E[X^2] - \mu_X^2) + (E[Y^2] - \mu_Y^2) + 2(E[XY] + \mu_X \mu_Y ) \\
   &= \operatorname{Var}[X] + \operatorname{Var}[Y] + 2 \operatorname{Cov}[X,Y]
 \end{align*}
-```
 
-**Exercise:** Generalize the identity $\operatorname{Var}[X+Y] = \operatorname{Var}[X] +
-\operatorname{Var}[Y] + 2 \operatorname{Cov}[X,Y]$ from $X+Y$ to $X_1 + X_2 + \cdots + X_n$. We
+
+__Exercise:__ Generalize the identity $\operatorname{Var}[X+Y] =
+\operatorname{Var}[X] + \operatorname{Var}[Y] + 2
+\operatorname{Cov}[X,Y]$ from $X+Y$ to $X_1 + X_2 + \cdots + X_n$. We
 will need this result when we conduct output analysis of simulations.
 
 
 
 (sec:stochastic_process)=
-# Stochastic Processes #
+## Stochastic Processes ##
 
 <!--
 You may have learned about stochastic processes in a stochastic
@@ -965,7 +964,7 @@ Tie up pieces here.
 
 
 (sec:rv_extra)=
-# Examples of slightly more advanced concepts #
+## Examples of slightly more advanced concepts ##
 
 The examples given here illustrate three parts: (1) when the sample
 space is not a subset of $\mathbb{R}$, (2) an example of a

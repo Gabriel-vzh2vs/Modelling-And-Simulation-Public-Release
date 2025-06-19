@@ -14,6 +14,7 @@ project:
     - file: Front-Matter/splash.md
     - title: Front Matter
       children:
+        - file: Front-Matter/book-structure.md
         - file: Front-Matter/preface.md
         - file: Front-Matter/toc.md
         - file: Front-Matter/pedagogy.md
