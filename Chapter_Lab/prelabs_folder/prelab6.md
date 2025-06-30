@@ -216,8 +216,9 @@ This example is based on the [ciw documentation](https://ciw.readthedocs.io/en/l
 
 Consider the following, a factory is producing bread, and the production
 process has several components. On _average_, a pre-made bread dough takes an exponentially-distributed
-20 minutes to finish in an extremely hot, steam-injecting oven. The bread then enters a conveyor-belt
-with four workstations that apply and inject preservatives, flavor enhancers, and other ingredients
+20 minutes to finish in an extremely hot, steam-injecting oven, this can be considered a source
+with a Markovian Arrival rate of 1/5 hours that feeds into a workstation. The bread then enters a conveyor-belt
+with four sequential workstations that apply and inject preservatives, flavor enhancers, and other ingredients
 for bread quality which takes a uniform time ranging from 10 to 30 minutes to allow for injection
 and resting.
 

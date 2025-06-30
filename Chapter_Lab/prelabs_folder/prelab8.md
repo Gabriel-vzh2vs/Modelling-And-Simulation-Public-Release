@@ -707,7 +707,7 @@ Wiener process) with the following properties:
 1. That it starts at 0 $(P(W_0 = 0)= 1)$.
 2. $W$ has independent increments the same as the Markov Property:
 Any future increment $W_{T+u} - W_T, U \ge 0$ are independent of $W_{t}, t > T$.
-3. W has Gaussian increments: $$W_{T+u} - W_T$ is normally distributed with mean zero and variance $u$.
+3. W has Gaussian increments: $W_{T+u} - W_T$ is normally distributed with mean zero and variance $u$.
 4. W has continuous paths with regard to time with probability one.
 
 Brownian Motion was defined by Levy {cite}`morters2010brownian` as the following real-valued stochastic process with the definitions above along with the expression
