@@ -1,5 +1,5 @@
 
-(prelab-3)=
+(prelab-5)=
 # Pre-Lab 5: Fundamentals of Debugging For Simulation (Do)
 
 Now that this text has covered a substantial amount of theory,
