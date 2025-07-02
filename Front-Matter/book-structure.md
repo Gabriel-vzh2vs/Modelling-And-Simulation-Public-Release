@@ -22,6 +22,10 @@ these. With computational examples.
 
 6. Output analysis
 
+7. RNG and generating variates from arbitrary distributions
+
+8.
+
 
 
 
