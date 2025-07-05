@@ -9,8 +9,7 @@ before, we recommend that you actually break out your pen, paper, and
 your computer. You may be surprised. It is inspired by a problem that
 appears in {cite}`Banks:14`.
 
-
-(sec:intro_chefs)
+(sec:intro_chefs)=
 ## The Three Chefs ##
 
 Three friends, let us call them $A$, $B$ and $C$, run a lodge where
@@ -105,11 +104,8 @@ $\Pr(C)$ of the corresponding paths $A$, $B$ and $C$ being the
 critical path using an analytic argument using the joint distribution
 of the six random variables involved.
 
+:::{tip} Solution
 :class:dropdown
-
-
-```{tip} Solution
-
 
 __(a)__ The minimal and maximal times are $t_{\min} = 0$ and $t_{\max}
 = 3$ across all paths. The expected time is 3/2 across all paths. You
@@ -141,9 +137,6 @@ import matplotlib.pyplot as plt
 
 
 ```
-
-
-
 
 For the
 sample generated we have:
@@ -221,14 +214,12 @@ path, which is a sum of three $U(2,4)$ random variables and the bacon
 path, which is just a $U(6,12)$ random variable.  One might argue that
 to have a large, positive deviation from the mean in the former case,
 all three $U(2,4)$ random variables need to deviate positively from
-their mean. For these three ``dials'' to all align in this manner is
+their mean. For these three ''dials'' to all align in this manner is
 less likely than for the single dial in the latter case. Ergo, the
 bacon path is more likely than the egg path to be the critical
-path. The same ``reasoning'' applies when comparing the toast- and
+path. The same "reasoning" applies when comparing the toast and
 bacon paths. This is all good except that the reasoning is flawed.
-%%
-\\[1ex]
-%%
+
 Let us start by estimating the probabilities
 \begin{equation}
 \label{eq:pcb}
@@ -238,7 +229,9 @@ Let us start by estimating the probabilities
 \label{eq:pca}
 \Pr( T_{C_1} \ge T_{A_1} + T_{A_2} + T_{A_3})  \;,
 \end{equation}
+
 and
+
 \begin{equation}
 \label{eq:pcab}
 \Pr(T_{A_1} + T_{A_2} + T_{A_3} \ge  T_{B_1} + T_{B_2} )  \;,
@@ -262,9 +255,8 @@ and that
 One can compute $\Pr( Y \ge X_1 + X_2 + X_3 )$ in precisely the same
 manner, albeit now with one more dimension to the integral, to obtain
 the same answer of~$1/2$.
-%%
-\\[1ex]
-%%
+
+
 The situation with~\eqref{eq:pcab} is almost the same where
 \begin{equation*}
   \Pr(X_1 + X_2 + X_3 \ge  Y_1 + Y_2 )
@@ -272,20 +264,16 @@ The situation with~\eqref{eq:pcab} is almost the same where
      \frac{4}{9}\, dy_2\, dy_1\,dx_3\,dx_2\,dx_1 \;,
 \end{equation*}
 which also simplifies to $\frac{1}{2}$.
-%%
-Thus any ``intuition'' involving a pair of random variables
+
+Thus any "intuition" involving a pair of random variables
 from~$\{T_\bacon, T_{\text{egg}}, T_\toast\}$ appearing in their sums will
 likely be misguided.
-%%
-\\[1ex]
-%%
+
 The question is therefore: how does one explain the non-uniformity in
-Figure~\ref{fig:fe-9f} and the frequencies in
-Table~\ref{tab:breakfast}? We are not aware of any solution that plays
+Figure {ref}`fig:fe-9f` and the frequencies in
+Table {ref}`tab:breakfast`? We are not aware of any solution that plays
 to intuition, which, one may argue, makes a solid case for simulation.
-%%
-\\[1ex]
-%%
+
 To provide an analytic answer we can proceed as above using the joint
 probability density function of $X_1$, $X_2$, $X_3$, $Y_1$, $Y_2$ and
 $Z$ which is
@@ -323,9 +311,8 @@ and can now express determine $p_1$ as:
 After tedious calculations, one obtains $p_1 = \frac{7}{18}$ which is
 approximately $0.389$ which is quite close to the estimated value of
 $0.392$ in Table~\ref{tab:breakfast}.
-%%
-\\[1ex]
-%%
+
+
 How about the toast path being the critical path? We are now looking at
 \begin{equation*}
 p_2 = \Pr(Y_1 + Y_2 \ge X_1 + X_2 + X_3 \quad\text{and}\quad Y_1 + Y_2
@@ -352,9 +339,7 @@ and can now determine $p_2$ as:
    \int_0^1 \int_0^1 \int_0^1 \int_0^{3/2} \int_{0}^{3/2} \int_{x_1+x_2+x_3}^{y_1+y_2}
          \frac{4}{27} \, dz\, dy_2\, dy_1\, dx_3\, dx_2\, dx_1
 \end{align*}
-%%
-\\[1ex]
-%%
+
 While we could determine $p_3$ from $p_3 = 1 - p_1 - p_2$, we will do
 this the hard way.  We are now looking at
 \begin{equation*}
@@ -382,9 +367,4 @@ and can now determine $p_3$ as:
    \int_0^1 \int_0^1 \int_0^1 \int_0^{3/2} \int_{0}^{3/2} \int_{y_1+y_2}^{x_1+x_2+x_3}
          \frac{4}{27} \, dz\, dy_2\, dy_1\, dx_3\, dx_2\, dx_1
 \end{align*}
-
-
-
-
-
-```
+:::

@@ -12,6 +12,11 @@ three papers: {cite:p}`barth2012typical` {cite:p}`robinson1999three`
 
 ## On Prediction of Complex Phenomena
 
+A common historical discussion in simulation literature is
+the question: "how should complex phenomena be presented and analyzed
+in simulation?" One of the papers that attempted to build a consensus
+around this topic is {cite:p}`christie2005error`.
+
 ### Constraining the Model
 
 ### Inference and Prediction
@@ -28,16 +33,18 @@ three papers: {cite:p}`barth2012typical` {cite:p}`robinson1999three`
 
 ## Errors in Interpretation and Communication
 
-In {cite:p}`barth2012typical`, they describe the existence of five 
+In {cite:p}`barth2012typical`, they describe the existence of five
 distinct pitfalls: acceptance, distraction, complexity, implementation,
-and interpretation. 
+and interpretation.
 
-### 
+### Acceptance
 
-###
+### Distraction
 
-###
+### Complexity
 
-###
+### Implementation
 
-###
+### Interpretation
+
+a
