@@ -31,7 +31,13 @@ In Christie and et al's, the following quote is important for understanding unce
 
 #### Interval Analysis
 
-#### Fuzzy sets
+The basic concept of interval analysis (arithmetic) is taking a point estimate such as a number, and converting it into to a range of possibilities. This method has several benefits as a computational technique
+
+#### Fuzzy sets, logic, and numbers
+
+The concept of a mathematical construction being fuzzy was first described in 1923 by Russell in his short paper named "Vagueness" in which he described a logic where a preposition can evaluate as true and false which was extended to sets[^2] with their elements being able to exist within a range within a set as opposed to crisp sets[^3] which are binary in nature. Fuzzy numbers are an extension on fuzzy sets and a generalization of a real number.
+
+Fuzzy Logic is sometimes used in Agent-Based Modelling, Control Systems[^4], specialized Monte Carlo Method Implementations ({ref}`FuzzyMonteCarlo2013`), linear programming ({ref}`Sakawa13`) and more recently, as a formal method for simulating human behavior and perception when interacting with machines ({ref}`bolton2022fuzzy`).
 
 #### Theory of Belief Functions
 
@@ -40,7 +46,7 @@ This subsection builds on some other topics in Statistical Inference and Predict
 From a formal perspective, Theory of Belief Functions are a method of generalizing probability theory with a framework that models epistemic
 uncertainty - in plain English, it is the mathematical formalization of evidence. It is often used to combine information and therefore conclusions from multiple sources into a coherent, provable statement.
 
-This formalization starts from a event space that is bounded through support and plausibility, then it assigns masses (probabilities) to this sets[^1], 
+This formalization starts from a event space that is bounded through support and plausibility, then it assigns masses (probabilities) to this sets[^5], 
 
 Of a Bayesian Approximation
 <table>
@@ -73,4 +79,13 @@ and interpretation.
 
 a
 
-[^1]: These sets are often referred to as Focal Sets 
+[^1]:
+
+[^2]: An example of a fuzzy set might be natural numbers that are close to three with a
+degree of relatedness defined through a membership function associated with each element that can be described as 'partially true'. I.e: [1 (0.25), 2 (0.5), 3 (1.0), 4 (0.5), 5 (0.25)].
+
+[^3]: If the reader sees the term _crisp set_ it refers to sets that have a defined if-then statement defining them; for example, this set goes from all natural numbers smaller than 6 to only even natural numbers smaller than six to only natural numbers that are a multiple of 2 [1, 2, 3, 4, 5, 6] -> [2, 4, 6] -> [4, 6].
+
+[^4]: Such as energy-efficient motors, auto-focusing cameras, handwriting recognition, and most modern control systems that operate on a series of rules that are phrased similar to the following: "IF first qualitative condition AND second qualitative condition, then do qualitative action".
+
+[^5]: These sets are often referred to as Focal Sets.
