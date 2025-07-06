@@ -19,15 +19,44 @@ around this topic is {cite:p}`christie2005error`.
 
 ### Constraining the Model
 
-A core element of modelling and simulation for complex systems with 'big data' as discussed in {ref} `sec:preface` is having available data; note, that the data does not
-and cannot be fully representative of the whole system. Any simulation practitioner should also know because of the inherent incompleteness of models, it is critical to focus on process and structure of the simulation in the context of the data to ensure the model can be validated with real-world data. There are several methods for doing this, which are encapsulated in Christie and et al's 'Decomposition of Errors:
+A core element of modelling and simulation for complex systems with 'big data'
+as discussed in {ref}`sec:preface` is having available data; note, that the data does not
+and cannot be fully representative of the whole system. Any simulation practitioner
+should also know because of the inherent incompleteness of models, it is critical
+to focus on process and structure of the simulation in the context of the data to
+ensure the model can be validated with real-world data. There are many methods for
+doing this task, some of which are encapsulated in Christie and et al's "Decomposition of
+Errors" three step process:
+
+1. Compare Simulated and Experimental Results, meaning to verify that the
+simulated system is operating correctly based on the available information about
+the system and that the data from the real world system is valid.
+2. Analyze the solution error, which generally means to use classical Bayesian
+approaches or bootstrapping to define a confidence interval and determine if simulation experiments'
+results are explainable by the aleatoric uncertainty expected from the observed system.
+3. Determine the impact of errors on predictability, in this case the core point is to
+determine the validity of a model through ensuring that it matches the available data,
+if that is not accomplished with the simulated model, it means the errors are too great
+for the simulation to be useful.
+
+Note that none of these methods are meant to improve the accuracy (as that is limited
+through modelling, data quality, and more concepts covered in {ref}`sec:output_analysis`)
+of a model, but to make sure that the model is representative of the known data and its
+expected system performance metrics from known parameter estimates.
 
 ### Inference and Prediction
 
-Looking back on {ref}`prelab-2`, this work discussed a method for using for binding correlated variates together (copula), and this is a common
-method of improving statistical inferences and prediction using a Bayesian approach.
+Looking back on {ref}`prelab-2`, this work discussed a method for using for constructing
+correlated variates (copula), and this is a common
+method of improving statistical inferences and prediction using a Bayesian
+approach as a method of improving observations through contextualization.
+These methods are then combined with concepts from {ref}`sec:prob_stats` to
+create predictions of system performance (outputs) from the model, which is
+what Christie argues is the point of modelling and simulating complex (or not) phenomena.
 
-In Christie and et al's, the following quote is important for understanding uncertainty: "Numerical and observation errors are the leading terms in the determination of the Bayesian likelihood", as uncertainty is a function of the variance of the observations in the vast majority of cases using statistical inference.
+In Christie and et al's, the following quote is important for understanding uncertainty: "Numerical and observation errors
+are the leading terms in the determination of the Bayesian likelihood", as uncertainty is a function of the variance of the
+observations in the vast majority of cases using statistical inference.
 
 #### Interval Analysis
 
@@ -35,18 +64,32 @@ The basic concept of interval analysis (arithmetic) is taking a point estimate s
 
 #### Fuzzy sets, logic, and numbers
 
-The concept of a mathematical construction being fuzzy was first described in 1923 by Russell in his short paper named "Vagueness" in which he described a logic where a preposition can evaluate as true and false which was extended to sets[^2] with their elements being able to exist within a range within a set as opposed to crisp sets[^3] which are binary in nature. Fuzzy numbers are an extension on fuzzy sets and a generalization of a real number.
+The concept of a mathematical construction being fuzzy was first described in 1923 by Russell
+in his short paper named "Vagueness" in which he described a logic where a preposition can evaluate
+as true and false which was extended to sets[^2] with their elements being able to exist within a
+range within a set as opposed to crisp sets[^3] which are binary in nature. Fuzzy numbers are an
+extension on fuzzy sets and a generalization of a real number.
 
-Fuzzy Logic is sometimes used in Agent-Based Modelling, Control Systems[^4], specialized Monte Carlo Method Implementations ({ref}`FuzzyMonteCarlo2013`), linear programming ({ref}`Sakawa13`) and more recently, as a formal method for simulating human behavior and perception when interacting with machines ({ref}`bolton2022fuzzy`).
+Fuzzy Logic is sometimes used in Agent-Based Modelling, Control Systems[^4],
+specialized Monte Carlo Method Implementations ({cite}`FuzzyMonteCarlo2013`),
+increasing the complexity of linear programming ({cite}`Sakawa13`),
+and more recently, as a formal method for simulating human behavior and perception when
+interacting with machines ({cite}`bolton2022fuzzy`).
 
 #### Theory of Belief Functions
 
-This subsection builds on some other topics in Statistical Inference and Prediction that applies to modelling, for more information a reader might be interested in {cite}`GlennEvidence76` and {cite}`Xu2025QuestionableTitle`.
+This subsection builds on some other topics in Statistical Inference and Prediction that
+applies to modelling, for more information a reader might be interested in {cite}`GlennEvidence76`
+and {cite}`Xu2025QuestionableTitle`.
 
-From a formal perspective, Theory of Belief Functions are a method of generalizing probability theory with a framework that models epistemic
-uncertainty - in plain English, it is the mathematical formalization of evidence. It is often used to combine information and therefore conclusions from multiple sources into a coherent, provable statement.
+From a formal perspective, Theory of Belief Functions are a method of
+generalizing probability theory with a framework that models epistemic
+uncertainty - in plain English, it is the mathematical formalization of evidence.
+It is often used to combine information and therefore conclusions from
+multiple sources into a coherent, provable statement.
 
-This formalization starts from a event space that is bounded through support and plausibility, then it assigns masses (probabilities) to this sets[^5], 
+This formalization starts from a event space that is bounded through support and plausibility, 
+then it assigns masses (probabilities) to this sets[^5],
 
 Of a Bayesian Approximation
 <table>
