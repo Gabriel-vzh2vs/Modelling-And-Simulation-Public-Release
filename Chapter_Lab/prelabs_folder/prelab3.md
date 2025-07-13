@@ -44,7 +44,7 @@ through modelling, data quality, and more concepts covered in {ref}`sec:output_a
 of a model, but to make sure that the model is representative of the known data and its
 expected system performance metrics from known parameter estimates.
 
-### Inference and Prediction
+### Statistical Inference and Prediction
 
 Looking back on {ref}`prelab-2`, this work discussed a method for using for constructing
 correlated variates (copula), and this is a common
@@ -58,9 +58,14 @@ In Christie and et al's, the following quote is important for understanding unce
 are the leading terms in the determination of the Bayesian likelihood", as uncertainty is a function of the variance of the
 observations in the vast majority of cases using statistical inference.
 
-#### Interval Analysis
+#### Interval Analysis (Abstract Interpretation)
 
-The basic concept of interval analysis (arithmetic) is taking a point estimate such as a number, and converting it into to a range of possibilities. This method has several benefits as a computational technique
+The basic concept of interval analysis (arithmetic) is taking a point estimate such as a number,
+and converting it into to a range of possibilities. This method has several benefits as a computational technique that allows for the 
+
+
+IntvalPy package implementation
+
 
 #### Fuzzy sets, logic, and numbers
 
@@ -86,15 +91,16 @@ From a formal perspective, Theory of Belief Functions are a method of
 generalizing probability theory with a framework that models epistemic
 uncertainty - in plain English, it is the mathematical formalization of evidence.
 It is often used to combine information and therefore conclusions from
-multiple sources into a coherent, provable statement.
+multiple sources into a coherent, provable statement. And the end result of this
+framework is an rigorous enclosure of the true value of a calculated or
+simulated number.[^5]
 
-This formalization starts from a event space that is bounded through support and plausibility, 
-then it assigns masses (probabilities) to this sets[^5],
+This formalization starts from a event space that is bounded through
+support and plausibility, then it assigns masses (probabilities) to
+the sets[^6],
 
 Of a Bayesian Approximation
 <table>
-
-### Statistical Error
 
 ## Systematic Errors in Development
 
@@ -131,4 +137,6 @@ degree of relatedness defined through a membership function associated with each
 
 [^4]: Such as energy-efficient motors, auto-focusing cameras, handwriting recognition, and most modern control systems that operate on a series of rules that are phrased similar to the following: "IF first qualitative condition AND second qualitative condition, then do qualitative action".
 
-[^5]: These sets are often referred to as Focal Sets.
+[^5]: A reader might be wondering, then "why do confidence intervals exist?" The answer is that a rigorous enclosure defines the _bounds_ of which an sufficient statistic (like expected value) may exist in, a confidence interval allows for smaller intervals where the statistic is _likely_ to exist instead of the entire range where it _does_ exist.
+
+[^6]: These sets are often referred to as Focal Sets.
