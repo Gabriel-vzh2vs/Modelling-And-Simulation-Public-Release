@@ -61,10 +61,19 @@ observations in the vast majority of cases using statistical inference.
 #### Interval Analysis (Abstract Interpretation)
 
 The basic concept of interval analysis (arithmetic) is taking a point estimate such as a number,
-and converting it into to a range of possibilities. This method has several benefits as a computational technique that allows for the 
+and converting it into to a range of possibilities. This method has
+several benefits as a computational technique that allows for the
+creation of enclosures that are certain to contain at least one
+solution for a specific equation or optimization problem.
 
+A common use case is the interval extension of a general function
+which gives an interval of values because giving a precise result
+such as a point is functionally (and likely mathematically) unfeasible, which is then applied to applications that do not have an exact numerical value such as fuzzy intervals, tolerance analysis (this is a classical part of input-output analysis), constraint programming, propagation of error analysis, and solutions to PDEs of specific families (such as ODE).
 
-IntvalPy package implementation
+A reader might be wondering how does this apply to simulation? There are three major ways that
+Interval Analysis is sometimes used in simulation: parameter estimation ({cite}`jaulin1993guaranteed`), hybrid simulation ({cite}`gao2011hybrid`), and Robust Simulation and Optimization along with its associated reliability analysis ({cite}`zou2010nonlinearity`, and {cite}`ma2013interval`). These are important tools for making models more useful even in varying conditions, and can be used to inform modelling choices that enhance the precision of the conclusions from simulations.
+
+An Python package that is used for interval analysis [^1] (arithmetic) is Inveralpy.
 
 
 #### Fuzzy sets, logic, and numbers
@@ -128,7 +137,7 @@ and interpretation.
 
 a
 
-[^1]:
+[^1]: Often Julia with its impressive set of (interval analysis tools)[https://juliaintervals.github.io/dev/] is useful for this task along with Fortran (XSC), C++ (Boost Collection), or anything with the Basic Linear Algebra Subprograms will have more robust support for these operations than Python.
 
 [^2]: An example of a fuzzy set might be natural numbers that are close to three with a
 degree of relatedness defined through a membership function associated with each element that can be described as 'partially true'. I.e: [1 (0.25), 2 (0.5), 3 (1.0), 4 (0.5), 5 (0.25)].
