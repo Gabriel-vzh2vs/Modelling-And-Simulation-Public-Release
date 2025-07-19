@@ -122,6 +122,63 @@ Insert Table with the following structure: Name of the Type, Description, and Ex
 
 #### pyMC
 
+The following subsection discusses common distributions, options,
+sampling methods, and statistical methods that exist within the PyMC package (at least its ecosystem.)
+
+##### Probability Distributions
+
+:::{table}
+| Distribution (`pm.*`) | Description | Key Parameters |
+| :--- | :--- | :--- |
+| **Continuous Distributions** | | |
+| `Normal` | A continuous, symmetric, bell-shaped distribution. | `mu` (mean), `sigma` (std. dev.) |
+| `HalfNormal` | A normal distribution constrained to be non-negative. | `sigma` (std. dev.) |
+| `Uniform` | A continuous distribution where all values in a range are equally likely. | `lower` (lower bound), `upper` (upper bound) |
+| `StudentT` | Similar to the Normal distribution but with heavier tails, making it robust to outliers. | `nu` (degrees of freedom), `mu` (mean), `sigma` (scale) |
+| `Exponential` | A continuous distribution for modeling the time between events. ⏳ | `lam` (rate parameter, $\lambda$) |
+| `Beta` | A continuous distribution defined on the interval [0, 1], often used for modeling probabilities or proportions. | `alpha`, `beta` (shape parameters) |
+| `Gamma` | A two-parameter continuous distribution for non-negative random variables. | `alpha` (shape), `beta` (rate) |
+| `LogNormal` | A distribution whose logarithm is normally distributed. Used for positive random variables. | `mu` (mean of the log), `sigma` (std. dev. of the log) |
+| **Discrete Distributions** | | |
+| `Bernoulli` | A distribution for a single trial with two outcomes (0 or 1, success or failure). 🪙 | `p` (probability of success) |
+| `Binomial` | Models the number of successes in a fixed number of independent Bernoulli trials. | `n` (number of trials), `p` (probability of success) |
+| `Poisson` | Models the number of events occurring in a fixed interval of time or space. 📊 | `mu` (rate, expected number of events) |
+| `NegativeBinomial` | Models the number of successes in a sequence of Bernoulli trials before a specified number of failures occurs. | `mu` (mean), `alpha` (dispersion) |
+
+:::
+
+##### pyMC Statistics
+
+Through the Arviz package. 
+
+:::{table}
+| Function (`pm.*`) | Description | Key Parameters / Usage |
+| :--- | :--- | :--- |
+| `summary` | Generates a DataFrame with key summary statistics for the posterior distribution, such as mean, standard deviation, effective sample size (`ess`), and the R-hat diagnostic (`r_hat`). | `trace`, `var_names` |
+| `plot_posterior` | Creates a plot of the posterior distribution for specified variables, typically shown as a histogram or a Kernel Density Estimate (KDE). 📊 | `trace`, `var_names`, `hdi_prob` |
+| `trace_plot` | Creates a plot showing the MCMC trace (the time series of the samples) on one side and the posterior density on the other. It's essential for diagnosing convergence issues. | `trace`, `var_names` |
+| `sample_posterior_predictive` | Generates new data based on the fitted model and posterior samples. This is crucial for posterior predictive checks to see how well the model simulates new data. | `trace`, `model`, `samples` |
+| `loo` | Computes the approximate Leave-One-Out cross-validation (LOO) score, a metric for estimating a model's out-of-sample predictive accuracy. Used for model comparison. | `trace`, `model` |
+| `waic` | Computes the Watanabe-Akaike Information Criterion (WAIC), another popular metric for estimating out-of-sample predictive accuracy. | `trace`, `model` |
+| `model_to_graphviz` | Renders a visual graph of the model's structure, showing the relationships between random variables and data. 🔗 | `model` |
+
+:::
+
+##### pyMC Sampling
+
+:::{table}
+| Function / Concept | Description | Key Parameters / Usage |
+| :--- | :--- | :--- |
+| `pm.sample()` | This is the core function used to run the MCMC sampler and draw samples from your model's posterior distribution. | `draws`, `tune`, `chains`, `cores`, `target_accept` |
+| **NUTS Sampler** | The **No-U-Turn Sampler** is PyMC's default, highly efficient MCMC algorithm for sampling from continuous variables. It uses gradient information to explore the posterior. | Automatically assigned by `pm.sample()` to continuous variables. |
+| `draws` | The number of samples to generate and save for each chain, *after* the tuning phase. | `draws=2000` |
+| `tune` | The number of initial "warm-up" iterations per chain. These are used to adapt the sampler's parameters and are then discarded. | `tune=1000` |
+| `chains` | The number of independent MCMC chains to run. Running multiple chains (e.g., 4) is essential for diagnosing whether the sampler has converged properly. | `chains=4` |
+| `cores` | The number of CPU cores to use for running chains in parallel. Setting this to the number of chains speeds up sampling significantly. | `cores=4` |
+| `target_accept` | The target acceptance rate for the NUTS sampler. The default is usually 0.8. Increasing it can help resolve sampling difficulties (divergences) in complex models. | `target_accept=0.9` |
+| **InferenceData** | The object returned by `pm.sample()`. It's an `arviz.InferenceData` object that contains all sampling results (posterior, observed data, etc.). Often called `idata` or `trace`.| This object is the input for all diagnostic and plotting functions, like `pm.summary(idata)`. |
+:::
+
 #### Ciw
 
 #### Salabim
