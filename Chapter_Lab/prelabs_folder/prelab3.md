@@ -7,7 +7,7 @@ in simulation, some of these malignant patterns can be discovered
 and removed with the methods discussed in this section and by using the more technological-focused solutions in {ref}`prelab-5`.
 
 This pre-lab builds on the knowledge and theory presented in these
-three papers: {cite:p}`barth2012typical` {cite:p}`robinson1999three`
+two papers: {cite:p}`barth2012typical`
 {cite:p}`christie2005error`.
 
 ## On Prediction of Complex Phenomena
@@ -15,16 +15,16 @@ three papers: {cite:p}`barth2012typical` {cite:p}`robinson1999three`
 A common historical discussion in simulation literature is
 the question: "how should complex phenomena be presented and analyzed
 in simulation?" One of the papers that attempted to build a consensus
-around this topic is {cite:p}`christie2005error`. The following subsection will discuss methods of making simulation more robust to errors in structure through a variety of approaches that do not rely on software
-alone.
+around this topic is {cite:p}`christie2005error`. The following subsection
+will discuss methods of making simulation more robust to errors in structure
+through a variety of approaches that do not rely on software alone.
 
 ### Constraining the Model
 
 A core element of modelling and simulation for complex systems with 'big data'
-as discussed in {ref}`sec:preface` is having available data; note, that the data does not
-and cannot be fully representative of the whole system. Any simulation practitioner
+as discussed in {ref}`sec:preface` is having available data. Any simulation practitioner
 should also know because of the inherent incompleteness of models, it is critical
-to focus on process and structure of the simulation in the context of the data to
+to focus on the process and structure of the simulation in the context of the data to
 ensure the model can be validated with real-world data. There are many methods for
 doing this task, some of which are encapsulated in Christie and et al's "Decomposition of
 Errors" three step process:
@@ -58,14 +58,17 @@ what Christie argues is the point of modelling and simulating complex (or not) p
 In Christie and et al's, the following quote is important for understanding uncertainty:
 "Numerical and observation errors are the leading terms in the determination of the Bayesian likelihood",
 as uncertainty is a function of the variance of the observations in the vast majority of cases
-using statistical inference. Moreover, there are a variety of methods both Bayesian and Non-Bayesian to inform and structure inferences and predictions of which only a limited set are seen throughout this work
+using statistical inference. Moreover, there are a variety of methods both Bayesian and 
+Non-Bayesian to inform and structure inferences and predictions of which only a limited set are seen throughout this work
 (e.g: Monte Carlo, Confidence Intervals, and Simulation for Predictions) and below (Interval Analysis, Fuzzy Logic, and DS theory).
 
 :::{admonition} Advisory on the Content below
 :class: warning dropdown
 
 In general, the content discussed below is a limited overview of more
-complex topics that lead into number theory with applications in simulation. The purpose of exposing the reader to these topics is not mastery nor familiarity with these topics, but to allow for further exploration. It is not expected that the reader will be able to use everything in the following three subsections.
+complex topics that lead into number theory with applications in simulation. The purpose of exposing the
+reader to these topics is not mastery nor familiarity with these topics, but to allow for further exploration.
+It is not expected that the reader will be able to use everything in the following three subsections.
 
 :::
 
@@ -185,19 +188,72 @@ predictions of future events in context of Markov Chain Monte Carlo [^7] {cite}`
 
 In {cite:p}`barth2012typical`, they describe the existence of five
 distinct pitfalls: acceptance, distraction, complexity, implementation,
-and interpretation.
+and interpretation. It does so in the context of a six stage cycle which consists of formulating the question, identifying relevant elements of the target system, choosing a model structure, implementation, model analysis, and communicating results.
 
-### Acceptance
+### Acceptance, Understanding, & Interpretation
+
+One of the errors that could occur during the communication stage of
+simulation is that a practitioner assumes that the model is valid
+and verified because its output is consistent with expectations. In Barth,
+the describe this as the acceptance pitfall,
+although in the social sciences this is known as confirmation bias. It is 
+important to understand that just because a model is consistent
+with expectations does not mean that is representative of the model or that it is useful.
+An example of this is [an article](https://www.ft.com/content/5ff6469a-6dd8-11ea-89df-41bea055720b)
+from the Financial Times that claims that by March 24th, 2020, half of the population of the
+United Kingdom of Great Britain and Northern Ireland was infected
+by the Novel Coronavirus, SARS-COV-2, based on a SIR model
+(which this text discusses later) with an $\rho$ that was not constrained
+nor supported by the data of the time nor in retrospect. This is an
+example of confidently misunderstanding the results of a simulation the results along with the
+data because it appears to match with the expectations of the practitioner.
+An another problem with how this result is presented and
+structured is that it is presented without the possibility of error.
+
+A practitioner must consider the assumptions, the uncertainty, the implications
+and the context that their model exists in or may generate. It is natural
+to assume increased confidence because of a model, but even a model that appears to
+be perfect should be backed through proper communication of results and assumptions and a
+replicable, reproducible methodology for its construction[^8].
 
 ### Distraction
 
-### Complexity
+Distraction is often defined as something that prevents a person from giving their full attention
+to the subject at hand.
 
-### Implementation
+In simulation, it refers to the idea that a practitioner is not accomplishing enough in the model,
+constantly adding more details and increasing the scope to what they assume that.
+This often occurs in the context of external or internal pressures by stakeholders to
+answer every question with a single model.
 
-### Interpretation
+It often goes "why not use this model to answer this", the reason why is the same
+reason why a map cannot have every detail of the terrain, at that point the map is useless -
+it is just reality.
 
-a
+The fundamental pair of errors in the context of distraction is scope creep and
+overconfidence, these two factors make it impossible to finish the model or at best,
+make the model so complex that it is impossible to understand.
+
+How does a practitioner avoid distraction? They must have both
+conceptual clarity in the fundamentals in their model and have
+clarity in their research question which clients often lack.
+This is difficult in many different
+environments as there is often a desire to meet all of the demands
+from every stakeholder and answer every question, but that is impossible
+without losing the original question. Moreover, it might be needed
+to switch the question if it is too vague or broad.
+
+### Complexity and Implementation
+
+Complexity refers to the rules that control and interact with the model, this is often a source of aleatoric uncertainty. One of the
+main tasks of an engineer is to manage this uncertainty with simplicity
+without destroying the usefulness of the model.
+
+It is often hard to figure out what to exclude from the model, but
+a practitioner must use their experience, conceptual clarity, willpower, and data to figure out what is useful. Moreover, this concept might require the practitioner to understand that modelling is a two-way process of addition and subtraction - it is not just building and combing concepts it is also taking away concepts that do not aid in discovery or conclusion making to find a useful, relative truth.
+
+Implementation relies on a reasonable amount of complexity and a infrastructure that can be understood and verified by the practitioners as a useful tool and not reality itself. It is often stated in Simulation textbooks such as {ref}`Law:13` that face validity is a critical part of making models that are suitable for obtaining founded
+conclusions. This is a double-edged sword, as face validity is required but not in any way sufficient for building useful models. It also needs to be rigorously analyzed and validated while maintaining a detached view of the model itself which is more and more difficult with time.
 
 [^1]: Often Julia with its impressive set of [interval analysis tools](https://juliaintervals.github.io/dev/) is more useful for most tasks involving intervals along with Fortran (XSC), C++ (Boost Collection), or anything with the Basic Linear Algebra Subprograms will have more robust support for these operations than Python.
 
@@ -213,3 +269,5 @@ degree of relatedness defined through a membership function associated with each
 [^6]: These sets are often referred to as Focal Sets.
 
 [^7]: In the paper, they refer to MCMC (Markov Chain Monte Carlo) as Bayesian Monte Carlo which is quite peculiar, since modern Bayesian inference is built on MCMC and not the other way around [a lecture on why MCMC is important to Bayesian inference](https://www.stats.ox.ac.uk/~reinert/mcmc/mcmc.pdf).
+
+[^8]: This is one of the reasons why this work exists - to help early simulation practitioners understand what to consider when doing simulation.
