@@ -5,7 +5,7 @@
 Now that this text has covered a substantial amount of theory,
 it is important for the reader to identify and consider malignant
 patterns in simulation, which is what this pre-lab aims to aid in
-doing.
+doing. This pre-lab unlike {ref}`prelab-3` focuses on using technological verification instead of structural validation.
 
 A critical part of working with complex systems and software is debugging.
 In this case, this text defines debugging as a reliable, systematic method

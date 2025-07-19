@@ -1,10 +1,10 @@
 (prelab-3)=
-# Pre-Lab 3: When Simulation Breaks Down (Read)
+# Pre-Lab 3: Improving the Robustness of Simulation (Read)
 
 Now that this text has covered a substantial amount of theory,
-it is important for the reader to consider malignant patterns
+it is important for the reader to consider malignant patterns and robustness
 in simulation, some of these malignant patterns can be discovered
-and removed with the methods discussed in {ref}`prelab-5`.
+and removed with the methods discussed in this section and by using the more technological-focused solutions in {ref}`prelab-5`.
 
 This pre-lab builds on the knowledge and theory presented in these
 three papers: {cite:p}`barth2012typical` {cite:p}`robinson1999three`
@@ -15,7 +15,8 @@ three papers: {cite:p}`barth2012typical` {cite:p}`robinson1999three`
 A common historical discussion in simulation literature is
 the question: "how should complex phenomena be presented and analyzed
 in simulation?" One of the papers that attempted to build a consensus
-around this topic is {cite:p}`christie2005error`.
+around this topic is {cite:p}`christie2005error`. The following subsection will discuss methods of making simulation more robust to errors in structure through a variety of approaches that do not rely on software
+alone.
 
 ### Constraining the Model
 
@@ -54,26 +55,46 @@ These methods are then combined with concepts from {ref}`sec:prob_stats` to
 create predictions of system performance (outputs) from the model, which is
 what Christie argues is the point of modelling and simulating complex (or not) phenomena.
 
-In Christie and et al's, the following quote is important for understanding uncertainty: "Numerical and observation errors
-are the leading terms in the determination of the Bayesian likelihood", as uncertainty is a function of the variance of the
-observations in the vast majority of cases using statistical inference.
+In Christie and et al's, the following quote is important for understanding uncertainty:
+"Numerical and observation errors are the leading terms in the determination of the Bayesian likelihood",
+as uncertainty is a function of the variance of the observations in the vast majority of cases
+using statistical inference. Moreover, there are a variety of methods both Bayesian and Non-Bayesian to inform and structure inferences and predictions of which only a limited set are seen throughout this work
+(e.g: Monte Carlo, Confidence Intervals, and Simulation for Predictions) and below (Interval Analysis, Fuzzy Logic, and DS theory).
+
+:::{admonition} Advisory on the Content below
+:class: warning dropdown
+
+In general, the content discussed below is a limited overview of more
+complex topics that lead into number theory with applications in simulation. The purpose of exposing the reader to these topics is not mastery nor familiarity with these topics, but to allow for further exploration. It is not expected that the reader will be able to use everything in the following three subsections.
+
+:::
 
 #### Interval Analysis (Abstract Interpretation)
 
-The basic concept of interval analysis (arithmetic) is taking a point estimate such as a number,
-and converting it into to a range of possibilities. This method has
+The basic concept of interval analysis (arithmetic) is taking a point estimate
+such as a number, and converting it into to a range of possible values. This method has
 several benefits as a computational technique that allows for the
 creation of enclosures that are certain to contain at least one
 solution for a specific equation or optimization problem.
 
 A common use case is the interval extension of a general function
 which gives an interval of values because giving a precise result
-such as a point is functionally (and likely mathematically) unfeasible, which is then applied to applications that do not have an exact numerical value such as fuzzy intervals, tolerance analysis (this is a classical part of input-output analysis), constraint programming, propagation of error analysis, and solutions to PDEs of specific families (such as ODE).
+such as a point is functionally (and likely mathematically) unfeasible,
+which is then applied to applications that do not have an exact numerical value
+such as fuzzy intervals, tolerance analysis (this is a classical part of input-output analysis),
+constraint programming, propagation of error analysis, and solutions to PDEs of specific
+families (such as an ODE).
 
 A reader might be wondering how does this apply to simulation? There are three major ways that
-Interval Analysis is sometimes used in simulation: parameter estimation ({cite}`jaulin1993guaranteed`), hybrid simulation ({cite}`gao2011hybrid`), and Robust Simulation and Optimization along with its associated reliability analysis ({cite}`zou2010nonlinearity`, and {cite}`ma2013interval`). These are important tools for making models more useful even in varying conditions, and can be used to inform modelling choices that enhance the precision of the conclusions from simulations.
+Interval Analysis is sometimes used in simulation: parameter estimation ({cite}`jaulin1993guaranteed`),
+hybrid simulation ({cite}`gao2011hybrid`), and Robust Simulation and Optimization along with its
+associated reliability analysis ({cite}`zou2010nonlinearity`, and {cite}`ma2013interval`). These
+are important tools for making models more useful even in varying conditions, and can be used to
+inform modelling choices that enhance the precision of the conclusions from simulations.
 
-An Python package that is used for interval analysis [^1] (arithmetic) is portion which provides a data structure with associated operations for intervals (note: it uses a namedtruple which is why the footnote is there).
+An Python package that is used for interval analysis [^1] (arithmetic) is portion which provides
+a data structure with associated operations for intervals (note: it uses a namedtruple which is why
+the footnote is there).
 
 #### Fuzzy sets, logic, and numbers
 
@@ -83,40 +104,82 @@ as true and false which was extended to sets[^2] with their elements being able 
 range within a set as opposed to crisp sets[^3] which are binary in nature. Fuzzy numbers are an
 extension on fuzzy sets and a generalization of a real number.
 
-Fuzzy Logic is sometimes used in Agent-Based Modelling, Control Systems[^4],
+Fuzzy Logic is sometimes used in Agent-Based Modelling, Machine Learning, Control Systems[^4],
 specialized Monte Carlo Method Implementations ({cite}`FuzzyMonteCarlo2013`),
 increasing the complexity of linear programming ({cite}`Sakawa13`),
 and more recently, as a formal method for simulating human behavior and perception when
-interacting with machines ({cite}`bolton2022fuzzy`). 
+interacting with machines ({cite}`bolton2022fuzzy`).
 
-#### Theory of Belief Functions
+What follows this passage is a toy example of using Fuzzy Logic for a simulated control system,
+which is a canonical example of a control system, a Heating, Ventilation and Air Conditioning (HVAC)
+system controlled by a thermostat. This example uses scikit-fuzzy as an implementation for fuzzy logic (a reader could also implement this using the fuzzylogic package.)
+
+:::{admonition} Code
+:class: dropdown
+
+```{code} python3
+import numpy as np
+import skfuzzy as fuzz
+from skfuzzy import control as ctrl
+
+temperature = ctrl.Antecedent(np.arange(0, 41, 1), 'temperature')
+humidity = ctrl.Antecedent(np.arange(0, 101, 1), 'humidity')
+hvac = ctrl.Consequent(np.arange(-100, 101, 1), 'hvac')
+
+# Define the membership functions for temperature, humidity, and outputs
+temperature['cold'] = fuzz.trimf(temperature.universe, [0, 0, 20])
+temperature['comfortable'] = fuzz.trimf(temperature.universe, [15, 20, 25])
+temperature['hot'] = fuzz.trimf(temperature.universe, [20, 40, 40])
+humidity['dry'] = fuzz.trimf(humidity.universe, [0, 0, 50])
+humidity['comfortable'] = fuzz.trimf(humidity.universe, [30, 50, 70])
+humidity['humid'] = fuzz.trimf(humidity.universe, [50, 100, 100])
+hvac['heating'] = fuzz.trimf(hvac.universe, [-100, -100, 0])
+hvac['off'] = fuzz.trimf(hvac.universe, [-25, 0, 25])
+hvac['cooling'] = fuzz.trimf(hvac.universe, [0, 100, 100])
+
+# Fuzzy Rules
+
+rule1 = ctrl.Rule(temperature['cold'], hvac['heating'])
+rule2 = ctrl.Rule(temperature['hot'] & humidity['humid'], hvac['cooling'])
+rule3 = ctrl.Rule(temperature['comfortable'] & humidity['comfortable'], hvac['off'])
+
+# Control System Creation and Simulation
+hvac_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
+hvac_simulation = ctrl.ControlSystemSimulation(hvac_ctrl)
+
+# Simulate a warm and somewhat humid day
+hvac_simulation.input['temperature'] = 28
+hvac_simulation.input['humidity'] = 65
+hvac_simulation.compute()
+print(f"HVAC Output: {hvac_simulation.output['hvac']:.2f}")
+humidity.view()
+hvac.view()
+hvac.view(sim=hvac_simulation)
+```
+
+:::
+
+#### Theory of Belief Functions (Dempster–Shafer theory)
 
 This subsection builds on some other topics in Statistical Inference and Prediction that
 applies to modelling, for more information a reader might be interested in {cite}`GlennEvidence76`
-and {cite}`Xu2025QuestionableTitle`.
+and {cite}`Xu2025QuestionableTitle`. And if a reader is interested in a more rigorous and formal treatment of the theory of belief functions there is {cite}`chen2004evidential` which is about a specific implementation of the theory in warfare or {cite}`sentz2002combination` for a more traditional analysis.
 
 From a formal perspective, Theory of Belief Functions are a method of
-generalizing probability theory with a framework that models epistemic
+generalizing probability theory with a framework that models _epistemic_
 uncertainty - in plain English, it is the mathematical formalization of evidence.
 It is often used to combine information and therefore conclusions from
 multiple sources into a coherent, provable statement. And the end result of this
 framework is an rigorous enclosure of the true value of a calculated or
 simulated number.[^5]
-
 This formalization starts from a event space that is bounded through
 support and plausibility, then it assigns masses (probabilities) to
-the sets[^6],
+the sets[^6] that when added together must sum to a total probability of one. Then, belief functions add context to the true but unknown probabilities in
+accordance with Dempster's rule (a rule that allows for the combination of opinions/information of disparate probability distributions.)
+All of these factors combine into a non-bayesian method for supporting evidence that provides an alternative view of probability judgement.
 
-Of a Bayesian Approximation
-<table>
-
-## Systematic Errors in Development
-
-### Modelling
-
-### Data
-
-### Experimentation
+Some applications of the Theory of Belief Functions in Simulation (or at least in fields related to it) include the simulation of decision-making processes like stock trading systems {cite}`sevastianov2009synthesis`,
+predictions of future events in context of Markov Chain Monte Carlo [^7] {cite}`he2011prognostics`, and most commonly in Machine Learning {cite}`belmahdi2023application` and{cite}`nachappa2020flood`.
 
 ## Errors in Interpretation and Communication
 
@@ -145,6 +208,8 @@ degree of relatedness defined through a membership function associated with each
 
 [^4]: Such as energy-efficient motors, auto-focusing cameras, handwriting recognition, and most modern control systems that operate on a series of rules that are phrased similar to the following: "IF first qualitative condition AND second qualitative condition, then do qualitative action".
 
-[^5]: A reader might be wondering, then "why do confidence intervals exist?" The answer is that a rigorous enclosure defines the _bounds_ of which an sufficient statistic (like expected value) may exist in, a confidence interval allows for smaller intervals where the statistic is _likely_ to exist instead of the entire range where it _does_ exist.
+[^5]: A reader might be wondering, then "why do confidence intervals exist?" The answer is that a rigorous enclosure for a statistic (which could be sufficient, complete, or ancillary) defines the _bounds_ of which an statistic (like expected value) may exist in, a confidence interval allows for smaller intervals where the statistic is _likely_ to exist instead of the entire range where it _does_ exist.
 
 [^6]: These sets are often referred to as Focal Sets.
+
+[^7]: In the paper, they refer to MCMC (Markov Chain Monte Carlo) as Bayesian Monte Carlo which is quite peculiar, since modern Bayesian inference is built on MCMC and not the other way around [a lecture on why MCMC is important to Bayesian inference](https://www.stats.ox.ac.uk/~reinert/mcmc/mcmc.pdf).

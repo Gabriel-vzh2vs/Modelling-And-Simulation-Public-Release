@@ -5,10 +5,10 @@ These projects are meant to bridge the theory of simulation and application into
 this section will have methods for evaluation for students and instructors. It is recommended to select two of the five projects selected
 here with one belonging to the fundamental set, and another belonging to the extension set.
 Additionally, these projects are in a case-study format, meaning that there is not a walk-through, and the learner is expected
-to convert the projects from the case-study with requirements to a system that could be in ODD-format depending on course goals.
+to convert the projects from the case-study with requirements to a system that could be in ODD-format depending on course goals, typically with a group of learners[^1].
 
 :::{note} Project Status
-To Henning, this section is in a state of chaos and change until June 21st. After that point, this
+To Henning, this section is in a state of chaos and change until July 21st. After that point, this
 section should become more stable and mature.
 
 The close thing to consistency is Project 3 for the moment. (Projects 1 and 2 are being reworked to be in-line with
@@ -378,3 +378,6 @@ And this project relies on the following prerequisites:
 
 ## Project 8 Metrics of Interest
 
+[^1]: The reason for this is the fact that every project you do is a group project, even if a reader works independently - the reader existing in the past is not and cannot be the same person as the present nor future reader. Working within a group allows for the reader to appreciate this fact in the present rather than retroactively.
+
+<!-- Note to the Editor, "The reason for this is simple, every project you do is a group project, even if a reader works independently - the past reader cannot be the same person as the future reader, no matter how much they try" is risky, so I have rephrased this. -->
