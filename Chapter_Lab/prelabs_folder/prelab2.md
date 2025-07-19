@@ -7,9 +7,9 @@ done within other packages in python such as the monaco and (copulas or statsmod
 
 In this pre-lab we will discuss the Monte Carlo Method with its implementations
 and do a short example of coin-flipping that loosely relates to Lab-2. Keep in mind that
-the XLRisk and pyMC sections are almost identical on purpose.
+the pyMC section depends on the XLRisk section to reduce duplication.
 
-::::{tab-set}
+:::{tab-set}
 
 ### Correlations between distributions (Copula)
 
@@ -86,7 +86,7 @@ documentation.
 
 :::
 
-:::{tab-item} pyMC + Numpy + Scipy
+:::{tab-item} pyMC and its Ecosystem
 
 ### pyMC Functions
 
@@ -142,21 +142,90 @@ a1 = ["a_dist"behavior].cdf(a)
 b1 = ["b_dist"].cdf(b)
 sns.jointplot(x=a1, y=b1, kind="hex", height=6);
 ```
-
 ::::
+
 
 ### pyMC Presentation of Results
 
-The differences between PyMC and XLrisk are not based on fundamental mathematical differences, but based on interface changes between a spreadsheet and Python, as the laster tends to have a more terminal-focused UI/UX.
-
-#### PyMC Statistics and Outputs
-
-Generally, PyMC is generally considered a package for Bayesian statistics and analysis
-
-### Skew and Kurtosis through Pandas
+The differences between PyMC and XLrisk are not based on fundamental mathematical differences, but based on interface changes between a spreadsheet and Python, as the laster tends to have a more terminal-focused UI/UX. And the user is expected to define the
+interface through its commands and some of it is listed in {ref}`sec:software`. An case study is included below to assist the reader.
 
 ### Example of Using pyMC (Code with Explanation)
 
+In this case, this text is based on the Monte Hall Problem with some
+influences from [Austin's Introduction to PyMC](https://austinrochford.com/posts/intro-prob-prog-pymc.html#The-Monty-Hall-problem).
+
+::::{admonition} Code for the Monte Hall Problem in Python
+:class: dropdown
+
+```{code} python
+import pymc as pm
+import pytensor.tensor as pt
+import numpy as np
+import arviz as az
+
+# The doors are numbered 0, 1, and 2.
+DOORS = [0, 1, 2]
+NUM_SAMPLES = 10000
+
+with pm.Model() as monty_hall_model:
+
+    # These are the initial beliefs about the random variables before we see any data.
+    # The prize is behind one of three doors with equal probability (1/3).
+    prize_door = pm.Categorical('prize_door', p=[1/3, 1/3, 1/3])
+    initial_choice = pm.Categorical('initial_choice', p=[1/3, 1/3, 1/3])
+
+    def monty_opens_func(prize, choice):
+        all_doors = pt.arange(3)
+        remaining_doors_when_correct = all_doors[~pt.eq(all_doors, choice)]
+        monty_if_correct = remaining_doors_when_correct[0]
+        monty_if_incorrect = 3 - prize - choice
+
+        # Use pt.switch to decide which case applies.
+        # pt.eq(prize, choice) returns 1 if true, 0 if false.
+        return pt.switch(pt.eq(prize, choice), monty_if_correct, monty_if_incorrect)
+
+    # pm.Deterministic creates a variable whose value is strictly determined by its parents.
+    monty_opens = pm.Deterministic('monty_opens', monty_opens_func(prize_door, initial_choice))
+    
+    def switch_choice_func(choice, monty):
+        return 3 - choice - monty
+
+    switch_choice = pm.Deterministic('switch_choice', switch_choice_func(initial_choice, monty_opens))
+    win_if_stay = pm.Deterministic('win_if_stay', pt.eq(initial_choice, prize_door))
+    win_if_switch = pm.Deterministic('win_if_switch', pt.eq(switch_choice, prize_door))
+
+# pm.sample_prior_predictive does exactly this: it draws samples from the prior distributions
+# and calculates the values of the deterministic variables.
+with monty_hall_model:
+    prior_trace = pm.sample_prior_predictive(samples=NUM_SAMPLES, random_seed=42)
+
+# The trace contains the outcomes of all 10,000 simulated games.
+prob_win_stay = prior_trace.prior['win_if_stay'].mean().item()
+prob_win_switch = prior_trace.prior['win_if_switch'].mean().item()
+
+print("\n--- Monty Hall Problem Simulation Results ---")
+print(f"Number of simulated games: {NUM_SAMPLES}")
+print(f"Probability of winning if you STAY: {prob_win_stay:.2%}")
+print(f"Probability of winning if you SWITCH: {prob_win_switch:.2%}")
+
+print("\n--- Preview of 5 games ---")
+for i in range(5):
+    prize = prior_trace.prior['prize_door'].values[0, i]
+    choice = prior_trace.prior['initial_choice'].values[0, i]
+    monty = prior_trace.prior['monty_opens'].values[0, i]
+    sw_choice = prior_trace.prior['switch_choice'].values[0, i]
+    stay_win = "Win" if prior_trace.prior['win_if_stay'].values[0, i] else "Lose"
+    switch_win = "Win" if prior_trace.prior['win_if_switch'].values[0, i] else "Lose"
+    print(
+        f"Game {i+1}: Prize is behind door {prize}. "
+        f"Contestant chose {choice}. Monty opened {monty}. "
+        f"Switching goes to {sw_choice}. "
+        f"Result (Stay/Switch): {stay_win}/{switch_win}"
+    )
+```
+
+::::
 
 :::
 
