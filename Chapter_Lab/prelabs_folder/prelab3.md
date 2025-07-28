@@ -58,7 +58,7 @@ what Christie argues is the point of modelling and simulating complex (or not) p
 In Christie and et al's, the following quote is important for understanding uncertainty:
 "Numerical and observation errors are the leading terms in the determination of the Bayesian likelihood",
 as uncertainty is a function of the variance of the observations in the vast majority of cases
-using statistical inference. Moreover, there are a variety of methods both Bayesian and 
+using statistical inference. Moreover, there are a variety of methods both Bayesian and
 Non-Bayesian to inform and structure inferences and predictions of which only a limited set are seen throughout this work
 (e.g: Monte Carlo, Confidence Intervals, and Simulation for Predictions) and below (Interval Analysis, Fuzzy Logic, and DS theory).
 
