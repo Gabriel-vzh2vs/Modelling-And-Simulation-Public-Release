@@ -36,8 +36,65 @@ verification and validation.
 
 
 :::{tab-item} Breakpoints
-In most IDEs, the concept of a breakpoint generally exists, and a breakpoint is generally
-used to ensure that the code in question runs
+In most IDEs (such as VS Code), the concept of a breakpoint generally exists, and a
+breakpoint is generally used to ensure that the code in question runs. In this case run refers
+to the program/model completing its tasks - *not* that the tasks are correctly done,
+but that the program begins and terminates without issue. If an error does prevent
+execution at a breakpoint, then the IDE will allow the practitioner to look at the
+data structures, the trace of the events before the error (a trace is a list of
+operations called or performed by the program), maybe an error message
+(depending on the packages).
+
+The reason why breakpoints are useful might be apparent to some readers, particularly by now, but
+essentially, a breakpoint allows a practitioner to discover hints about why their program
+is unable to complete execution. This use usually involves moving through a series of
+operations and functions trying to find the source of the error. Moreover, breakpoints have
+another use, to analyze why a output from a program or function is incorrect. A practitioner
+can leverage breakpoints to determine where a calculation goes wrong or which assumption in a
+model was either inconsistent programmatically or incorrectly implemented.
+
+Here is a toy example for the reader that might show why breakpoints are important in
+software implementations of models. In this example, there is a single function
+with an error someone within its logic.
+
+```{code} python3
+def find_magic_sum(data_list):
+    """
+    This function is supposed to sum all numbers in a list that are > 5.
+    """
+    magic_sum = 0
+    for number in data_list:
+        if number > 5:
+            magic_sum += 1 # This line might be of interest.
+            
+    return magic_sum
+
+# --- Executing the Function  ---
+numbers = [2, 8, 4, 10, 6]
+expected_result = 8 + 10 + 6  # Should be 24
+actual_result = find_magic_sum(numbers)
+
+print(f"List of numbers: {numbers}")
+print(f"Expected sum (> 5): {expected_result}")
+print(f"Actual function result: {actual_result}") # Why is 3 the result?
+```
+
+Once the reader runs this script, they get the statement that the actual result
+is 3, when the expected result is 24. The reason for that is that the magic
+sum is adding 1 for each of the numbers instead of summing the number itself
+to a variable named 'magic_sum'. If the reader places a breakpoint
+on the line marked with magic_sum += 1 and steps through the cycle three times
+they will see the variable go from 1 to 2 to 3, instead of the correct
+sequence based on the list of 8, 18, and 24.
+
+One of the issues when using breakpoints is the problem of "where", as in,
+where should you place an breakpoint within a program. The reason why this is
+an problem is that if the error occurs before the breakpoint, the breakpoint is
+never activated. With the example above, if the reader places it on the print statement,
+they might miss the source of the error as it will only show the end results without the
+context that precedes it. One of the solutions to this problem is
+to combine breakpoints with the next technique, unit testing, which will narrow
+the search area for possible issues (in ideal circumstances).
 :::
 
 :::{tab-item} Unit Testing
@@ -103,17 +160,21 @@ A common language for making software provable is _LTL_, Linear Temporal Logic, 
 allows for the application of logic on to a process or system. This work will not
 in-depth about how to do LTL, but will provide an outline of some critical concepts.
 
-LTL is composed of the following elements: variables, boolean values, and operators that make up properties (model-related traits).
+LTL is composed of the following elements: variables, boolean values, and operators that
+make up properties (model-related traits).
 Some of the operators are the "and" ($\land$), "or" ($\vee$),
 "exclusive or" ($\oplus$), "not" ($\neg$), "until" (U), "next" (X), and
 "eventually" ($\rightarrow$) operators. These operators can combine into compositions
 in the context of variables which allow for creating statements such as
 "this event will _eventually_ happen at some point in the system's lifetime _and_
-be true afterward". And the path defined by LTL statements is verified by model checking - which os similar to simulating each possibility and ensuring that the behavior matches the description.  More information is available in dedicated sources on LTL like
+be true afterward". And the path defined by LTL statements is verified by model checking -
+which is similar to simulating each possibility and ensuring that the behavior matches the description.  
+More information is available in dedicated sources on LTL:
 {cite:p}`fisher2011introduction`, {cite:p}`wang2019formal`, and {cite:p}`clarke1997another`.
 
 What follows is an example of using LTL in a Python-Based Library[^2],
-PyReason. Suppose there is a traffic light that has three states: green, yellow, and red, and the following transition pattern applies: $S_green \rightarrow S_yellow \rightarrow S_red \rightarrow S_green$.
+PyReason. Suppose there is a traffic light that has three states: green, yellow, and red,
+and the following transition pattern applies: $S_{green} \rightarrow S_{yellow} \rightarrow S_{red} \rightarrow S_{green}$.
 
 Logically, three properties of this system can be defined as the following:
 
@@ -121,89 +182,43 @@ Logically, three properties of this system can be defined as the following:
 a light cannot be green and red:
 
 ```{math}
-G(\neg(is_green \land is_red) \vee (is_red \land is_green) \vee (is_green \land is_red))
+G(\neg(is_{green} \land is_{red}) \vee (is_{red} \land is_{green}) \vee (is_{green} \land is_{red}))
 ```
 
 This can be read as the following, it is is globally true that the
-light cannot be in green and red _or_ green and yellow, _or_ yellow and red. Or in using set notation, $\forall S: is_green + is_red + is_yellow = 1$.This is an *invariant* property, meaning that it remains true for all states in a system.
+light cannot be in green _and_ red _or_ green _and_ yellow, _or_ yellow _and_ red. Or in using set notation,
+$\forall S: is_{green} + is_{red} + is_{yellow} = 1$. 
+This is an *invariant* property, meaning that it remains true for all states in a system.
 
 2. Upon every update, the system shall move from one state to another. In a specific order defined through the transition pattern above.
 
 ```{math}
-G(is_red \rightarrow X(is_green)) \land G(is_green \rightarrow X(is_yellow)) \land G(is_yellow \rightarrow X(is_red))
+G(is_{red} \rightarrow X(is_{green})) \land G(is_{green} \rightarrow X(is_{yellow})) \land G(is_{yellow} \rightarrow X(is_{red}))
 ```
 
-Which can be read as "_if_ the light is red, the next light will be green, _AND_ _if_ the light is green, the next light will be yellow, and if the light is yellow, the next light will be red."
+Which can be read as "_if_ the light is red, the next light will be green, _AND_ _if_ 
+the light is green, the next light will be yellow, 
+and if the light is yellow, the next light will be red."
 
 3. The initial state of the system shall be green.
 
 
 ```{code} python3
-import pyreason as pr
-pr.reset()
-
-# Nodes are 'light', edges represent properties (simple graph)
-graph = pr.Graph()
-graph.add_node("light")
-pr.add_graph(graph)
-
-# 2. Define the initial state (Facts)
-# The light is green at time t=0
-initial_facts = [
-    pr.Fact("is_green_fact", "light", "is_green", True, [0, 0])
-]
-pr.add_facts(initial_facts)
-
-# 3. Define the transition logic (Rules)
-# These rules tell the system how to move from one state to the next.
-# The 't' is a variable representing time.
-rules = [
-    # If the light is green at time t, it will be yellow at t+1
-    pr.Rule(
-        "GreenToYellow",
-        [pr.Fact(None, "light", "is_green", True, ["t", "t"])],
-        [pr.Fact("is_yellow_fact", "light", "is_yellow", True, ["t+1", "t+1"])]
-    ),
-    # If the light is yellow at time t, it will be red at t+1
-    pr.Rule(
-        "YellowToRed",
-        [pr.Fact(None, "light", "is_yellow", True, ["t", "t"])],
-        [pr.Fact("is_red_fact", "light", "is_red", True, ["t+1", "t+1"])]
-    ),
-    # If the light is red at time t, it will be green at t+1
-    pr.Rule(
-        "RedToGreen",
-        [pr.Fact(None, "light", "is_red", True, ["t", "t"])],
-        [pr.Fact("is_green_fact", "light", "is_green", True, ["t+1", "t+1"])]
-    )
-]
-pr.add_rules(rules)
-
-
-pr.settings.verbose = False # Turn off detailed output for clarity
-interpretation = pr.reason(timesteps=10)
-
-# 5. Model Checking
-print("Traffic Light State Over Time:")
-for t in range(11):
-    state = "unknown"
-    if interpretation.nodes["light"].facts[t].get("is_green"):
-        state = "Green"
-    elif interpretation.nodes["light"].facts[t].get("is_yellow"):
-        state = "Yellow"
-    elif interpretation.nodes["light"].facts[t].get("is_red"):
-        state = "Red"
-    print(f"Time {t}: {state}")
-
-# Doing output analysis: using the intervals where a property is true and matching it with expectations
-
-green_intervals = interpretation.nodes["light"].labels["is_green"].get_intervals()
-print(f"\nThe light is green during these time intervals: {green_intervals}")
+Finding some better code. 
 ```
 
-a
+There is another formal methods that this text covers in later chapters called
+Finite State Machines ({ref}`sec:cellular_automata`, {ref}`sec:DFA`), but this prelab
+will not cover that to reduce deduplication of efforts in this text.
 
-a
+And many that this text does not approach as they are uncommon in simulation[^3], and a
+nonexhaustive list is below along with some external texts that describe them in further
+detail:
+
+1. Static Analysis techniques such as linters (which are similar to breakpoints);
+2. Automated theorem provers like LEAN, Isabelle, or RCoq (proving theorems is an exercise left to the reader);
+3. And more!
+
 :::
 ::::
 
