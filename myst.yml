@@ -124,7 +124,7 @@ project:
 site:
   template: book-theme
   parts:
-    footer: | # Note that this footer will not work until June with 2.0.0a4 of JB 2.0.
+    footer: | # Note that this footer will not work until June with 2.0.0b2 of JB 2.0.
       <div>
         <p>&copy; Copyright 2025 Henning S. Mortveit and Gabriel A. Lawrence. All rights reserved.</p>
       </div>

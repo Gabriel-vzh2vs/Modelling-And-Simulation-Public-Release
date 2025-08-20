@@ -156,55 +156,45 @@ system specifications. In general, formal methods are difficult and time-consumi
 to capture for every element of the system meaning that they should be automated and
 focused to critical elements within the model.
 
-A common language for making software provable is _LTL_, Linear Temporal Logic, that
+A common language for making software provable is _CTL*_, Computational Tree Logic*, that
 allows for the application of logic on to a process or system. This work will not
-in-depth about how to do LTL, but will provide an outline of some critical concepts.
+in-depth about how to do CTL*, but will provide an outline of some critical concepts.
 
-LTL is composed of the following elements: variables, boolean values, and operators that
+CTL* is composed of the following elements: variables, boolean values, and operators that
 make up properties (model-related traits).
 Some of the operators are the "and" ($\land$), "or" ($\vee$),
 "exclusive or" ($\oplus$), "not" ($\neg$), "until" (U), "next" (X), and
 "eventually" ($\rightarrow$) operators. These operators can combine into compositions
 in the context of variables which allow for creating statements such as
 "this event will _eventually_ happen at some point in the system's lifetime _and_
-be true afterward". And the path defined by LTL statements is verified by model checking -
+be true afterward". And the path defined by CTL* statements is verified by model checking -
 which is similar to simulating each possibility and ensuring that the behavior matches the description.  
-More information is available in dedicated sources on LTL:
+More information is available in dedicated sources on CTL* and its subsets:
 {cite:p}`fisher2011introduction`, {cite:p}`wang2019formal`, and {cite:p}`clarke1997another`.
 
-What follows is an example of using LTL in a Python-Based Library[^2],
-PyReason. Suppose there is a traffic light that has three states: green, yellow, and red,
-and the following transition pattern applies: $S_{green} \rightarrow S_{yellow} \rightarrow S_{red} \rightarrow S_{green}$.
-
-Logically, three properties of this system can be defined as the following:
-
-1. The signal cannot be in multiple states at the same time - i.e:
-a light cannot be green and red:
-
-```{math}
-G(\neg(is_{green} \land is_{red}) \vee (is_{red} \land is_{green}) \vee (is_{green} \land is_{red}))
-```
-
-This can be read as the following, it is is globally true that the
-light cannot be in green _and_ red _or_ green _and_ yellow, _or_ yellow _and_ red. Or in using set notation,
-$\forall S: is_{green} + is_{red} + is_{yellow} = 1$. 
-This is an *invariant* property, meaning that it remains true for all states in a system.
-
-2. Upon every update, the system shall move from one state to another. In a specific order defined through the transition pattern above.
-
-```{math}
-G(is_{red} \rightarrow X(is_{green})) \land G(is_{green} \rightarrow X(is_{yellow})) \land G(is_{yellow} \rightarrow X(is_{red}))
-```
-
-Which can be read as "_if_ the light is red, the next light will be green, _AND_ _if_ 
-the light is green, the next light will be yellow, 
-and if the light is yellow, the next light will be red."
-
-3. The initial state of the system shall be green.
-
+What follows is an example of using CTL* in a Python-Based Library[^2],
+PyReason. Suppose there is a system where two entities are racing each
+other for a single, exclusive resource and the designer wants to ensure
+that only one entity uses the resource at a time. This type of situation
+is often called a race condition, and the solution is called a mutex
+(mutual exclusion).
 
 ```{code} python3
-Finding some better code. 
+from umaudemc import check
+
+initial_term = "$ [a, wait] [b, wait]"
+modules = ["MUTEX", "MUTEX-PREDS"]
+
+# Safety property: a and b are never in critical section simultaneously
+safety_formula = "[] ~(crit(a) /\ crit(b))"
+safety_result = check("mutex.maude", initial_term, safety_formula, modules=modules)
+print("Safety Property Result:", safety_result)
+
+# Liveness property: if a is waiting, eventually it enters critical section
+liveness_formula = "[] (wait(a) -> <> crit(a))"
+liveness_result = check("mutex.maude", initial_term, liveness_formula, modules=modules)
+print("Liveness Property Result:", liveness_result)
+
 ```
 
 There is another formal methods that this text covers in later chapters called
