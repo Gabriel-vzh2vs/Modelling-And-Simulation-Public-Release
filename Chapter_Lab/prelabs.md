@@ -27,16 +27,8 @@ To Henning, this section is getting content at a decent speed. It should be
 fully-drafted by June 25th at the current rate of improvement. The topics are
 all there, along with basic information and sections.
 
-Pre-Lab Completion Tracker (40% done with pre-labs):
+Pre-Lab Completion Tracker (66% done with pre-labs):
 
-- Pre-lab 1 (Provisionally Complete) _drafted_
-- Pre-lab 2 (Partially-Drafted) *core focus to hasten book progress*
-- Pre-Lab 3 (Partially-Drafted) *core focus to hasten book progress*
-- Pre-lab 4 (Provisionally Complete) _drafted_
-- Pre-lab 5 (Considering Changing Topic) *at some point*
-- Pre-lab 6 (Provisionally Complete - although shortened) _drafted_
-- Pre-lab 7 (Provisionally Complete) _drafted_
-- Pre-lab 8 (Provisionally Complete) _drafted_
 - Pre-lab 9 (Consolidating Pre-lab 5 into it) *at some point*
 - Pre-lab 10 (Topic Okay!) *secondary focus*
 - Pre-lab 11 (Topic Okay!) *secondary focus*
