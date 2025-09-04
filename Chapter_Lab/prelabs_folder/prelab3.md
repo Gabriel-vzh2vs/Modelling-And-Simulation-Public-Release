@@ -162,7 +162,7 @@ hvac.view(sim=hvac_simulation)
 
 :::
 
-#### Theory of Belief Functions (Dempster–Shafer theory)
+<!-- #### Theory of Belief Functions (Dempster–Shafer theory)
 
 This subsection builds on some other topics in Statistical Inference and Prediction that
 applies to modelling, for more information a reader might be interested in {cite}`GlennEvidence76`
@@ -182,7 +182,7 @@ accordance with Dempster's rule (a rule that allows for the combination of opini
 All of these factors combine into a non-bayesian method for supporting evidence that provides an alternative view of probability judgement.
 
 Some applications of the Theory of Belief Functions in Simulation (or at least in fields related to it) include the simulation of decision-making processes like stock trading systems {cite}`sevastianov2009synthesis`,
-predictions of future events in context of Markov Chain Monte Carlo [^7] {cite}`he2011prognostics`, and most commonly in Machine Learning {cite}`belmahdi2023application` and{cite}`nachappa2020flood`.
+predictions of future events in context of Markov Chain Monte Carlo [^7] {cite}`he2011prognostics`, and most commonly in Machine Learning {cite}`belmahdi2023application` and{cite}`nachappa2020flood`. -->
 
 ## Errors in Interpretation and Communication
 
@@ -264,10 +264,10 @@ degree of relatedness defined through a membership function associated with each
 
 [^4]: Such as energy-efficient motors, auto-focusing cameras, handwriting recognition, and most modern control systems that operate on a series of rules that are phrased similar to the following: "IF first qualitative condition AND second qualitative condition, then do qualitative action".
 
-[^5]: A reader might be wondering, then "why do confidence intervals exist?" The answer is that a rigorous enclosure for a statistic (which could be sufficient, complete, or ancillary) defines the _bounds_ of which an statistic (like expected value) may exist in, a confidence interval allows for smaller intervals where the statistic is _likely_ to exist instead of the entire range where it _does_ exist.
+<!-- [^5]: A reader might be wondering, then "why do confidence intervals exist?" The answer is that a rigorous enclosure for a statistic (which could be sufficient, complete, or ancillary) defines the _bounds_ of which an statistic (like expected value) may exist in, a confidence interval allows for smaller intervals where the statistic is _likely_ to exist instead of the entire range where it _does_ exist.
 
 [^6]: These sets are often referred to as Focal Sets.
 
-[^7]: In the paper, they refer to MCMC (Markov Chain Monte Carlo) as Bayesian Monte Carlo which is quite peculiar, since modern Bayesian inference is built on MCMC and not the other way around [a lecture on why MCMC is important to Bayesian inference](https://www.stats.ox.ac.uk/~reinert/mcmc/mcmc.pdf).
+[^7]: In the paper, they refer to MCMC (Markov Chain Monte Carlo) as Bayesian Monte Carlo which is quite peculiar, since modern Bayesian inference is built on MCMC and not the other way around [a lecture on why MCMC is important to Bayesian inference](https://www.stats.ox.ac.uk/~reinert/mcmc/mcmc.pdf). -->
 
 [^8]: This is one of the reasons why this work exists - to help early simulation practitioners understand what to consider when doing simulation.
