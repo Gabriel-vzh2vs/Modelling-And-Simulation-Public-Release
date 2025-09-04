@@ -1,5 +1,5 @@
 (prelab-1)=
-# Pre-Lab 1: On Excel Skills and Python (Read)
+# Pre-Lab 1: A Review of Excel Skills and Python (Read)
 
 The first pre-lab will introduce some important details you should know
 about Excel if you choose to use it, and will teach the readers who do not
@@ -65,18 +65,6 @@ you take several cells that are referenced from a range. Such as the following f
 which represents the calculation of the skewness of the range of numbers stored in A1, A2, and A3 as a single unit.
 Additionally, other useful formulas are available from {ref}`sec:software`, which should read in conjunction
 with this pre-lab.
-
-### When you should consider using Something Else
-
-An important part of any tool is using it appropriately. This might become a
-soapbox unlike every other pre-lab, which this text tends to avoid being at times.
-
-Consider using different tools than Excel when you need to
-
-- store data that needs to be assessed by other software or requires access control, instead use DBMSs like PostgreSQL, MariaDB.
-- have speed at processing data and information, instead use programming languages like Rust, Python with Pypy, or Java.
-- simulate complex systems, particularly ones with any form of Differential Equation determining their behaviors, instead use simulation software like simpy, Anylogic, SIMIO.
-- analyzing big data, for reference big data is greater than 500 entities in a list, instead use programming languages with frameworks to handle it like R, Python's Dask/PySpark, Apache's Flink/Samza/Storm.
 :::
 
 :::{tab-item} Python Review (Read)

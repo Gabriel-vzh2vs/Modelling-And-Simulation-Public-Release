@@ -17,13 +17,18 @@ There are several choices of discrete-event simulation software that come with a
 | **AnyLogic** | - Supports multiple simulation methodologies (agent-based, discrete event, queuing systems) <br> - Cross-platform compatibility (Windows, macOS, Linux) <br> - Extensive libraries and pre-made blocks <br> - Strong visualization capabilities |Can be resource-intensive <br> - Student Version Libraries are Limited to 6 Hours of Runtime <br> - Occasional bugs and crashes with libraries and addons |
 | **SimPy \& Salabim** | - Open-source and free to use <br> - Simple and lightweight <br> - Easy to integrate with other Python libraries | - Limited to discrete event simulation <br> - No built-in visualization tools <br> - Requires programming knowledge |
 
+
 ## XLRisk (For Mac and Windows)
 
-XLRisk is a free and open source Monte Carlo Excel Plugin that is similar to \@Risk! 
+XLRisk is a free and open source Monte Carlo Excel Plugin that is similar to \@Risk!
 It allows the user to define distributions with parameters and use the Monte Carlo Method to simulate systems.
 
 Here is the documentation for using its functions after you install it: https://github.com/pyscripter/XLRisk/wiki/RiskFunctions.
 
+Note: it might be required to reinstall or reactivate XLrisk once in a while on Mac and Windows.
+
+::::{admonition} Windows, XLRisk Install
+:class: tip dropdown
 ### Windows
 
 1. Download XLRisk from https://github.com/pyscripter/XLRisk/raw/master/XLRisk.xlam.
@@ -49,6 +54,10 @@ Here is the documentation for using its functions after you install it: https://
 
 5. After that the XLRisk tab will appear at the top of your Excel window!
 
+::::
+
+::::{admonition} Mac, XLRisk Install
+:class: tip dropdown
 ### Mac
 
 1. Download XLRisk from https://github.com/pyscripter/XLRisk/raw/master/XLRisk.xlam.
@@ -94,6 +103,8 @@ Here is the documentation for using its functions after you install it: https://
 :align: center
 :label: XLRiskMac5
 :::
+
+::::
 
 (SIMIO-Install)=
 ### SIMIO Installation
