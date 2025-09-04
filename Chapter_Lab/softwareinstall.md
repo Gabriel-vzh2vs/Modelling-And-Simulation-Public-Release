@@ -1,7 +1,21 @@
 (sec:softwaresetup)=
+
+<Insert> Warning. We are not endorsing these products nor are responsible for student behaviors. 
+Anonymize content. Remove Product Keys.
+
 # Software Installation
-In this section, we will describe how to install a discrete event simulation software and XLRisk 
+In this section, we will describe how to install a discrete event simulation software and XLRisk
 (Monte Carlo Excel Plugin) on your personal machine.
+
+## Choices of Simulation Software
+
+There are several choices of discrete-event simulation software that come with advantages and disadvantages, which some of which are summarized in this table below:
+
+| **Software** | **Advantages** | **Disadvantages** |
+|--------------|----------------|-------------------|
+| **SIMIO**    | - Real-time risk analysis <br> - Has Simbits, aka bulit-in examples <br> - Integration with Google Warehouse | - Strict Licensing <br> - Requires powerful hardware for simulation <br> - Limited customization without additional programming <br> - Only has a Windows Version |
+| **AnyLogic** | - Supports multiple simulation methodologies (agent-based, discrete event, queuing systems) <br> - Cross-platform compatibility (Windows, macOS, Linux) <br> - Extensive libraries and pre-made blocks <br> - Strong visualization capabilities |Can be resource-intensive <br> - Student Version Libraries are Limited to 6 Hours of Runtime <br> - Occasional bugs and crashes with libraries and addons |
+| **SimPy \& Salabim** | - Open-source and free to use <br> - Simple and lightweight <br> - Easy to integrate with other Python libraries | - Limited to discrete event simulation <br> - No built-in visualization tools <br> - Requires programming knowledge |
 
 ## XLRisk (For Mac and Windows)
 
@@ -81,16 +95,6 @@ Here is the documentation for using its functions after you install it: https://
 :label: XLRiskMac5
 :::
 
-## Choices of Simulation Software
-
-There are several choices of discrete-event simulation software that come with advantages and disadvantages, which some of which are summarized in this table below:
-
-| **Software** | **Advantages** | **Disadvantages** |
-|--------------|----------------|-------------------|
-| **SIMIO**    | - Real-time risk analysis <br> - Has Simbits, aka bulit-in examples <br> - Integration with Google Warehouse | - Strict Licensing <br> - Requires powerful hardware for simulation <br> - Limited customization without additional programming <br> - Only has a Windows Version |
-| **AnyLogic** | - Supports multiple simulation methodologies (agent-based, discrete event, queuing systems) <br> - Cross-platform compatibility (Windows, macOS, Linux) <br> - Extensive libraries and pre-made blocks <br> - Strong visualization capabilities |Can be resource-intensive <br> - Student Version Libraries are Limited to 6 Hours of Runtime <br> - Occasional bugs and crashes with libraries and addons |
-| **SimPy \& Salabim** | - Open-source and free to use <br> - Simple and lightweight <br> - Easy to integrate with other Python libraries | - Limited to discrete event simulation <br> - No built-in visualization tools <br> - Requires programming knowledge |
-
 (SIMIO-Install)=
 ### SIMIO Installation
 ```{warning}
@@ -108,7 +112,7 @@ use your school email in the academic email section and fill it out with your na
 :::
 
 2. After you get the license in your email, then follow this link: https://www.simio.com/academic-licensing/getting-academic-software/ - click on “Download Simio Academic 64 bit”
-3. Then follow the instructions in the installer, when you open SIMIO for the first time, you will be prompted to input your license key from an email that looks like this: 
+3. Then follow the instructions in the installer, when you open SIMIO for the first time, you will be prompted to input your license key from an email that looks like this:
 
 :::{image} ../Figs/Chapter_Lab/SIMIO_email.png
 :width: 20 %
@@ -233,14 +237,12 @@ use your school email in the academic email section and fill it out with your na
 :::
 3. Follow the Instructions to Install like any other program!
 
-### Henning-Gabe Course Package Installation
-
-This will be developed at a later point.
-
-#### Python Packages
+### Python Packages
 
 In general, any python package can be installed through pip, for example:
 
 ```{code} python
-!pip install statsmodels matlibplot pymc3 jupyterlab
+!pip install statsmodels matlibplot pymc3 jupyterlab monaco
 ```
+
+(Some point make a Python Environment Specification/YAML)

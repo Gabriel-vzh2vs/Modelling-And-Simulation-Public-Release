@@ -1,5 +1,5 @@
 (prelab-3)=
-# Pre-Lab 3: Improving the Robustness of Simulation (Read)
+# Pre-Lab 3: Validity and Verification in Simulation Models (Read)
 
 Now that this text has covered a substantial amount of theory,
 it is important for the reader to consider malignant patterns and robustness

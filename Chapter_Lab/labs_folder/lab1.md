@@ -157,10 +157,11 @@ state variables $z$, $x$, and $y$.
 ### Basic Principles
 
 This model depicts a classic problem of numerical integration using random numbers to
-compute a multidimensional definite integral using $N$ uniform samples also known as Monte Carlo Integration through Crude Monte Carlo (CMC).
-Moreover, this process leverages the Law of Large Numbers that allows for the average of the indictor variable, $\hat{\pi}$ to
-converge to $\pi$ with a sufficient number of trials. In this case, we define the Law of Large Numbers as
-Khinchin's Weak Law of Large Numbers: the observation that the average of the results obtained from a large number of
+compute a multidimensional definite integral using $N$ uniform samples also known as Monte Carlo Integration
+through Crude Monte Carlo (CMC).
+Moreover, this process leverages the Law of Large Numbers that allows for the average of the indictor variable,
+$\hat{\pi}$ to converge to $\pi$ with a sufficient number of trials. In this case, we use the Law of Large Numbers:
+the observation that the average of the results obtained from a large number of
 i.i.d random samples converges to the value, if it exists,
 which is supported by Proof 1 in the appendix {ref}`sec:proofs`. {cite}`shum2024laws`
 Additionally, the foundations of Monte Carlo Integration are further elaborated in one of the prerequisite chapters,
