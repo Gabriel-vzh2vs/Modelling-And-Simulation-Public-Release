@@ -1,7 +1,16 @@
 (sec:softwaresetup)=
 
-<Insert> Warning. We are not endorsing these products nor are responsible for student behaviors. 
-Anonymize content. Remove Product Keys.
+ <!-- FUTURE: Remove/Censor Product Keys. -->
+
+:::{admonition} Software Advisory
+:class: warning dropdown
+
+We, the writers do not endorse nor are funded, supported, or have any relation to the software products
+throughout this book.
+
+Additionally, the use and acquisition of these software products is solely the responsibility of the student, user,
+or instructor and by reading this advisory, the reader acknowledges this advisory and its consequences.
+:::
 
 # Software Installation
 In this section, we will describe how to install a discrete event simulation software and XLRisk
