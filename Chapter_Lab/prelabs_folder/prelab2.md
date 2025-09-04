@@ -158,14 +158,48 @@ sns.jointplot(x=a1, y=b1, kind="hex", height=6);
 
 ### pyMC Presentation of Results
 
-The differences between PyMC and XLrisk are not based on fundamental mathematical differences, but based on interface changes between a 
+The differences between PyMC and XLrisk are not based on fundamental mathematical differences, but based on interface changes between a
 spreadsheet and Python, as the laster tends to have a more terminal-focused UI/UX. And the user is expected to define the
 interface through its commands and some of it is listed in {ref}`sec:software`. An case study is included below to assist the reader.
 
-### Example of Using pyMC (Code with Explanation)
+### Monte Hall Case Study - pyMC
 
-In this case, this text is based on the Monte Hall Problem with some
+There is a classical problem in Probability called the Monte Hall Problem, and it goes something like this (Savant, 1990):
+
+Suppose you're on a game show, and you're given the choice of three doors:
+Behind one door is a car; behind the others, goats.
+You pick a door, say No. 1, and the host, who knows what's behind the doors, opens another door,
+say No. 3, which has a goat. He then says to you,
+"Do you want to pick door No. 2?" Is it to your advantage to switch your choice?
+
+The answer might seem obvious or impossible depending on your mathematical background. However, we can solve this using
+the power of simulation, while also determining the skewness and kurtosis of potential outcomes.
+
+In this case, the solution to this problem is based on Marilyn vos Savant's article in Parade from 1990 with some modern
 influences from [Austin's Introduction to PyMC](https://austinrochford.com/posts/intro-prob-prog-pymc.html#The-Monty-Hall-problem).
+
+And through a Monte Carlo Simulation, we get the following as the solution to the Monte Hall Problem.
+
+```{code}
+--- Monty Hall Problem Simulation Results ---
+Number of simulated games: 10000
+Probability of winning if you STAY: 33.55%
+Probability of winning if you SWITCH: 66.45%
+
+--- Distribution Shape Statistics ---
+STAY Strategy Skewness: 0.6968
+STAY Strategy Kurtosis: -1.5145
+SWITCH Strategy Skewness: -0.6968
+SWITCH Strategy Kurtosis: -1.5145
+
+--- Preview of 5 games ---
+Game 1: Prize is behind door 1. Contestant chose 2. Monty opened 0. Switching goes to 1. Result (Stay/Switch): Lose/Win
+Game 2: Prize is behind door 0. Contestant chose 2. Monty opened 1. Switching goes to 0. Result (Stay/Switch): Lose/Win
+Game 3: Prize is behind door 1. Contestant chose 2. Monty opened 0. Switching goes to 1. Result (Stay/Switch): Lose/Win
+Game 4: Prize is behind door 0. Contestant chose 0. Monty opened 1. Switching goes to 2. Result (Stay/Switch): Win/Lose
+Game 5: Prize is behind door 2. Contestant chose 2. Monty opened 0. Switching goes to 1. Result (Stay/Switch): Win/Lose
+
+```
 
 ::::{admonition} Code for the Monte Hall Problem in Python
 :class: dropdown
@@ -175,6 +209,7 @@ import pymc as pm
 import pytensor.tensor as pt
 import numpy as np
 import arviz as az
+import scipy.stats as stats # <-- ADDED: Import SciPy stats module
 
 # The doors are numbered 0, 1, and 2.
 DOORS = [0, 1, 2]
@@ -189,12 +224,16 @@ with pm.Model() as monty_hall_model:
 
     def monty_opens_func(prize, choice):
         all_doors = pt.arange(3)
+        # Doors Monty can open if the contestant's choice is correct
         remaining_doors_when_correct = all_doors[~pt.eq(all_doors, choice)]
+        # In the PyMC model, we must be deterministic. If the contestant is right,
+        # we'll assume Monty always opens the lower-numbered of the two available doors.
+        # This choice doesn't affect the final probabilities.
         monty_if_correct = remaining_doors_when_correct[0]
+        # Door Monty must open if the contestant's choice is incorrect
         monty_if_incorrect = 3 - prize - choice
 
         # Use pt.switch to decide which case applies.
-        # pt.eq(prize, choice) returns 1 if true, 0 if false.
         return pt.switch(pt.eq(prize, choice), monty_if_correct, monty_if_incorrect)
 
     # pm.Deterministic creates a variable whose value is strictly determined by its parents.
@@ -216,10 +255,30 @@ with monty_hall_model:
 prob_win_stay = prior_trace.prior['win_if_stay'].mean().item()
 prob_win_switch = prior_trace.prior['win_if_switch'].mean().item()
 
+# Extract the boolean outcomes (True/False) and convert them to numbers (1/0)
+stay_outcomes = prior_trace.prior['win_if_stay'].values.flatten().astype(float)
+switch_outcomes = prior_trace.prior['win_if_switch'].values.flatten().astype(float)
+
+# Calculate skewness for each strategy
+skew_stay = stats.skew(stay_outcomes)
+skew_switch = stats.skew(switch_outcomes)
+
+# Calculate kurtosis for each strategy
+kurt_stay = stats.kurtosis(stay_outcomes)
+kurt_switch = stats.kurtosis(switch_outcomes)
+
 print("\n--- Monty Hall Problem Simulation Results ---")
 print(f"Number of simulated games: {NUM_SAMPLES}")
 print(f"Probability of winning if you STAY: {prob_win_stay:.2%}")
 print(f"Probability of winning if you SWITCH: {prob_win_switch:.2%}")
+
+# --- ADDED: Print Skewness and Kurtosis Results ---
+print("\n--- Distribution Shape Statistics ---")
+print(f"STAY Strategy Skewness: {skew_stay:.4f}")
+print(f"STAY Strategy Kurtosis: {kurt_stay:.4f}")
+print(f"SWITCH Strategy Skewness: {skew_switch:.4f}")
+print(f"SWITCH Strategy Kurtosis: {kurt_switch:.4f}")
+# --- END ADDED SECTION ---
 
 print("\n--- Preview of 5 games ---")
 for i in range(5):
