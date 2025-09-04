@@ -15,13 +15,10 @@ the pyMC section depends on the XLRisk section to reduce duplication.
 
 In this pre-lab, we should relate a random variable to another random variable in a joint distribution.
 One method for doing so is building a distribution that connects related (dependent) variables.
-An example of these kind of dependent variables would be if a person goes to an expensive hotel, 
+An example of these kind of dependent variables would be if a person goes to an expensive hotel,
 it is more likely than not that they would get expensive food, tours, and everything else on their trip.
 
-In more formal terms, based on Sklar's Theorem, a  is a multivariate distribution such that marginalizing gives
-a uniform $[0,1]$, and the marginal distributions are inherently uncorrelated with other, and the correlation is
-exclusively provided by the copula; here is an example of a Gaussian copula from a completed {ref}`project-1`.
-Copulas are discussed in more detail in a future chapter.
+It is possible to visualize this relation between dependent variables, and example of this is below.
 
 ```{figure} #fig:copula
 :label: fig:copula-1
