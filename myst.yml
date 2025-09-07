@@ -47,9 +47,11 @@ project:
         - file: Chapter_Output_Analysis/sample_size_estimation.md
         - file: Chapter_Output_Analysis/bonferroni.md
         - file: Chapter_Output_Analysis/dependent_variables.md
-    - title: Random Number Generation and Random Variate Generation
+    - title: Random Numbers and Variates
       children:
         - file: Chapter_Random-Number-And-Variate-Generation/introduction.md
+        - file: Chapter_Random-Number-And-Variate-Generation/section_random_number_generation.md
+        - file: Chapter_Random-Number-And-Variate-Generation/section_variates.md
     - title: Distribution Modelling
       children:
         - file: Chapter_Distribution-Modelling/index.md
