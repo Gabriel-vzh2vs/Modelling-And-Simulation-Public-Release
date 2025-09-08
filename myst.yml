@@ -55,6 +55,11 @@ project:
     - title: Distribution Modelling
       children:
         - file: Chapter_Distribution-Modelling/index.md
+        - file: Chapter_Distribution-Modelling/empirical_distribution.md
+        - file: Chapter_Distribution-Modelling/example_distributions.md
+        - file: Chapter_Distribution-Modelling/sample_independence.md
+        - file: Chapter_Distribution-Modelling/distribution_modeling.md
+        - file: Chapter_Distribution-Modelling/no_data.md
     - title: Simulation In Practice
       children:
         - file: Chapter_Simulation-In-Practice/introduction.md
