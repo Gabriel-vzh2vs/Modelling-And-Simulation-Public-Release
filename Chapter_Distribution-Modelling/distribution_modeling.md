@@ -288,14 +288,17 @@ form the __likelihood function__
 \label{eq:likelihoodfunction}
 L(\theta) = f_\theta(x_1) f_\theta(x_n)  \cdots f_\theta(x_n)  \;.
 \end{equation}
-The MLE $\hat{\theta}$ of $\theta$ is the value of $\theta$ that
-maximizes $L$ in~\eqref{eq:likelihoodfunction} over the range of
-permissible values $\theta$.
-%%
-In practice, it will often be easier to determine the value $\theta$
-that maximizes $\ln [L(\theta)] = \sum_{i=1}^n \log f_\theta(x_i)$, an
-approach that holds since the natural logarithm function is strictly
-increasing.
+
+The maxiumum likelihood estimator $\hat{\theta}$ of $\theta$ is the
+value of $\theta$ that __maximizes__ $L$ in
+{ref}`eq:likelihoodfunction` over the range of permissible values
+$\theta$. In practice, it will often be easier to determine the value
+$\theta$ that maximizes $\ln [L(\theta)] = \sum_{i=1}^n \log
+f_\theta(x_i)$, an approach that holds since the natural logarithm
+function is strictly monotonically increasing. We refer to $\ln
+[L(\theta)]$ as the __log-likelihood function__.
+
+
 
 \textbf{Example:} We illustrate the MLE for the exponential
 distribution which has density function $f(x) = e^{-x/\beta}\bigl /
