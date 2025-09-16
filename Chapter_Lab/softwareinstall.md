@@ -1,5 +1,5 @@
-(sec:softwaresetup)=
-
+(softwaresetup)=
+# Software Installation
  <!-- FUTURE: Remove/Censor Product Keys. -->
 
 :::{admonition} Software Advisory
@@ -12,7 +12,6 @@ Additionally, the use and acquisition of these software products is solely the r
 or instructor and by reading this advisory, the reader acknowledges this advisory and its consequences.
 :::
 
-# Software Installation
 In this section, we will describe how to install a discrete event simulation software and XLRisk
 (Monte Carlo Excel Plugin) on your personal machine.
 

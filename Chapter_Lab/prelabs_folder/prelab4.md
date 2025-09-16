@@ -1,5 +1,5 @@
-(prelab-4)=
-# Pre-Lab 4: Short Overview of Modelling (Do)
+(prelab-3)=
+# Pre-Lab 3: Short Overview of Modelling (Do)
 ::::{tab-set}
 
 This pre-lab focuses on exposing the reader to different modelling schemas
