@@ -23,7 +23,7 @@ It is possible to visualize this relation between dependent variables, and examp
 ```{figure} #fig:copula
 :label: fig:copula-1
 
-An example of the correlation between Accommodation Prices and Meal Costs through a Correlation Matrix,
+An example of the correlation between Accommodation Prices and Meal Costs through a joint distribution
 this is related to {ref}`project-1`.
 
 ```
@@ -158,9 +158,11 @@ sns.jointplot(x=a1, y=b1, kind="hex", height=6);
 
 ### pyMC Presentation of Results
 
-The differences between PyMC and XLrisk are not based on fundamental mathematical differences, but based on interface changes between a
-spreadsheet and Python, as the laster tends to have a more terminal-focused UI/UX. And the user is expected to define the
-interface through its commands and some of it is listed in {ref}`sec:software`. An case study is included below to assist the reader.
+The differences between PyMC and XLrisk are not based on fundamental mathematical
+differences, but based on interface changes between a spreadsheet and Python,
+as the latter tends to have non-graphical UI/UX. And the user is expected to define the
+interface through its commands and some of it is listed in {ref}`sec:software`.
+An case study is included below to assist the reader.
 
 ### Monte Hall Case Study - pyMC
 
@@ -209,7 +211,7 @@ import pymc as pm
 import pytensor.tensor as pt
 import numpy as np
 import arviz as az
-import scipy.stats as stats # <-- ADDED: Import SciPy stats module
+import scipy.stats as stats
 
 # The doors are numbered 0, 1, and 2.
 DOORS = [0, 1, 2]

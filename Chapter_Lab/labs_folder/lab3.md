@@ -34,7 +34,8 @@ how to process and analyze real-world data.
 
 #### Pattern 1. Monte Carlo Method in the Context of Stock Data
 
-This pattern reflects the idea that the stock market can be modelled through a stochastic process that can be replicated through Monte Carlo through the generation of an average that reflects the value of a security at a specific point in time.
+This pattern reflects the idea that the stock market can be modelled through a stochastic process that can be replicated 
+through Monte Carlo through the generation of an average that reflects the value of a security at a specific point in time.
 With higher average returns, the value of the security should increase, and the opposite will occur with the converse assuming no variance.
 However, with a higher variance of the security, the security's value exhibits more values away from the data's mean dependent on the underlying random variable's skew and kurtosis, with the converse, the value of the Monte Carlo calculated average tends to readily converge with the data's mean.
 
@@ -70,28 +71,35 @@ The model runs on a daily time step, ignoring after hours movements of the secur
 
 Processes: This model is built to cover the basic movements of a security in the context of other securities in a portfolio as a risk (defined as variance in financial contexts) hedging or profit improving method. It is structured within five processes: one related to the gathering of security data, three related to the generation and contextualization of random variables (random variable selection, weight assignment to random variables, and output variate collection), and one process related to the performance of the portfolio (the average value of the portfolio based on the weighting and constituent random variables.)
 
-Schedule: The simulation starts at a time zero, and continues until the simulation reaches the user-set parameter $t$. Upon initialization, the parameters $r$, $s_{name}$, $p_{0}$ and $r_s$ are set through user-intervention. With the first process, the variables, $s$ is obtained through a web-based process such as the STOCKHISTORY function in excel or Stockdex in Python. The second process, then takes this information and fits the random variable to the data (likely through a python package like phitter or through direct testing such as the K-S test). Upon the completion of this process, the weight assignment with the user-provided information from the parameter $r_s$ is then applied to $r$. At this point, the random variables are now defined and then variates from them we get
+Schedule:The simulation starts at a time zero, and continues until the simulation reaches the user-set parameter $t$.
+Upon initialization, the parameters $r$, $s_{name}$, $p_{0}$ and $r_s$ are set through user-intervention.
+With the first process, the variables, $s$ is obtained through a web-based process such as the STOCKHISTORY
+function in excel or Stockdex in Python. The second process, then takes this information and fits the random
+variable to the data (likely through a python package like phitter or through direct testing such as the K-S test).
+Upon the completion of this process, the weight assignment with the user-provided information from the parameter
+$r_s$ is then applied to $r$ constituting the third process. At this point, the random variables are now defined
+and then the variates from the variable(s) are now initiated as instances of a variable which are added up time
+period by time period to form the overall value of the portfolio per period, which is the fourth process.
+The final and fifth process takes the information from the fourth process and calculate statistical data from the portfolio.
 
 ## Design Concepts
 
 ### Basic Principles
 
-This model depicts the usage of Monte Carlo Methods for building estimations of future
-retirement accounts - however, the purpose of this model is to show that simulation
-can be used to build predictions based on a limited set of data with epistemic
-uncertainty. Similar to Lab 1, this lab leverages the Law of Large Numbers to build
-pausable estimations for $P_{40}$, however, unlike lab 1, this model also uses non-uniform
-random variables (a function that maps outcomes from a sample space to values)
-to generate random variates that enter an function (the interest calculation) that
-estimates target state variables ($r$ and $p_0$) with a definite pattern. These ideas
-were covered in more detail in {ref}`sec:prob_stats`.
+This model depicts the usage of Monte Carlo Methods for building estimations of a
+portfolio while also showing a method for reducing aleatoric variance (known as financial risk)
+through diversification in securities if the securities in question are independent of each other.
+This idea builds on the general concept of correlation, where if the variables have negative correlations
+or no correlations with each other - variance shall decrease, this principal is widely taught in financial
+courses along with being the foundation of a variance reduction technique named antithetic variates
+in the application of Monte Carlo Methods.
 
 ## Input Data
 
 The user inputs the following data points:
 
-- Initial Interest Rate
-- Parameters for Normal and Triangular Distributions
+- Initial Value, Weight, Standard Deviation as Gaussian Variable & Symbol of Security
+- Contributions over a Time Horizon
 - Time Horizon
 - Initial Principal
 - Number of Experiments
