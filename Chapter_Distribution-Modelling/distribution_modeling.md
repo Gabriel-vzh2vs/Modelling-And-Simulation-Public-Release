@@ -1,6 +1,5 @@
 
-(sec:distribution_modeling)=
-# Distribution modeling
+(sec:distribution_modeling)= # Distribution modeling
 
 
 ## Overview
@@ -27,7 +26,8 @@ steps:
 
 We will go through each step in the upcoming. The description will be
 a combination of theory and practice where we illustrate concepts
-through Python code and the tool Phitter (introduced in {cite}`sec:??`).
+through Python code and the tool Phitter (introduced in
+{cite}`sec:??`).
 
 
 Note that distribution modeling is a large scientific area, and that
@@ -42,8 +42,8 @@ these, here is this organization.
 - {cite}`Law:13` breaks this down as three ``activities'': (1)
   hypothesizing families of distributions ($\S 6.4$), (2) estimation
   of parameters ($\S 6.5$), and (3) determining how representative the
-  fitted distributions are ($\S 6.6$).
-- {cite}`Banks:14` ... Indicate
+  fitted distributions are ($\S 6.6$).  - {cite}`Banks:14`
+  ... Indicate
 
 
 ## Running example
@@ -53,20 +53,20 @@ Python code block below (and assigned to the variable
 $\text{\texttt{sample}}$).
 
 ```{code} python
-sample = [
-    4.875, 5.74, 10.149, 6.197, 11.357, 3.9048, 8.07, 8.055,
-    7.067, 9.737, 4.3757, 6.451, 13.023, 10.513, 6.978, 3.7117, 6.919,
-    11.466, 7.338, 12.409, 4.4195, 6.729, 4.2673, 14.4, 11.214, 7.777,
-    19.62, 3.9662, 4.154, 5.586, 7.619, 5.009, 25.05, 15.58, 7.171,
-    6.534, 4.888, 7.841, 5.192, 3.52463, 6.46, 8.074, 17.82, 6.677,
-    14.22, 10.826, 7.343, 4.2477, 7.067, 3.6041, 6.675, 11.254, 6.385,
-    5.32, 6.44, 9.429, 6.303, 25.78, 8.152, 14.02, 6.199, 10.185,
-    7.446, 4.689, 25.74, 6.621, 7.157, 6.158, 7.01, 3.8648, 7.492,
-    4.1367, 11.988, 4.4746, 4.838, 5.829, 11.613, 15.36, 5.073, 17.51,
-    11.151, 9.558, 4.949, 9.332, 4.4172, 8.342, 19.47, 3.6985, 17.9,
-    4.4053, 8.112, 8.617, 7.575, 3.9138, 4.4023, 5.279, 4.4784, 5.007,
-    22.66, 5.847
+
+sample = [ 4.875, 5.74, 10.149, 6.197, 11.357, 3.9048, 8.07, 8.055,
+  7.067, 9.737, 4.3757, 6.451, 13.023, 10.513, 6.978, 3.7117, 6.919,
+  11.466, 7.338, 12.409, 4.4195, 6.729, 4.2673, 14.4, 11.214, 7.777,
+  19.62, 3.9662, 4.154, 5.586, 7.619, 5.009, 25.05, 15.58, 7.171, 6.534,
+  4.888, 7.841, 5.192, 3.52463, 6.46, 8.074, 17.82, 6.677, 14.22,
+  10.826, 7.343, 4.2477, 7.067, 3.6041, 6.675, 11.254, 6.385, 5.32,
+  6.44, 9.429, 6.303, 25.78, 8.152, 14.02, 6.199, 10.185, 7.446, 4.689,
+  25.74, 6.621, 7.157, 6.158, 7.01, 3.8648, 7.492, 4.1367, 11.988,
+  4.4746, 4.838, 5.829, 11.613, 15.36, 5.073, 17.51, 11.151, 9.558,
+  4.949, 9.332, 4.4172, 8.342, 19.47, 3.6985, 17.9, 4.4053, 8.112,
+  8.617, 7.575, 3.9138, 4.4023, 5.279, 4.4784, 5.007, 22.66, 5.847
 ]
+
 ```
 
 As practice, you should construct and visualize the empirical
@@ -74,12 +74,11 @@ distribution function $\tilde{F}$ of $S$.
 
 ::::{tip} Python - Empirical distribution function for running example
 :class:dropdown
-```{code} python
-import matplotlib.pyplot as plt
-from scipy import stats
 
-sample = [
-    4.875, 5.74, 10.149, 6.197, 11.357, 3.9048, 8.07, 8.055,
+```{code} python import matplotlib.pyplot as plt from
+scipy import stats
+
+sample = [ 4.875, 5.74, 10.149, 6.197, 11.357, 3.9048, 8.07, 8.055,
     7.067, 9.737, 4.3757, 6.451, 13.023, 10.513, 6.978, 3.7117, 6.919,
     11.466, 7.338, 12.409, 4.4195, 6.729, 4.2673, 14.4, 11.214, 7.777,
     19.62, 3.9662, 4.154, 5.586, 7.619, 5.009, 25.05, 15.58, 7.171,
@@ -90,23 +89,20 @@ sample = [
     4.1367, 11.988, 4.4746, 4.838, 5.829, 11.613, 15.36, 5.073, 17.51,
     11.151, 9.558, 4.949, 9.332, 4.4172, 8.342, 19.47, 3.6985, 17.9,
     4.4053, 8.112, 8.617, 7.575, 3.9138, 4.4023, 5.279, 4.4784, 5.007,
-    22.66, 5.847
-]
+    22.66, 5.847 ]
 
 emp_dist = stats.ecdf(sample)
 
-# Use matplotlib to visualize:
-ax = plt.subplot()
+# Use matplotlib to visualize: ax = plt.subplot()
 emp_dist.cdf.plot(ax)
 
-# r-strings permit LaTeX formatting. This is optional, but looks professional.
-ax.set_xlabel(r'$x$')
-ax.set_ylabel(r'Empirical CDF $\tilde{F} of running example$')
-plt.show()
+# r-strings permit LaTeX formatting. This is optional, but looks
+professional.  ax.set_xlabel(r'$x$') ax.set_ylabel(r'Empirical CDF
+$\tilde{F} of running example$') plt.show()
 ```
 
-Python documentation
-- [scipy.ecdf](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ecdf.html)
+Python documentation -
+[scipy.ecdf](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ecdf.html)
 ::::
 
 Using Python and matplotlib, we generated the CDF shown in
@@ -124,14 +120,13 @@ The empirical distribution function $\tilde{F}$ for the running example.
 Specification of $\Omega$ will generally involve one's knowledge of
 the random variable $X$ and one's assessment of the sample $S$.  For
 example, barring any mistakes, the sample $S = \{x_1, x_2, \ldots,
-x_n\}$ will be a proper subset of $\Omega$, that is $S \subset \Omega$. This can guide
-one towards classifying $\Omega$ into on of the following four
-following categories:
+x_n\}$ will be a proper subset of $\Omega$, that is $S \subset
+\Omega$. This can guide one towards classifying $\Omega$ into on of
+the following four following categories:
 
 \begin{equation*} 1.~\Omega = (-\infty,\infty), 2.~\Omega =
-(\eta,\infty), 3.~\Omega = (\eta_L, \eta_U),\text{ or } 4.~\Omega
-= (-\infty,\eta)
-\end{equation*}
+(\eta,\infty), 3.~\Omega = (\eta_L, \eta_U),\text{ or } 4.~\Omega =
+(-\infty,\eta) \end{equation*}
 
 Insights about the underlying system can further help identify which
 of the cases 1 through 4 to consider.
@@ -195,24 +190,28 @@ and normalized versions for $n\in\{5,10,15,20,30\}$.
 :label: fig:histogram_5_running_example
 A histogram for the running example with $n=5$ bins.
 :::
+
 :::{figure} ../Figs/histogram_n_10_example_running_example.svg
 :align: center
 :width: 600
 :label: fig:histogram_10_running_example
 A histogram for the running example with $n=10$ bins.
 :::
+
 :::{figure} ../Figs/histogram_n_15_example_running_example.svg
 :align: center
 :width: 600
 :label: fig:histogram_15_running_example
 A histogram for the running example with $n=15$ bins.
 :::
+
 :::{figure} ../Figs/histogram_n_20_example_running_example.svg
 :align: center
 :width: 600
 :label: fig:histogram_20_running_example
 A histogram for the running example with $n=20$ bins.
 :::
+
 :::{figure} ../Figs/histogram_n_30_example_running_example.svg
 :align: center
 :width: 600
@@ -269,24 +268,19 @@ Scanning the table in $\S~6.2$ of {cite}`Law:13`, you will find that
 almost all entries has their MLE(s) listed. For example, in the case
 of a uniform distribution $U(a,b)$, the MLE for $a$ and $b$ are
 
-\begin{equation*}
-\hat{a} = \min_{1\le i \le n} X_i
-\quad\text{ and }\quad
-\hat{b} = \max_{1\le i \le n} X_i \;.
-\end{equation*}
+\begin{equation*} \hat{a} = \min_{1\le i \le n} X_i \quad\text{ and
+}\quad \hat{b} = \max_{1\le i \le n} X_i \;.  \end{equation*}
 
 As before, we are working with a sample
 
-\begin{equation*}
-S = \{x_1, x_2, \ldots, x_n \}\;.
-\end{equation*}
+\begin{equation*} S = \{x_1, x_2, \ldots, x_n \}\;.  \end{equation*}
 
 For a single-parameter, univariate continous distribution with
 probability density function $f_\theta(x)$ with parameter $\theta$ we
 form the __likelihood function__
 \begin{equation}
 \label{eq:likelihoodfunction}
-L(\theta) = f_\theta(x_1) f_\theta(x_n)  \cdots f_\theta(x_n)  \;.
+L(\theta) = f_\theta(x_1) f_\theta(x_n) \cdots f_\theta(x_n) \;.
 \end{equation}
 
 The maxiumum likelihood estimator $\hat{\theta}$ of $\theta$ is the
@@ -299,74 +293,117 @@ function is strictly monotonically increasing. We refer to $\ln
 [L(\theta)]$ as the __log-likelihood function__.
 
 
+:::{prf:example} MLE for the exponential distribution
+:label: ex:mle_exponential
 
-\textbf{Example:} We illustrate the MLE for the exponential
-distribution which has density function $f(x) = e^{-x/\beta}\bigl /
-\beta$ for $x\ge 0$ and $f(x) = 0$ otherwise.
-Here, writing $s = \sum_i x_i$, we have
+We illustrate the the approach for the exponential distribution which
+has probability density function $f(x) = e^{-x/\beta}\bigl / \beta$
+for $x\ge 0$ and $f(x) = 0$ otherwise.  Here, writing $s = \sum_i
+x_i$, we have
+
 \begin{equation}
 \ell(\theta) = \ln L(\theta) = -s/\beta - n \ln \beta
 \end{equation}
+
 with derivative
+
 \begin{equation}
 \frac{d\ell}{d\theta} = -n/\beta + s/\beta^2
 \end{equation}
-which equals $0$ for $\hat\theta = s/n = \frac{1}{n} \sum_{i=1}^n
-x_i$. Here you should verify that $\frac{d^2\ell}{d\theta^2}$ is
-negative at $\theta = \hat\theta$.
 
-The process above becomes more complicated for distributions with more
-than one parameter. The approach, however, is exactly the same when
-forming $L(\bm{\theta)} = (\theta_1, \theta_2, \ldots, \theta_k))$ and
-the corresponding log-likelihood function $\ln L(\bm{\theta})$.
+which, when equated to $0$, gives $\hat\theta = s/n = \frac{1}{n}
+\sum_{i=1}^n x_i$. To verify that that it corresponds to a maximum,
+you must verify that $\frac{d^2\ell}{d\theta^2}$ is negative when
+evaluated at $\theta = \hat\theta$ (aka, the second derivative test).
 
-\textbf{Homework III:} You will get to demonstrate that for $N(\mu,
-\sigma^2)$ we have MLEs
-\begin{equation*}
-  \hat{\mu} = \frac{1}{n} \sum_{i=1}^n x_i,
-  \quad\text{and}\quad
-  \hat{\sigma} = \Bigl[\frac{n-1}{n} S^2(n) \Bigr]^{1/2}\;.
+:::
+
+:::{exercise} An old exam problem
+:label: ex:mle_discrete
+The problem
+from the spring exam.
+:::
+
+The process becomes more complicated for distributions with more than
+one parameter. For a distribution with $n$ paramaters, you will derive
+a system of $n$ equations. After solving this set of equations, you
+will also need to assess whether any of the solutions corresponds to a
+maximum and not some high-dimensional saddle point.
+
+Formally, however, the approach is exactly the same: form
+$L(\bm{\theta)} = (\theta_1, \theta_2, \ldots, \theta_k))$ and the
+corresponding log-likelihood function $\ln L(\bm{\theta})$, and then
+compute its gradient.
+
+:::{exercise} MLE for the normal distribution
+:label: ex:mle_discrete
+
+Demonstrate that for the normal distribution $N(\mu, \sigma^2)$ we
+have the MLEs
+
+\begin{equation*} \hat{\mu} = \frac{1}{n} \sum_{i=1}^n
+x_i, \quad\text{and}\quad \hat{\sigma} = \Bigl[\frac{n-1}{n} S^2(n)
+\Bigr]^{1/2}\;.
 \end{equation*}
 
+To demonstrate that this solution corresponds to a maxium, you will
+have to form the Hesse matrix, compute its determinant, and then run
+through the standard list of conditions
+[Wikipedia](https://en.wikipedia.org/wiki/Derivative_test).
 
-\subsection{Goodness-of-fit tests}
+:::
 
 
-Goodness-of-fit tests are use to assess if observations $X_1, X_2, \ldots,
-X_n$ are an independent sample from a particular distribution with
-distribution function $F$ using as null hypothesis:
-\begin{equation*}
-\text{$H_0$: The $X_i$'s are IID random variables with distribution
-  function $F$}
+(sec:goodness-of-fit-test)=
+## Goodness-of-fit tests
+
+Goodness-of-fit tests are use to assess if observations $x_1, x_2,
+\ldots, x_n$ are an independent sample from a particular distribution
+with distribution function $F$ using as null hypothesis:
+
+\begin{equation*} \text{$H_0$: The $X_i$'s are IID random variables
+with cumulative distribution function $F$}
 \end{equation*}
-\textbf{Note 1:} not rejecting $H_0$ does not mean accepting $H_0$ as
+
+__Remember:__ not rejecting $H_0$ does not mean accepting $H_0$ as
 true.
 
-\textbf{Note 2:} (sample size) this class of tests is not that
-sensitive to small discrepanices between distributions for
-small/moderate samples sizes $n$. However, for very large $n$, even
-tiny deviations will be detected causing rejection of the null
-hypothesis. These are tools that should be used judiciously keeping
-these factors in mind.
+__And about sample size:__ this class of tests is not that sensitive
+to small discrepanices between distributions for small/moderate
+samples sizes $n$. However, for very large $n$, even tiny deviations
+will be detected causing rejection of the null hypothesis. These are
+methods that must be used judiciously keeping these factors in mind.
+
+NEED TO EXPLAIN THAT THE NEXT SECTIONS ARE GENERAL ETC ...
 
 
-%% ----------------------------------------------------------------------
-\subsection{The Kolmogorov-Smirnov Test}
-\label{sec:ks}
-The Kolmogorov-Smirnov (KS) test is used to assess how well a
-hypothesized distribution $\hat{F}$ of a continuous random variable
-$X$ matches a observed sample data $x_1, x_2, \ldots, x_n$ and their
-corresponding empirical distribution~$F$ as defined
-in~\ref{eq:empirical}.
+(sec:ks)=
+
+### The Kolmogorov-Smirnov Test
+
+We first present the general Kolmogorov-Smirnov test (or just KS-test)
+and then apply it to testing goodness-of-fit for a fitted
+distribution. As before, we have a sample $S = \{x_1, x_2, \ldots,
+x_n\}$ consisting of $n$ independent observations of a random variable
+$X$. The sample $S$ gives rise to the empirical distribution function
+$\tilde{F}$. In addition, we are given a cumulative distribution
+function $F$. For now, note that $S$ was not used to in any way to
+determine parameters of $F$.
+
+
+
+
 %%
 The KS-statistic $D_n$ is defined as the supremum (sup)
+
 \begin{equation}
   D_n = \sup_{x} |F(x) - \hat{F}(x)| \;.
 \end{equation}
-Here supremum is used rather than maximum. For example, the  interval
+
+Here the supremum is used rather than the maximum. For example, the  interval
 $(0,1) \subset \mathbb{R}$ does not have a maximum, however, the
 supremum exists and equals~1. You can read about supremum and infimum
-\href{https://en.wikipedia.org/wiki/Infimum_and_supremum}{here}.
+[Wikipedia](https://en.wikipedia.org/wiki/Infimum_and_supremum).
 
 The computation of the KS-statistic can be carried out via
 \begin{equation}
@@ -387,6 +424,13 @@ $D^-$ are the gaps between hollow circles and $\hat{F}(x)$.
   distribution $\hat{F}(x)$.}
 \label{fig:ks}
 \end{figure}
+
+
+We will use the Kolmogorov-Smirnov (KS) to assess how well a
+hypothesized distribution $\hat{F}$ of a continuous random variable
+$X$ matches a observed sample data $x_1, x_2, \ldots, x_n$ and their
+corresponding empirical distribution $\tilde{F}$ as defined in
+{ref}`eq:empirical`.
 
 
 There are two main cases to cover: (i) all parameters of $\hat{F}$ are
@@ -458,42 +502,51 @@ You can read more about this under
 
 
 
-%% ----------------------------------------------------------------------
-\subsection{The $\chi^2$-Test}
-\label{sec:chi}
+
+
+(sec:chi_square)=
+## The $\chi^2$-Test
 
 The $\chi^2$ test (or Pearson's $\chi^2$ test) is a test used with
 categorical data and the following setup:
-\begin{itemize}
-\item There are categories $1, 2, \ldots, k$
-\item There are $N$ samples
-\item The number of samples in category $i$ is $N_i$, and $\sum_i N_i
+
+- There are categories $1, 2, \ldots, k$
+- There are $N$ samples
+- The number of samples in category $i$ is $N_i$, and $\sum_i N_i
   = N$.
-\item The null hypothesis is that the data is sampled from
+- The null hypothesis is that the data is sampled from
   $\text{Multinomial}(N, p_1, p_2, \ldots, p_k)$
-\item The test statistic is the random variable
+- The test statistic is the random variable
 \begin{equation}
 \chi^2 = \sum_{i=1}^k \frac{(N_i-N p_i)^2}{N p_i}
 \end{equation}
-which, in the limit $N\to \infty$ approaches the $\chi^2$
-distribution with $k-1$ degrees of freedom.
-\end{itemize}
 
-\textbf{Assumptions:} samples are IID, sample size is sufficiently
-large, sample counts within each category are sufficiently large.
+In the limit as $N\to \infty$ the test statistic $\chi^2$ approaches
+the $\chi^2$ distribution with $k-1$ degrees of freedom.
 
+The __assumptions__ behind the test is that samples are IID, that
+sample size is sufficiently large, and also that sample counts within
+each category are sufficiently large.
 
-\textbf{Example:} Two shopkeepers in neighboring store are trying to
-settle an argument. Shopkeeper $A$ has for the longest time claimed
-that he always gets the same number of customers every day Monday
-through Friday. ``50 customers, and my day is done!'' To prove him
-wrong, shopkeeper $B$, who happens to have just completed a
-correspondence course in statistics, finally decides to camp out at
-$A$'s store for an entire week and record the total customer counts,
-making sure not to miss or double-count a single customer. He has
-heard about IID random variables, and has taken laudable precautions
-to not influence customer counts during this week.
-Shopkeeper $B$'s recorded is given in Table~\ref{tab:shopkeeper_data}.
+:::{prf:example} The shopkeepers
+:label:ex:shopkeepers
+
+Two shopkeepers in neighboring store are trying to settle an
+argument. Shopkeeper $A$ has for the longest time claimed that he
+always gets the same number of customers every day Monday through
+Friday. ``50 customers, and my day is done!''
+
+Annoyed with this statement, shopkeeper $B$, who happens to have just
+completed a correspondence course in statistics, is determined to
+prove him wrong. He decides to set up camp at $A$'s store for an
+entire week and record the total customer counts, making sure no
+customer is missed or double-counted. He has heard about IID random
+variables, and has taken careful precautions to not influence customer
+counts during this week. (See the movie Kitchen Stories for a
+similar case [IMDB](https://www.imdb.com/de/title/tt0323872/).)
+Shopkeeper $B$'s recorded data is given in {ref}`tab:shopkeeper_data`.
+
+```{raw} latex
 \begin{table}[ht]
 \centerline{
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -505,10 +558,10 @@ Expected &  50 & 50 & 50 & 50 & 50 \\
 \hline
 \end{tabular}
 }
-\caption{The visitor count data of shopkeeper $B$.}
+\caption{Shopkeeper $B$'s data}
 \label{tab:shopkeeper_data}
 \end{table}
-
+```
 Here we have $Np_i = 50$ (more about this later) and the test
 statistic becomes
 \begin{equation*}
@@ -516,14 +569,16 @@ statistic becomes
 \end{equation*}
 The $p$-value for this case, which has $k-1 = 4$ degree of freedom, is
 $0.359$. Shopkeeper $B$, being unable to reject the null hypothesis,
-concedes for now and, more determined than ever, signs up for an
+concedes for now and, and, more determined than ever, signs up for an
 advanced statistics correspondence course.
+:::
 
 What if we had to estimate one or more parameters in the distribution
 for customers across days? In general, we drop one degree of freedom
-for every estimated parameter, a fact discussed in the next section.
+for every estimated parameter, a fact discussed later.
 
-\url{https://online.stat.psu.edu/stat415/book/export/html/832}
+A source of many facts and __problems__
+(https://online.stat.psu.edu/stat415/book/export/html/832)
 
 
 \section{$\chi^2$ and Goodness-of-Fit Testing}
