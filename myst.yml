@@ -73,6 +73,7 @@ project:
         - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
     - file: Chapter_Lab/intro-to-labs.md # Restructuring
       children:
+        - file: Chapter_Lab/In-Class_Problem_Solving_Prototypes.md
         - file: Chapter_Lab/softwareinstall.md
         - file: Chapter_Lab/prelabs.md
           children:
