@@ -1,6 +1,6 @@
 
-(prelab-5)=
-# Pre-Lab 5: Fundamentals of Debugging For Simulation (Short Do)
+(prelab-4)=
+# Pre-Lab 4: Fundamentals of Debugging For Simulation (Short Do)
 
 Now that this text has covered a substantial amount of theory,
 it is important for the reader to identify and consider malignant

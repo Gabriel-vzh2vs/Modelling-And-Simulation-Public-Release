@@ -10,7 +10,7 @@ concepts are available in their sections.
 The lab section consists of three sections that were discussed before
 and three documents of information organized with the following structure:
 
-- {ref}`sec:softwaresetup`
+- {ref}`softwaresetup`
 - {ref}`sec:pre-labs`
   - {ref}`prelab-1`
   - {ref}`prelab-2`
