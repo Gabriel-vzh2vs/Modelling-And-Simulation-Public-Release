@@ -3,14 +3,136 @@
 # Preview, prerequisites, and preparation  #
 
 Do you already know modeling and simulation? Do you have the required
-prerequisites for this book? Give the following problem a shot and see
-for yourself. Unless you have solved this or a very similar problem
-before, we recommend that you actually break out your pen, paper, and
-your computer. You may be surprised. It is inspired by a problem that
-appears in {cite}`Banks:14`.
+prerequisites for this book? Give the following problems a shot to see
+for yourself. If you have already tackled very similar problems and
+feel confident, feel free to skip. If not, we recommend that you break
+out your pen, paper, and computer. Do not use Copilot or ChatGPT; that
+would be utterly pointless.
+
+(sec:intro_breakdown)=
+## System Breakdown ##
+
+__Description__: we have a mechanical system $S$ where fatigue
+accumulates over time. If the accumulated level of fatigue exceeds a
+threshold the system will experience a critical failure. A basic model
+of this system is as follows.
+
+- The system is deployed in year 0 with with no built up fatigue.
+
+- For year $k$, the added fatigue is modeled by a random variable $X_k
+  \sim U(0,1)$. We assume that the random variables $X_1$, $X_2$,
+  $\ldots$ are independent.
+
+- If the cumulative fatigue exceeds $\tau = 1$, the system fails.
+
+
+__Question 1a:__ Determine the expected time to failure through simulation.
+
+__Question 1b:__ Determine the expected time to failure analytically.
+
+The system operator seeks to increase longevity, and schedules
+maintenance taking place at the beginning of each yearly
+cycle. Note that no maintenance is scheduled for the beginning of
+year~1 since the system is then just put into operation.
+
+Their maintenance protocol is as follows:
+
+- Measure the current system fatigue $Y$.
+
+- If $Y$ exceeds $\tau_c$ where $\tau_c < 1$, limited maintenance will
+  take place. Maintenance in year $k$, if conducted, lowers the
+  accumulated fatigue by an amount captured by a random variable $R_k
+  \sim U(0.1, 0.3)$. Of course, system fatigue can never become
+  negative.
+
+__Question 2a:__ Using simulation, graph the expected time to failure
+as a function of $\tau_0$. We denote this by $E(\tau_0)$.
+
+__Questin 2b:__ Using simulation, determine the probability
+$p_{\tau_0}$ that the system fails prior to $E(\tau_0)$
+
+
+__Comments on modeling:__ Why use $U(0,1)$ for the yearly fatigue and
+not $U(0,a)$ for some $a \in \mathbb{R}$? Because we are considering a
+__scaled version__ of the problem. And that is why $\tau$ equals $1$
+and not some quantity $\tau_{\text{critical}}$. For mathematical
+modeling, re-scaling the original model like this is par for the
+course and an established practice.
+
+__Broader application context__: This kind of buildup can arise in
+many systems. You can look up topics such as stochastic threshold
+systems, trigger phenomena, and cascade failures.
+
+````{solution} sol
+:label: sol_breakdown
+
+1a. Define $Y_n = \sum_{i=1}^n X_i$ where there $X_i$'s are IID
+$U(0,1)$ and $N = \min_n Y_n \ge \tau = 1$. We want to determine
+$\mathbb{E}[N]$, the expected number of years until failure.
+
+```{code-block} python
+
+#!/usr/bin/env python3
+#
+
+# Synopsis: Code estimating E[N] for the sum-of-uniforms breakdown
+# problem as a function of sample size n.
+
+import numpy as np
+from scipy.stats import uniform
+import matplotlib.pyplot as plt
+
+nSamples=100000
+step=100 # We only visualize the average for every 100 steps.
+
+sampleArray = []
+nSubSamples = int(nSamples / step)
+subSampleArray = np.zeros(nSubSamples)
+indexArray = np.zeros(nSubSamples)
+
+# Create the sample:
+
+for i in range(0, nSamples) :
+    n = 0
+    sum = 0.0
+    while True :
+        sum += uniform.rvs()
+        n+=1
+        if sum >= 1.0 :
+            break
+    sampleArray.append(n)
+
+# Create estimates as a function of number of samples in increments of 'step':
+
+for i in range(0, nSubSamples) :
+    indexArray[i] = step * (i+1)
+    subSampleArray[i] = np.average( sampleArray[0:(step * (i+1))] )
+
+print( subSampleArray[-1] )
+
+fig, ax = plt.subplots(1, 1)
+ax.plot(indexArray, subSampleArray, 'b-', lw=1, alpha=0.6, label=r'$\hat{E}[N_x](n)$')
+ax.legend(loc='best', frameon=False)
+plt.show()
+
+```
+
+
+1b. Analytic solution
+
+
+
+
+````
+
+
+
+
 
 (sec:intro_chefs)=
 ## The Three Chefs ##
+
+(This problem is inspired by an exercise from {cite}`Banks:14`.)
 
 Three friends, let us call them $A$, $B$ and $C$, run a lodge where
 they have just started offering breakfast. Now wanting to complicate
