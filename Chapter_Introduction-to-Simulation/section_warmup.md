@@ -12,6 +12,10 @@ Copilot, ChatGPT, or similar tools. That would be utterly pointless.
 (sec:intro_breakdown)=
 ## System Breakdown ##
 
+```{exercise}
+:label: ex:breakdown
+:enumerator: System breakdown!
+
 __Description__: we have a mechanical system $S$ where fatigue
 accumulates over time. If the accumulated level of fatigue exceeds a
 threshold the system will experience a critical failure. A basic model
@@ -68,16 +72,22 @@ course and an established practice.
 __Broader application context__: This kind of buildup can arise in
 many systems. You can look up topics such as stochastic threshold
 systems, trigger phenomena, and cascade failures.
+```
 
-````{solution} sol
+:::::{solution} ex:breakdown
+:class:dropdown
 :label: sol_breakdown
+:hidden: false
 
 1a. Define $Y_n = \sum_{i=1}^n X_i$ where there $X_i$'s are IID -
 $U(0,1)$ and $N = \min_n Y_n \ge \tau = 1$. We want to determine
 $\mathbb{E}[N]$, the expected number of years until failure. The
-following Python code is a standard use of the __Monte Carlo method__.
-The following Python code block is a basic way to execute this using
+following Python code is a standard use of the __Monte Carlo method__, and
+the Python code below is a basic way to execute this using
 $n=100000$ samples.
+
+::::{tip} Python - Estimating E[N] for the breakdown problem
+:class:dropdown
 
 ```{code-block} python
 #!/usr/bin/env python3
@@ -103,6 +113,7 @@ for i in range(0, nSamples) :
 
 print(np.average(sampleArray))
 ```
+::::
 
 For the particular instance, we got the estimate $\frac{1}{n}
 \sum_{i=1}^n x_i = 2.71899$. Since no random number seed was provided,
@@ -116,6 +127,9 @@ one's estimate. We adapt the code above to estimate the expected value
 in steps of 100. That is, we estimate using 100 sample, then 200
 samples, 300 samples and so. The updated code looks like this:
 
+
+::::{tip} Python - Estimating E[N] as a function of sample size
+:class:dropdown
 
 ```{code-block} python
 
@@ -168,11 +182,18 @@ plt.savefig('system_breakdown_n.svg')
 plt.show()
 
 ```
+::::
 
 ```{figure} system_breakdown_n.svg
 :width: 600
 :label: fig:breakdown_n
-Here is the text.
+
+The diagram shows the estimate of $\mathbb{E}[N]$ for the system
+breakdown problem as a function of the sample size $n$. Here the
+estimates were constructed based on the Monte Carlo method. Note that
+different seed values will generally produce quite different curves,
+most notably for small values of $n$.
+
 ```
 
 
@@ -181,8 +202,8 @@ Here is the text.
 
 
 
-````
 
+:::::
 
 
 
