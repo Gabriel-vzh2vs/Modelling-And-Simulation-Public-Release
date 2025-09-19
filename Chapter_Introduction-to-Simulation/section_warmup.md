@@ -3,11 +3,11 @@
 # Preview, prerequisites, and preparation  #
 
 Do you already know modeling and simulation? Do you have the required
-prerequisites for this book? Give the following problems a shot to see
-for yourself. If you have already tackled very similar problems and
+prerequisites for this book? Give the following problems a try to see
+where you stand. If you have already tackled very similar problems and
 feel confident, feel free to skip. If not, we recommend that you break
-out your pen, paper, and computer. Do not use Copilot or ChatGPT; that
-would be utterly pointless.
+out your pen, paper, and computer. Give them a good effort. Do not use
+Copilot, ChatGPT, or similar tools. That would be utterly pointless.
 
 (sec:intro_breakdown)=
 ## System Breakdown ##
@@ -26,16 +26,19 @@ of this system is as follows.
 - If the cumulative fatigue exceeds $\tau = 1$, the system fails.
 
 
-__Question 1a:__ Determine the expected time to failure through simulation.
+__Question 1a:__ Determine the expected time to failure through
+simulation. Seeing the numerical estimate, hypothesize what the exact
+value is.
 
-__Question 1b:__ Determine the expected time to failure analytically.
+__Question 1b:__ Determine the expected time to failure
+analytically. Does it match your hypothesis from 1a?
+
 
 The system operator seeks to increase longevity, and schedules
-maintenance taking place at the beginning of each yearly
-cycle. Note that no maintenance is scheduled for the beginning of
-year~1 since the system is then just put into operation.
-
-Their maintenance protocol is as follows:
+maintenance taking place at the beginning of each yearly cycle. Note
+that no maintenance is scheduled for the beginning of year 1 since the
+system is then just put into operation. Their maintenance protocol is
+as follows:
 
 - Measure the current system fatigue $Y$.
 
@@ -48,9 +51,12 @@ Their maintenance protocol is as follows:
 __Question 2a:__ Using simulation, graph the expected time to failure
 as a function of $\tau_0$. We denote this by $E(\tau_0)$.
 
-__Questin 2b:__ Using simulation, determine the probability
-$p_{\tau_0}$ that the system fails prior to $E(\tau_0)$
+__Question 2b:__ Using simulation, determine and graph the probability
+$p_{\tau_0}$ that the system fails prior to $E(\tau_0)$ as a function
+of $\tau_0$.
 
+__Question 3:__ Based on your findings, would you offer any
+recommendations to the system operator?
 
 __Comments on modeling:__ Why use $U(0,1)$ for the yearly fatigue and
 not $U(0,a)$ for some $a \in \mathbb{R}$? Because we are considering a
@@ -66,9 +72,50 @@ systems, trigger phenomena, and cascade failures.
 ````{solution} sol
 :label: sol_breakdown
 
-1a. Define $Y_n = \sum_{i=1}^n X_i$ where there $X_i$'s are IID
+1a. Define $Y_n = \sum_{i=1}^n X_i$ where there $X_i$'s are IID -
 $U(0,1)$ and $N = \min_n Y_n \ge \tau = 1$. We want to determine
-$\mathbb{E}[N]$, the expected number of years until failure.
+$\mathbb{E}[N]$, the expected number of years until failure. The
+following Python code is a standard use of the __Monte Carlo method__.
+The following Python code block is a basic way to execute this using
+$n=100000$ samples.
+
+```{code-block} python
+#!/usr/bin/env python3
+#
+# Synopsis: Code estimating E[N] for the sum-of-uniforms breakdown
+#   problem
+
+import numpy as np
+from scipy.stats import uniform
+
+nSamples=100000
+sampleArray = np.zeros(nSamples)
+
+for i in range(0, nSamples) :
+    n = 0
+    sum = 0.0
+    while True :
+        sum += uniform.rvs()
+        n+=1
+        if sum >= 1.0 :
+            break
+    sampleArray[i] = n
+
+print(np.average(sampleArray))
+```
+
+For the particular instance, we got the estimate $\frac{1}{n}
+\sum_{i=1}^n x_i = 2.71899$. Since no random number seed was provided,
+you will get a different estimate every time you run this code. We
+have a small hunch that the exact answer may be $e$, the base of the
+natural logarithms.
+
+If you used a small sample size (e.g., 10), you may get a very
+different answer. It is natural to ask how the sample size influences
+one's estimate. We adapt the code above to estimate the expected value
+in steps of 100. That is, we estimate using 100 sample, then 200
+samples, 300 samples and so. The updated code looks like this:
+
 
 ```{code-block} python
 
@@ -85,14 +132,9 @@ import matplotlib.pyplot as plt
 nSamples=100000
 step=100 # We only visualize the average for every 100 steps.
 
-sampleArray = []
-nSubSamples = int(nSamples / step)
-subSampleArray = np.zeros(nSubSamples)
-indexArray = np.zeros(nSubSamples)
+sampleArray = np.zeros(nSamples)
 
-# Create the sample:
-
-for i in range(0, nSamples) :
+def SampleX() :
     n = 0
     sum = 0.0
     while True :
@@ -100,7 +142,13 @@ for i in range(0, nSamples) :
         n+=1
         if sum >= 1.0 :
             break
-    sampleArray.append(n)
+    return n
+
+sampleArray = [SampleX() for i in range(nSamples)]
+
+nSubSamples = int(nSamples / step)
+subSampleArray = np.zeros(nSubSamples)
+indexArray = np.zeros(nSubSamples)
 
 # Create estimates as a function of number of samples in increments of 'step':
 
@@ -108,13 +156,23 @@ for i in range(0, nSubSamples) :
     indexArray[i] = step * (i+1)
     subSampleArray[i] = np.average( sampleArray[0:(step * (i+1))] )
 
+# This gives the estimate:
 print( subSampleArray[-1] )
 
+# Now plot the evolution:
 fig, ax = plt.subplots(1, 1)
-ax.plot(indexArray, subSampleArray, 'b-', lw=1, alpha=0.6, label=r'$\hat{E}[N_x](n)$')
+ax.plot(indexArray, subSampleArray, 'b-', lw=1, alpha=0.6, label=r'$\hat{E}[N](n)$')
 ax.legend(loc='best', frameon=False)
+plt.xlabel(r'$n$')
+plt.savefig('system_breakdown_n.svg')
 plt.show()
 
+```
+
+```{figure} system_breakdown_n.svg
+:width: 600
+:label: fig:breakdown_n
+Here is the text.
 ```
 
 
