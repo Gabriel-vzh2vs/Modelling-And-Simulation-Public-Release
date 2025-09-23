@@ -9,16 +9,26 @@ as many courses have adopted this format to great success at the University
 of Virginia and beyond.
 :::
 
-## ICPS 1: Bayes vs Simulation (Using Mathematical Results to Build Simulations)
+## Monte Carlo-Based Problems
 
-Facebook has a content team that labels pieces of content on the platform as spam or not spam. 90% of them are diligent raters and will label 20% of the content as spam and 80% as non-spam. The remaining 10% are non-diligent raters and will label 0% of the content as spam and 100% as non-spam. Assume the pieces of content are labeled independently from one another, for every rater. Given that a rater has labeled 4 pieces of content as good, what is the probability that they are a diligent rater?
+### ICPS 1: Bayes vs Simulation (Using Mathematical Results to Build Simulations)
 
-Produce a Crude Monte Carlo Simulation that is able to reproduce these results from the closed-form formulation of Bayes' Theorem.
+Facebook has a content team that labels pieces of content on the platform as spam or not spam.
+90% of them are diligent raters and will label 20% of the content as spam and 80% as non-spam.
+The remaining 10% are non-diligent raters and will label 0% of the content as spam and 100% as
+non-spam. Assume the pieces of content are labeled independently from one another, for every rater.
+Given that a rater has labeled 4 pieces of content as good, what is the probability that they are a
+diligent rater?
+
+Produce a Crude Monte Carlo Simulation that is able to reproduce these results from the closed-form 
+formulation of Bayes' Theorem.
 
 We will present a method for solving this with Bayes' Theorem, so the simulation based on this question
 can be checked using an empirical method.
 
-To use Bayes with the conditional probability established in the problem above, we need to understand the event space through establishing a prior. In this case, we are assuming that there is a 0.9 probability of a diligent rater with a 0.1 chance of a non-diligent rater.
+To use Bayes with the conditional probability established in the problem above, we need to understand the
+event space through establishing a prior. In this case, we are assuming that there is a 0.9 probability of a
+diligent rater with a 0.1 chance of a non-diligent rater.
 
 From this, we can construct a table that defines the event space.
 
@@ -34,7 +44,8 @@ Spam & Non-spam & Spam & Non-spam \\
 \end{tabular}
 ```
 
-Once the probabilities $P(A|B)$, $P(B|A)$, $P(A)$, and $P(B)$ that constitute the Bayes Theorem are established, then it shall be possible to use a closed-form formula to calculate the probability of these events occurring.
+Once the probabilities $P(A|B)$, $P(B|A)$, $P(A)$, and $P(B)$ that constitute the Bayes Theorem are established,
+then it shall be possible to use a closed-form formula to calculate the probability of these events occurring.
 
 These events are defined as the following:
 
@@ -46,7 +57,8 @@ Now, the Bayes Theorem:
 
 $$P(A|B) = \frac{P(B|A) * P(A)}{P(B)}$$
 
-And as the values constituting this theorem for answering the question above are known, they can be substituted below to analytically solve this problem.
+And as the values constituting this theorem for answering the question above are known, 
+they can be substituted below to analytically solve this problem.
 
 $$0.787 = \frac{0.8^4 * 0.9}{0.9 * 0.8^4 + 0.1 (1)}$$
 
@@ -55,11 +67,11 @@ Simulation answer:
 ```{code} python3
 import numpy as np
 
-nrounds = 1000
+n = 1000
 four_non_spam_cases = 0
 diligent_raters = 0
 
-while four_non_spam_cases < nrounds:
+while four_non_spam_cases < n:
     is_diligent = np.random.binomial(1, 0.9, 1)[0]
 
     spam_count = 0
@@ -72,27 +84,31 @@ while four_non_spam_cases < nrounds:
         four_non_spam_cases += 1
         diligent_raters += is_diligent
 
-simulated_probability = diligent_raters / nrounds
+simulated_probability = diligent_raters / n # Monte Carlo Estimator
 
 print(simulated_probability)
 ```
 
-### ICPS-Extension 1 
 
-## ICPS 2: Coins from 538
+### ICPS 2: Coins from 538
 
 While traveling in the Kingdom of Arbitraria, you are accused of a heinous crime. Arbitraria decides who’s guilty or innocent not through a court system, but a board game. It’s played on a simple board: a track with sequential spaces numbered from 0 to 1,000. The zero space is marked “start,” and your token is placed on it. You are handed a fair six-sided die and three coins. You are allowed to place the coins on three different (nonzero) spaces. Once placed, the coins may not be moved.
 
 After placing the three coins, you roll the die and move your token forward the appropriate number of spaces. If, after moving the token, it lands on a space with a coin on it, you are freed. If not, you roll again and continue moving forward. If your token passes all three coins without landing on one, you are executed. On which three spaces should you place the coins to maximize your chances of survival?
 
-## ICPS 3: Boarding Puzzle (Simulations Over Solving A Difficult Mathematical Problem)
+### ICPS 3: The Last Boarding Pass Puzzle
+<!-- (Complex Simulations Over Solving A Difficult Mathematical Problem) -->
 
-One hundred people are lined up with their boarding passes showing their seats on the 100 seat Plane. The first guy in line drops his pass as he enters the plane, and unable to pick it up with others behind him sits in a random seat. The people behind him, who have their passes, sit in their seats until one of them comes upon someone sitting in his seat, and takes his seat in a new randomly chosen seat. This process continues until there is only one seat left for the last person.
+One hundred people are lined up with their boarding passes showing their seats on the 100 seat plane.
+The first guy in line drops his pass as he enters the plane, and unable to pick it up with others
+behind him sits in a random seat. The people behind him, who have their passes, sit in their seats
+until one of them comes upon someone sitting in his seat, and takes his seat in a new randomly chosen seat.
+This process continues until there is only one seat left for the last person.
 
 What is the probability that the last person will sit in the correct seat?
 
-There is a set of analytic solutions to this, one from {cite:p}`nigussie2014finding`. But an easier
-solution is simulation.
+There is a set of analytic solutions to this, which one will be discussed later, which is from
+ {cite:p}`nigussie2014finding`. But an easier solution is simulation.
 
 ```{code} python3
 
@@ -115,7 +131,7 @@ which then collapses into
 
 $$p(k) = \frac{1}{n} \sum \prod_{\ell=1}^{m} \frac{1}{(n+1) - j_{\ell}}$$
 
-## ICPS 4: Feller's coin-tossing (Using Simulation to Check Complex Mathematical Results)
+### ICPS 4: Feller's coin-tossing (Using Simulation to Check Complex Mathematical Results)
 
 If you flip a coin n times, what is the probability there are no streaks of k heads in a row?
 
@@ -124,7 +140,7 @@ is woefully insufficient. This is because the streak we are measuring in this qu
 a fundamental assumption of using the binominal distribution. This problem is actually related to
 Feller's coin-tossing constants and Fibonacci numbers, which simulation can do both approaches!
 
-To illustrate how intractable this problem is using an analytic approach, we will begin with a sample of 
+To illustrate how intractable this problem is using an analytic approach, we will begin with a sample of
 30 flips, looking for a streak of length 3 or n = 30, k = 3.
 
 ```{code} python3
@@ -150,7 +166,8 @@ In this case, the result has one streak of length three, but doing this for a di
 larger length would be less trivial. And through what method is possible for determining if this is
 true for all sequences of any length - the ratio between the ones with a sequence and the ones without
 can be defined as the frequentist definition of probability of p(30, 3). The downside of this is that it will take
-$2^30$ sequences to discover this value using this method. This poses set of problems that grow _exponentially_, which is the total number of sequences and the second problem of specificity to one set of n or k.
+$2^30$ sequences to discover this value using this method. This poses a set of problems that grow _exponentially_,
+which is the total number of sequences and the second problem of specificity to one set of n or k.
 
 There are several analytic solutions to this problem one of which is Feller's coin-tossing
 constants. It is known that the for any independent tosses of a fair coin, there is
@@ -173,7 +190,8 @@ $p(n,k) \approx \frac{\beta_k}{\alpha_k^{n+1}} = 0.1406263$.
 
 However, it is easier and possible to exploit
 the Law of Large Numbers in combination with Crude Monte Carlo to find this probability
-without having to go through every possibility or taking limits. And it allows for an easier exploration of different lengths.
+without having to go through every possibility or taking limits. And it allows
+for an easier exploration of different lengths.
 
 Simulation Code:
 
@@ -212,9 +230,7 @@ Which can be visualized as the following:
 
 ![embedded image](figs/CoinFlipHeads.png)
 
-123
-
-## ICPS 5: Coupon Collector Problem (A Classical Statistical Problem that it is Easier to Use Crude Monte Carlo For)
+### ICPS 5: Coupon Collector Problem
 
 A cereal company puts one of $n$ different collectible cards in each box. How many boxes do you expect to
 buy before collecting all $n$ cards?
@@ -224,9 +240,9 @@ checking your simulation work.
 
 We begin with a unique card, as the first box will always contain a card that is new to you.
 Now, the probability of getting a second unique card is $\frac{n-1}/n$ which can be represented
-as a bernoulli trial.
+as a Bernoulli trial.
 
-In this case, we notice that a series of bernoulli trials is the geometric
+In this case, we notice that a series of Bernoulli trials is the Geometric
 distribution as we are tracking the expected number until a success,
 which is expressed as with:
 
@@ -234,6 +250,49 @@ $$\frac{1}{P(Success)} = \frac{n-1}$$
 
 For the third unique card, the state space for possible new cards reduces to $n-2$,
 so the probability is $\frac{n-2}{n}$ and the $E(trials)$ should be $\frac{n}{n-2}$.
-This pattern continues for n until the entire
+This pattern continues for n until the entire state space is exhausted.
 
-## ICPS 6: On Rare Events
+From this, it is possible to deduce the expected value as the sum of these
+Bernoulli Trials.
+
+$$E[X] = 1 + \frac{n}{n-1} + \frac{n}{n-2}  + \dots + \frac{n}{1}$$
+
+Now, consider an instance of this problem with 9 cards, if this formula
+is applied, the expected number of boxes required to get every card
+would be about 25.46 boxes from the analytic solution.
+
+Simulation Code:
+
+```{code} python3
+import random
+
+def coupon_collector_simulation(num_cards, num_experiments):
+    results = []
+    
+    for _ in range(num_experiments):
+        collected_cards = set()
+        boxes_bought = 0
+        
+        while len(collected_cards) < num_cards:
+            card = random.randint(1, num_cards)
+            collected_cards.add(card)
+            boxes_bought += 1
+            
+        results.append(boxes_bought)
+    
+    return results
+
+# Calculate theoretical expected value
+def theoretical_expected_boxes(num_cards):
+    harmonic_sum = sum(1/i for i in range(1, num_cards + 1))
+    return num_cards * harmonic_sum
+```
+
+#### Extension 1
+
+#### Extension 2
+
+### ICPS 6: On Rare Events
+
+
+## 
