@@ -34,7 +34,6 @@ verification and validation.
 
 ::::{tab-set}
 
-
 :::{tab-item} Breakpoints
 In most IDEs (such as VS Code), the concept of a breakpoint generally exists, and a
 breakpoint is generally used to ensure that the code in question runs. In this case run refers
@@ -150,7 +149,7 @@ alone.
 
 :::
 
-:::{tab-item} Formal Methods
+<!-- :::{tab-item} Formal Methods
 Formal methods refer to making code that is based on mathematical logic[^1] and
 system specifications. In general, formal methods are difficult and time-consuming
 to capture for every element of the system meaning that they should be automated and
@@ -209,7 +208,7 @@ detail:
 2. Automated theorem provers like LEAN, Isabelle, or RCoq (proving theorems is an exercise left to the reader);
 3. And more!
 
-:::
+::: -->
 ::::
 
 [^1]: This is where the _formal_ in formal methods comes from, as it is talking about

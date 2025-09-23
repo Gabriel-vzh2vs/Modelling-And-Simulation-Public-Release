@@ -1,5 +1,5 @@
 (ICPS)=
-# ICPS Prototypes
+# In-Class Exercises
 
 :::{note} A Note on the ICPSes in this section
 :class: dropdown
@@ -77,8 +77,7 @@ simulated_probability = diligent_raters / nrounds
 print(simulated_probability)
 ```
 
-
-### ICPS-Extension 1: 
+### ICPS-Extension 1 
 
 ## ICPS 2: Coins from 538
 
@@ -88,16 +87,132 @@ After placing the three coins, you roll the die and move your token forward the 
 
 ## ICPS 3: Boarding Puzzle (Simulations Over Solving A Difficult Mathematical Problem)
 
-One hundred people are lined up with their boarding passes showing their seats on the 100-seat Plane. The first guy in line drops his pass as he enters the plane, and unable to pick it up with others behind him sits in a random seat. The people behind him, who have their passes, sit in their seats until one of them comes upon someone sitting in his seat, and takes his seat in a new randomly chosen seat. This process continues until there is only one seat left for the last person.
+One hundred people are lined up with their boarding passes showing their seats on the 100 seat Plane. The first guy in line drops his pass as he enters the plane, and unable to pick it up with others behind him sits in a random seat. The people behind him, who have their passes, sit in their seats until one of them comes upon someone sitting in his seat, and takes his seat in a new randomly chosen seat. This process continues until there is only one seat left for the last person.
+
+What is the probability that the last person will sit in the correct seat?
+
+There is a set of analytic solutions to this, one from {cite:p}`nigussie2014finding`. But an easier
+solution is simulation.
+
+```{code} python3
+
+```
+
+In {cite:p}`nigussie2014finding`, Nigussie constructs the following:
+
+For $2 \le k \le n$, customer $c$ gets bumped when their seat is occupied by customer $k-1$, who was
+also bumped by a customer $k-2$, and so on until customer 1.
+
+This allows for the construction of a diagram showing the bumping process:
+
+$$1 \to k_{1} \to k_{2} \to \dots \to k_{m} \to c$$
+
+Then, the probability of this series of events is defined as
+
+$$\frac{1}{n} \cdot \frac{1}{n+1 - k_1} \cdot \dots \frac{1}{(n+1)-k_{m}}$$
+
+which then collapses into
+
+$$p(k) = \frac{1}{n} \sum \prod_{\ell=1}^{m} \frac{1}{(n+1) - j_{\ell}}$$
 
 ## ICPS 4: Feller's coin-tossing (Using Simulation to Check Complex Mathematical Results)
 
 If you flip a coin n times, what is the probability there are no streaks of k heads in a row?
 
-The question might seem to be directly answerable by using the binomial distribution's PDF, but that is woefully
-insufficient. This is because the streak we are measuring in this question is NOT independent,
+The question might seem to be directly answerable by using the binomial distribution's PDF, but that
+is woefully insufficient. This is because the streak we are measuring in this question is NOT independent,
 a fundamental assumption of using the binominal distribution. This problem is actually related to
 Feller's coin-tossing constants and Fibonacci numbers, which simulation can do both approaches!
+
+To illustrate how intractable this problem is using an analytic approach, we will begin with a sample of 
+30 flips, looking for a streak of length 3 or n = 30, k = 3.
+
+```{code} python3
+import numpy.random as random
+
+random.seed(42)
+flip_list = []
+
+for i in range(30):
+    flip = random.randint(0, 2)  # Generates either 0 or 1
+    flip_list.append(flip)
+
+print(flip_list)
+```
+
+As it has a set seed, it will always return the result below:
+
+```{code} python3
+[0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+```
+
+In this case, the result has one streak of length three, but doing this for a different result of a much
+larger length would be less trivial. And through what method is possible for determining if this is
+true for all sequences of any length - the ratio between the ones with a sequence and the ones without
+can be defined as the frequentist definition of probability of p(30, 3). The downside of this is that it will take
+$2^30$ sequences to discover this value using this method. This poses set of problems that grow _exponentially_, which is the total number of sequences and the second problem of specificity to one set of n or k.
+
+There are several analytic solutions to this problem one of which is Feller's coin-tossing
+constants. It is known that the for any independent tosses of a fair coin, there is
+an asymptotic probability associated with it. Feller in 1968 stated that if the probability is
+stated as $p(n,k)$, then the probability can be expressed as
+
+$$ \lim_{n \to \infty} p(n, k)\alpha_k^{n+1} = \beta_k $$
+
+And that $\alpha_k$ and $\beta_k$ can be defined as the smallest roots of
+
+$$\alpha_k = x^{k+1} = 2^{k+1} (x-1)$$
+
+and
+
+$$\beta_k = \frac{2-\alpha_k}{k+1-k \cdot \alpha_k}$$
+
+A example directly from {cite:t}`feller1971introduction` is one for $p(10,2)$ which is $\frac{9}{64} = 0.140625$
+through the binominal distribution, with the approximation from Feller consisting of
+$p(n,k) \approx \frac{\beta_k}{\alpha_k^{n+1}} = 0.1406263$.
+
+However, it is easier and possible to exploit
+the Law of Large Numbers in combination with Crude Monte Carlo to find this probability
+without having to go through every possibility or taking limits. And it allows for an easier exploration of different lengths.
+
+Simulation Code:
+
+```{code} python3
+import numpy as np
+import numpy.random as random
+import pandas as pd
+
+def streak_of_three_coin(parameter):
+    windows = np.lib.stride_tricks.sliding_window_view(parameter, window_shape=3)
+    return np.any(np.sum(windows, axis=1) == 3)
+
+trials = 10_000 # This number of trials is arbitrary - but bigger is often better 
+
+sequence_lengths = np.arange(3, 52, 2)
+results = []
+
+for length in sequence_lengths:
+    success_count = 0
+    for i in range(trials):
+        flips = random.randint(0, 2, size=length)
+        if not streak_of_three_coin(flips):
+            success_count += 1
+            
+    probability = success_count / trials # Remember this from earlier?
+    
+    results.append({
+        'sequence_length': length,
+        'probability_of_no_three': probability
+    })
+
+sim_results_df = pd.DataFrame(results)
+```
+
+Which can be visualized as the following:
+
+![embedded image](figs/CoinFlipHeads.png)
+
+123
 
 ## ICPS 5: Coupon Collector Problem (A Classical Statistical Problem that it is Easier to Use Crude Monte Carlo For)
 
@@ -110,6 +225,7 @@ checking your simulation work.
 We begin with a unique card, as the first box will always contain a card that is new to you.
 Now, the probability of getting a second unique card is $\frac{n-1}/n$ which can be represented
 as a bernoulli trial.
+
 In this case, we notice that a series of bernoulli trials is the geometric
 distribution as we are tracking the expected number until a success,
 which is expressed as with:
@@ -119,3 +235,5 @@ $$\frac{1}{P(Success)} = \frac{n-1}$$
 For the third unique card, the state space for possible new cards reduces to $n-2$,
 so the probability is $\frac{n-2}{n}$ and the $E(trials)$ should be $\frac{n}{n-2}$.
 This pattern continues for n until the entire
+
+## ICPS 6: On Rare Events
