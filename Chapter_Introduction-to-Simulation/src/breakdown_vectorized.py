@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 #
 # Synopsis: Code estimating E[N] for the sum-of-uniforms breakdown
-#   problem
+#   problem using a vectorized solution.
 
 import numpy as np
 from scipy.stats import uniform
+import multiprocessing
 
 nSamples=100000
 
-def SampleX() :
+def SampleX(x) :
     n = 0
     sum = 0.0
     while True :
@@ -18,4 +19,10 @@ def SampleX() :
             break
     return n
 
-print(np.average( [SampleX() for i in range(nSamples)] ) )
+vec_SampleX = np.vectorize(SampleX)
+#sampleArray = vec_SampleX(np.zeros(nSamples))
+
+iput = np.zeros(nSamples)
+sampleArray = SampleX(iput)
+
+print(np.average(sampleArray))
