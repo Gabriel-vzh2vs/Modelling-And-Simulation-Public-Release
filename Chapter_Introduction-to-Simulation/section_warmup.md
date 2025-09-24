@@ -8,7 +8,7 @@ where you stand. If you have already tackled very similar problems and
 feel confident, feel free to skip. If not, we recommend that you break
 out your pen, paper, and computer. Give them a good effort. Do not use
 Copilot, ChatGPT, or similar tools. That would be utterly pointless.
-ye
+
 (sec:intro_breakdown)=
 ## System Breakdown ##
 
@@ -53,7 +53,7 @@ as follows:
   \sim U(0.1, 0.3)$. Note that accumulated system fatigue can never
   become negative.
 
-__Question 2a:__ Relate $Y_k$ and the $X_k$'s.
+__Question 2a:__ Give a precise mathematical model for $Y_k$.
 
 __Question 2b:__ Using simulation, graph the expected time to failure
 as a function of $\tau_0$. We denote this by $E(\tau_0)$.
@@ -77,17 +77,20 @@ many systems. You can look up topics such as stochastic threshold
 systems, trigger phenomena, and cascading failures.
 ```
 
-:::::{solution} ex:breakdown
-<!--:class:dropdown-->
+
+::::::{solution} ex:breakdown
 :label: sol_breakdown
 :hidden: false
 
-__1a__. Define $Y_n = \sum_{i=1}^n X_i$ where there $X_i$'s are IID
-$U(0,1)$ random variables and $N = \min_n Y_n \ge \tau = 1$. We want
-to determine $\mathbb{E}[N]$, the expected number of years until
+:::::{tip} __1a__ Simulation approach
+:class:dropdown
+
+Define $Y_n = \sum_{i=1}^n X_i$ where there $X_i$'s are IID $U(0,1)$
+random variables and $N = \min_n Y_n \ge \tau = 1$. We want to
+determine $\mathbb{E}[N]$, the expected number of years until
 failure. The following Python code is a standard use of the __Monte
-Carlo method__, and the Python code below is a basic way to execute
-this using $n=100000$ samples.
+Carlo method__. It is a basic code and uses $n=100000$ samples and is
+based on Python's default random number generator.
 
 ::::{tip} Python - Estimating E[N] for the breakdown problem
 :class:dropdown
@@ -128,11 +131,11 @@ If you used a small sample size (e.g., 10), you may get a very
 different answer. It is natural to ask how sample size influences
 one's estimate. We adapt the code above to estimate the expected value
 in steps of 100. That is, we estimate using 100 sample, then 200
-samples, 300 samples and so. The updated code looks like this:
+samples, 300 samples and so. You find the updated code below.
 
 
 ::::{tip} Python - Estimating E[N] as a function of sample size
-<!--:class:dropdown-->
+:class:dropdown
 
 ```{code-block} python
 /bin/env python3
@@ -193,12 +196,16 @@ breakdown problem as a function of the sample size $n$. Here the
 estimates were constructed based on the Monte Carlo method. Note that
 different seed values will generally produce quite different curves,
 most notably for small values of $n$. As we will learn, as $n$ gets
-large, differences will disappear.
+large, differences will disappear (strong law of large numbers).
 
 ```
+:::::
+
+:::::{tip} __1b__ Analytic approach
+:class:dropdown
 
 
-__1b__. To derive the answer analytically, we set
+To derive the answer analytically, we set
 
 \begin{equation*}
 N_x = \min \{n\ge 1 \mid \sum_{i=1}^n X_k \ge x \}
@@ -245,8 +252,12 @@ the latter following from the  equation upstairs. The sought after expectation v
 
 precisely as the simulation approach indicated in the previous problem.
 
+:::::
 
-__2a__. First, we see that $Y_1$, the accumulated fatigue at the end
+:::::{tip} __2a__ Model with added maintenance
+:class:dropdown
+
+First, we see that $Y_1$, the accumulated fatigue at the end
 of the first year, is $Y_1 = X_1$. If $Y_1 \ge 1$, then $Y_k = Y_1$ for
 all $k\ge 1$, that is, the system remains in the failed state.
 
@@ -263,6 +274,12 @@ Y_{k-1} + X_k,& \text{if $Y_{k-1} < \tau_c$}\\
 
 Finally, we have $Y_k = \min \{1, \tilde{Y}_k\}$. Moreover, if
 $\tilde{Y}_k \ge 1$, then $Y_{k'} = 1$ for all $k' \ge k$.
+
+
+:::::
+
+:::::{tip} __2b__ Simulation for $E(\tau_c)$ as a function of $\tau_c$
+:class:dropdown
 
 __2b__. We used Python to to estimate $E(\tau_c)$ as a function of
 $\tau_c$ using the Monte Carlo method using $Y_k$ from __2a__. The
@@ -324,33 +341,29 @@ plt.savefig(f'system-breakdown-tau_c-{nSamples}.svg')
 plt.show()
 
 ```
-
-```{figure} system-breakdown-tau_c-100000-labeled.svg
-:width: 600
-:label: fig:e_tau_c_100000
-
-The expected time to failure $E(\tau_c)$ as a function of $\tau_c$
-estimated using a Monte Carlo approach (part __2b__).
-
-```
-
-```{figure} system-breakdown-tau_c-100000-labeled.svg
-:width: 600
-:label: fig:e_tau_c_100000
-
-The expected time to failure $E(\tau_c)$ as a function of $\tau_c$
-estimated using a Monte Carlo approach (part __2b__).
-
-```
-
-
 ::::
 
 
-__2c__. Here we use the saved data from part __2b__ for the estimated
-time to failure as a function of $\tau_c$. The approach uses the Monte
-Carlo method for each increment of $\tau_c$ applied to an indicator
-random variable measuring. The estimates are shown in
+```{figure} system-breakdown-tau_c-100000-labeled.svg
+:width: 600
+:label: fig:e_tau_c_100000
+
+The expected time to failure $E(\tau_c)$ as a function of $\tau_c$
+estimated using a Monte Carlo approach (part __2b__).
+
+```
+
+
+:::::
+
+:::::{tip} __2c__ Probability of failure prior to $E(\tau_c)$ as a function of $\tau_c$
+:class:dropdown
+
+Here we use the saved data from part __2b__ for the estimated time to
+failure as a function of $\tau_c$. The approach uses the Monte Carlo
+method for each increment of $\tau_c$ applied to an indicator random
+variable measuring whether failure happened prior to the expected
+time. The estimates are shown in
 {ref}`fig:prob_failure_prior_exp_10000`. Can you explain the sharp
 transition that seems to take place at $\tau_c$ close to $0.6$?
 
@@ -442,21 +455,39 @@ plt.show()
 The probability that the system with the repair policy in part 2
 breaks down prior to its expected time to failure $E(\tau_c)$ as a
 function of $\tau_c$. The graph was constructed using a Monte Carlo
-approach based on the estimates for $E(\tau_c)$ from part __2b__.
+approach based on the (Monte Carlo) estimates for $E(\tau_c)$ from
+part __2b__.
 
 ```
+:::::
 
-__3__.
+:::::{tip} __3__ Potential recommendations
+:class:dropdown
 
-
-__Moral of the story:__
-
+With the given maintenance parameters ($a=0.1$ and $b=0.3$) and $R_k
+\sim U(a,b)$, the annual fatigue overwhelms the partial repair of the
+system. Can the maintenance be modified to increase $a$ and $b$?
+Back-of-the-envelope estimates makes it plausible that
+$\mathbb{E}[R_k]$ should be comparable to $\mathbb{E}[U(0,1)] = 1/2$
+to avoid the rapid breakdown observed here. You may want to test this
+conjecture.
 
 :::::
 
+:::::{tip} Closing comments
+:class:dropdown
 
+For some models like the one in part __1__, one can derive analytic
+solutions for the quantities of interest. In practice, that is
+relatively rare, and one will need to use techniques such as
+simulation in conjuction with the Monte Carlo method. However, the
+insight we got from __1b__ is still helpful. From this, we know what
+to expect at a parameter border cases (i.e., $\tau_c = 1$). This can
+help with verification of the simulation model.
 
+:::::
 
+::::::
 
 
 
@@ -492,7 +523,7 @@ table. The process and the steps are illustrated in {ref}`fig:three_chefs`.
 :label: fig:three_chefs
 
 Breakfast preparation and associated distributions (prior to
-normalization). Here $U(a,b)$ denotes the uniforma distribution across
+normalization). Here $U(a,b)$ denotes the uniform distribution across
 the interval $[a,b]$.
 
 :::
@@ -511,11 +542,13 @@ For the purpose of this problem, however, we replace each of the
 distributions for the $A_i$ steps by $U(0,1).$ Similarly, we replace
 the distributions for the $B_i$ steps by $U(0,3/2)$, and the
 distribution for the $C_1$ step by $U(0,3)$. We do not debate the
-modeling bacon cooking times as short as 0 minutes.
+merit of modeling bacon cooking times as short as 0 minutes (nor
+eating under-cooked bacon); this re-scaling will make the following
+computations more pleasant.
 
-__(a)__ With the above assumptions on distributions, what is the expected
-time, the minimal time, and the maximal time for preparing each of the
-three items?
+__(a)__ With the above assumptions on distributions, what is the
+expected time, the minimal time, and the maximal time for preparing
+each of the three items?
 
 __(b)__ Write down a (stochastic) model for the time $T$ needed to prepare
 a single, complete breakfast meal in terms of the expressions for
@@ -523,38 +556,38 @@ $T_{\text{egg}}$, $T_{\text{toast}}$ and $T_{\text{bacon}}$.
 
 __(c)__ In Python, Excel, XLRisk, or any tool of your choice, construct $n
 = 5000$ simulation instances for your model for $T$. For each instance
-also record $T_{\text{egg}}$, $T_{\text{toast}}$ and
+you will also need to record $T_{\text{egg}}$, $T_{\text{toast}}$ and
 $T_{\text{bacon}}$.  Estimate the expected total time $T$, and provide
 a $1-\alpha$ confidence interval for $\alpha=0.05$. Construct a
 histogram across $[0,3]$ using 250 bins of equal width and comment on
 its shape.
 
-__(d)__ For a particular simulation instance, we call the path that took
-the longest to complete the _critical path_ of that instance. Based on
-the sample you generated in (c) which of the paths $A$, $B$ and $C$ is
-most likely to be the critical path? Formalize this by introducing the
-random variable $\mathcal{C}$ that assigns 1 to sample points for
-which $C$ is the critical path, 2 to sample points for which $B$ is
-the critical path, and 3 to sample points for which $A$ is the
-critical path. Estimate and visualize the PMF (probability mass
-function) of $\mathcal{C}$.
+__(d)__ For a particular simulation instance, we call the path that
+took the longest to complete the __critical path__ of that
+instance. Based on the sample you generated in (c) which of the paths
+$A$, $B$ and $C$ is most likely to be the critical path? Formalize
+this by introducing the random variable $\mathcal{C}$ that assigns 1
+to sample points for which $C$ is the critical path, 2 to sample
+points for which $B$ is the critical path, and 3 to sample points for
+which $A$ is the critical path. Estimate and visualize the
+probability mass function (PMF) of $\mathcal{C}$.
 
-__(e)__ For question (d), could you have determined this without
-simulation? Specifically, could you have determined the order of
-$p_{\mathcal{C}}(1)$, $p_{\mathcal{C}}(2)$, and $p_{\mathcal{C}}(3)$
-without simulation? Explain. Here $p_{\mathcal{C}}$ denotes the PMF of
-$\mathcal{C}$.
+__(e)__ For question (d), could you have determined the outcome
+without simulation? Specifically, could you have determined the order
+of $p_{\mathcal{C}}(1)$, $p_{\mathcal{C}}(2)$, and
+$p_{\mathcal{C}}(3)$ without simulation? Explain. Here
+$p_{\mathcal{C}}$ denotes the PMF of $\mathcal{C}$.
 
 __(f)__ In case you answered "yes" in problem (e) consider this follow-up
 problem. The customer is on the Atkins diet and tells the cooks to
 hold the toast. Considering the model adapted from $T$ by omitting
 $T_{\text{toast}}$, which of the two remaining paths, $A$ and $C$, is
 most likely to be the critical path? Does your reasoning from (e) hold
-water?
+up?
 
 __(g)__ Challenge: determine the probabilities $\Pr(A)$, $\Pr(B)$ and
 $\Pr(C)$ of the corresponding paths $A$, $B$ and $C$ being the
-critical path using an analytic argument using the joint distribution
+critical path using an analytic argument via the joint distribution
 of the six random variables involved.
 
 :::{tip} Solution
