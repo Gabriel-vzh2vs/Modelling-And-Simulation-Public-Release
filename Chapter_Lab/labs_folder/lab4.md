@@ -18,6 +18,9 @@
 ## Purpose and Patterns
 
 ### Statement of Model Purpose
+This set of models serve a singular purpose: to demonstrate different techniques for
+estimating a Bayesian Prior on observed data using Monte Carlo and other methods
+that this course covered earlier.
 
 ### Patterns
 

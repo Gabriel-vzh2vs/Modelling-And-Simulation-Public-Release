@@ -20,7 +20,6 @@
 - {ref}`sec:random_number_generation`
 - {ref}`sec:distribution_modeling`
 
-
 ## Purpose and Patterns
 
 ### Statement of Model Purpose

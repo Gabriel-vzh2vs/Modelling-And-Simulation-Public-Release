@@ -119,6 +119,8 @@ Note: it might be required to reinstall or reactivate XLrisk once in a while on 
 This first set of instructions is for Microsoft Windows! If you do not have Microsoft Windows, skip this section until otherwise instructed. 
 ```
 
+::::{admonition} Windows, SIMIO Install
+:class: tip dropdown
 1. If you are reading this as a student, go to this link, https://forms.simio.com/f/student-license, 
 use your school email in the academic email section and fill it out with your name 
 (if your name is complex, aka more than three names, use your given and first family name); Use the claim code that your instructor provides you in the form.
@@ -138,12 +140,15 @@ use your school email in the academic email section and fill it out with your na
 :label: SIMIOEmail
 :::
 
-4. Input the license key from your email into your SIMIO as the email instructs. 
-5. You now have SIMIO installed on your computer! 
-#### On Virtualization for Mac
+4. Input the license key from your email into your SIMIO as the email instructs.
+5. You now have SIMIO installed on your computer!
+::::
 
+### On Virtualization for Mac
+
+::::{admonition} Mac OS, Apple Silicon, SIMIO Install
+:class: tip dropdown
 ##### UTM (Apple Silicon)
-
 1. Download UTM from this link: https://github.com/utmapp/UTM/releases/latest/download/UTM.dmg or from the App Store
 2. Drag the UTM icon to Applications in the installation window:
 :::{image} ../Figs/Chapter_Lab/UTM1.png
@@ -189,7 +194,11 @@ use your school email in the academic email section and fill it out with your na
 :label: UTMStep7
 :::
 10. At the end of this process, you should reach the Windows 11 desktop, and once you see it, follow the Windows Instructions from here: {ref}`SIMIO-Install`.
+:::
+::::
 
+::::{admonition} Mac OS, SIMIO Install for Intel Macs
+:class: tip dropdown
 ##### VirtualBox (Apple Silcon with Arm Version \& Intel Macs)
 
 1. Download VirtualBox from here: https://download.virtualbox.org/virtualbox/7.1.4/VirtualBox-7.1.4-165100-OSX.dmg 
@@ -243,7 +252,7 @@ use your school email in the academic email section and fill it out with your na
 :label: VirtualBoxStep8
 :::
 11. Now once the Virtual Machine is ready for use meaning it shows the Windows 11 Desktop, follow the instructions in {ref}`SIMIO-Install`.
-
+:::
 ### AnyLogic Installation (Windows, Mac, and Linux)
 
 1. Go to https://www.anylogic.com/downloads/personal-learning-edition-download/, and fill out the form with your school or professional email and details. 
