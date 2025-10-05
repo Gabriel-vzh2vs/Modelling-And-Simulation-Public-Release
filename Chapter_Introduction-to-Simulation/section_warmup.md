@@ -554,44 +554,48 @@ __(b)__ Write down a (stochastic) model for the time $T$ needed to prepare
 a single, complete breakfast meal in terms of the expressions for
 $T_{\text{egg}}$, $T_{\text{toast}}$ and $T_{\text{bacon}}$.
 
-__(c)__ In Python, Excel, XLRisk, or any tool of your choice, construct $n
+<!--
+__(c)__ In your tool of choice (e.g., Python, Excel, XLRisk), construct $n
 = 5000$ simulation instances for your model for $T$. For each instance
-you will also need to record $T_{\text{egg}}$, $T_{\text{toast}}$ and
+you will also want to record $T_{\text{egg}}$, $T_{\text{toast}}$ and
 $T_{\text{bacon}}$.  Estimate the expected total time $T$, and provide
 a $1-\alpha$ confidence interval for $\alpha=0.05$. Construct a
 histogram across $[0,3]$ using 250 bins of equal width and comment on
 its shape.
+-->
 
-__(d)__ For a particular simulation instance, we call the path that
-took the longest to complete the __critical path__ of that
-instance. Based on the sample you generated in (c) which of the paths
-$A$, $B$ and $C$ is most likely to be the critical path? Formalize
-this by introducing the random variable $\mathcal{C}$ that assigns 1
-to sample points for which $C$ is the critical path, 2 to sample
-points for which $B$ is the critical path, and 3 to sample points for
-which $A$ is the critical path. Estimate and visualize the
-probability mass function (PMF) of $\mathcal{C}$.
+__(c)__ For a particular simulation instance, we call the path that
+took the longest to complete the __critical path__ for that
+instance. Which of the paths $A$, $B$ and $C$ is most likely to be the
+critical path? Solve using simulation.
 
-__(e)__ For question (d), could you have determined the outcome
-without simulation? Specifically, could you have determined the order
-of $p_{\mathcal{C}}(1)$, $p_{\mathcal{C}}(2)$, and
-$p_{\mathcal{C}}(3)$ without simulation? Explain. Here
-$p_{\mathcal{C}}$ denotes the PMF of $\mathcal{C}$.
+Introduce the random variable $\mathcal{C}$ that assigns 1 to outcomes
+where $C$ is the critical path, 2 to those where $B$ is the critical
+path, and 3 to those for which $A$ is the critical path. Estimate and
+visualize the probability mass function (PMF) of $\mathcal{C}$,
+written $p_{\mathcal{C}}$.
 
-__(f)__ In case you answered "yes" in problem (e) consider this follow-up
-problem. The customer is on the Atkins diet and tells the cooks to
-hold the toast. Considering the model adapted from $T$ by omitting
-$T_{\text{toast}}$, which of the two remaining paths, $A$ and $C$, is
-most likely to be the critical path? Does your reasoning from (e) hold
-up?
+__(d)__ For question (c), can you solve the question analytically?  In
+other words can you determine the order of $p_{\mathcal{C}}(1)$,
+$p_{\mathcal{C}}(2)$, and $p_{\mathcal{C}}(3)$ without simulation?
+Explain.
 
+__(e)__ In case you answered "yes" in problem (d) consider this
+follow-up problem. The customer is on the Atkins diet and tells the
+cooks to skip the toast. Considering the model adapted from $T$ by
+omitting the tast component $T_{\text{toast}}$, which of the two
+remaining paths, $A$ and $C$, is most likely to be the critical path?
+Does your analytic argument from (d) actually work?
+
+<!--
 __(g)__ Challenge: determine the probabilities $\Pr(A)$, $\Pr(B)$ and
 $\Pr(C)$ of the corresponding paths $A$, $B$ and $C$ being the
 critical path using an analytic argument via the joint distribution
 of the six random variables involved.
+-->
 
-:::{tip} Solution
-:class:dropdown
+::::{tip} Solution
+:asdf-class:dropdown
 
 __(a)__ The minimal and maximal times are $t_{\min} = 0$ and $t_{\max}
 = 3$ across all paths. The expected time is 3/2 across all paths. You
@@ -613,61 +617,15 @@ per the text. The time $T$ is given by
  T = \max \{ T_{\text{egg}}, T_{\text{toast}}, T_{\text{bacon}} \} \;.
 \end{equation}
 
-__(c)__ This problem was solved using Python.
 
-
-```{code} python
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-
-```
-
-For the
-sample generated we have:
-
-```{code} python
-DescribeResult(
-  nobs=25,
-  minmax=(np.float64(8.242095828902297), np.float64(11.747219968630734)),
-  mean=np.float64(10.576055816186042),
-  variance=np.float64(1.0619764557044438),
-  skewness=np.float64(-1.2069468524530453),
-  kurtosis=np.float64(0.2615107022714347))
-```
-
-We used $n=25$ sample points giving the estimated mean preparation
-time of
-\begin{equation*}
-\bar{T}(n) = 10.58\text{ minutes.}
-\end{equation*}
-We also have~$\sqrt{\hat{S}^2(n)} = 1.062$ from which we deduce that
-the half-length of the confidence interval is
-\begin{equation*}
- t_{(25-1),1-0.05/2} \sqrt{S^2(n)/n}
-  = 2.064 \sqrt{1.062/25} = 0.43\;
-\end{equation*}
-with confidence interval $[10.13, 11.01]$.  The normalized histogram
-is shown in Figure~\ref{fig:9f}.
-\begin{figure}[ht]
-\centerline{\includegraphics[width=0.6\textwidth]{fe-9-time-distribution}}
-\caption{Problem 9f: distribution of preparation time using a sample
-  of size~$n=50000$.}
-\label{fig:9f}
-\end{figure}
-
-__(d)__
-
-
-
-
-From simulation, it appears that bacon is the critical path,
+__(c)__ From simulation, it appears that bacon is the critical path,
 followed by toast, and then egg. Using $n=10000$ sample points, we
-arrived at Table~\ref{tab:breakfast}, and using $n=50000$ sample
-points, we got the normalized histogram visualized in
-Figure~\ref{fig:fe-9f}.
+arrived at {ref}`tab:breakfast`, and using $n=50000$ sample points, we
+got the normalized histogram visualized in
+{ref}`fig:fe-9f`. Simulations clearly indicate that path $C$, bacon,
+is the critical path among the three candidates.
 
+```{raw} latex
 \begin{table}[ht]
 \centerline{
 \begin{tabular}{l|rrr}
@@ -679,44 +637,104 @@ Frequency & 0.288 & 0.319 & 0.392\\
 \hline
 \end{tabular}
 }
-\caption{Statistics for the critical paths in the breakfast setup.}
+\caption{Frequency statistics for the three paths.}
 \label{tab:breakfast}
 \end{table}
+```
 
-\begin{figure}[ht]
-\centerline{\includegraphics[width=0.6\textwidth]{fe-9f}}
-\caption{Problem 9f: statistics by path/number of random variables in
-  sum. Here '1' indicates the bacon path, '2' indicates the toast
-  path, and '3' indicates the egg path. }
-\label{fig:fe-9f}
-\end{figure}
+:::{figure} figs/fe-9f.png
+:align: center
+:width: 600
+:label: fig:fe-9f
+
+The three chefs: statistics by path/number of random variables in
+sum. Here '1' indicates the bacon path, '2' indicates the toast path,
+and '3' indicates the egg path. The histogram is the estimate for the PMF
+$p_{\mathcal{C}}$.
+
+:::
+
+__(d)__
+
+Can one arrive at the conclusion from the simulation-based estimate of
+$p_{\mathcal{D}}$ using intuition? Perhaps, but that would be quite
+impressive. An example of misguided reasoning is as follows: compare
+the egg path, which is a sum of three $U(0,1)$ random variables and
+the bacon path, which is just a $U(0,3)$ random variable.  One might
+argue that to have a large, positive deviation from the mean in the
+former case, all three $U(0,1)$ random variables need to deviate
+positively from their mean. For these three ''dials'' to all align in
+this manner is less likely than for the single dial in the case of
+bacon (path $C$). "Ergo", path $C$ is more likely than path $1$ to be
+the critical path. The same "reasoning" applies when comparing the
+toast and bacon paths. This is all good except that the reasoning is
+flawed.
+
+We are asked to estimate the probability:
+
+\begin{equation}
+\label{eq:p}
+\Pr( T_{C_1} \ge T_{B_1} + T_{B_2} \text{ AND } T_{C_1} \ge T_{A_1} + T_{A_2} + T_{A_3})\;,
+\end{equation}
+
+How do you estimate that? You integrate the joint probability density
+function of the six random variables above across the region $R$ which
+is the subset of the six-dimensional space $[0,1]^3 \times [0, 3/2]^2
+\times [0,3]$ given by
+
+\begin{equation*}
+T_{C_1} \ge T_{B_1} + T_{B_2} \text{ AND } T_{C_1} \ge T_{A_1} + T_{A_2} + T_{A_3}\;
+\end{equation*}
+
+which we view as an __event__ $E$. Since we assume that all the random
+variables involved in the cooking are independent, the joint PDF is
+
+\begin{equation*}
+f(x_1, x_2, x_3, y_1, y_2, z) = 1/ \bigl( 1^3 (3/2)^2 3\bigr) = {4\over27} \;,
+\end{equation*}
+
+and the probability of the event $E$ is thus
+\begin{equation}
+\label{eq:cp_prob}
+\Pr(E) = \int \int \!\!\!\!\int\limits_R\!\!\!\! \int \int \int {4\over 27} dx_1 dx_2 dx_3 dy_1 dy_2 dz
+\end{equation}
+
+which is surprisingly resistant to evaluation, the challenge being the specification of $R$.
 
 __(e)__
+It turns out to be much easier when we only compare pairs of paths. To
+see this, consider the comparisons of paths $B$ and $C$. Here we want
 
-Can one arrive at the conclusion from the computational
-analysis of~\pPart{e} by intuition? Perhaps, but this would be quite
-impressive. A misguided reasoning may be as follows: compare the egg
-path, which is a sum of three $U(2,4)$ random variables and the bacon
-path, which is just a $U(6,12)$ random variable.  One might argue that
-to have a large, positive deviation from the mean in the former case,
-all three $U(2,4)$ random variables need to deviate positively from
-their mean. For these three ''dials'' to all align in this manner is
-less likely than for the single dial in the latter case. Ergo, the
-bacon path is more likely than the egg path to be the critical
-path. The same "reasoning" applies when comparing the toast and
-bacon paths. This is all good except that the reasoning is flawed.
-
-Let us start by estimating the probabilities
 \begin{equation}
 \label{eq:pcb}
 \Pr( T_{C_1} \ge T_{B_1} + T_{B_2})\;,
 \end{equation}
+
+and since the joint probability of the three random variables involved
+is $f(y_1, y_2, z) = 1/\bigl( (3/2)^2 3\bigr) = 4/27$ we obtain
+
+\begin{align*}
+  \Pr( Y \ge Y_1 + Y_2 )
+  &= \int_0^{3/2}\int_{0}^{3/2}\int_{y_1 + y_2}^3 f(y_1, y_2, z)\, dz\, dy_2\,dy_1\\
+  &= \frac{4}{27} \int_0^{3/2}\int_{0}^{3/2} (3-y_1 - y_2) \, dy_2\,dy_1\\
+  &= \frac{4}{27} \int_0^{3/2} [ (3-y_1)y_2 - \frac{1}{2} y_2^2]_0^{3/2} \,dy_1\\
+  &= \frac{4}{27} \int_0^{3/2} (3-y_1)(3/2) -  9/8 \,dy_1\\
+  &= \frac{4}{27} \int_0^{3/2} \frac{27}{8} - \frac{3}{2} y_1 \,dy_1\\
+  &= \frac{4}{27}(\frac{27}{8}\frac{3}{2} - \frac{3}{4} \frac{9}{4}) = \frac{1}{4} ( 3 - 1 )
+  = \frac{1}{2} \;.
+\end{align*}
+
+In other words, paths $B$ and $C$ are equally likely to be the
+critical paths. One can show that the same holds for the other
+pairwise comparisons. This shows that the "intuitive" argument earlier
+is flawed. We have not found a good way to evaluate {ref}`eq:cp_prob` -
+if you have a good solution we are eager to see it!
+
+<!--
 \begin{equation}
 \label{eq:pca}
 \Pr( T_{C_1} \ge T_{A_1} + T_{A_2} + T_{A_3})  \;,
 \end{equation}
-
-and
 
 \begin{equation}
 \label{eq:pcab}
@@ -741,7 +759,6 @@ and that
 One can compute $\Pr( Y \ge X_1 + X_2 + X_3 )$ in precisely the same
 manner, albeit now with one more dimension to the integral, to obtain
 the same answer of~$1/2$.
-
 
 The situation with~\eqref{eq:pcab} is almost the same where
 \begin{equation*}
@@ -853,4 +870,7 @@ and can now determine $p_3$ as:
    \int_0^1 \int_0^1 \int_0^1 \int_0^{3/2} \int_{0}^{3/2} \int_{y_1+y_2}^{x_1+x_2+x_3}
          \frac{4}{27} \, dz\, dy_2\, dy_1\, dx_3\, dx_2\, dx_1
 \end{align*}
-:::
+
+-->
+
+::::
