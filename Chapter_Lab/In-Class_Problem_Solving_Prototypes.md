@@ -298,26 +298,23 @@ would be about 25.46 boxes from the analytic solution.
 
 Simulation Code:
 
-```{code} python3
+```{code} python
 import random
 
 def coupon_collector_simulation(num_cards, num_experiments):
     results = []
-    
+
     for _ in range(num_experiments):
         collected_cards = set()
         boxes_bought = 0
-        
         while len(collected_cards) < num_cards:
             card = random.randint(1, num_cards)
             collected_cards.add(card)
-            boxes_bought += 1
-            
+            boxes_bought += 1   
         results.append(boxes_bought)
-    
     return results
 
-# Calculate theoretical expected value
+# Calculate expected value
 def theoretical_expected_boxes(num_cards):
     harmonic_sum = sum(1/i for i in range(1, num_cards + 1))
     return num_cards * harmonic_sum
@@ -326,9 +323,15 @@ def theoretical_expected_boxes(num_cards):
 #### ICPS 4, Extension 1: Variance Estimation
 
 As the simulation above provides a framework for analyzing the distribution, it is trivial
-compared with the closed-form to estimate the variance with it.
+compared with the closed-form to estimate the variance with it. Particularly as it is possible
+to use the solution to the Basel Problem directly in the code.
 
-```{code} python3
+```{code} python
+import math
+
+def collect_variance(n):
+    solution =  n**2 * (math.pi**2)/6
+    return solution
 ```
 
 The Closed-Form Solution for Variance Estimation using begins by using
@@ -347,24 +350,31 @@ and variance as they are expressions derived from the survival function.
 
 $T = max_{1 < c < m} C_t$
 
-Since we know that each coupon is independent (as they were generated from a Poisson Process),
-we can now find the mean by using the survival function. Which
+Since we know that each coupon and $C_t$ are independent
+(as they were generated from a Poisson Process), it becomes
+possible to define the CDF of a Poisson Mixture, which is the
+same as the maximum of $m$ independent random variables defined
+by T:
 
+$F_X(c) = P(X < c) = P(X_j < t \, \forall \, j) = \prod_{j=1}^{m} \left(1 - e^{-p_c c}\right) \quad (1) $.
+
+Because of this expression, it becomes possible to find the survival function, and
+through this to get the mean. As any survival function can be integrated to get
+the expected value or in mathematical terms, $E(x) = \int^\infty_0 S_x(t) dt$.
+
+$E(C) = \int^\infty_0 (1 - \sum^{m}_{j=1}(1-e^{-p_j t})) dt$
+$= \sum \frac{1}{p_c} - \sum_{i < j} \frac{1}{p_j + p_i} + ... + (-1)^{m-1} \frac{1}{p_1 + p_2 + ... + p_m}$
+
+Which Ross's Probability gives us a substitution ($p_c = \frac{1}{n} \forall c$)
+to make this easier to calculate, particularly after an algebraic identity and then
+an application of the law of total expectation.
+
+$E(C) = n \sum^{n}_{k=1} \frac{1}{k}$.
+
+Variance can now be calculated from the expected value through the expression
+$Var(C) = E(C^2) - E(C)^2$.
 
 Which one of these solutions seems easier to implement and scale?
-
-#### ICPS 4, Extension 2: Generalization Across M
-
-A other associated problem with this is that the current closed-form analytical solution only applies when m is fixed,
-to generalize this, we can either use the simulation or use the Erdős-Rényi method for it.
-
-```{code} python3
-```
-
-The closed-form version of this is the limit of:
-$$P(T_{m} < n log n + (m -1) n log log n + cn \rightarrow e^{-e}^{e} / (m-1)!$$ as n goes to infinity.
-
-Which one of these solution is faster to calculate?
 
 ## Other Issues
 
