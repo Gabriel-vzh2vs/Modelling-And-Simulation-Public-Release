@@ -281,7 +281,7 @@ In this case, we notice that a series of Bernoulli trials is the Geometric
 distribution as we are tracking the expected number until a success,
 which is expressed as with:
 
-$$\frac{1}{P(Success)} = \frac{n-1}$$
+$${P(Success)} = \frac{1}{n-1}$$
 
 For the third unique card, the state space for possible new cards reduces to $n-2$,
 so the probability is $\frac{n-2}{n}$ and the $E(trials)$ should be $\frac{n}{n-2}$.
@@ -378,4 +378,4 @@ Which one of these solutions seems easier to implement and scale?
 
 ## Other Issues
 
-### ICPS 6: On Rare Events
+### ICPS 5: On Rare Events
