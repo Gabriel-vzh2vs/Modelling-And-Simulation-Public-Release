@@ -20,7 +20,7 @@ non-spam. Assume the pieces of content are labeled independently from one anothe
 Given that a rater has labeled 4 pieces of content as good, what is the probability that they are a
 diligent rater?
 
-Produce a Crude Monte Carlo Simulation that is able to reproduce these results from the closed-form 
+Produce a Crude Monte Carlo Simulation that is able to reproduce these results from the closed-form
 formulation of Bayes' Theorem.
 
 We will present a method for solving this with Bayes' Theorem, so the simulation based on this question
@@ -89,14 +89,7 @@ simulated_probability = diligent_raters / n # Monte Carlo Estimator
 print(simulated_probability)
 ```
 
-
-### ICPS 2: Coins from 538
-
-While traveling in the Kingdom of Arbitraria, you are accused of a heinous crime. Arbitraria decides who’s guilty or innocent not through a court system, but a board game. It’s played on a simple board: a track with sequential spaces numbered from 0 to 1,000. The zero space is marked “start,” and your token is placed on it. You are handed a fair six-sided die and three coins. You are allowed to place the coins on three different (nonzero) spaces. Once placed, the coins may not be moved.
-
-After placing the three coins, you roll the die and move your token forward the appropriate number of spaces. If, after moving the token, it lands on a space with a coin on it, you are freed. If not, you roll again and continue moving forward. If your token passes all three coins without landing on one, you are executed. On which three spaces should you place the coins to maximize your chances of survival?
-
-### ICPS 3: The Last Boarding Pass Puzzle
+### ICPS 2: The Last Boarding Pass Puzzle
 <!-- (Complex Simulations Over Solving A Difficult Mathematical Problem) -->
 
 One hundred people are lined up with their boarding passes showing their seats on the 100 seat plane.
@@ -110,11 +103,43 @@ What is the probability that the last person will sit in the correct seat?
 There is a set of analytic solutions to this, which one will be discussed later, which is from
  {cite:p}`nigussie2014finding`. But an easier solution is simulation.
 
-```{code} python3
+```{code} python
+import numpy as np
+import numba
 
+@numba.njit
+def boarding(num_seats=100):
+    occupied = np.full(num_seats, False) # [Empty Seats]
+
+    # Passenger 0 takes a random seat
+    p0_choice = np.random.randint(0, num_seats)
+    occupied[p0_choice] = True
+
+    # All of the passengers after 0 pick a random unoccupied seat
+    # IF the passenger before them took their seat. 
+    for p_id in range(1, num_seats - 1):
+        if not occupied[p_id]:
+            occupied[p_id] = True
+        else:
+            unoccupied_indices = np.where(occupied == False)[0]
+            choice = np.random.choice(unoccupied_indices)
+            occupied[choice] = True
+            
+    # Return True if the last passenger's seat is NOT occupied (point of the puzzle)
+    return not occupied[num_seats - 1]
+
+trials = 3_000_000 # More Trials would be Better.
+numerator = sum(boarding() for i in range(trials)) 
+print(float(numerator) / trials)
 ```
 
-In {cite:p}`nigussie2014finding`, Nigussie constructs the following:
+In the solution above, the steps of the problem have been converted into
+discrete actions on a matrix with random number assigning the seat where
+the passenger sits. This is a form of Crude Monte Carlo. There are ways
+to accelerate this process such as: parallelization, but this work will
+not cover that method as it is out of scope.
+
+In comparison to the simulation method, {cite:p}`nigussie2014finding`, constructs the following:
 
 For $2 \le k \le n$, customer $c$ gets bumped when their seat is occupied by customer $k-1$, who was
 also bumped by a customer $k-2$, and so on until customer 1.
@@ -131,7 +156,17 @@ which then collapses into
 
 $$p(k) = \frac{1}{n} \sum \prod_{\ell=1}^{m} \frac{1}{(n+1) - j_{\ell}}$$
 
-### ICPS 4: Feller's coin-tossing (Using Simulation to Check Complex Mathematical Results)
+Over the sets of the k values, which be expressed as the following:
+
+$$p(k) = \frac{1}{n} \sum \prod_{\ell=1}^{m} \frac{1}{(n+1) - j_{\ell}}$$
+
+Which when the summations are collapsed converts into:
+
+$$p(k) = \frac{1}{n + 2 - k}$$
+
+And in the case described in the question, $k = n$, we get $p(n) = \frac{1}{2}$, which is the same as the simulation method.
+
+### ICPS 3: Feller's coin-tossing (Using Simulation to Check Complex Mathematical Results)
 
 If you flip a coin n times, what is the probability there are no streaks of k heads in a row?
 
@@ -230,10 +265,10 @@ Which can be visualized as the following:
 
 ![embedded image](figs/CoinFlipHeads.png)
 
-### ICPS 5: Coupon Collector Problem
+### ICPS 4: Coupon Collector Problem (Analytic vs Simulation)
 
-A cereal company puts one of $n$ different collectible cards in each box. How many boxes do you expect to
-buy before collecting all $n$ cards?
+A cereal company puts one of $n$ different collectible cards in each box. How many boxes 
+do you expect to buy before collecting all $n$ cards?
 
 The following provides an analytic answer to the question posed above. This is included for
 checking your simulation work.
@@ -288,11 +323,49 @@ def theoretical_expected_boxes(num_cards):
     return num_cards * harmonic_sum
 ```
 
-#### Extension 1
+#### ICPS 4, Extension 1: Variance Estimation
 
-#### Extension 2
+As the simulation above provides a framework for analyzing the distribution, it is trivial
+compared with the closed-form to estimate the variance with it.
+
+```{code} python3
+```
+
+The Closed-Form Solution for Variance Estimation using begins by using
+independence of random variables.
+But which random variables? It might be best to use a Poisson process as it
+allows for the generalized solution for the variance of any problem of this class.
+
+In this solution, the assumption is that the poisson process has a rate of 1, and
+that every coupon is of the same type $t$ with each probability being represented through
+$p_c$, and when each $p_c$ is added together they are mutually exclusive and exhaustive.
+
+Now, the expression for the total time, $T$, to collect every coupon, $C$,
+must be found to define the survival function.
+And through the survival function can be used to find the mean
+and variance as they are expressions derived from the survival function.
+
+$T = max_{1 < c < m} C_t$
+
+Since we know that each coupon is independent (as they were generated from a Poisson Process),
+we can now find the mean by using the survival function. Which
+
+
+Which one of these solutions seems easier to implement and scale?
+
+#### ICPS 4, Extension 2: Generalization Across M
+
+A other associated problem with this is that the current closed-form analytical solution only applies when m is fixed,
+to generalize this, we can either use the simulation or use the Erdős-Rényi method for it.
+
+```{code} python3
+```
+
+The closed-form version of this is the limit of:
+$$P(T_{m} < n log n + (m -1) n log log n + cn \rightarrow e^{-e}^{e} / (m-1)!$$ as n goes to infinity.
+
+Which one of these solution is faster to calculate?
+
+## Other Issues
 
 ### ICPS 6: On Rare Events
-
-
-## 
