@@ -329,9 +329,53 @@ to use the solution to the Basel Problem directly in the code.
 ```{code} python
 import math
 
-def collect_variance(n):
-    solution =  n**2 * (math.pi**2)/6
-    return solution
+def expected_and_variance(probs):
+    """
+    Calculates the expected value and variance for the 
+    coupon collector's problem with unequal probabilities.
+    
+    The logic is based on iterating through all n! permutations
+    of the items being collected.
+    """
+    probs = np.asarray(probs, dtype=float)
+    if probs.size == 0:
+        return (0.0, 0.0)
+    probs = probs / np.sum(probs)
+    n = len(probs)
+
+    if n == 1:
+        return (1.0, 0.0)
+
+    # --- 2. Generate All Permutations ---
+    perm_indices_iter = itertools.permutations(range(n))
+    perm_indices = list(perm_indices_iter)
+    permprobs = probs[perm_indices]
+
+    # --- 3. Initialize Vectors ---
+    n_perm = permprobs.shape[0]
+    m = np.zeros(n_perm)     # E[N | perm_k]
+    v = np.zeros(n_perm)     # Var(N | perm_k)
+    phere = np.ones(n_perm)  # P(perm_k)
+    pleft = np.ones(n_perm) 
+
+    # --- 4. Loop Through Collection Steps ---
+    for i in range(n):
+        current_prob_col = permprobs[:, i]
+        m = m + 1.0 / pleft
+        v = v + (1.0 - pleft) / (pleft**2)
+        phere = phere * current_prob_col / pleft
+        pleft = pleft - current_prob_col
+        if i < n - 1:
+             pleft = np.clip(pleft, 1e-100, 1.0) 
+
+    # --- Law of Total Expectation ---
+    expected_n = np.sum(phere * m)
+    variance_n = np.sum(phere * (v + m**2)) - expected_n**2
+    print(f"Expected value: {expected_n}, Variance: {variance_n}")
+    return (expected_n, variance_n)
+
+expected_and_variance([0.1, 0.3, 0.4, 0.2])
+Expected value: 12.361111111111118, Variance: 72.4359567901235
 ```
 
 The Closed-Form Solution for Variance Estimation using begins by using
@@ -348,7 +392,7 @@ must be found to define the survival function.
 And through the survival function can be used to find the mean
 and variance as they are expressions derived from the survival function.
 
-$T = max_{1 < c < m} C_t$
+$T = max \textsubscript{1 \leq c \leq m} C_t$
 
 Since we know that each coupon and $C_t$ are independent
 (as they were generated from a Poisson Process), it becomes
