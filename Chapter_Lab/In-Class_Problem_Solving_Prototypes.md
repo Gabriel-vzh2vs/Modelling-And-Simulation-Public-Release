@@ -328,12 +328,14 @@ to use the solution to the Basel Problem directly in the code.
 
 ```{code} python
 import math
+import itertools
+import numpy as np
 
 def expected_and_variance(probs):
     """
     Calculates the expected value and variance for the 
     coupon collector's problem with unequal probabilities.
-    
+
     The logic is based on iterating through all n! permutations
     of the items being collected.
     """
@@ -355,7 +357,7 @@ def expected_and_variance(probs):
     n_perm = permprobs.shape[0]
     m = np.zeros(n_perm)     # E[N | perm_k]
     v = np.zeros(n_perm)     # Var(N | perm_k)
-    phere = np.ones(n_perm)  # P(perm_k)
+    paccountedfor = np.ones(n_perm)  # P(perm_k)
     pleft = np.ones(n_perm) 
 
     # --- 4. Loop Through Collection Steps ---
@@ -363,14 +365,14 @@ def expected_and_variance(probs):
         current_prob_col = permprobs[:, i]
         m = m + 1.0 / pleft
         v = v + (1.0 - pleft) / (pleft**2)
-        phere = phere * current_prob_col / pleft
+        paccountedfor = paccountedfor * current_prob_col / pleft
         pleft = pleft - current_prob_col
         if i < n - 1:
              pleft = np.clip(pleft, 1e-100, 1.0) 
 
     # --- Law of Total Expectation ---
-    expected_n = np.sum(phere * m)
-    variance_n = np.sum(phere * (v + m**2)) - expected_n**2
+    expected_n = np.sum(paccountedfor * m)
+    variance_n = np.sum(paccountedfor * (v + m**2)) - expected_n**2
     print(f"Expected value: {expected_n}, Variance: {variance_n}")
     return (expected_n, variance_n)
 
