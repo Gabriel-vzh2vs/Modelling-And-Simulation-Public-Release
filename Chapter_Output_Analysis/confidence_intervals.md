@@ -10,23 +10,23 @@ the confidence portion represents the reliability of the method used to
 calculate this estimate.
 
 A confidence interval defines a probabilistic guarantee that a parameter
-will reside within an interval. Moreover, this probabilistic guarantee 
+will reside within an interval. Moreover, this probabilistic guarantee
 
-## The Other CI, the Credible Interval
+## What a Confidence Interval Is Not
 
-To Bayesians, there is a second concept that is analogous to the confidence
-interval, the Credible interval. This interval defines the possibility of a
-parameter residing in set of numbers within a given region in the context of a
-posterior distribution. This is the concept most people popularly associate
-with a confidence interval.
-
-This also means that when you derive a number from 
+To Bayesians, there is a second concept that is often confused with
+the confidence interval, the Credible interval. This interval defines the
+possibility of a parameter residing in set of numbers within a given region
+in the context of a posterior distribution. This is the concept
+most people popularly associate with a confidence interval.
 
 Credible intervals can be calculating using the simulation-sampling technique
-described as Markov Chain Monte Carlo,, which is defined further in {ref}`MCMC`
+described as Markov Chain Monte Carlo,, which is defined further in {ref}`sec:MCMC`
 
 ## Central Limit Theorem
 
-## Methods of Confidence Interval Discovery
+## Methods of Confidence Interval Construction
 
 a
+
+## What does this mean for Simulation?
