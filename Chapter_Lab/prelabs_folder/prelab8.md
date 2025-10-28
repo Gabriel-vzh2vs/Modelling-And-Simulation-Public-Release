@@ -643,13 +643,14 @@ wave can be seen.
 
 ## SDEs for Modelling and Simulation
 
-The concept of SDEs also known as Stochastic Calculus was first discovered by Kiyosi Itô
-during the Second World War and is fundamental to modern finance modelling and simulation,
-this text will discuss two of the most important SDEs: Poisson (point) processes and Brownian
-motion. There are many more SDEs that build on these two, such as the geometric Brownian motion
-SDE and other semi-martingales[^5] such as Langevin Equations, step functions, and the inputs for
-Feynman-Kac Formula that have many applications: diffusion, population dynamics, stochastic
-control theory, deep learning, Markov chains, and statistical mechanics.
+The concept of SDEs the most well-known application  of Stochastic Calculus was first
+discovered by Kiyosi Itô during the Second World War and is fundamental to modern
+continuous-time modelling and simulation, this text will discuss two of the most important
+SDEs: Poisson (point) processes and Brownian motion. There are many more SDEs that build on
+these two, such as the geometric Brownian motion SDE and other semi-martingales[^5] such as
+Langevin Equations, step functions, and the inputs for Feynman-Kac Formula that have many
+applications: diffusion, population dynamics, stochastic control theory, deep learning,
+Markov chains, and statistical mechanics.
 
 ::::{tab-set}
 

@@ -424,4 +424,11 @@ Which one of these solutions seems easier to implement and scale?
 
 ## Other Issues
 
-### ICPS 5: On Rare Events
+### ICPS 5: On Rare Events (Sampling Methods)
+<!-- Thought Exercise -->
+
+A common problem with simulation and modelling in general is the under-representation
+of uncommon events, and it is difficult to simulate these events without high variance
+or missing them entirely. One method is to use sampling methods that perform
+variance reduction such as Quasi-Monte Carlo, Importance Sampling, or Subset Simulation
+over Crude Monte Carlo. 

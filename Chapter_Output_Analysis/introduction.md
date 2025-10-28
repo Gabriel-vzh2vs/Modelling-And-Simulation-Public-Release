@@ -1,8 +1,7 @@
 (sec:output_analysis)=
 # Output Analysis #
 
-
-In this chapter we cover the base concepts needed to work with
+In this chapter, we cover the base concepts needed to work with
 simulation analysis based on the Monte Carlo method. We have split
 this into the following parts:
 
