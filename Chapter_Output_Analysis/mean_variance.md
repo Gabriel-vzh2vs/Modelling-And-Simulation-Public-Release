@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 (sec:means_variance)=
 ## Means and variance
@@ -490,3 +491,6 @@ necessary. In 3062, we will focus on confidence intervals.
 \end{frame}
 
 \end{document}
+=======
+# Estimation of Means and the Strong Law of Large Numbers
+>>>>>>> 92de02b7eaf031522751d7061fcc795954efc199

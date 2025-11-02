@@ -1,1 +1,2 @@
-# Monte Chain Monte Carlo
+(sec:MCMC)=
+# Markov Chain Monte Carlo (MCMC)

@@ -20,7 +20,7 @@ non-spam. Assume the pieces of content are labeled independently from one anothe
 Given that a rater has labeled 4 pieces of content as good, what is the probability that they are a
 diligent rater?
 
-Produce a Crude Monte Carlo Simulation that is able to reproduce these results from the closed-form 
+Produce a Crude Monte Carlo Simulation that is able to reproduce these results from the closed-form
 formulation of Bayes' Theorem.
 
 We will present a method for solving this with Bayes' Theorem, so the simulation based on this question
@@ -89,14 +89,7 @@ simulated_probability = diligent_raters / n # Monte Carlo Estimator
 print(simulated_probability)
 ```
 
-
-### ICPS 2: Coins from 538
-
-While traveling in the Kingdom of Arbitraria, you are accused of a heinous crime. Arbitraria decides who’s guilty or innocent not through a court system, but a board game. It’s played on a simple board: a track with sequential spaces numbered from 0 to 1,000. The zero space is marked “start,” and your token is placed on it. You are handed a fair six-sided die and three coins. You are allowed to place the coins on three different (nonzero) spaces. Once placed, the coins may not be moved.
-
-After placing the three coins, you roll the die and move your token forward the appropriate number of spaces. If, after moving the token, it lands on a space with a coin on it, you are freed. If not, you roll again and continue moving forward. If your token passes all three coins without landing on one, you are executed. On which three spaces should you place the coins to maximize your chances of survival?
-
-### ICPS 3: The Last Boarding Pass Puzzle
+### ICPS 2: The Last Boarding Pass Puzzle
 <!-- (Complex Simulations Over Solving A Difficult Mathematical Problem) -->
 
 One hundred people are lined up with their boarding passes showing their seats on the 100 seat plane.
@@ -110,11 +103,43 @@ What is the probability that the last person will sit in the correct seat?
 There is a set of analytic solutions to this, which one will be discussed later, which is from
  {cite:p}`nigussie2014finding`. But an easier solution is simulation.
 
-```{code} python3
+```{code} python
+import numpy as np
+import numba
 
+@numba.njit
+def boarding(num_seats=100):
+    occupied = np.full(num_seats, False) # [Empty Seats]
+
+    # Passenger 0 takes a random seat
+    p0_choice = np.random.randint(0, num_seats)
+    occupied[p0_choice] = True
+
+    # All of the passengers after 0 pick a random unoccupied seat
+    # IF the passenger before them took their seat. 
+    for p_id in range(1, num_seats - 1):
+        if not occupied[p_id]:
+            occupied[p_id] = True
+        else:
+            unoccupied_indices = np.where(occupied == False)[0]
+            choice = np.random.choice(unoccupied_indices)
+            occupied[choice] = True
+            
+    # Return True if the last passenger's seat is NOT occupied (point of the puzzle)
+    return not occupied[num_seats - 1]
+
+trials = 3_000_000 # More Trials would be Better.
+numerator = sum(boarding() for i in range(trials)) 
+print(float(numerator) / trials)
 ```
 
-In {cite:p}`nigussie2014finding`, Nigussie constructs the following:
+In the solution above, the steps of the problem have been converted into
+discrete actions on a matrix with random number assigning the seat where
+the passenger sits. This is a form of Crude Monte Carlo. There are ways
+to accelerate this process such as: parallelization, but this work will
+not cover that method as it is out of scope.
+
+In comparison to the simulation method, {cite:p}`nigussie2014finding`, constructs the following:
 
 For $2 \le k \le n$, customer $c$ gets bumped when their seat is occupied by customer $k-1$, who was
 also bumped by a customer $k-2$, and so on until customer 1.
@@ -131,7 +156,17 @@ which then collapses into
 
 $$p(k) = \frac{1}{n} \sum \prod_{\ell=1}^{m} \frac{1}{(n+1) - j_{\ell}}$$
 
-### ICPS 4: Feller's coin-tossing (Using Simulation to Check Complex Mathematical Results)
+Over the sets of the k values, which be expressed as the following:
+
+$$p(k) = \frac{1}{n} \sum \prod_{\ell=1}^{m} \frac{1}{(n+1) - j_{\ell}}$$
+
+Which when the summations are collapsed converts into:
+
+$$p(k) = \frac{1}{n + 2 - k}$$
+
+And in the case described in the question, $k = n$, we get $p(n) = \frac{1}{2}$, which is the same as the simulation method.
+
+### ICPS 3: Feller's coin-tossing (Using Simulation to Check Complex Mathematical Results)
 
 If you flip a coin n times, what is the probability there are no streaks of k heads in a row?
 
@@ -230,10 +265,10 @@ Which can be visualized as the following:
 
 ![embedded image](figs/CoinFlipHeads.png)
 
-### ICPS 5: Coupon Collector Problem
+### ICPS 4: Coupon Collector Problem (Analytic vs Simulation)
 
-A cereal company puts one of $n$ different collectible cards in each box. How many boxes do you expect to
-buy before collecting all $n$ cards?
+A cereal company puts one of $n$ different collectible cards in each box. How many boxes 
+do you expect to buy before collecting all $n$ cards?
 
 The following provides an analytic answer to the question posed above. This is included for
 checking your simulation work.
@@ -246,7 +281,7 @@ In this case, we notice that a series of Bernoulli trials is the Geometric
 distribution as we are tracking the expected number until a success,
 which is expressed as with:
 
-$$\frac{1}{P(Success)} = \frac{n-1}$$
+$${P(Success)} = \frac{1}{n-1}$$
 
 For the third unique card, the state space for possible new cards reduces to $n-2$,
 so the probability is $\frac{n-2}{n}$ and the $E(trials)$ should be $\frac{n}{n-2}$.
@@ -263,36 +298,137 @@ would be about 25.46 boxes from the analytic solution.
 
 Simulation Code:
 
-```{code} python3
+```{code} python
 import random
 
 def coupon_collector_simulation(num_cards, num_experiments):
     results = []
-    
+
     for _ in range(num_experiments):
         collected_cards = set()
         boxes_bought = 0
-        
         while len(collected_cards) < num_cards:
             card = random.randint(1, num_cards)
             collected_cards.add(card)
-            boxes_bought += 1
-            
+            boxes_bought += 1   
         results.append(boxes_bought)
-    
     return results
 
-# Calculate theoretical expected value
+# Calculate expected value
 def theoretical_expected_boxes(num_cards):
     harmonic_sum = sum(1/i for i in range(1, num_cards + 1))
     return num_cards * harmonic_sum
 ```
 
-#### Extension 1
+#### ICPS 4, Extension 1: Variance Estimation
 
-#### Extension 2
+As the simulation above provides a framework for analyzing the distribution, it is trivial
+compared with the closed-form to estimate the variance with it. Particularly as it is possible
+to use the solution to the Basel Problem directly in the code.
 
-### ICPS 6: On Rare Events
+```{code} python
+import math
+import itertools
+import numpy as np
 
+def expected_and_variance(probs):
+    """
+    Calculates the expected value and variance for the 
+    coupon collector's problem with unequal probabilities.
 
-## 
+    The logic is based on iterating through all n! permutations
+    of the items being collected.
+    """
+    probs = np.asarray(probs, dtype=float)
+    if probs.size == 0:
+        return (0.0, 0.0)
+    probs = probs / np.sum(probs)
+    n = len(probs)
+
+    if n == 1:
+        return (1.0, 0.0)
+
+    # --- 2. Generate All Permutations ---
+    perm_indices_iter = itertools.permutations(range(n))
+    perm_indices = list(perm_indices_iter)
+    permprobs = probs[perm_indices]
+
+    # --- 3. Initialize Vectors ---
+    n_perm = permprobs.shape[0]
+    m = np.zeros(n_perm)     # E[N | perm_k]
+    v = np.zeros(n_perm)     # Var(N | perm_k)
+    paccountedfor = np.ones(n_perm)  # P(perm_k)
+    pleft = np.ones(n_perm) 
+
+    # --- 4. Loop Through Collection Steps ---
+    for i in range(n):
+        current_prob_col = permprobs[:, i]
+        m = m + 1.0 / pleft
+        v = v + (1.0 - pleft) / (pleft**2)
+        paccountedfor = paccountedfor * current_prob_col / pleft
+        pleft = pleft - current_prob_col
+        if i < n - 1:
+             pleft = np.clip(pleft, 1e-100, 1.0) 
+
+    # --- Law of Total Expectation ---
+    expected_n = np.sum(paccountedfor * m)
+    variance_n = np.sum(paccountedfor * (v + m**2)) - expected_n**2
+    print(f"Expected value: {expected_n}, Variance: {variance_n}")
+    return (expected_n, variance_n)
+
+expected_and_variance([0.1, 0.3, 0.4, 0.2])
+Expected value: 12.361111111111118, Variance: 72.4359567901235
+```
+
+The Closed-Form Solution for Variance Estimation using begins by using
+independence of random variables.
+But which random variables? It might be best to use a Poisson process as it
+allows for the generalized solution for the variance of any problem of this class.
+
+In this solution, the assumption is that the poisson process has a rate of 1, and
+that every coupon is of the same type $t$ with each probability being represented through
+$p_c$, and when each $p_c$ is added together they are mutually exclusive and exhaustive.
+
+Now, the expression for the total time, $T$, to collect every coupon, $C$,
+must be found to define the survival function.
+And through the survival function can be used to find the mean
+and variance as they are expressions derived from the survival function.
+
+$T = max \textsubscript{1 \leq c \leq m} C_t$
+
+Since we know that each coupon and $C_t$ are independent
+(as they were generated from a Poisson Process), it becomes
+possible to define the CDF of a Poisson Mixture, which is the
+same as the maximum of $m$ independent random variables defined
+by T:
+
+$F_X(c) = P(X < c) = P(X_j < t \, \forall \, j) = \prod_{j=1}^{m} \left(1 - e^{-p_c c}\right) \quad (1) $.
+
+Because of this expression, it becomes possible to find the survival function, and
+through this to get the mean. As any survival function can be integrated to get
+the expected value or in mathematical terms, $E(x) = \int^\infty_0 S_x(t) dt$.
+
+$E(C) = \int^\infty_0 (1 - \sum^{m}_{j=1}(1-e^{-p_j t})) dt$
+$= \sum \frac{1}{p_c} - \sum_{i < j} \frac{1}{p_j + p_i} + ... + (-1)^{m-1} \frac{1}{p_1 + p_2 + ... + p_m}$
+
+Which Ross's Probability gives us a substitution ($p_c = \frac{1}{n} \forall c$)
+to make this easier to calculate, particularly after an algebraic identity and then
+an application of the law of total expectation.
+
+$E(C) = n \sum^{n}_{k=1} \frac{1}{k}$.
+
+Variance can now be calculated from the expected value through the expression
+$Var(C) = E(C^2) - E(C)^2$.
+
+Which one of these solutions seems easier to implement and scale?
+
+## Other Issues
+
+### ICPS 5: On Rare Events (Sampling Methods)
+<!-- Thought Exercise -->
+
+A common problem with simulation and modelling in general is the under-representation
+of uncommon events, and it is difficult to simulate these events without high variance
+or missing them entirely. One method is to use sampling methods that perform
+variance reduction such as Quasi-Monte Carlo, Importance Sampling, or Subset Simulation
+over Crude Monte Carlo. 
