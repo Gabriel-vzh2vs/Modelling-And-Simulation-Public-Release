@@ -8,10 +8,10 @@ section we will see that once you are armed with this, you can
 generate variates from a range of distributions. Here we will go
 through four techniques for this:
 
-- The Inverse Transform Method:
-- Composition:
-- Convolution:
-- Rejection sampling:
+- The Inverse Transform Method
+- Composition
+- Convolution
+- Rejection sampling
 
 [A brief section on why one should learn this]
 
@@ -28,6 +28,7 @@ increasing for $0 < F(x) < 1$. We will later see how this can be
 relaxed.
 
 __Algorithm:__
+
   1. Generate $u$ from $U(0,1)$
   2. Return  $x=F^{-1}(u)$
 
@@ -50,13 +51,29 @@ Is there any intuition behind the method?
 (sec:composition_method)=
 # The Composition Method
 
-The convolution method is usually used when the target distribution's CDF, $F(x)$,
+Composition is usually used when the target distribution's CDF, $F(x)$ is complex and can be decomposed
+into a easier to calculate and convex combination of density functions, $p_i(x)$.
 
+__Algorithm:__
+
+  1. Generate a positive, random integer $I$ such that $P(I = i) = p_i$
+  2. Return $X$ with CDF $F_i$ (given $I = i$, $X$ is independent of $I$).
+
+
+
+
+[Insert Example here]
+Example 1: Symmetric Triangular Distribution with vertical symmetry on $[-1, 1]$.
 
 (sec:convolution_method)=
 # The Convolution Method
 
+Convolutions are used when a random variable can be expressed as the sum of two or more random variables, $Y_i$, and then this sum needs to be sampled as a random variate, $X$.
 
+__Algorithm:__
+
+  1. Generate $Y_1, Y_2, ... Y_m$ independently using their distribution
+  2. Return $X = Y_1 + Y_2 + ... Y_m$
 
 
 (sec:rejection_sampling)=
@@ -66,6 +83,7 @@ Acceptance-rejection sampling is usually used when there is not a tractable, clo
 expression for the target distribution's CDF $F(x)$. The goal is to generate variates $X$ from the density function $f(x)$ of the target distribution. A requirement is that we must select a function $t(x)$ that _majorizes_ $f(x)$ for all of $x$.
 
 __Algorithm:__
+
   1. Generate $Y$ having density d
   2. Generate $U$ from $U(0,1)$
   3. If $U \le \frac{f(Y)}{t(Y)}$, return $X = Y$ and stop (accept), else return to step 1 (reject)
