@@ -50,10 +50,24 @@ Is there any intuition behind the method?
 (sec:composition_method)=
 # The Composition Method
 
+The convolution method is usually used when the target distribution's CDF, $F(x)$,
+
 
 (sec:convolution_method)=
 # The Convolution Method
 
 
+
+
 (sec:rejection_sampling)=
 # Rejection Sampling
+
+Acceptance-rejection sampling is usually used when there is not a tractable, closed-form
+expression for the target distribution's CDF $F(x)$. The goal is to generate variates $X$ from the density function $f(x)$ of the target distribution. A requirement is that we must select a function $t(x)$ that _majorizes_ $f(x)$ for all of $x$.
+
+__Algorithm:__
+  1. Generate $Y$ having density d
+  2. Generate $U$ from $U(0,1)$
+  3. If $U \le \frac{f(Y)}{t(Y)}$, return $X = Y$ and stop (accept), else return to step 1 (reject)
+
+Now, how does this work?

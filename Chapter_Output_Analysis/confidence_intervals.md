@@ -27,6 +27,8 @@ described as Markov Chain Monte Carlo,, which is defined further in {ref}`sec:MC
 
 ## Methods of Confidence Interval Construction
 
-a
+### 
+
+### Bootstrapping
 
 ## What does this mean for Simulation?
