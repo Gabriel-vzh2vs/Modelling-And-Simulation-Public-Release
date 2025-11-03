@@ -60,8 +60,6 @@ __Algorithm:__
   2. Return $X$ with CDF $F_i$ (given $I = i$, $X$ is independent of $I$).
 
 
-
-
 [Insert Example here]
 Example 1: Symmetric Triangular Distribution with vertical symmetry on $[-1, 1]$.
 
@@ -75,6 +73,8 @@ __Algorithm:__
   1. Generate $Y_1, Y_2, ... Y_m$ independently using their distribution
   2. Return $X = Y_1 + Y_2 + ... Y_m$
 
+[Example Here]
+Example 1: Geometric to Negative Binominal Random Variate
 
 (sec:rejection_sampling)=
 # Rejection Sampling
@@ -89,3 +89,9 @@ __Algorithm:__
   3. If $U \le \frac{f(Y)}{t(Y)}$, return $X = Y$ and stop (accept), else return to step 1 (reject)
 
 Now, how does this work?
+
+[Proof from Sigman Here]
+
+[Example Here]
+Example 1 from Ross, Generate a standard half-normal RV with PDF:
+$$$$
