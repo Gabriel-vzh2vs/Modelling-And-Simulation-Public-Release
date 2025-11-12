@@ -111,28 +111,32 @@ P(acceptance, Y \le x)= \int^{\infty}_{-\infty} P(acceptance, Y \le x| Y = y) \c
 When then spilt this into the sum of two integration regions, the acceptance range and the rejection range
 (aka what is below X and what is above X, respectively).
 
-$$\int^{X}_{-\inf}P(Acceptance, Y \le x | Y = y) r(y) dy + \int^{\inf}}_{X}P(Acceptance, Y \le x | Y = y) r(y) dy$$
+```{math} 
+\int^{X}_{-\infty} P(Acceptance, Y \le x | Y = y) \cdot r(y) dy + \int^{\infty}_{X}P(Acceptance, Y \le x | Y = y) \cdot r(y) dy
+```
 
 Which then simplifies into
 
-$$\int^{X}_{-\inf} P(acceptance, Y \le x | Y = y)r(y) dy$$
+$$\int^{X}_{-\infty} P(acceptance, Y \le x | Y = y) \cdot r(y) dy$$
 
 And once we substitute in our definition of r(y)
 
-$$\frac{1}{c} \int^{x}_{-\inf} t(y) dy$$
+$$\frac{1}{c} \int^{x}_{-\infty} t(y) dy$$
 
-Which simplifies to $\frac{F(x)}{C}$.
+Which simplifies to
+
+$$\frac{F(x)}{C}$$
 
 However, we need to show how to reobtain $F(x)$, our original function from this simplification.
 In this case, we can obtain $\frac{1}{c}$ from our probability of acceptance after substituting our
 $r(y) and performing simplification.
 
-$$P(acceptance) = \int^{\inf}_{-\inf} P(acceptance| Y = y) r(y) dy \rightarrow \frac{1}{c} \int^{\inf}_{-\inf} \frac{f(y)}{t(y)} t(y) dy$$
+$$P(acceptance) = \int^{\infty}_{-\infty} P(acceptance| Y = y) r(y) dy \rightarrow \frac{1}{c} \int^{\infty}_{-\infty} \frac{f(y)}{t(y)} t(y) dy$$
 
-Then we apply the multiplication of reciprocals (which always become 1), and simplify $\int^{\inf}_{-\inf} F(x)$
+Then we apply the multiplication of reciprocals (which always become 1), and simplify $\int^{\infty}_{-\infty} F(x)$
 as one because it is a density, and therefore also equal to one, to get $\frac{1}{c}$.
 
-Finally, we substitute our $P(acceptance, Y \le x) and P(acceptance) into the our definition of the
+Finally, we substitute our $P(acceptance, Y \le x)$ and $P(acceptance)$ into the our definition of the
 conditional probability, $\frac{P(acceptance, Y \le x)}{P(acceptance)}$, giving us $F(x)$ through
 algebraic manipulation.
 
