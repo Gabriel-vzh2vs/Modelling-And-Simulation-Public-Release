@@ -113,7 +113,7 @@ When then spilt this into the sum of two integration regions, the acceptance ran
 (aka what is below X and what is above X, respectively).
 
 ```{math}
-\int^{X}_{-\infty} P(Acceptance, Y \le x | Y = y) \cdot r(y) dy + \int^{\infty}_{X}P(Acceptance, Y \le x | Y = y) \cdot r(y) dy
+\int^{X}_{-\infty} P(acceptance, Y \le x | Y = y) \cdot r(y) dy + \int^{\infty}_{X}P(acceptance, Y \le x | Y = y) \cdot r(y) dy
 ```
 
 Which then simplifies into
@@ -130,7 +130,7 @@ $$\frac{F(x)}{C}$$
 
 However, we need to show how to reobtain $F(x)$, our original function from this simplification.
 In this case, we can obtain $\frac{1}{c}$ from our probability of acceptance after substituting our
-$r(y) and performing simplification.
+$r(y)$ and performing simplification.
 
 $$P(acceptance) = \int^{\infty}_{-\infty} P(acceptance| Y = y) \cdot r(y) dy $$
 
