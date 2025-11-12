@@ -85,12 +85,30 @@ expression for the target distribution's CDF $F(x)$. The goal is to generate var
 __Algorithm:__
 
   1. Generate $Y$ having density d
-  2. Generate $U$ from $U(0,1)$
+  2. Generate $U$ from $U(0,1)$, independent of $Y$
   3. If $U \le \frac{f(Y)}{t(Y)}$, return $X = Y$ and stop (accept), else return to step 1 (reject)
 
 Now, how does this work?
 
-[Proof from Sigman Here]
+This proof is based on the Rejection Sampling method from {cite:t}`liu2001monte`:
+
+We get a $X$ conditional on acceptance from step 3, therefore, by the definition of conditional probabilities:
+
+$$P(X \le x) = \frac{P(acceptance, Y \le x)}{P(acceptance)}$$
+
+And for any real $y$:
+$$P(acceptance| Y = y) = P(U \le \frac{f(y)}{t(y)} = \frac{f(y)}{t(y)}$$
+
+Because in step 2, we defined $U ~ U(0,1)$, and $Y$ is independent of $U$, and t(y) majorizes f(y), therefore:
+```{math}
+P()
+```
+When then spilt this into two integration regions, the acceptance range and the rejection range
+(aka what is below X and what is above X, respectively).
+
+$$$$
+
+Why is this important?
 
 [Example Here]
 Example 1 from Ross, Generate a standard half-normal RV with PDF:
