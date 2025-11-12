@@ -82,7 +82,7 @@ Example 1: Geometric to Negative Binominal Random Variate
 Acceptance-rejection sampling is usually used when there is not a tractable, closed-form
 expression for the target distribution's CDF $F(x)$. The goal is to generate variates $X$ from the density function $f
 (x)$ of the target distribution. A requirement is that we must select a function $t(x)$ that _majorizes_ $f(x)$ for all
-of $x$. However, t(x) is not a density, therefore, we need to set $c$ which is $\int^(\inf}_(-\inf} t(x) dx \ge 1$,
+of $x$. However, t(x) is not a density, therefore, we need to set $c$ which is defined as $\int^{\infty}_{-\infty} t(x) dx \ge 1$,
 and then define $d$ as a density that applies for all of $x$ as $d(x) = \frac{t(x)}{c}$.
 
 __Algorithm:__
@@ -93,6 +93,7 @@ __Algorithm:__
 
 Now, how does this work?
 
+:::{prf:theorem} Rejection Sampling
 This proof is based on the Rejection Sampling method from {cite:t}`liu2001monte` :
 
 We get a $X$ conditional on acceptance from step 3, therefore, by the definition of conditional probabilities:
@@ -111,7 +112,7 @@ P(acceptance, Y \le x)= \int^{\infty}_{-\infty} P(acceptance, Y \le x| Y = y) \c
 When then spilt this into the sum of two integration regions, the acceptance range and the rejection range
 (aka what is below X and what is above X, respectively).
 
-```{math} 
+```{math}
 \int^{X}_{-\infty} P(Acceptance, Y \le x | Y = y) \cdot r(y) dy + \int^{\infty}_{X}P(Acceptance, Y \le x | Y = y) \cdot r(y) dy
 ```
 
@@ -131,7 +132,11 @@ However, we need to show how to reobtain $F(x)$, our original function from this
 In this case, we can obtain $\frac{1}{c}$ from our probability of acceptance after substituting our
 $r(y) and performing simplification.
 
-$$P(acceptance) = \int^{\infty}_{-\infty} P(acceptance| Y = y) r(y) dy \rightarrow \frac{1}{c} \int^{\infty}_{-\infty} \frac{f(y)}{t(y)} t(y) dy$$
+$$P(acceptance) = \int^{\infty}_{-\infty} P(acceptance| Y = y) \cdot r(y) dy $$
+
+Which becomes
+
+$$\frac{1}{c} \int^{\infty}_{-\infty} \frac{f(y)}{t(y)} t(y) dy$$
 
 Then we apply the multiplication of reciprocals (which always become 1), and simplify $\int^{\infty}_{-\infty} F(x)$
 as one because it is a density, and therefore also equal to one, to get $\frac{1}{c}$.
@@ -141,6 +146,7 @@ conditional probability, $\frac{P(acceptance, Y \le x)}{P(acceptance)}$, giving 
 algebraic manipulation.
 
 $$\frac{F(x)/c}{1/c} \rightarrow F(x)$$
+:::
 
 Why is this important?
 
