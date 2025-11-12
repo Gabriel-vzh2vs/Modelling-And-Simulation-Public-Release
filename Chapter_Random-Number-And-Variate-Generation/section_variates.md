@@ -80,7 +80,10 @@ Example 1: Geometric to Negative Binominal Random Variate
 # Rejection Sampling
 
 Acceptance-rejection sampling is usually used when there is not a tractable, closed-form
-expression for the target distribution's CDF $F(x)$. The goal is to generate variates $X$ from the density function $f(x)$ of the target distribution. A requirement is that we must select a function $t(x)$ that _majorizes_ $f(x)$ for all of $x$.
+expression for the target distribution's CDF $F(x)$. The goal is to generate variates $X$ from the density function $f
+(x)$ of the target distribution. A requirement is that we must select a function $t(x)$ that _majorizes_ $f(x)$ for all
+of $x$. However, t(x) is not a density, therefore, we need to set $c$ which is $\int^(\inf}_(-\inf} t(x) dx \ge 1$,
+and then define $d$ as a density that applies for all of $x$ as $d(x) = \frac{t(x)}{c}$.
 
 __Algorithm:__
 
@@ -90,23 +93,50 @@ __Algorithm:__
 
 Now, how does this work?
 
-This proof is based on the Rejection Sampling method from {cite:t}`liu2001monte`:
+This proof is based on the Rejection Sampling method from {cite:t}`liu2001monte` :
 
 We get a $X$ conditional on acceptance from step 3, therefore, by the definition of conditional probabilities:
 
 $$P(X \le x) = \frac{P(acceptance, Y \le x)}{P(acceptance)}$$
 
-And for any real $y$:
-$$P(acceptance| Y = y) = P(U \le \frac{f(y)}{t(y)} = \frac{f(y)}{t(y)}$$
+And for any $y$:
+$$P(acceptance| Y = y) = P(U \le \frac{f(y)}{t(y)}) = \frac{f(y)}{t(y)}$$
 
-Because in step 2, we defined $U ~ U(0,1)$, and $Y$ is independent of $U$, and t(y) majorizes f(y), therefore:
+Because in step 2, we defined $U \sim U(0,1)$, and $Y$ is independent of $U$, and t(y) majorizes f(y), therefore:
+
 ```{math}
-P()
+P(acceptance, Y \le x)= \int^{\infty}_{-\infty} P(acceptance, Y \le x| Y = y) \cdot r(y) dy
 ```
-When then spilt this into two integration regions, the acceptance range and the rejection range
+
+When then spilt this into the sum of two integration regions, the acceptance range and the rejection range
 (aka what is below X and what is above X, respectively).
 
-$$$$
+$$\int^{X}_{-\inf}P(Acceptance, Y \le x | Y = y) r(y) dy + \int^{\inf}}_{X}P(Acceptance, Y \le x | Y = y) r(y) dy$$
+
+Which then simplifies into
+
+$$\int^{X}_{-\inf} P(acceptance, Y \le x | Y = y)r(y) dy$$
+
+And once we substitute in our definition of r(y)
+
+$$\frac{1}{c} \int^{x}_{-\inf} t(y) dy$$
+
+Which simplifies to $\frac{F(x)}{C}$.
+
+However, we need to show how to reobtain $F(x)$, our original function from this simplification.
+In this case, we can obtain $\frac{1}{c}$ from our probability of acceptance after substituting our
+$r(y) and performing simplification.
+
+$$P(acceptance) = \int^{\inf}_{-\inf} P(acceptance| Y = y) r(y) dy \rightarrow \frac{1}{c} \int^{\inf}_{-\inf} \frac{f(y)}{t(y)} t(y) dy$$
+
+Then we apply the multiplication of reciprocals (which always become 1), and simplify $\int^{\inf}_{-\inf} F(x)$
+as one because it is a density, and therefore also equal to one, to get $\frac{1}{c}$.
+
+Finally, we substitute our $P(acceptance, Y \le x) and P(acceptance) into the our definition of the
+conditional probability, $\frac{P(acceptance, Y \le x)}{P(acceptance)}$, giving us $F(x)$ through
+algebraic manipulation.
+
+$$\frac{F(x)/c}{1/c} \rightarrow F(x)$$
 
 Why is this important?
 
