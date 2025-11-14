@@ -5,7 +5,7 @@ project:
   title: Modelling and Simulation
   description: This book covers theory and applications related to modeling and simulation. The level of the exposition is suited for advanced undergraduate students and graduate students.
   keywords: []
-  copyright: "2025"
+  copyright: "2026"
   # authors: [Henning S. Mortveit, Gabriel A. Lawrence]
   github: https://github.com/Gabriel-vzh2vs/Modelling-And-Simulation-Public-Release
   # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
@@ -138,11 +138,11 @@ site:
       </div>
   options:
   #   favicon: favicon.ico
-  #   logo: site_logo.png
+    logo: simulation.svg
     # launch_buttons:
     #   thebe                  : true
 
-  # To export the file as a Springer-Style PDF
+  # To export the file as a Book PDF, uncomment the following lines:
   # exports:
   #   - format: pdf
-  #   - template: springer
+  #   - template: plain_latex_book
