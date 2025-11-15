@@ -132,17 +132,17 @@ project:
 site:
   template: book-theme
   parts:
-    footer: | # Note that this footer will not work until June with 2.0.0b2 of JB 2.0.
-      <div>
-        <p>&copy; Copyright 2025 Henning S. Mortveit and Gabriel A. Lawrence. All rights reserved.</p>
-      </div>
+    footer: footer.md
   options:
-  #   favicon: favicon.ico
+  # favicon: favicon.ico
     logo: simulation.svg
+    style: footer.css
+    exports:
+      - format: pdf
+      - template: plain_latex_book
     # launch_buttons:
     #   thebe                  : true
 
-  # To export the file as a Book PDF, uncomment the following lines:
-  # exports:
-  #   - format: pdf
-  #   - template: plain_latex_book
+      # <div>
+      #   <p>&copy; Copyright 2025 Henning S. Mortveit and Gabriel A. Lawrence. All rights reserved.</p>
+      # </div>

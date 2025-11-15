@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-
 (sec:means_variance)=
-## Means and variance
-
-\frametitle{Week III: Introduction to Output Analysis}
+# Cleanup Needed: Means and variance
 
 \hmbullet\textbf{Overview:} These slides are a condensed version of
 the lectures for January~28 and~30.
@@ -491,6 +487,3 @@ necessary. In 3062, we will focus on confidence intervals.
 \end{frame}
 
 \end{document}
-=======
-# Estimation of Means and the Strong Law of Large Numbers
->>>>>>> 92de02b7eaf031522751d7061fcc795954efc199
