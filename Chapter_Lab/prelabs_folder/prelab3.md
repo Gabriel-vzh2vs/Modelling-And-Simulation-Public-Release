@@ -196,7 +196,7 @@ One of the errors that could occur during the communication stage of
 simulation is that a practitioner assumes that the model is valid
 and verified because its output is consistent with expectations. In Barth,
 the describe this as the acceptance pitfall,
-although in the social sciences this is known as confirmation bias. It is 
+although in the social sciences this is known as confirmation bias. It is
 important to understand that just because a model is consistent
 with expectations does not mean that is representative of the model or that it is useful.
 An example of this is [an article](https://www.ft.com/content/5ff6469a-6dd8-11ea-89df-41bea055720b)

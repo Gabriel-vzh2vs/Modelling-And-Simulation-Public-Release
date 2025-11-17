@@ -34,7 +34,7 @@ how to process and analyze real-world data.
 
 #### Pattern 1. Monte Carlo Method in the Context of Stock Data
 
-This pattern reflects the idea that the stock market can be modelled through a stochastic process that can be replicated 
+This pattern reflects the idea that the stock market can be modelled through a stochastic process that can be replicated
 through Monte Carlo through the generation of an average that reflects the value of a security at a specific point in time.
 With higher average returns, the value of the security should increase, and the opposite will occur with the converse assuming no variance.
 However, with a higher variance of the security, the security's value exhibits more values away from the data's mean dependent on the underlying random variable's skew and kurtosis, with the converse, the value of the Monte Carlo calculated average tends to readily converge with the data's mean.
