@@ -1,5 +1,17 @@
 # Overview of Variance Reduction
 
+Variance Reduction refers to methods that
+reduce the variance of the Monte Carlo method, which then leads to
+a reduced number of samples being required for convergence
+in ideal circumstances. However, not every technique has a
+guarantee that they will reduce variance, some may increase
+it depending on the properties of the estimator. The reason
+why this is important is that it reduces the computational and
+mathematical effort needed to calculate a parameter, $\theta$
+with an estimator $\hat{\theta}$. More information
+on how this is calculated is in {ref}`sec:CrudeMC`, the
+section that formally discusses Monte Carlo.
+
 ## Variate Modification Methods
 
 ### Control Variates
