@@ -4,6 +4,10 @@
 (lab-1)=
 # Lab 1: Computing $\pi$ with Monte Carlo Methods (Excel or Python)
 
+Summary: This lab is basically introducing how to do Monte Carlo
+Integration/Quadrature while showing that concept in a standard
+package (ODD framework).
+
 ## Lab 1 Prerequisites
 
 ### Pre-labs

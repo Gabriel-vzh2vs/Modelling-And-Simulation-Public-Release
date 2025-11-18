@@ -1,7 +1,7 @@
 :::{admonition} Lab 5
 :class: attention dropdown
 (lab-5)=
-# Lab 5: Foundations of Modelling (SIMIO, Anylogic, or Python)
+# Lab 5: Foundations of Modelling (SIMIO, Anylogic, or Python): House Heating Example
 
 ## Lab 5 Prerequisites
 
@@ -14,11 +14,13 @@
 - {ref}`sec:prob_stats`
 - {ref}`sec:monte_carlo_method`
 - {ref}`sec:building_simulation_models`
+- {ref}`sec:random_number_generation`
+- {ref}`sec:distribution_modeling`
 
 ### Recommended Chapters for Lab 5
 
-- {ref}`sec:random_number_generation`
 - {ref}`sec:distribution_modeling`
+
 
 ## Purpose and Patterns
 

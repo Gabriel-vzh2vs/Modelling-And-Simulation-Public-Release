@@ -1,7 +1,7 @@
 :::{admonition} Lab 6
 :class: tip dropdown
 (lab-6)=
-# Lab 6: Applied Queuing Theory in Simulation (Ciw, SIMIO, or Anylogic)
+# Lab 6: Applied Queuing Theory in Simulation (Ciw, SIMIO, or Anylogic): Goldratt's Dice Game
 
 ## Lab 6 Prerequisites
 

@@ -3,6 +3,10 @@
 (lab-3)=
 # Lab 3: Building a Portfolio with Monte Carlo Methods (XLRisk or Python)
 
+Note: This is the last lab in the ODD framework, as this book aims
+to make its readers/users adaptable across different presentations
+of problems and labs.
+
 ## Lab 3 Prerequisites
 
 ### Pre-labs for Lab 3
