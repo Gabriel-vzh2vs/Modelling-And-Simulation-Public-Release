@@ -59,10 +59,7 @@ $$\text{Half Width } = z_{\frac{\alpha}{2}} \sqrt{\frac{\text{Var}(g(X))}{N}}$$
 Then the minimum sample size requirement for Monte Carlo is defined through
 this expression:
 
-$$N \le \frac{Z}{\text{Half Width}} \cdot \text{Var}(g(X))$$
+$$N \le \frac{z_{\frac{a}{2}}}{\text{Half Width}} \cdot \text{Var}(g(X))$$
 :::
 
-And generally the smaller the required sample size: the more efficient the
-estimation will be. This is where variance reduction techniques come in,
-as they specifically target the variance as it determines the half-width
-and is a factor in determining sample size.
+And generally the smaller the required sample size: the more efficient the estimation will be. This is where variance reduction techniques come in, as they specifically target the variance as it determines the half-width and is a factor in determining sample size.

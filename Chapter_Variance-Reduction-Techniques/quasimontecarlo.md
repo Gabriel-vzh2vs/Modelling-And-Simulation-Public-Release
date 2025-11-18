@@ -1,3 +1,4 @@
+(sec:QuasiMC)=
 # Quasi-Monte Carlo
 
 ## Why use QMC?
