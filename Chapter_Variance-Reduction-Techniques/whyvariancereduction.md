@@ -1,3 +1,4 @@
+(sec:VarReduction)=
 # Overview of Variance Reduction
 
 Variance Reduction refers to methods that
