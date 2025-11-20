@@ -89,7 +89,8 @@ additional parameters $\mu$, $\sigma$ over the interval $
 
 ### Estimate Premiums
 
-Using the first GBM, estimate a premium for an Asian Call Option on SPY, a index fund tracking the S&P 500,
+Using the first GBM, estimate a premium for an Asian Call Option on SPY, a index fund tracking the S&P 500
+with a value that is practically the same as the S&P 500 but divided by 10 in most cases,
 where the initial price is $S_0 = 500$, the strike price is $K = 510$ over $T = 1$ year.
 We know the annualized rate and volatility of the S&P 500 is about $\mu = 0.08$ and $\sigma = 0.15$. Assume that
 there are 250 trading days for the year with no halts. Obtain the premium $C$ and the estimation of the standard deviation. Compare this with the second GBM with a risk-free rate of 3.83 percent and all other parameters being
