@@ -6,9 +6,14 @@
 
 ## Note
 
-So, from this lab onwards, we skip the ODD formalism as the reader
-has been exposed to it sufficiently enough to understand its purpose.
-Additionally, this lab is based on a series of lectures from CMU.
+From this lab onwards, we will move away from the explicit ODD formalism.
+Having been exposed to the protocol in previous labs, you are now ready
+to apply these concepts implicitly. This lab requires you to translate
+requirements into a model independently, mirroring real-world modeling
+scenarios.
+
+Note: This lab is adapted from a series of lectures
+belonging to CMU's Monte Carlo Methods Course.
 
 ## Lab 4 Prerequisites
 

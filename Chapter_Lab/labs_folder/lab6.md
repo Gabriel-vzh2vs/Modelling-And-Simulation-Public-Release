@@ -1,18 +1,23 @@
 :::{admonition} Lab 6
 :class: tip dropdown
 (lab-6)=
-# Lab 6: Applied Queuing Theory in Simulation (Ciw, SIMIO, or Anylogic): Goldratt's Dice Game
+# Lab 6: Queuing and Output Analyisis in Simulation: Goldratt's Dice Game
 
 ## Lab 6 Prerequisites
 
-### Pre-labs
+### Mandatory Pre-labs
 
+- {ref}`prelab-2`
+- {ref}`prelab-3`
+- {ref}`prelab-4`
 - {ref}`prelab-6`
 
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
+### Mandatory Chapters for Lab 6:
+
+- {ref}`sec:prob_stats`
+- {ref}`sec:distribution_modeling`
+- {ref}`sec:random_number_generation`
+- {ref}``
 
 ## Purpose and Patterns
 
