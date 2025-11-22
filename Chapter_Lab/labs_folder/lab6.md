@@ -12,12 +12,11 @@
 - {ref}`prelab-4`
 - {ref}`prelab-6`
 
-### Mandatory Chapters for Lab 6:
+### Mandatory Chapters for Lab 6
 
 - {ref}`sec:prob_stats`
 - {ref}`sec:distribution_modeling`
 - {ref}`sec:random_number_generation`
-- {ref}``
 
 ## Purpose and Patterns
 
