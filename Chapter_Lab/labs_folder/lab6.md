@@ -49,7 +49,8 @@ First, a worker is defined as a entry buffer (a queue), with a time delay (proce
 a output buffer, and a blocker which prevents the entrance of new material into the system. Next,
 the connections between workers are established through the construction of a queuing network.
 Programmatically, this can be implemented in Python using yield and store.get(). Now,
-once the model is built, you should generate a graph of the inventory.
+once the model is built, you should generate a graph of the inventory. For consistency,
+set your seed to `42` using set.seed, this will make the random number generation reproducible.
 
 However, the base model above has some problems: inaccurate modelling of process time and
 excessive inventory. As the first problem can be seen by the use of a uniform distribution
@@ -66,12 +67,14 @@ for efficiency.
 
 Once those tasks are done, the model should behave in a more efficient way, with a higher level
 of throughput, document this number in some form. Along with having lower fluctuations (variance)
-than the base model.
+than the base model. To support this assertion, the throughout rate should be graphed and
+average across 30 replications comparing the two models: new (with modifications) and base.
 
 ### Output Analysis: Experimental Design and Statistical Analysis
 
 It is important to understand what factors in the system connect with
-system performance metrics (i.e: throughput rate). In this system, we want to construct
+system performance metrics (in this case, it should be throughput rate, $y [1/t]$).
+In this system, we want to construct
 an experimental design to inform our output analysis. More details about experimental
 design are available in Prelab 9, but here is a short summary; experimental design refers
 to explaining the variance of factors within a series of different conditions.
@@ -79,8 +82,14 @@ to explaining the variance of factors within a series of different conditions.
 In this lab, a full factorial design (3,300 runs) with varying line length, buffer sizes,
 processing variation, and worker variation is recommended, as it is not computationally
 expensive to do so (that's where the other factorial designs come in). Hint: Using itertools.product
-makes it easier to get an appropriate set of combinations.
+makes it easier to get an appropriate set of combinations; and it might take a while to run
+3,300 simulations on each of the unique sets of parameters.
 
-Finally, statistical analysis using a GLM (Linear Regression) to show that buffer
-size and processing variation
+Next, exploratory data analysis across the event space defined through the full-factorial
+design should provide context on the impact of parameters on simulations across the event
+space. Generate summary statistics from the event space on the throughput, and generate box
+plots for line performance v.s line length, buffer size, performance time variation, and worker
+performance variation to see the impact of each. Then make fit a linear model using `statmodels`,
+which will us to find the results of the four parameters on throughput rate.
+
 :::
