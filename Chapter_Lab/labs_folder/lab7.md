@@ -1,7 +1,7 @@
 :::{admonition} Lab 7
 :class: attention dropdown
 (lab-7)=
-# Lab 7: Introduction to System Dynamics from Queuing (SIMIO, Ciw, or Anylogic)
+# Lab 7: Simulating an Election (Monte Carlo and ABM)
 
 ## Lab 7 Prerequisites
 

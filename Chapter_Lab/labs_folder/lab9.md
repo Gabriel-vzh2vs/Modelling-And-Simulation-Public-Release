@@ -1,7 +1,7 @@
 :::{admonition} Lab 9
 :class: danger dropdown
 (lab-9)=
-# Lab 9: Introduction to Hybrid Modelling (System Dynamics + Discrete Event) (PySim/Salabim, Anylogic, or SIMIO) 
+# Lab 9: Modelling Alternative Systems (PySim/Salabim, Anylogic, or SIMIO) 
 
 ## Lab 9 Prerequisites
 

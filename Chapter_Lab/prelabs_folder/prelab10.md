@@ -1,5 +1,5 @@
 (prelab-10)=
-# Pre-Lab 10: A Short Introduction to Agent-Based Modelling (Do)
+# Pre-Lab 10: An Introduction to Advanced Agent-Based Modelling (Do)
 
 ## What is an Agent?
 
