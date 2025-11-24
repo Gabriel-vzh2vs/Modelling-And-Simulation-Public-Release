@@ -114,7 +114,9 @@ The user inputs the following data points:
 2. What are your 25% percentile, median, and 75% percentile values, and what do they say about the extreme values?
 3. Moreover, would you say that this portfolio would pay off (have a positive value if we subtract the $E[X] = 10,000$ from the FV), in a week, which is our length of simulation.
 4. Given the Kurtosis of the Model from XLrisk, what would you say about extreme events with this portfolio?
-5. If you change the mixture of the stocks from all equal to only one stock, for example, MSTR, what happens to the variance, and why? And how does connect to portfolio strategies in the real world?
+5. If you change the mixture of the stocks from all equal to only one stock, for example, MSTR, what happens to
+the variance, and why? And how does connect to portfolio strategies in the real world? (For Example, think
+about Parametric  Value at Risk, which is defined as: present value * vol * np.sqrt(t/TRADING_DAYS) * cutoff.)
 <!-- ::: -->
 
 [^1]: There are securities that have a negative value, we call these "short" positions (short selling or selling a put/call option) - which can be represented in this model, but it is not expected that a student would have those in their portfolio.

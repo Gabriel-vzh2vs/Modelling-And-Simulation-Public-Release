@@ -92,4 +92,6 @@ plots for line performance v.s line length, buffer size, performance time variat
 performance variation to see the impact of each. Then make fit a linear model using `statmodels`,
 which will us to find the results of the four parameters on throughput rate.
 
+## Example Output
+
 :::
