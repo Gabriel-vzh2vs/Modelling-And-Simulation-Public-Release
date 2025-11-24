@@ -77,7 +77,8 @@ Processes: This model is built to cover the basic movements of a security in the
 
 Schedule:The simulation starts at a time zero, and continues until the simulation reaches the user-set parameter $t$.
 Upon initialization, the parameters $r$, $s_{name}$, $p_{0}$ and $r_s$ are set through user-intervention.
-With the first process, the variables, $s$ is obtained through a web-based process such as the STOCKHISTORY
+With the first process, the variables, $s$ (representing the stocks: PG, MSFT, KO, and PEP) are obtained
+through a web-based process such as the STOCKHISTORY
 function in excel or Stockdex in Python. The second process, then takes this information and fits the random
 variable to the data (likely through a python package like phitter or through direct testing such as the K-S test).
 Upon the completion of this process, the weight assignment with the user-provided information from the parameter
