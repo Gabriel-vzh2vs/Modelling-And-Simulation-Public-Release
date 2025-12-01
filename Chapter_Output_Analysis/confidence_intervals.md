@@ -89,16 +89,17 @@ $$\left[ \bar{X} - G\left(t_{crit}\right)\sqrt{\frac{S^2}{n}}, \quad \bar{X} + G
 
 To construct this interval, several statistics must be computed from the sample data $X_1, X_2, \dots, X_n$:
 
-1) Sample Moments, which involves calculating the sample mean ($\bar{X}$) and variance ($S^2$). The method heavily relies on an unbiased-type estimator for the third central moment, denoted in the text as $\hat{\mu}_3$:$$\hat{\mu}_3 = \frac{n}{(n-1)(n-1)} \sum_{i=1}^{n} (X_i - \bar{X})^3$$
+1) Sample Moments, which involves calculating the sample mean ($\bar{X}$) and variance ($S^2$). The method heavily relies on an unbiased-type estimator for the third central moment, denoted in the text as $\hat{\mu}_3$:
+$$\hat{\mu}_3 = \frac{n}{(n-1)(n-1)} \sum_{i=1}^{n} (X_i - \bar{X})^3$$
 
-2) The Skewness Parameter ($a$), The parameter $a$ represents a scaled measure of the skewness of the sampling distribution of the mean. It normalizes the third moment against the variance and sample size:
+2) The Skewness Parameter ($a$), The parameter $a$ represents a scaled measure of the skewness of the
+sampling distribution of the mean. It normalizes the third moment against the variance and sample size:
 $$a = \frac{\hat{\mu}_3}{6\sqrt{n}(S^2)^{3/2}}$$
 If the data is perfectly symmetric, $\hat{\mu}_3 = 0$, which makes $a=0$.
 
-3) The Transformation Function $G(r)$This is the core of the Willink correction. It maps a value $r$ (usually the $t$-critical value) to a new value that adjusts for the estimated skewness $a$.
+3) The Transformation Function $G(r)$ This maps a value $r$ (usually the $t$-critical value) 
+to a new value that adjusts for the estimated skewness $a$.
 $$G(r) = \frac{1 + 6a(r - a)^{1/3} - 1}{2a}$$
-
-This function is derived from an inversion of a purely algebraic approximation (often related to the Wilson-Hilferty transformation) intended to normalize a _pivotal quantity_ involving the sample mean.
 
 ## What a Confidence Interval Is Not
 
@@ -116,7 +117,8 @@ described as Markov Chain Monte Carlo, which is defined further in {ref}`sec:MCM
 ### Bootstrapping Methods
 
 Bootstrapping methods are a family of methods
-that can assign a series of measures of accuracy (i.e: Confidence Intervals, Variance, Bias, Power, and Hypothesis Testing) to sample estimates. without relying on CLT.
+that can assign a series of measures of accuracy (i.e: Confidence Intervals, Variance,
+Bias, Power, and Hypothesis Testing) to sample estimates. without relying on CLT.
 It will provide better results in cases where the CLT and LLN do not apply (i.e: no
 closed-form expression for the distribution). And the naive bootstrap is never worse than CLT in terms of accuracy.
 
