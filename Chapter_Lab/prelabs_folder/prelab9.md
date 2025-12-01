@@ -1,8 +1,7 @@
 (prelab-9)=
 # Pre-Lab 9: A Short Overview of Experimental Design (Read)
 
-This pre-lab will be more focused on developing skills via doing and
-relies on {ref}`sec:system_modeling` for its theoretical foundations.
+Experimental Design? 
 
 ## Queuing Systems
 
