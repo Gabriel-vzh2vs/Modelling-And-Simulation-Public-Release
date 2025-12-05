@@ -1,12 +1,16 @@
 (prelab-11)=
-# Pre-Lab 11: A Review of Optimization (Read)
+# Pre-Lab 11: An Introduction to Advanced Agent-Based Modelling (Do)
 
-## What does it mean to Optimize?
+## What is an Agent?
 
-### How can you Optimize a Simulation?
+### Agent Topology
 
-## Common Software for Simulation Optimization
+## Three Characteristics of Agent-Based Modelling
 
-### OpenModelica
+### Heterogeneity
 
-### Optquest (Anylogic)
+### Complexity
+
+### Emergence
+
+## Walk-Through of a SIR Model
