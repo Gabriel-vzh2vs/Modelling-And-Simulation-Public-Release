@@ -170,7 +170,7 @@ faster than CLT-based confidence intervals.
 #### How Does Bootstrapping Work?
 
 Naive Bootstrapping is a sampling method that
-consists of the following method, which was defined by {cite}`Efron1979Bootstrap`:
+consists of the following method, which was defined by {cite}`efron1994introduction`:
 
 Suppose you have access to an i.i.d. sample $\{x_i\}_{i=1}^n$ and you want to compute a
 statistic $\theta$ using an estimator $\hat{\theta}$. You can approximate the
@@ -258,6 +258,23 @@ def calculate_bootstrap_basic_interval(data, n_bootstraps=10000, confidence=0.95
 :::
 
 #### Why not Bootstrap Everything?
+
+Bootstrapping is not a universal method for obtaining confidence intervals or any other
+parameter from a distribution, and it has some different and some similar limitations to CLT-based methods:
+
+1) Sample Size, according to Hall, 1992
+
+2) It is impossible to fully and exactly sample the bootstrapping event space, often requiring
+a Monte Carlo method to approximate the distribution of $\hat{\theta}^{*}$ because the
+number of samples in the event space are defined through {cite:p}`hall2013bootstrap`:
+$$\binom{2n-1}{n} = \frac{(2n-1)!}{n!(n-1)!}$$
+As a binominal expansion, the growth of the event space in terms of
+samples is severe. For example, a sample size of n = 5 produces 126 samples
+while n = 10 gives us 92,378. However, this is also what makes
+a bootstrap sample value for calculating confidence intervals (the lack
+of repeats).
+
+3) a
 
 Like other sampling methods, the naive bootstrap is particularly vulnerable to heavy tails.
 
