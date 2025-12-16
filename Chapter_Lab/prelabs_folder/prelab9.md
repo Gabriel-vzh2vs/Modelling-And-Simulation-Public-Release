@@ -1,5 +1,5 @@
 (prelab-9)=
-# Pre-Lab 9: Introduction to Experimental Design and Sensitivity Analysis (Read)
+# Pre-Lab 9: Overview of Experimental Design and Sensitivity Analysis (Read)
 
 The overall goal of simulation projects is to determine the
 impact of inputs on a system, $S$, and to interpret the outputs
@@ -96,22 +96,153 @@ Full-Factorials are particularly useful in small, less-complex models
 as they cover the entire event space ensuring that _every_ possibility
 is covered.
 
-<example>
+This example is based on {cite}`olver2010nist`, a commonly-cited source for
+engineers using statistical concepts:
+
+Suppose there is a polishing operations with three factors:
+Speed ($X_a$), Feed, ($X_b$) and Depth ($X_c$),
+and one response variable: Yield, $Y$. Speed, Feed, and Depth, the three factors
+each have three levels (Low, Medium, and High). In this case, we want to determine
+the impact of each factor on yield.
+
+We can defined the table of factor levels through a factor level table:
+
+``` {raw} latex
+\begin{tabular}{|l||c|c|c||c|}
+    \hline
+    % Header Row
+        & \textbf{\makecell{Low\\(-1)}} & \textbf{\makecell{Standard\\(0)}} & \textbf{\makecell{High\\(+1)}} & \textbf{Units} \\
+    \hline\hline
+    % Data Rows
+    \textbf{Speed} & 12 & 16 & 20 & rpm \\
+    \hline
+    \textbf{Feed} & 0.002 & 0.004 & 0.006 & \makecell{cm/\\sec} \\
+    \hline
+    \textbf{Depth} & 0.005 & 0.01 & 0.015 & \makecell{cm/\\sec} \\
+    \hline
+\end{tabular}
+```
+
+In this case, it is desired to try various combinations of these setting
+to find the ideal way for running the polisher. In this case, there are
+2^3, as there are three factors ($k = 3$), and 2 settings (+1/-1), meaning
+that this design has 8 combinations via the factorial expression $2^k$.
+
+Here is a visualization of this full factorial design:
+
+```{figure} 23factorial.png
+:label: fig:23factorial
+
+Here is a visualization of this full factorial design.
+```
+
+If the full model of all possible combinations is ran, then the all of the
+main effects, second-order interactions, and third-order interactions can
+be expressed as a full model in this form with all coefficients being estimable:
+
+\begin{align*}
+    Y \quad = \quad & \beta_0 + \beta_a X_a + \beta_b X_b + \beta_c X_c + \\
+    & \beta_{ab} X_a X_b + \beta_{ac} X_a X_c + \beta_{bc} X_b X_c + \\
+    & \beta_{abc} X_a X_b X_c + \epsilon
+\end{align*}
+
+And this can be expressed through a tabular form called "standard order"
+which lists every vertex on the factorial design in order once it has been
+recoded with low settings being -1, and high settings being +1:
+
+```{raw} latex
+\begin{tabular}{|c||c|c|c|}
+        \hline
+         & $\mathbf{X_a}$ & $\mathbf{X_b}$ & $\mathbf{X_c}$ \\
+        \hline\hline
+        (1) & -1 & -1 & -1 \\
+        \hline
+        a & +1 & -1 & -1 \\
+        \hline
+        b & -1 & +1 & -1 \\
+        \hline
+        ab & +1 & +1 & -1 \\
+        \hline
+        c & -1 & -1 & +1 \\
+        \hline
+        ac & +1 & -1 & +1 \\
+        \hline
+        bc & -1 & +1 & +1 \\
+        \hline
+        abc & +1 & +1 & +1 \\
+        \hline
+    \end{tabular}
+```
 
 #### Fractional Factorial
 
 Fractional factorials are particularly useful when the event space is so
 large that it would be impossible to fully compute every possible combination
-of event spaces as they cover the entire event space ensuring 
-that _every_ possibility is covered.
+in the event space or when a series of factors are considered unfeasible to
+co-occur.
 
-<example>
+Like the previous example, this example is
+based on {cite}`olver2010nist`, a commonly-cited source for
+engineers using statistical concepts:
+
+First, a fractional factorial is generally based on a smaller full-factorial
+design, for example, if an experiment has a $2^3$ design, and we decided
+to make a half-factorial design, we should start with a 2^2 design with
+a high and a low setting. This gives use the following standard order table:
+
+```{raw} latex
+\begin{tabular}{|c|c||c|}
+        \hline
+         & $\mathbf{X_a}$ & $\mathbf{X_b}$ \\
+        \hline\hline
+         1 & $\mathbf{-1}$ & $\mathbf{-1}$ \\
+         \hline
+         2 & $\mathbf{+1}$ & $\mathbf{-1}$ \\
+         \hline
+         3 & $\mathbf{-1}$ & $\mathbf{+1}$ \\
+         \hline
+         4 & $\mathbf{+1}$ & $\mathbf{+1}$ \\
+         \hline
+\end{tabular}
+```
+
+In this case, the $2^2$ factorial design has the sufficient number of runs,
+but there is a insufficient number of variables, as we want three when only
+two exist in the current table. However, we can address this through creating
+a new variable defined as the interaction term of $x_a$ and $x_b$: $x_c$.
+
+```{raw} latex
+\begin{tabular}{|c|c||c|c|}
+        \hline
+         & $\mathbf{X_a}$ & $\mathbf{X_b}$ & $\mathbf{x_c}$ \\
+        \hline\hline
+         1 & $\mathbf{-1}$ & $\mathbf{-1}$ & $\mathbf{+1}$\\
+         \hline
+         2 & $\mathbf{+1}$ & $\mathbf{-1}$ & $\mathbf{-1}$\\
+         \hline
+         3 & $\mathbf{-1}$ & $\mathbf{+1}$ & $\mathbf{-1}$\\
+         \hline
+         4 & $\mathbf{+1}$ & $\mathbf{+1}$ & $\mathbf{+1}$\\
+         \hline
+\end{tabular}
+```
+
+The limitation of this approach this that it is going cover less
+of the event space than a full-factorial. This leads to averages of the
+main effect only being based on four runs instead of the eight of the full
+fractional. But this also has the benefit of requiring half of the runs.
+of a full-factorial, making it possible to understand a part of an
+extremely complex or large event space in a reasonable amount of time.
 
 ### Response Surface (Central-composite)
 
 A Central Composite Design is composed on top of a two-level ($2^k$)
 full or fractional factorial design, with center points (median of values
-from the factorial design)
+from the factorial design) and axial points (runs the same as the center
+points with one factor change to be below and above the median of the factorial
+levels.)
+
+This creates a matrix called the _design matrix_
 
 <example>
 
@@ -173,15 +304,22 @@ The Sobol method decomposes the variance of the model into fractions that belong
 to different factors or set of factors, which allows for quantification of the size
 of the factor and the interaction between factors in the system.
 
-It is defined as the following mathematical construction
+It is defined as the following mathematical formulation:
 
+\begin{gather*}
+Y = f_0 + \sum_{i=1}^{d} f_i(X_i) + \sum_{i<j} f_{ij}(X_i, X_j) + \dots + f_{1,2\dots d}(X_1, X_2, \dots X_d) \\
+\text{Var}(Y) = \sum_{i=1}^{d} V_i + \sum_{i<j} V_{ij} + \dots + V_{1,2\dots,d}
+\end{gather*}
 
 The Sobol Method is often used within the context of Quasi-Monte Carlo
 
 :::
 
 :::{tab-item} Fractional Factorial Method
-
+The Fractional Factorial method builds a design matrix and then uses this design
+matrix to run simulations of the original model. This design matrix
+then is evaluated through the  dot products of the linear combination
+of the parameters
 
 :::
 

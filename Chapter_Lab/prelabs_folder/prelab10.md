@@ -24,7 +24,7 @@ series of inputs and outputs.
 
 ## Common Software for Simulation Optimization
 
-### OpenModelica
+### ParMOO
 
 ### Optquest
 

@@ -85,13 +85,87 @@ expensive to do so (that's where the other factorial designs come in). Hint: Usi
 makes it easier to get an appropriate set of combinations; and it might take a while to run
 3,300 simulations on each of the unique sets of parameters.
 
-Next, exploratory data analysis across the event space defined through the full-factorial
-design should provide context on the impact of parameters on simulations across the event
-space. Generate summary statistics from the event space on the throughput, and generate box
-plots for line performance v.s line length, buffer size, performance time variation, and worker
-performance variation to see the impact of each. Then make fit a linear model using `statmodels`,
+Next, preforming exploratory data analysis across the event space will provide context on the impact of
+each of the parameters. Then, generate summary statistics from the event space on the throughput,
+and generate box plots for line performance vs line length, buffer size, performance time variation,
+and worker performance variation to see the impact of each. Then fit a linear model using `statmodels`,
 which will us to find the results of the four parameters on throughput rate.
 
 ## Example Output
+
+### Plots of Output Measures
+
+![](figs/LineBuffer.png)
+
+![](figs/LineVariance.png)
+
+### Regression Results
+
+```{raw} latex
+\begin{center}
+    \textbf{OLS Regression Results} \\
+    \small Fitting Model: $y \sim 1 + n + \log(1+b) \times \log(a) + \text{sigma}$
+\end{center}
+
+\begin{table}[h!]
+    \centering
+    \small
+    % Top Table: Model Summary
+    \begin{tabular}{lclc}
+        \toprule
+        \textbf{Dep. Variable:}    & y                  & \textbf{R-squared:}         & 0.735     \\
+        \textbf{Model:}            & OLS                & \textbf{Adj. R-squared:}    & 0.704     \\
+        \textbf{Method:}           & Least Squares      & \textbf{F-statistic:}       & 24.36     \\
+        \textbf{Date:}             & Mon, 15 Dec 2025   & \textbf{Prob (F-statistic):}& 1.15e-11  \\
+        \textbf{Time:}             & 15:47:23           & \textbf{Log-Likelihood:}    & 98.009    \\
+        \textbf{No. Observations:} & 50                 & \textbf{AIC:}               & -184.0    \\
+        \textbf{Df Residuals:}     & 44                 & \textbf{BIC:}               & -172.5    \\
+        \textbf{Df Model:}         & 5                  &                             &           \\
+        \textbf{Covariance Type:}  & nonrobust          &                             &           \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.3cm}
+
+    % Middle Table: Coefficients
+    \begin{tabular}{lcccccc}
+        \toprule
+                                     & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+        \midrule
+        \textbf{Intercept}           & 0.6697        & 0.052            & 12.781     & 0.000               & 0.564           & 0.775           \\
+        \textbf{n}                   & -0.0015       & 0.001            & -1.358     & 0.181               & -0.004          & 0.001           \\
+        \textbf{np.log(1 + b)}       & 0.1058        & 0.026            & 4.087      & 0.000               & 0.054           & 0.158           \\
+        \textbf{np.log(a)}           & 0.1059        & 0.024            & 4.457      & 0.000               & 0.058           & 0.154           \\
+        \textbf{np.log(1 + b):np.log(a)} & -0.0357   & 0.013            & -2.792     & 0.008               & -0.062          & -0.010          \\
+        \textbf{sigma}               & -0.7492       & 0.157            & -4.775     & 0.000               & -1.065          & -0.433          \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.3cm}
+
+    % Bottom Table: Residual Tests
+    \begin{tabular}{lclc}
+        \toprule
+        \textbf{Omnibus:}       & 4.346  & \textbf{Durbin-Watson:}     & 2.169 \\
+        \textbf{Prob(Omnibus):} & 0.114  & \textbf{Jarque-Bera (JB):}  & 3.255 \\
+        \textbf{Skew:}          & -0.486 & \textbf{Prob(JB):}          & 0.196 \\
+        \textbf{Kurtosis:}      & 3.786  & \textbf{Cond. No.}          & 386.  \\
+        \bottomrule
+    \end{tabular}
+
+    \flushleft
+    \footnotesize
+    \textbf{Notes:} \\
+    {[1]} Standard Errors assume that the covariance matrix of the errors is correctly specified.
+\end{table}
+```
+
+### Linear Regression Results
+
+![](figs/BufferSizeAndProcessing.png)
+
+![](figs/ImpactofLineLength.png)
+
+![](figs/ImpactofVariance.png)
 
 :::
