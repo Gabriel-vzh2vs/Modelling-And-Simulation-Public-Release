@@ -115,7 +115,8 @@ interacting with machines ({cite}`bolton2022fuzzy`).
 
 What follows this passage is a toy example of using Fuzzy Logic for a simulated control system,
 which is a canonical example of a control system, a Heating, Ventilation and Air Conditioning (HVAC)
-system controlled by a thermostat. This example uses scikit-fuzzy as an implementation for fuzzy logic (a reader could also implement this using the fuzzylogic package.)
+system controlled by a thermostat. This example uses scikit-fuzzy as an implementation for fuzzy logic 
+(a reader could also implement this using the fuzzylogic package.)
 
 :::{admonition} Code
 :class: dropdown
