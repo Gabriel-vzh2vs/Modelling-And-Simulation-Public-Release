@@ -8,6 +8,15 @@
 ### Required Pre-labs
 
 - {ref}`prelab-8`
+- {ref}`prelab-3`
+
+### Required Chapters
+
+- 
+-
+-
+-
+
 
 ## Background Information
 
