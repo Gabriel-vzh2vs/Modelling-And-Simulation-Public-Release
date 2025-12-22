@@ -1,16 +1,24 @@
 (prelab-11)=
-# Pre-Lab 11: An Introduction to Advanced Agent-Based Modelling (Do)
+# Pre-Lab 11: On Distribution Fitting Software (Do)
 
-## What is an Agent?
+## What is Distribution Fitting?
 
-### Agent Topology
+### Parametric Fitting
 
-## Three Characteristics of Agent-Based Modelling
+### Non-Parametric Fitting
 
-### Heterogeneity
+### Goodness of Fit
 
-### Complexity
+#### Metric: Sum of Squared Errors (SSE)
 
-### Emergence
+####
 
-## Walk-Through of a SIR Model
+#### Metric: Energy Fitting
+
+### Software Implementations
+
+#### Phitter
+
+#### Fitter
+
+#### Distfit

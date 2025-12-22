@@ -329,55 +329,6 @@ And this project relies on the following prerequisities:
 ## Project 6 Metrics of Interest
 
 
-(project-7)=
-# Project 7 (Extension)
-
-This project focuses on developing the following skills:
-1. How to structure \& create a simulation study;
-2. And learning how to use Monte Carlo Methods to build basic simulations.
-
-And this project relies on the following prerequisites:
-### Labs
-
-1. [Lab5](./GMPforReports.ipynb)
-2. [Lab6](./GMPforReports.ipynb)
-3. [Lab7](./GMPforReports.ipynb)
-
-### Lectures
-
-1. [Lab5](./GMPforReports.ipynb)
-2. [Lab6](./GMPforReports.ipynb)
-3. [Lab7](./GMPforReports.ipynb)
-
-## Project 7 Model Information
-
-## Project 7 Metrics of Interest
-
-
-(project-8)=
-# Project 8 (Extension)
-
-This project focuses on developing the following skills:
-1. How to structure \& create a simulation study;
-2. And learning how to use Monte Carlo Methods to build basic simulations.
-
-And this project relies on the following prerequisites:
-### Labs
-
-1. [Lab5](./GMPforReports.ipynb)
-2. [Lab6](./GMPforReports.ipynb)
-3. [Lab7](./GMPforReports.ipynb)
-
-### Lectures
-
-1. [Lab5](./GMPforReports.ipynb)
-2. [Lab6](./GMPforReports.ipynb)
-3. [Lab7](./GMPforReports.ipynb)
-
-## Project 8 Model Information
-
-## Project 8 Metrics of Interest
-
 [^1]: The reason for this is the fact that every project you do is a group project, even if a reader works independently - the reader existing in the past is not and cannot be the same person as the present nor future reader. Working within a group allows for the reader to appreciate this fact in the present rather than retroactively.
 
 <!-- Note to the Editor, "The reason for this is simple, every project you do is a group project, even if a reader works independently - the past reader cannot be the same person as the future reader, no matter how much they try" is risky, so I have rephrased this. -->
