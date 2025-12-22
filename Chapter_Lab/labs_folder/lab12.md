@@ -1,7 +1,7 @@
 :::{admonition} Lab 12
 :class: attention dropdown
 (lab-12)=
-# Lab 12: Simulating an Election (Monte Carlo vs ABM) (PySim/Salabim, Anylogic, or SIMIO)
+# Lab 12: Using SYSML for Simulation-Based Design for MBSE
 
 ## Lab 12 Prerequisites
 

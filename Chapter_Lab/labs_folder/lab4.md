@@ -1,13 +1,32 @@
-:::{admonition} Lab 4
-:class: danger dropdown
 (lab-4)=
-# Lab 4: Posterior Probability Estimation with Monte Carlo Methods (Python + Excel)
+# Lab 4: Simulating Stochastic Processes with Monte Carlo Methods (Python + Excel)
+
+:::{admonition} Lab 4: Stochastic Process Simulation
+:class: danger
+
+## Note
+
+From this lab onwards, we will move away from the explicit ODD formalism.
+Having been exposed to the protocol in previous labs, you are now ready
+to apply these concepts implicitly. This lab requires you to translate
+requirements into a model independently, mirroring real-world modeling
+scenarios.
+
+Note: This lab is adapted from a series of lectures
+belonging to CMU's Monte Carlo Methods Course.
 
 ## Lab 4 Prerequisites
 
-### Pre-labs
+### Required Pre-labs
 
+- {ref}`prelab-2`
+- {ref}`prelab-3`
 - {ref}`prelab-4`
+
+### Optional Pre-Labs
+
+- {ref}`prelab-8`
+- {ref}`prelab-5`
 
 ### Mandatory Chapters for Lab 4
 
@@ -15,42 +34,119 @@
 - {ref}`sec:monte_carlo_method`
 - {ref}`sec:distribution_modeling`
 
-## Purpose and Patterns
+### Optional Chapters for Lab 4
 
-### Statement of Model Purpose
-This set of models serve a singular purpose: to demonstrate different techniques for
-estimating a Bayesian Prior on observed data using Monte Carlo and other methods
-that this course covered earlier.
+- {ref}`sec:CrudeMC`
+- {ref}`sec:VarReduction`
+- {ref}`sec:QuasiMC`
 
-### Patterns
+## Background Information
 
-## Entities, State Variables, and Scales
+In Computational Finance, Monte Carlo is often used to model the behaviors of
+equities (such as stocks) and their derivatives (i.e: stock options), which
+are defined through stochastic processes and random variates. This situation
+gives us a good case study for using Monte Carlo in "real world" context similar
+to {ref}`lab-3` and {ref}`lab-2`.
 
-### State Variables and Scales (Lab 4)
+Now, let's begin the case study.
 
-```{raw} latex
-\begin{tabular}{llll}
-\hline
-\textbf{Variable} & \textbf{Scale} & \textbf{Type} & \textbf{Description} \\
-\hline
-$p_{0}$ & $[0 - \infty]$ & Double & The initial value of the principal. \\
-$r$ & $[-\infty - \infty]$ & Double & The rate of return which is often [0-100] percent, but can be any number. \\
-$\bar{r}$ & $[0 - \infty]$ & Double & The average rate of return defined by the user. \\
-$\sigma$ & $[0 - \infty]$ & Double & The standard deviation of the rate of return defined by the user. \\
-$t$ & $[0 - 1]$ & Integer & The time horizon for the model. \\
-$p_{t}$ & $[-\infty - \infty]$ & Double & The value of the return at step t. \\
-$n$ & $[1 - \infty]$ & Integer & The number of experiments performed. \\
-\hline
-\end{tabular}
+Stocks represent ownership in a corporation, which is defined as a fraction of market cap
+(the total value of the company) over the number of outstanding shares.
+And the goal of holding a stock price $S_t$, is to "buy low and sell high",
+as in a rational actor wants $S_t$ to be higher than $S_0$ when they bought the stock.
+
+Stock Options refer to a contract that says that you will either buy (call) or sell (put) a stock by a certain
+date (maturity date). In European and American options, you pay a premium to obtain a option representing
+100 shares at a strike price (the price you agree to sell or buy at). For example, you might pay 20 dollars
+for a call option at strike price of 15 dollars on the maturity date of January 16th, 2026. If the stock
+is at 20 dollars at maturity, then you make a profit of $5 \cdot 100 - 20  = 480$ dollars if you exercise the option.
+This is basically buying stock at a discount; however, this is not a free lunch, if the option is out of the money,
+meaning $S_t$ is below the strike price for a call or above for a put, you will lose all of your premium.
+
+## Tasks
+
+We now get into lab tasks, we should have a model for *how* we expect the stock
+market to behave like. In this case, we are using a variant of the SDE described in Prelab 8, Example 2:
+the Geometric Brownian Motion model.
+
+$$dS_t = \mu S_t dt + \sigma S_t d W_t$$
+
+Where $\mu$ is the expected rate of return, $\sigma$ represents the standard deviation of
+the return, over $n$ time steps, which is similar to Lab 3. However, there are two parts of this
+equation, the linear ODE for exponential growth, $\mu \cdot S_t dt$, and the second term representing
+volatility proportional to price of the stock.
+
+However, we also need to include the risk-free rate as an rational agent on the market has the option
+of choosing a treasury bond, which has no realistic risk in the financial system. This will discount
+our returns by $e^{rT}$, representing the returns on a risk-free investment. Which changes the pricing
+of the premium for something like a Asian Call
+into $e^{rT} \cdot E^Q [max(0, \bar{S} - K)]$, with $E_Q$ being the expectation of the
+risk-free measure. But that does not change that much for our GBM:
+
+$$dS_t = rS_t dt + \sigma S_t d W_t$$
+
+Which replaces $\mu$ with the risk-free return rate $r$, but only for the linear ODE, because the
+value of the security still determines the relative volatility of the system.
+
+### Construct and Verify the Stochastic Process
+
+Construct a method for simulating the GBM model given the initial value, $S_0$, and the
+additional parameters $\mu$, $\sigma$ over a time interval, $[0, T)$, using $n$ time steps,
+returning prices as a list of floats. Assume that $\mu$ and $\sigma$ is the annualized rate of return and
+volatility, time $T$ is in years, and that the $S$, the stock prices are in USD, so you must return
+values in USD.
+
+Now, perform a face validity check. In this case, this means that you must compare your implementation of
+the GBM to the historical data for the S&P 500. Run your code for a starting price of $S_0 = 4,745.20$,
+annualized rate of return of $\mu = 0.221$ with a volatility of $\sigma = 0.13$, and duration of $T = 1$ year.
+Plot the result of this code against the S&P in 2024 and visually consider if the GBM model is
+representative of the real world results from the .csv generated by the code snippet. Make sure that
+you use the closing OR opening column for your input values when comparing.
+
+```{code} python3
+import yfinance as yf
+
+def save_sp500_to_csv():
+    print("Fetching S&P 500 data for 2024...")
+    ticker = yf.Ticker("^GSPC")
+    data = ticker.history(start="2024-01-01", end="2025-01-01")
+
+    if not data.empty:
+        filename = "sp500_2024_data.csv"
+        data.to_csv(filename)
+        
+        print(f"Success! Data saved to '{filename}'")
+        print(f"Total rows saved: {len(data)}")
+    else:
+        print("No data found to save.")
+
+if __name__ == "__main__":
+    save_sp500_to_csv()
 ```
 
-## Process Overview and Scheduling
+#### Example of an Acceptable Graph
 
-## Design Concepts
+```{figure} Lab4SPReturn.png
+:label: fig:Lab4SPReturn
 
-### Basic Principles
+This graph shows the actual S&P 500 value (in blue) for the year 2024 on top on of some simulated
+paths (in gray) using the random seed of 42.
+```
 
-## Input Data
+### Estimate Premiums
 
-## Questions left to the reader to answer
+Now, we will define what option will we will be using for this lab, and that is the Asian Call Option,
+which is when your profit is the difference between the strike price, notated as $K$, and the
+average price $\bar{S}$ over the time horizon of the option. Therefore:
+
+$$\bar{S} = \frac{1}{T} \int^T_{0} S_t dt $$
+
+then the net profit shall be defined through: $max(0, \bar{S} - K) - Premium$.
+
+Using the first GBM, estimate a premium for an Asian Call Option on SPY, a index fund tracking the S&P 500
+with a value that is practically the same as the S&P 500 but divided by 10 in most cases,
+where the initial price is $S_0 = 500$, the strike price is $K = 510$ over $T = 1$ year.
+We know the annualized rate and volatility of the S&P 500 is about $\mu = 0.08$ and $\sigma = 0.15$. Assume that
+there are 250 trading days for the year with no halts. Obtain the premium $C$ and the estimation of the standard deviation. Compare this with the second GBM with a risk-free rate of 3.83 percent and all other parameters being
+the same. Which model do you trust more, and would you trust either one with your investment plans?
 :::

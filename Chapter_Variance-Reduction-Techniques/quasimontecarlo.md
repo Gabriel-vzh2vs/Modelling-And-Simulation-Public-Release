@@ -1,9 +1,6 @@
+(sec:QuasiMC)=
 # Quasi-Monte Carlo
 
 ## Why use QMC?
 
-### Types of QMC
-
-## How can we use QMC?
-
-## 
+QMC will have asymptotically faster convergence than {ref}`sec:CrudeMC`, 

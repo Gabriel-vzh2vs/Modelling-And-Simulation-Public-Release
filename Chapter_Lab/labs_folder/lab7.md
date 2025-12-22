@@ -1,38 +1,73 @@
 :::{admonition} Lab 7
 :class: attention dropdown
 (lab-7)=
-# Lab 7: Introduction to System Dynamics from Queuing (SIMIO, Ciw, or Anylogic)
+# Lab 7: Expanding Modelling Methods: Compartmental Models Lab
 
 ## Lab 7 Prerequisites
 
-### Pre-labs
+### Required Pre-labs
 
-- {ref}`prelab-7`
+- {ref}`prelab-8`
+- {ref}`prelab-3`
 
-### Chapters
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
+### Required Chapters
 
-## Purpose and Patterns
+- 
+-
+-
+-
 
-### Statement of Model Purpose
 
-### Patterns
+## Background Information
 
-## Entities, State Variables, and Scales
+This lab covers a topic of compartmental models, which is a modelling technique
+that analyzes and recreates the movement of population through different states
+which are often defined through ODEs with some being formulated on random variables.
+Compartmental models are often used in pharmacokinetics, epidemiology, population
+ecology, and operations research.
 
-### State Variables
+One of the these models is the SIR model, discovered by Kermack and McKendrick in 1927,
+{cite}`SIR1927`, which separates its states into three different
+"compartments":
 
-### Scales
+- Susceptible (S)
+- Infected (I)
+- Recovered (R)
 
-## Process Overview and Scheduling
+Which are represented by the following ODEs when using the traditional SIR model:
 
-## Design Concepts
+``` {raw} latex
+\begin{aligned}
+    \frac{dS}{dt} &= -\frac{\beta}{N}IS, \\
+    \frac{dI}{dt} &= \frac{\beta}{N}IS - \gamma I, \\
+    \frac{dR}{dt} &= \gamma I,
+\end{aligned}
 
-### Basic Principles
+\noindent \textbf{Variables:}
+\begin{itemize}
+    \item $S(t)$: The number of \textbf{susceptible} individuals at time $t$.
+    \item $I(t)$: The number of \textbf{infectious} individuals at time $t$.
+    \item $R(t)$: The number of \textbf{recovered} (or removed) individuals at time $t$.
+\end{itemize}
 
-## Input Data
+\noindent \textbf{Parameters:}
+\begin{itemize}
+    \item $N$: The total population size, where $N = S + I + R$.
+    \item $\beta$: The \textbf{transmission rate}, representing the probability of transmitting the disease between a susceptible and an infectious individual.
+    \item $\gamma$: The \textbf{recovery rate}, which is the inverse of the average duration of infection ($1/\gamma$).
+\end{itemize}
+```
 
-## Questions left to the reader to answer
+This modelling technique is often used to model extremely infectious diseases without
+the chance of reinfection such as mumps, a specific strain of flu, and tuberculosis (when
+curable).
+
+Many models expand upon the SIR model either through adding additional states (as seen in
+some of the models here), adding bayesian details (like in {ref}`prelab-8`), or abstracted
+into a Multi-Compartmental Model (system dynamics as seen in {ref}`prelab-3`). 
+
+## Tasks
+
+### SIRD
+
 :::

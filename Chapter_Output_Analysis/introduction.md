@@ -1,24 +1,36 @@
+
 (sec:output_analysis)=
 # Output Analysis #
 
-In this chapter, we cover the base concepts needed to work with
-simulation analysis based on the Monte Carlo method. We have split
-this into the following parts:
+You have modeled ... You have implemented ... You have run the simulations ... Now what?
 
-- Estimation of means and the Strong Law of Large Numbers (Law 4)
+In this chapter we give an introduction analyzing output data from
+generated from running simulation models. Of course, samples are
+samples, so you can of course use what you learn here for data this is
+not generated from simulations. We will talk about the Monte Carlo
+(MC) method. As you can read on the
+[Wikipedia](https://en.wikipedia.org/wiki/Monte_Carlo_method), you may
+not find a clear-cut definition of what the MC method is, but you will
+definitely get a very clear flavor of what is involved here.
 
-- Construction of confidence intervals and the Central Limit Theorem (Law 4)
+Of course, we would not be doing this unless the systems that we are
+modeling and simulating are __stochastic__. For a deterministic model
+that is implemented carefully, you will always get the same outcome.
 
-- Multiple measures of performance (9.7)
+We will cover the following:
 
-- Estimates of correlation (Law 4)
+- Viewing models of stochastic systems as random variables or
+  stochastic processes.
 
-- Output analysis for a single system
+- Estimating the mean & the Strong Law of Large Numbers
 
-  - The stochastic process view of simulations (Law 9.2)
+- Constructing confidence intervals for the means & the Central Limit
+  Theorem
 
-  - Time plots of variables (9.8)
+- A basic classification of simulation models. Here we will cover (i)
+  terminating simulations and (ii) non-terminating simulations (steady
+  states and cycle parameters). Time plots of variables (9.8) ??
 
-  - A classification of simulation models (Law 9.3+)
-    - Terminating simulations
-    - Non-terminating simulations (steady state and cycle parameters)
+- Handling multiple measures of performance (9.7)
+
+- Estimating correlation (Law 4)

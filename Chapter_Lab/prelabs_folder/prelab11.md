@@ -1,12 +1,24 @@
 (prelab-11)=
-# Pre-Lab 11: A Review of Optimization (Read)
+# Pre-Lab 11: On Distribution Fitting Software (Do)
 
-## What does it mean to Optimize?
+## What is Distribution Fitting?
 
-### How can you Optimize a Simulation?
+### Parametric Fitting
 
-## Common Software for Simulation Optimization
+### Non-Parametric Fitting
 
-### OpenModelica
+### Goodness of Fit
 
-### Optquest (Anylogic)
+#### Metric: Sum of Squared Errors (SSE)
+
+####
+
+#### Metric: Energy Fitting
+
+### Software Implementations
+
+#### Phitter
+
+#### Fitter
+
+#### Distfit

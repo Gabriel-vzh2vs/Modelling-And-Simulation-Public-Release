@@ -18,7 +18,6 @@ include:
 
 - Breakpoints
 - Unit Testing
-- Formal Methods
 
 As a general concept, each of these are a part of system verification. Verification
 is proving the system meets system requirements and specifications. Moreover, each of these
@@ -211,10 +210,10 @@ detail:
 ::: -->
 ::::
 
-[^1]: This is where the _formal_ in formal methods comes from, as it is talking about
+<!-- [^1]: This is where the _formal_ in formal methods comes from, as it is talking about
 code as a provable statement and often using proof to support the statement.
 
 [^2]: LTL and other Temporal Logics are not well supported in Python, as it is more of a
 mathematical topic than a standard programming topic, and common programming languages
 that are more equipped to handle these are FizzBee, PRISM Model
-Checker, UPPAAL, and GreatSPN.
+Checker, UPPAAL, and GreatSPN. -->

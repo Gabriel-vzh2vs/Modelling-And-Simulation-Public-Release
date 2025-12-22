@@ -1,7 +1,7 @@
 :::{admonition} Lab 10
 :class: danger dropdown
 (lab-10)=
-# Lab 10: Introduction to Agent-Based Modelling (Python via Mesa or Anylogic)
+# Lab 10: Forcasting using Simulation (Python via Mesa or Anylogic)
 
 ## Lab 10 Prerequisites
 

@@ -3,6 +3,10 @@
 (lab-3)=
 # Lab 3: Building a Portfolio with Monte Carlo Methods (XLRisk or Python)
 
+Note: This is the last lab in the ODD framework, as this book aims
+to make its readers/users adaptable across different presentations
+of problems and labs.
+
 ## Lab 3 Prerequisites
 
 ### Pre-labs for Lab 3
@@ -34,7 +38,7 @@ how to process and analyze real-world data.
 
 #### Pattern 1. Monte Carlo Method in the Context of Stock Data
 
-This pattern reflects the idea that the stock market can be modelled through a stochastic process that can be replicated 
+This pattern reflects the idea that the stock market can be modelled through a stochastic process that can be replicated
 through Monte Carlo through the generation of an average that reflects the value of a security at a specific point in time.
 With higher average returns, the value of the security should increase, and the opposite will occur with the converse assuming no variance.
 However, with a higher variance of the security, the security's value exhibits more values away from the data's mean dependent on the underlying random variable's skew and kurtosis, with the converse, the value of the Monte Carlo calculated average tends to readily converge with the data's mean.
@@ -73,7 +77,8 @@ Processes: This model is built to cover the basic movements of a security in the
 
 Schedule:The simulation starts at a time zero, and continues until the simulation reaches the user-set parameter $t$.
 Upon initialization, the parameters $r$, $s_{name}$, $p_{0}$ and $r_s$ are set through user-intervention.
-With the first process, the variables, $s$ is obtained through a web-based process such as the STOCKHISTORY
+With the first process, the variables, $s$ (representing the stocks: PG, MSFT, KO, and PEP) are obtained
+through a web-based process such as the STOCKHISTORY
 function in excel or Stockdex in Python. The second process, then takes this information and fits the random
 variable to the data (likely through a python package like phitter or through direct testing such as the K-S test).
 Upon the completion of this process, the weight assignment with the user-provided information from the parameter
@@ -110,7 +115,9 @@ The user inputs the following data points:
 2. What are your 25% percentile, median, and 75% percentile values, and what do they say about the extreme values?
 3. Moreover, would you say that this portfolio would pay off (have a positive value if we subtract the $E[X] = 10,000$ from the FV), in a week, which is our length of simulation.
 4. Given the Kurtosis of the Model from XLrisk, what would you say about extreme events with this portfolio?
-5. If you change the mixture of the stocks from all equal to only one stock, for example, MSTR, what happens to the variance, and why? And how does connect to portfolio strategies in the real world?
+5. If you change the mixture of the stocks from all equal to only one stock, for example, MSTR, what happens to
+the variance, and why? And how does connect to portfolio strategies in the real world? (For Example, think
+about Parametric  Value at Risk, which is defined as: present value * vol * np.sqrt(t/TRADING_DAYS) * cutoff.)
 <!-- ::: -->
 
 [^1]: There are securities that have a negative value, we call these "short" positions (short selling or selling a put/call option) - which can be represented in this model, but it is not expected that a student would have those in their portfolio.

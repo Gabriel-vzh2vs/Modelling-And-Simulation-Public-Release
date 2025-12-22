@@ -5,7 +5,7 @@ project:
   title: Modelling and Simulation
   description: This book covers theory and applications related to modeling and simulation. The level of the exposition is suited for advanced undergraduate students and graduate students.
   keywords: []
-  copyright: "2025"
+  copyright: "2026"
   # authors: [Henning S. Mortveit, Gabriel A. Lawrence]
   github: https://github.com/Gabriel-vzh2vs/Modelling-And-Simulation-Public-Release
   # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
@@ -67,7 +67,6 @@ project:
     - title: Variance Reduction Techniques
       children:
         - file: Chapter_Variance-Reduction-Techniques/whyvariancereduction.md
-        - file: Chapter_Variance-Reduction-Techniques/stratifiedsampling.md
         - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
         - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
         - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
@@ -133,17 +132,17 @@ project:
 site:
   template: book-theme
   parts:
-    footer: | # Note that this footer will not work until June with 2.0.0b2 of JB 2.0.
-      <div>
-        <p>&copy; Copyright 2025 Henning S. Mortveit and Gabriel A. Lawrence. All rights reserved.</p>
-      </div>
+    footer: footer.md
   options:
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
+  # favicon: favicon.ico
+    logo: simulation.svg
+    style: footer.css
+    exports:
+      - format: pdf
+      - template: plain_latex_book
     # launch_buttons:
     #   thebe                  : true
 
-  # To export the file as a Springer-Style PDF
-  # exports:
-  #   - format: pdf
-  #   - template: springer
+      # <div>
+      #   <p>&copy; Copyright 2025 Henning S. Mortveit and Gabriel A. Lawrence. All rights reserved.</p>
+      # </div>
