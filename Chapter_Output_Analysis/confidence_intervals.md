@@ -1,3 +1,4 @@
+(sec:confidence_intervals)=
 # Confidence Intervals
 
 It is highly likely that you have done some form of statistics course
