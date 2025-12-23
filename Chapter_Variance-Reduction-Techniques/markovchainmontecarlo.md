@@ -1,6 +1,15 @@
 (sec:MCMC)=
 # Markov Chain Monte Carlo (MCMC)
 
+MCMC is often used to estimate parameters
+such as variance or an expected value,
+sample from a continuous random variable,
+complex posterior distributions. These
+uses often come up in simulation when
+trying to generate random variates for
+discrete events or to improve the fit
+of distributions to existing data.
+
 ## What is MCMC?
 
 In general, Markov Chain Monte Carlo methods
