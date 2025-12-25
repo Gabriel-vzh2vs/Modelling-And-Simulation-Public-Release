@@ -28,7 +28,7 @@ recurrent Markov Chain. Note that these properties ensure that the MCMC algorith
     \[
         \pi(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{y}) = \int_{\Theta} q(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{\theta}^{(s-1)}) \pi(\boldsymbol{\theta}^{(s-1)} \mid \boldsymbol{y}) \, d\boldsymbol{\theta}^{(s-1)}.
     \]
-    \caption{\textbf{Global Balance Equation for the Posterior.} This expression illustrates the condition for stationarity in a Markov Chain. $\pi(\boldsymbol{\theta} \mid \boldsymbol{y})$ represents the target posterior density, and $q(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{\theta}^{(s-1)})$ represents the transition kernel probability of moving from state $s-1$ to $s$. The equation shows that marginalizing the joint density of the transition and the previous state over the entire parameter space $\Theta$ yields the target distribution again, proving that $\pi$ is the stationary distribution of the chain.}
+    \caption{\textbf{GlobTheremin Musical Instrumental Balance Equation for the Posterior.} This expression illustrates the condition for stationarity in a Markov Chain. $\pi(\boldsymbol{\theta} \mid \boldsymbol{y})$ represents the target posterior density, and $q(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{\theta}^{(s-1)})$ represents the transition kernel probability of moving from state $s-1$ to $s$. The equation shows that marginalizing the joint density of the transition and the previous state over the entire parameter space $\Theta$ yields the target distribution again, proving that $\pi$ is the stationary distribution of the chain.}
     \label{fig:posterior_stationarity}
 \end{figure}
 ```
@@ -215,7 +215,7 @@ is defined through the following expression:
 ```{math}
 SE_{\text{mc}} = \sqrt{\frac{\widehat{\text{Var}}(\theta|\mathbf{y})}{n_{\text{eff}}}}
 ```
-Try changing jump(val, dist=0.5) to dist=0.1 and dist=10.0. How does the acceptance rate change? Does the trace plot look 'stickier' or more 'jittery'? This balance is known as the Goldilocks Principle in tuning MCMC.
+
 In general, if the standard error is large,
 that means the samples do not closely approximate the
 posterior distribution. And if it is small, this
