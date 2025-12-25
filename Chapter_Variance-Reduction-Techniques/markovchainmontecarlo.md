@@ -373,7 +373,7 @@ Finally, the Gelman-Rubin statistic (Potential Scale Reduction Factor, $\hat{R}$
 \]
 
 If the Gelman-Rubin statistic is high ($\hat{R} \ge 1.1$), this indicates that the target quantities from the MHA cannot be
-trusted, and that it needs to be ran for a longer time until
+trusted, and it needs to be running for a longer time until
 it falls below this measure. {cite:p}`vats2021revisiting`.
 
 Here is an example of using the Gelman-Rubin statistic in Python on the Laplace Distribution we did before.
