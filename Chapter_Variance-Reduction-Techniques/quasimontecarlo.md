@@ -189,7 +189,7 @@ if __name__ == "__main__":
 
 :::
 
-### Confidence Intervals
+## Confidence Intervals
 
 QMC without randomization does not have easily calculable
 confidence intervals as every run is the same. However, if
@@ -285,7 +285,7 @@ if __name__ == "__main__":
 
 :::
 
-### Why not use QMC for Everything?
+## Why not use QMC for Everything?
 
 For most problems, QMC is easily interchangeable with Crude
 Monte Carlo and preforms better (lower error and faster

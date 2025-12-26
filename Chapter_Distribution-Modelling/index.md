@@ -1,6 +1,6 @@
 
 (chap:distribution_modeling)=
-# Introduction
+# Introduction to Distribution Modelling
 
 
 <!-- (sec:distribution_modeling:overview)=

@@ -1,5 +1,5 @@
 (sec:VarReduction)=
-# Overview of Variance Reduction
+# Variance Reduction
 
 Variance Reduction refers to methods that
 reduce the variance of the Monte Carlo method, which then leads to
@@ -78,9 +78,6 @@ placeholder
 placeholder
 :::
 
-:::{prf:example} Correlated Sampling
-placeholder
-:::
 
 ### Stratified Sampling
 
