@@ -15,26 +15,6 @@ same form as {ref}`sec:CrudeMC`:
 I = \hat{\theta}_N(f) = \frac{1}{N} \sum^{N}_{J_1} g(X_{j})
 ```
 
-With the worst-case QMC error bounds defined through the
-Koksma-Hlawka theorem, which is described in the paper {cite}
-`pausinger2015koksma`:
-
-```{math}
-E_N(f) = \left| \frac{1}{N} \sum_{i=1}^{N} f(\mathbf{t}_i) - \int_{[0,1]^d} f(y)dy \right| \leq D_N^* V[f].
-```
-
-```{raw} latex
-\begin{itemize}
-    \item $E_N(f)$: The approximation error. It represents the absolute difference between the numerical estimate (the Monte Carlo sum) and the true value of the integral.
-    \item $N$: The total number of points used in the sequence to approximate the integral.
-    \item $f(\mathbf{t}_i)$: The function being integrated, evaluated at the sample point 
-    \item $\mathbf{t}_i$: The sample points (vectors) chosen from a sequence. In Quasi-Monte Carlo (QMC), these are typically from a "low-discrepancy sequence" (like Sobol or Halton sequences) rather than being purely random.
-    \item $[0,1]^d$: The domain of integration, representing the $d$-dimensional unit hypercube.
-    \item $D_N^*$: The Star Discrepancy of the point set $\{\mathbf{t}_1, ..., \mathbf{t}_N\}$. This measures how uniformly the points are distributed in the unit hypercube. A lower discrepancy means the points cover the space more evenly (fewer gaps and clusters).
-    \item $V[f]$: The Hardy-Krause Variation of the function $f$. This measures how much the function fluctuates or how "rough" it is. A flatter function has a lower variation.
-    \end{itemize}
-```
-
 However, for Quasi-Monte Carlo to work, these deterministic
 sequences must be patternless (aka have a uniform-like density
 across a space). In mathematics, this property is often referred
@@ -99,9 +79,26 @@ print(f"Generated {num_points} points in {dimensions} dimensions:")
 print(sobol_sequence)
 ```
 
-Because of these qualities, QMC will have asymptotically faster convergence than {ref}`sec:CrudeMC`, meaning it takes fewer
+Because of Sobol's Sequences, QMC will have asymptotically faster convergence than {ref}`sec:CrudeMC`, meaning it takes fewer
 samples for QMC to converge into the value of the parameter of
-interest, if it exists.
+interest, if it exists and the function is continuous and smooth. However, this convergence is within
+a series of worst-case error bounds defined through the Koksma-Hlawka theorem, which is described in the paper {cite}`pausinger2015koksma`:
+
+```{math}
+E_N(f) = \left| \frac{1}{N} \sum_{i=1}^{N} f(\mathbf{t}_i) - \int_{[0,1]^d} f(y)dy \right| \leq D_N^* V[f].
+```
+
+```{raw} latex
+\begin{itemize}
+    \item $E_N(f)$: The approximation error. It represents the absolute difference between the numerical estimate (the Monte Carlo sum) and the true value of the integral.
+    \item $N$: The total number of points used in the sequence to approximate the integral.
+    \item $f(\mathbf{t}_i)$: The function being integrated, evaluated at the sample point 
+    \item $\mathbf{t}_i$: The sample points (vectors) chosen from a sequence. In Quasi-Monte Carlo (QMC), these are typically from a "low-discrepancy sequence" (like Sobol or Halton sequences) rather than being purely random.
+    \item $[0,1]^d$: The domain of integration, representing the $d$-dimensional unit hypercube.
+    \item $D_N^*$: The Star Discrepancy of the point set $\{\mathbf{t}_1, ..., \mathbf{t}_N\}$. This measures how uniformly the points are distributed in the unit hypercube. A lower discrepancy means the points cover the space more evenly (fewer gaps and clusters).
+    \item $V[f]$: The Hardy-Krause Variation of the function $f$. This measures how much the function fluctuates or how "rough" it is. A flatter function has a lower variation.
+    \end{itemize}
+```
 
 ## Why use QMC?
 
