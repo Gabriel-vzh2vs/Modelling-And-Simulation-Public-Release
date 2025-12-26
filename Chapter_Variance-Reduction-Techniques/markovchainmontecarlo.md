@@ -28,7 +28,7 @@ recurrent Markov Chain. Note that these properties ensure that the MCMC algorith
     \[
         \pi(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{y}) = \int_{\Theta} q(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{\theta}^{(s-1)}) \pi(\boldsymbol{\theta}^{(s-1)} \mid \boldsymbol{y}) \, d\boldsymbol{\theta}^{(s-1)}.
     \]
-    \caption{\textbf{GlobTheremin Musical Instrumental Balance Equation for the Posterior.} This expression illustrates the condition for stationarity in a Markov Chain. $\pi(\boldsymbol{\theta} \mid \boldsymbol{y})$ represents the target posterior density, and $q(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{\theta}^{(s-1)})$ represents the transition kernel probability of moving from state $s-1$ to $s$. The equation shows that marginalizing the joint density of the transition and the previous state over the entire parameter space $\Theta$ yields the target distribution again, proving that $\pi$ is the stationary distribution of the chain.}
+    \caption{\textbf{Balance Equation for the Posterior.} This expression illustrates the condition for stationarity in a Markov Chain. $\pi(\boldsymbol{\theta} \mid \boldsymbol{y})$ represents the target posterior density, and $q(\boldsymbol{\theta}^{(s)} \mid \boldsymbol{\theta}^{(s-1)})$ represents the transition kernel probability of moving from state $s-1$ to $s$. The equation shows that marginalizing the joint density of the transition and the previous state over the entire parameter space $\Theta$ yields the target distribution again, proving that $\pi$ is the stationary distribution of the chain.}
     \label{fig:posterior_stationarity}
 \end{figure}
 ```
@@ -455,7 +455,7 @@ else:
 
 :::{warning} Note about the Level of Detail
 Note: If the reader wants a more technical
-and mathematical explaination of how HMC works, they should consider reading {cite}`betancourt2017conceptual` and {cite}`betancourt2015hamiltonian` as this section
+and mathematical explanation of how HMC works, they should consider reading {cite}`betancourt2017conceptual` and {cite}`betancourt2015hamiltonian` as this section
 is inspired by those sources.
 :::
 
