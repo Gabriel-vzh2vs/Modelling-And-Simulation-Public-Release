@@ -34,7 +34,7 @@ recurrent Markov Chain. Note that these properties ensure that the MCMC algorith
 ```
 
 The proofs supporting this process are found
-in pg. 205 - 247 of the book {cite}`robert1999monte`,
+in pg. 205–247 of the book {cite}`robert1999monte`,
 as that is outside the scope of this chapter.
 
 Now, that we have discussed the fundamental requirements
@@ -486,7 +486,7 @@ In PyMC and Stan
 this joint density, $\rho$ is a Multivariate Gaussian distribution $MN \sim \mathcal{N}(0, \mathbf{I})$, with $\mathbb{I}$ being the covariance matrix. This allows us to define
 momentum vectors.
 
-This joint density, as it is a multivariate Gaussian can be defined through a Hamilition
+This joint density, as it is a multivariate Gaussian can be defined through a Hamilton
 often defined as the following:
 
 ```{raw} latex

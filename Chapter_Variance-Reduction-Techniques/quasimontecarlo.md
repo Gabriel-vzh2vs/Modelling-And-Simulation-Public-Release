@@ -189,6 +189,7 @@ def run_comparison():
 if __name__ == "__main__":
     run_comparison()
 ```
+
 :::
 
 ### Confidence Intervals
@@ -196,12 +197,42 @@ if __name__ == "__main__":
 QMC without randomization does not have easily calculable
 confidence intervals as every run is the same. However, if
 we modify QMC to use a method like Owen's Scrambling
-(Permutation) or Cranley-Patterson Rotation (Uniform Shifting via a vector this problem disappears. As Randomized QMC allows
-for multiple distinct experiments like Crude Monte Carlo, allowing for the construction of a confidence interval without
-using the worst-case error bound from the Koksma-Hlawka theorem.[^1]
+(Permutation) or Cranley-Patterson Rotation
+(Uniform Shifting via a vector) then this problem disappears.
+We call this method Randomized-QMC (R-QMC).
+
+Here is a visualization of the differences between QMC, R-QMC,
+and crude Monte Carlo. And it also shows how R-QMC is randomized
+compared with QMC (Sobol).
+
+![](figs/RQMCviz.png)
+
+Because of this shifting of evaluation points, randomized QMC 
+(R-QMC) allows for multiple distinct experiments like Crude
+Monte Carlo, allowing for the construction of a confidence
+interval without using the NP-complete worst-case error bound
+from the Koksma-Hlawka theorem.[^1]
 
 :::{prf:example} Example of QMC Confidence Interval
+In normal QMC, it is impossible to construct a confidence
+interval, or to have a discontinuous function converge;
+however, in R-QMC, it becomes possible to do both at
+the same time.
 
+This example takes the volume of a hypersphere in
+5 dimensions and calculates the confidence interval
+for the R-QMC estimator and compares it to the
+calculate value of the volume of a hypersphere
+using Marsaglia's[^2] method.
+
+```{code} python
+--- Results ---
+True Value:       0.164493
+RQMC Estimate:    0.164404
+Standard Error:   0.000389
+95% Conf Int:     [0.163642, 0.165167]
+True value within CI? YES
+```
 
 ```{code} python
 import numpy as np
@@ -226,17 +257,10 @@ def rqmc_simulation():
     print(f"Running {m_batches} independent Randomized QMC batches...")
     
     for i in range(m_batches):
-        # 1. Create a NEW scrambled Sobol engine for every batch
-        # This provides the necessary independence
+        # Scramble = Randomization
         sampler = qmc.Sobol(d=d, scramble=True)
-        
-        # 2. Sample points
         points = sampler.random(n_per_batch)
-        
-        # 3. Evaluate function
         y_values = integration_target(points)
-        
-        # 4. Store the mean of this specific batch
         estimates.append(np.mean(y_values))
 
     # --- Statistical Analysis ---
@@ -261,6 +285,7 @@ def rqmc_simulation():
 if __name__ == "__main__":
     rqmc_simulation()
 ```
+
 :::
 
 ### Why not use QMC for Everything?
@@ -269,17 +294,33 @@ For most problems, QMC is easily interchangeable with Crude
 Monte Carlo and preforms better (lower error and faster
 convergence). However, there are several limitations to
 QMC that might Crude Monte Carlo more feasible for certain
-problems:
+problems.
 
-1) Curse of Dimensionality
-2) The Inability for the construction of confidence intervals.
-3)
+```{raw} latex
+\begin{table}[htbp]
+    \label{tab:qmc_vs_cmc}
+    \renewcommand{\arraystretch}{1.5} % Increase row height for better readability
+    \begin{tabular}{@{} l p{6cm} p{6cm} @{}}
+        \toprule
+        \textbf{Feature} & \textbf{Use Quasi-Monte Carlo (QMC)} & \textbf{Use Crude Monte Carlo (CMC)} \\
+        \midrule
+        \textbf{Dimension} & Low to Moderate ($< 20 - 30$) or Low \emph{Effective} Dimension & High ($> 50$) with equal variable importance \\
+        \textbf{Smoothness} & Smooth, continuous functions & Discontinuous, "rough" functions \\
+        \textbf{Domain} & Hypercube ($[0, 1]^d$) or Gaussian & Complex, irregular geometries \\
+        \textbf{Error Est.} & Hard (requires scrambling/RQMC) & Easy (Sample Standard Deviation) \\
+        \textbf{Implementation} & Requires libraries (\texttt{scipy.stats.qmc}) & Trivial (\texttt{random.uniform}) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+```
 
-Randomized QMC does fix the last two of these problems
-at the cost of more complexity for implementation. And
-this balance is the reason why many commercial packages
-use R-QMC
+Randomized QMC does fix the limitations of Error Estimation
+and Smoothness at the cost of even more complexity for implementation. And this trade off is the reason many commercial packages (atRisk, XLRisk, SIMIO, etc) use R-QMC over crude Monte Carlo.
 
 [^1]: At that point, you might as well use MCMC to generate
 a Bayesian Credible Interval like in {ref}`sec:MCMC` as
 it would be smaller.
+
+[^2]: Yes, this is the same Marsaglia that made the Diehard
+tests and made most modern random number generators and
+theorems around random numbers.
