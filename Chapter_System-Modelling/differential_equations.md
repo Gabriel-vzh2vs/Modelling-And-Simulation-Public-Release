@@ -8,7 +8,7 @@ associated prelab, {ref}`prelab-8` along with the labs
 {ref}`lab-5`, and {ref}`lab-7`.
 
 Additionally, there are excellent resources on Differential
-Equations such as {cite}`braun1983differential`, {cite}`zwillinger2021handbook`, if the reader 
+Equations such as {cite}`braun1983differential`, {cite}`zwillinger2021handbook`, if the reader
 needs a reference that is more in-depth than this review.
 :::
 
@@ -60,7 +60,7 @@ ODEs are the most common form encountered in system modeling. The canonical firs
 
 ```{math}
 y^{'} + p(x)y = q(x)
-``` 
+```
 
 #### Analytic vs. Numerical Solutions
 
@@ -135,8 +135,15 @@ dX_t = \underbrace{a(t, X_t)dt}_{\text{Drift (Deterministic)}} + \underbrace{b(t
 - Drift (dt): This represents the deterministic trend of the system (e.g., expected return on a stock).
 - Diffusion (dWt​): This represents "white noise" or Brownian motion. It injects randomness at every time step.
 
-Unlike ODEs, SDEs do not result in a smooth curve; they result in a "jagged" path that is different every time you run the simulation. Solving these requires Stochastic Calculus (specifically Itô calculus), as standard calculus rules (like the Chain Rule) break down in the presence of infinite variance noise.
+Unlike ODEs, SDEs do not result in a smooth curve; they result
+in a jagged path that is different every time you run the
+simulation. Solving these requires Stochastic Calculus
+(specifically Itô calculus), as standard calculus rules (like
+the Chain Rule) break down in the presence of infinite noise.
 
 ## Modeling in the Real World
 
-In practice, the choice between using an ODE, SDE, or PDE depends on the fidelity required by the model. While closed-form solutions (like those for the M/M/1 queue from {sec}`sec:queueing_systems`) are elegant, real-world systems often require the numerical approximation of these differential equations, bridging the gap between mathematics and computational simulation.
+In practice, the choice between using an ODE, SDE, or PDE depends on the fidelity required by the model. While
+closed-form solutions (like those for the M/M/1 queue
+from {sec}`sec:queueing_systems`) are easy, real-world systems often require the numerical approximation of these differential
+equations, bridging the gap between mathematics and computational simulation.
