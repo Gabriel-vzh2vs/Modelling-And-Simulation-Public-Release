@@ -1,10 +1,6 @@
 (sec:queuing_systems)=
 # Queuing Systems 
 
-:::{note} Refinement 1
-All of the existing content in this section should be considered provisional at best.
-:::
-
 ## Introduction to Queues
 
 We have previously introduced the concept of discrete event simulation and various modeling paradigms. Queueing systems represent a fundamental class of models used to analyze congestion, waiting lines, and resource sharing.
@@ -23,7 +19,6 @@ In probability courses and textbooks you may have heard about
 the exponential distribution, one of the most prototypical
 queuing systems ($M/M/1$) relies on the
 Poisson and Exponential Distributions for its inter-arrival times and service rates respectively.
-
 
 #### Poisson Distribution
 
