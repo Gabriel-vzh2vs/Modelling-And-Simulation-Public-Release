@@ -31,18 +31,18 @@ Assume we have a system $S$ whose model $M$ contains an entity $E$. In a state m
 
 In this section, we will give an introduction to this topic. The formal foundation of state machines is critical for structuring complex agent behaviors and for using industry tools such as SYSML. It is structured as follows:
 
-- We first introduce the formal components of a state machine, focusing on states and events used to capture "things happening" within the system. We clarify that while "finite state machine" is a formal mathematical construction, our focus is on its practical application for modeling system dynamics.
+- We first introduce the formal components of a state machine, focusing on states and events used to capture "things happening".
 
 - Following this, we explore the iterative design process of a state machine using the robot-assisted search-and-rescue scenario (involving UGVs, UAVs, and Medics) as a primary case study. We will demonstrate how a model evolves from a simple sketch to a comprehensive blueprint by adding missing logical elements like return-to-base triggers or data transfer states.
 
 - We discuss how to enhance the model by incorporating actions (continuous control logic within a state) and system variables (memory of the system) to create a high-fidelity representation of the system's operation.
 
-- Finally, we touch upon the connection between state machines and broader systems engineering frameworks like Model Based Systems Engineering (MBSE) and SysML. We also note that these conceptual models can be directly implemented using Python libraries such as python-statemachine.
+- Finally, we touch upon the connection between state machines and broader systems engineering frameworks like Model Based Systems Engineering (MBSE) and SysML.
 
 As you likely guessed, we focus on the core utility of state machines as a bridge between conceptual design and simulation code, allowing for a close correspondence that facilitates automated model checking and resilience study.
 
 (sec:state_machine_modeling:conditions)=
-## Conditions
+### Conditions
 
 System variables often serve as the basis for conditions (or guards), which are logical checks that determine if a transition can occur. While an event might trigger a potential change, a condition validates whether the system can proceed to the next state.
 
@@ -55,32 +55,38 @@ In the UGV example, conditions act as decision gates for the robot's behavior. W
 - Victim Priority: A condition might check if a Victim in critical condition is found, prompting an immediate transition to Seek UAV to report the urgent data, bypassing further exploration.
 
 (sec:state_machine_modeling:states)=
-## States
+### States
 
 A state represents a distinct condition or situation in which an entity exists. An entity is always in exactly one state at any given time, and it remains there until a specific event triggers a transition. In modeling complex systems, defining the correct set of states is the first step in characterizing behavior.
 
 (sec:state_machine_modeling:events)=
-## Events and Transitions
+### Events and Transitions
 
 Events are the drivers of dynamic behavior; they capture "things happening" within the system. When an event occurs, it acts as a trigger that may cause the entity to transition from its current state to a new one.
 
 (sec:state_machine_modeling:actions)=
-## Actions within States
+### Actions within States
 
 While states define where an entity is in its logic, actions define what the entity is actually doing while residing in that state. Actions represent the functions or processes being executed by the entity; in our example, the Unmanned Ground Vehicle (UGV)—specific to its current state.
 
 For the UGV model, we can specify actions that are continuously executed by the control logic associated with a particular state. Consider the Explore state; the UGV does not simply sit idle. Instead, it actively cycles through specific operational functions:
 
 (sec:state_machine_modeling:system_variables)=
-## System Variables
+### System Variables
 
 To support the logic of transitions and actions, the state machine must often maintain a memory of the system's status. We can add system variables to our model to track this internal data.
 
 These variables are critical for making decisions—such as whether to continue exploring or return to base. In the context of the UGV search-and-rescue mission, relevant system variables include:
 
-## Statecharts
+## Iterative Design Process
 
 
-## Transition to SYSML 
+### Statecharts
+
+
+## Transition to MBSE 
+
+
+### SYSML 
 
 {ref}`prelab-11`
