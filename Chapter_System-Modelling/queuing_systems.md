@@ -1,6 +1,16 @@
 (sec:queuing_systems)=
 # Queuing Systems 
 
+:::{note} Note to the Reader
+More application of these concepts can be seen in the
+associated prelab, {ref}`prelab-6` along with the labs
+{ref}`lab-5`, and {ref}`lab-6`.
+
+Additionally, there are excellent resources on Queuing
+Theory such as {cite}`smith2018introduction`, {cite}`zwillinger2021handbook`, if the reader
+needs a reference that is more in-depth than this review.
+:::
+
 ## Introduction to Queues
 
 We have previously introduced the concept of discrete event simulation and various modeling paradigms. Queueing systems represent a fundamental class of models used to analyze congestion, waiting lines, and resource sharing.
