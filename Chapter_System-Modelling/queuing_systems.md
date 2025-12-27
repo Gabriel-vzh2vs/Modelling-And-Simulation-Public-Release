@@ -5,29 +5,38 @@
 All of the existing content in this section should be considered provisional at best.
 :::
 
-We have previously introduced the concept of discrete event
-simulation and various modeling paradigms. Queuing systems
-represent a fundamental class of models used to analyze
-congestion and waiting lines. The goal of this section is to
-establish a mathematical and conceptual foundation for queuing
-theory, moving from statistical distributions to formal
-notation and performance metrics.
+## Introduction to Queues
 
-## Foundations of Queuing
+We have previously introduced the concept of discrete event simulation and various modeling paradigms. Queueing systems represent a fundamental class of models used to analyze congestion, waiting lines, and resource sharing.
 
-At a high level, queuing models are stochastic systems driven
-by two primary random processes: the arrival of entities
-(customers, packets, jobs) and the processing of those entities
-(service times). Understanding these require a grasp of
-specific probability distributions that build the mathematics
-of waiting.
+At its core, a queuing system is defined by three components:
 
-## The Exponential Distribution
+- The Input Process: How customers (or jobs, packets) arrive at the system.
+- The Service Mechanism: How long it takes to serve a customer and how many servers are available.
+- The Queue Discipline: The rules describing how customers are selected for service (e.g., First-Come, First-Served).
+
+Why do queues form? For example, if the average service rate is faster than the average arrival rate, why is there a queue? The answer lies in variability. If arrivals and service times were perfectly deterministic (e.g., exactly one customer every 5 minutes, and service takes exactly 4 minutes), no queue would ever form. Queues arise because of the stochastic nature in when customers arrive and how long it takes to serve them.
+
+### The Exponential and Poisson Distributions
 
 In probability courses and textbooks you may have heard about
 the exponential distribution, one of the most prototypical
 queuing systems ($M/M/1$) relies on the
-exponential distribution for its service times and inter-arrival rates.
+Poisson and Exponential Distributions for its inter-arrival times and service rates respectively.
+
+
+#### Poisson Distribution
+
+The Poisson process is the most common mathematical model for "random" arrivals. If we say *singular* arrivals follow a Poisson process with rate $\lambda$, we imply:
+
+- Independence: An arrival occurring now does not influence when the next arrival will occur.
+- Stationarity: The average rate $\lambda$ is constant over time.
+
+The probability of seeing exactly k arrivals in a time period t is given by the Poisson distribution's PMF:
+
+```{math}
+P(N(t) = k) = \frac{e^{-\lambda t}(\lambda t)^k}{k!}
+```
 
 The exponential distribution's CDF is defined as the following:
 
@@ -35,7 +44,7 @@ The exponential distribution's CDF is defined as the following:
 1-e^{x \lambda}
 :::
 
-Now, what are the properties that make exponential distributions useful for queuing?
+Now, what are the properties that make exponential distributions useful for queuing's service rates?
 
 :::{table}
 
@@ -48,6 +57,38 @@ Now, what are the properties that make exponential distributions useful for queu
 | **Single Parameter** | The distribution is characterized by a single parameter, $\lambda$ (the rate parameter), which is the inverse of the mean ($1/\mu$ where $\mu$ is the mean time between events). | Simplifies parameter estimation from observed data. Only one value needs to be determined to define the distribution for either arrival rates or service rates.                                                                            |
 
 :::
+
+## Little's Law
+
+Before diving into specific queue configurations, we must
+introduce one of the most powerful theorems in queuing theory:
+Little's Law.
+
+It states that for any _stable_ queuing system, the average
+number of customers in the system (L) is equal to the average
+effective arrival rate ($\lambda$) multiplied by the average
+time a customer spends in the system (W).
+
+```{math}
+L = \lambda W
+```
+
+Which we can extend to the Queue itself through $L_q$:
+
+```{math}
+L_q = \lambda W_q
+```
+
+In this case, a stable queuing system means that the average
+arrival rate of customers is lower than the average service
+rate of the system ($W < \lambda$).
+
+Intuition: Imagine a crowded nightclub. If people are arriving
+at a rate of 50 per hour ($λ=50$) and every person stays inside
+for an average of 2 hours ($W=2$), then at any given time, you
+can expect to find $50 \cdot 2=100$ people inside ($L=100$).
+
+This law allows us to calculate waiting times if we know the queue length, or vice versa, without knowing the complex probability distributions involved.
 
 ## Specifying the System
 
@@ -105,6 +146,18 @@ For the system to be stable (i.e., the queue does not grow infinitely), we must 
 | Probability that the system time is greater than *t* (for $t \ge 0$) | $P(T_s > t)$ | $e^{-(\mu-\lambda)t}$|
 
 :::
+
+### Extensions
+
+In the real world, systems are often more complex than
+$M/M/1$, some examples of common systems and queuing networks
+are:
+
+- M/M/c (Multi-Server): Queues like bank tellers or airport check-in counters have multiple servers fed by a single line. The math becomes more complex (using the [Erlang-C formula](https://en.wikipedia.org/wiki/Erlang_(unit)#Erlang_C_formula)), but the concept of pooling resources generally reduces waiting times compared to separate lines for each server.
+
+- M/G/1 (General Service): Often, service times are not exponential (memoryless). If service times are tightly clustered around a mean (low variance), queues are smaller. If service times have a high variance, queues are longer. The [Pollaczek–Khinchine](https://en.wikipedia.org/wiki/Pollaczek%E2%80%93Khinchine_formula) formula is used here, showing that queue length depends on the variance of the service time, not just the mean.
+
+- G/G/1 (General Arrival & Service): When neither arrivals nor service times fit standard distributions, we cannot use simple formulas. This is where Discrete Event Simulation (DES) becomes the primary tool for analysis.
 
 ## Summary
 
