@@ -28,9 +28,9 @@ Defining an "agent" is the first step in constructing an ABM. A useful definitio
 
 This definition helps distinguish agents from passive objects:
 
-    The Billiard Ball Test: A billiard ball is not an agent because it reacts purely to external physics without internal mediation.
+- The Billiard Ball Test: A billiard ball is not an agent because it reacts purely to external physics without internal mediation.
 
-The Traffic Driver: In a standard traffic micro-simulation, a car might just be a discretized cell moving along a lane. However, if the driver observes the environment, assesses their safety against an internal belief, and chooses to change lanes based on a utility function, they act as an agent.
+- The Traffic Driver: In a standard traffic micro-simulation, a car might just be a discretized cell moving along a lane. However, if the driver observes the environment, assesses their safety against an internal belief, and chooses to change lanes based on a utility function, they act as an agent.
 
 ### Case Study: Belief Propagation
 
@@ -38,11 +38,11 @@ To make the concept of agent interaction tangible, consider the modeling of a ru
 
 Designing this model requires answering specific structural questions:
 
-    State Representation: How do we mathematically represent a person's belief?.
+- State Representation: How do we mathematically represent a person's belief?.
 
-Network Topology: How do we capture "who listens to whom"? This defines the agent's neighborhood or social network.
+- Network Topology: How do we capture "who listens to whom"? This defines the agent's neighborhood or social network.
 
-Update Functions: What is the precise function an agent uses to update their belief based on peer pressure or new information?.
+- Update Functions: What is the precise function an agent uses to update their belief based on peer pressure or new information?.
 
 (sec:abm:digital_twins_resilience)=
 ### Case Study 2: Digital Twins 

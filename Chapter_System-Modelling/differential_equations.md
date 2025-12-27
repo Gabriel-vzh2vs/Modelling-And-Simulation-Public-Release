@@ -1,51 +1,28 @@
 
 (sec:differential_equations)=
-# Differential Equations #
+# Differential Equations
 
-:::{note} Import from Pre-Lab
-To Henning, I have moved some of my Pre-Lab Materials into this chapter as suggested on
-May 30th. All of the existing content in this chapter should be considered provisional
-at best. Also, the tables might be aggressive, so be aware of that.
+:::{note} Refinement DE 1:
+All of the existing content in this chapter should be considered provisional at best.
 :::
 
-Previously in this text, we discussed and worked with queuing networks, the
-Monte Carlo Method, System Dynamics, Distribution Modelling,
-Random Variates, Random Number Generation, and Output Analysis
-which are ubiquitous throughout simulation; however, these are
-required but not sufficient for understanding the field of simulation,
-because you will often see ODEs, SDEs, and PDEs being used to model behavior,
-and a simulation practitioner (or any engineer) should be familiar
-with them. This pre-lab focuses on giving a basic review of
-ODEs and their application in simulation and modelling.
+We have previously discussed techniques such as the Monte Carlo Method, System Dynamics, and Random Variate Generation. While these are essential for simulation, they are not sufficient for a complete understanding of modeling. Engineers and simulation practitioners must also be familiar with Differential Equations (DEs), as they are frequently used to approximate real-world behaviors into deterministic or stochastic models.
 
-In general, DEs can be used to approximate real-world behaviors into
-deterministic (ODE/PDE) or Stochastic behaviors (SDEs/IDEs);
-however, even the deterministic models may have unresolved behaviors
-(as most PDEs and higher-order ODEs do not have closed-form solutions).
+The goal of this chapter is to provide a review of ODEs, PDEs, and SDEs, highlighting their application in simulation.
 
-### What are DEs (i.e: ODEs, PDEs, SDEs, and IDEs)?
+## Classification of Differential Equations
 
-In general, a differential equation (DE) is an equation that relates
-a function to its derivatives, an example is the canonical ordinary
-differential equation:
+In general, a differential equation relates a function to its derivatives. The canonical Ordinary Differential Equation (ODE) takes the form:
 
 ```{math}
 y^{'} + p(x)y = q(x)
 ```
 
-ODEs by definition are a differential equation (DE) dependent
-on a independent variable with its unknowns consisting of
-of at least one function and the derivatives of those function(s).
+However, the landscape of differential equations is broad. We can classify them based on the nature of their independent variables and the presence of stochastic elements.
 
-Additionally, there are other types of DEs that expand on the idea of
-ODEs, the first one of which you are likely familiar with:
+### Differential Equations Overview
 
-- PDEs (Partial Differential Equations)
-- SDEs (Stochastic Differential Equations)
-- IDEs (Integro-differential equations)
-
-Here is a table describing the differences between the several types of DEs (non-ODE)
-with further examples given throughout the rest of the pre-lab:
+While you are likely familiar with ODEs, other types expand on this concept significantly.
 
 :::{table}
 :label: DEs-Types
@@ -61,12 +38,13 @@ with further examples given throughout the rest of the pre-lab:
 
 :::
 
-### ODEs for Modelling
+### Ordinary Differential Equations (ODEs)
 
-Additionally, ODEs come within several different types of ODEs that are solved
-differently analytically - however, most automated solvers will usually use the
-same methods and are instead limited by stiffness or the lack of a closed-form
-solution. Here's a summary of the different forms of ODE and their analytic solution:
+ODEs are the most common form encountered in basic system modeling. They are often solved analytically in textbooks, but in simulation, we frequently rely on automated solvers. These solvers are often limited by the "stiffness" of the equation or the lack of a closed-form solution.
+
+#### Analytic Solution Methods
+
+For a simulation practitioner, understanding the type of ODE helps in selecting the correct numerical method.
 
 :::{table}
 :label: ODE-Types
@@ -89,3 +67,7 @@ solution. Here's a summary of the different forms of ODE and their analytic solu
 | Autonomous Equations          | $\frac{dy}{dx} = f(y)$  |  Autonomous differential equations are separable and can be solved by direct integration.
 
 :::
+
+## Modeling in the Real World
+
+In practice, the choice between using an ODE, SDE, or PDE depends on the fidelity required by the model. While closed-form solutions (like those for the M/M/1 queue from {sec}`sec:queueing_systems`) are elegant, real-world systems often require the numerical approximation of these differential equations, bridging the gap between mathematics and computational simulation.

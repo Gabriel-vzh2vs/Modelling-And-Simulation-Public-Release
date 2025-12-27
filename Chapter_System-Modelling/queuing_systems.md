@@ -1,16 +1,32 @@
 (sec:queuing_systems)=
-# Queueing Systems #
+# Queuing Systems 
 
-:::{note} Import from Pre-Lab
-To Henning, I have moved some of my Pre-Lab Materials into this chapter as suggested on
-May 30th. All of the existing content in this chapter should be considered provisional
-at best.
+:::{note} Refinement 1
+All of the existing content in this section should be considered provisional at best.
 :::
+
+We have previously introduced the concept of discrete event
+simulation and various modeling paradigms. Queuing systems
+represent a fundamental class of models used to analyze
+congestion and waiting lines. The goal of this section is to
+establish a mathematical and conceptual foundation for queuing
+theory, moving from statistical distributions to formal
+notation and performance metrics.
+
+## Foundations of Queuing
+
+At a high level, queuing models are stochastic systems driven
+by two primary random processes: the arrival of entities
+(customers, packets, jobs) and the processing of those entities
+(service times). Understanding these require a grasp of
+specific probability distributions that build the mathematics
+of waiting.
 
 ## The Exponential Distribution
 
-In probability courses and textbooks you may have heard about the exponential
-distribution, one of the most prototypical queuing systems ($M/M/1$) relies on the
+In probability courses and textbooks you may have heard about
+the exponential distribution, one of the most prototypical
+queuing systems ($M/M/1$) relies on the
 exponential distribution for its service times and inter-arrival rates.
 
 The exponential distribution's CDF is defined as the following:
@@ -33,12 +49,13 @@ Now, what are the properties that make exponential distributions useful for queu
 
 :::
 
-## Kendall's Notation for Queues
+## Specifying the System
 
-How are queues formally represented? For example, what does $M/M/1$ mean?
+To mathematically analyze a queue, we must rigorously define its characteristics. This is standardized through a shorthand known as Kendall's Notation.
 
-In general, every queue can be represented in the format A/B/c/K/N/D
-with the last three often excluded in most literature.
+### Kendall's Notation for Queues
+
+How do we formally represent a queue? For example, what does $M/M/1$ actually signify? In general, every queue is described by the format $A/B/c/K/N/D$, though the last three parameters are often omitted when they assume default values (infinite capacity, infinite population, FIFO).
 
 :::{table}
 :label: Kendall-Notation
@@ -54,12 +71,20 @@ with the last three often excluded in most literature.
 
 :::
 
+### M/M/1 Queue Example
+
 Using the {ref}`Kendall-Notation` above, we can determine that a $M/M/1$ queue is a
-queue with a Markovian Arrival Process, a Service time that is Markovian,
-and one server. Moreover, using this information, we know that the inter-arrival
-times are exponential, and the time it takes to serve someone the queue is
-also exponential, and that means we can calculate queue behaviors through
-closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
+queue with a Markovian Arrival Process, a Service time that is Markovian, and one server.
+
+Consider a basic server where jobs arrive and are processed one by one. If we assume the inter-arrival times and service times are exponentially distributed, we can calculate system behaviors using closed-form formulas.
+
+Key parameters include:
+* $\lambda$: The arrival rate (customers per unit time).
+* $\mu$: The service rate (customers served per unit time).
+* $\rho$: The utilization factor, defined as $\lambda / \mu$.
+
+For the system to be stable (i.e., the queue does not grow infinitely), we must assume $\rho < 1$.
+
 
 :::{table}
 :label: MM1Performance-Metrics
@@ -80,3 +105,7 @@ closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
 | Probability that the system time is greater than *t* (for $t \ge 0$) | $P(T_s > t)$ | $e^{-(\mu-\lambda)t}$|
 
 :::
+
+## Summary
+
+Queuing systems provide a powerful framework for analyzing delays and resource utilization. While this chapter focused on the analytical tractability of the M/M/1 queue, more complex systems (like those with general distributions G/G/1) often require the simulation techniques discussed in previous chapters.
