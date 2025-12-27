@@ -99,7 +99,7 @@ is covered.
 This example is based on {cite}`olver2010nist`, a commonly-cited source for
 engineers using statistical concepts:
 
-Suppose there is a polishing operations with three factors:
+Suppose there is a polishing operation with three factors:
 Speed ($X_a$), Feed, ($X_b$) and Depth ($X_c$),
 and one response variable: Yield, $Y$. Speed, Feed, and Depth, the three factors
 each have three levels (Low, Medium, and High). In this case, we want to determine

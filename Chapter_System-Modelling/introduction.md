@@ -284,7 +284,7 @@ about the system $S$. Verification, on the other hand, seeks to ensure
 that the model $M$ is accurately committed to code. One may regard
 verification and validation as conceptually separate processes. This
 point of view is perfectly fine for basic models. However, as one
-seeks to analyze complex system, one will often find that the modeling
+seeks to analyze complex systems, one will often find that the modeling
 paradigms that one chooses to apply will have to be done with a keen
 eye on what the simulation models will look like as well as the
 hardware on which they will run.
