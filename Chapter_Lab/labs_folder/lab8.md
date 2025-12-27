@@ -1,8 +1,8 @@
+(lab-8)=
+# Lab 8: Comparing Two Modelling Methodologies (ABM vs MC): Simulating an Election
 
 :::{admonition} Lab 8
 :class: attention
-(lab-8)=
-# Lab 8: Comparing Two Modelling Methodologies (ABM vs MC): Simulating an Election
 
 ## Lab 8 Prerequisites
 
@@ -43,7 +43,7 @@ of an event occurring (a party or candidate winning an election).
 
 ### Implementing an Agent-Based Modelling Election Model
 
-To implement a Agent-Based Modelling (ABM) model for elections, we first need to find appropriate data,
+To implement an Agent-Based Modelling (ABM) model for elections, we first need to find appropriate data,
 luckily enough, we have data that we can work with from {cite}`kononovicius2017empirical`. In this lab,
 we will try to reproduce the 2012 election using an abridged and programmatic method based on the paper.
 This section is basically a walk-through of how to roughly do this for the 1992 election, but it should
@@ -69,7 +69,8 @@ year & org\_id & party & alpha & beta & n & mean\_share \\
 \end{tabular}
 ```
 
-Now, a common ABM model for the beta distribution is Kirman Two State Model, which is expressed as a Markov
+Now, a common ABM model for the beta distribution is the 
+Kirman Two State Model, which is expressed as a Markov
 Chain with specific state transitions probabilities:
 
 ```{raw} latex
@@ -87,10 +88,11 @@ Let $X$ be the number of agents in State 1. The transition probabilities in time
 ```
 
 And if the system is at an infinite number of agents, the
-entire system can be expressed using the Fokker-Planck Equation
-with drift $A(x)$ and diffusion $B(x)$ which with a sufficiently
+entire system can be expressed using the Fokker-Planck Equation (FP).
+Moreover, if the FP equation has the following form with
+drift $A(x)$ and diffusion $B(x)$, then when it has a sufficiently
 large number of samples converges into the Beta Distribution as
-shown below:
+shown below.
 
 ```{raw} latex
 For large $N$, the fraction $x = X/N$ is described by a Fokker-Planck equation 
