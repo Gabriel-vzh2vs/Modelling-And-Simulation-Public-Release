@@ -86,9 +86,9 @@ they will see the variable go from 1 to 2 to 3, instead of the correct
 sequence based on the list of 8, 18, and 24.
 
 One of the issues when using breakpoints is the problem of "where", as in,
-where should you place an breakpoint within a program. The reason why this is
-an problem is that if the error occurs before the breakpoint, the breakpoint is
-never activated. With the example above, if the reader places it on the print statement,
+where should you place a breakpoint within a program. The reason this is
+a problem is that if the error occurs before the breakpoint, the breakpoint
+never activates. With the example above, if the reader places it on the print statement,
 they might miss the source of the error as it will only show the end results without the
 context that precedes it. One of the solutions to this problem is
 to combine breakpoints with the next technique, unit testing, which will narrow
