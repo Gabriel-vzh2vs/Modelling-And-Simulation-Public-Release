@@ -115,12 +115,12 @@ queue with a Markovian Arrival Process, a Service time that is Markovian, and on
 Consider a basic server where jobs arrive and are processed one by one. If we assume the inter-arrival times and service times are exponentially distributed, we can calculate system behaviors using closed-form formulas.
 
 Key parameters include:
-* $\lambda$: The arrival rate (customers per unit time).
-* $\mu$: The service rate (customers served per unit time).
-* $\rho$: The utilization factor, defined as $\lambda / \mu$.
+
+- $\lambda$: The arrival rate (customers per unit time).
+- $\mu$: The service rate (customers served per unit time).
+- $\rho$: The utilization factor, defined as $\lambda / \mu$.
 
 For the system to be stable (i.e., the queue does not grow infinitely), we must assume $\rho < 1$.
-
 
 :::{table}
 :label: MM1Performance-Metrics
