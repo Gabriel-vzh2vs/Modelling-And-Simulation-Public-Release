@@ -2,7 +2,7 @@
 # Finite State Machines #
 
 :::{note} "Thick" Outline
-To Henning, this is a quick outline to try and start this section:
+To Henning, this is a quick outline to start this section:
 however, this outline is based on your slides from week
 13 + 14 combined with some information from my SYSML
 course. It is not in any way qualified as a formal
