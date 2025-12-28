@@ -8,6 +8,8 @@ differs from Crude Monte Carlo's stochastic selection of samples from a random v
 Monte Carlo method, QMC is a method for finding the
 approximate value of a function as an average of the function.
 
+## What is Quasi-Monte Carlo?
+
 In general, the generic Quasi-Monte Carlo method takes the
 same form as {ref}`sec:CrudeMC`:
 
@@ -20,6 +22,8 @@ sequences must be patternless (aka have a uniform-like density
 across a space). In mathematics, this property is often referred
 to as a low discrepancy sequence. In this section, we use the digital net method of Sobol's Sequences as our low-discrepancy
 sequence.
+
+### Sobol's Sequences
 
 ```{raw} latex
 To calculate Sobol's sequences, we can use a recursive
