@@ -27,7 +27,7 @@ steps:
 We will go through each step in the upcoming. The description will be
 a combination of theory and practice where we illustrate concepts
 through Python code and the tool Phitter (introduced in
-{cite}`sec:??`).
+{cite}`prelab-7`).
 
 
 Note that distribution modeling is a large scientific area, and that
@@ -369,7 +369,7 @@ __Remember:__ not rejecting $H_0$ does not mean accepting $H_0$ as
 true.
 
 __And about sample size:__ this class of tests is not that sensitive
-to small discrepanices between distributions for small/moderate
+to small discrepancies between distributions for small/moderate
 samples sizes $n$. However, for very large $n$, even tiny deviations
 will be detected causing rejection of the null hypothesis. These are
 methods that must be used judiciously keeping these factors in mind.
@@ -391,8 +391,6 @@ function $F$. For now, note that $S$ was not used to in any way to
 determine parameters of $F$.
 
 
-
-
 %%
 The KS-statistic $D_n$ is defined as the supremum (sup)
 
@@ -400,7 +398,7 @@ The KS-statistic $D_n$ is defined as the supremum (sup)
   D_n = \sup_{x} |F(x) - \hat{F}(x)| \;.
 \end{equation}
 
-Here the supremum is used rather than the maximum. For example, the  interval
+Here the supremum is used rather than the maximum. For example, the interval
 $(0,1) \subset \mathbb{R}$ does not have a maximum, however, the
 supremum exists and equals~1. You can read about supremum and infimum
 [Wikipedia](https://en.wikipedia.org/wiki/Infimum_and_supremum).
@@ -499,9 +497,6 @@ D_{n,m} > \sqrt{-\ln\bigl(\frac{\alpha}{2}\bigr)\, \frac{m+n}{mn}\Bigr/2 }\;.
 You can read more about this under
 \href{https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test#Test_with_estimated_parameters}{Two-sample
   Kolmogorov–Smirnov test}.
-
-
-
 
 
 (sec:chi_square)=
@@ -671,10 +666,3 @@ intervals, there is no principled approach. Nontheless, the
 $\chi^2$-test is widely used, one reason being that it can be
 generalized to dimension $\ge 2$.
 
-
-
-
-
-
-(sec:distribution_modeling_phitter)=
-## The Phitter distribution modeling tool

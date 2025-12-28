@@ -1,13 +1,12 @@
 (sec:system_modeling)=
-#  Introduction to Modelling #
+# Introduction to Modelling #
 
 You have likely done some form of modeling. As we indicated in the
 introduction under {ref}`sec:intro_sim`, models range in complexity
 from basic to highly involved. The goal of this chapter is to
 establish a basic foundation for mathematical modeling. Followup
-literatre and more advanced references on this topic include
-{cite}`abc` and {cite}`efg`.
-
+literature and more advanced references on this topic include
+{cite}`birta2013modelling` and {cite}`efweilkiens2011systemsg`.
 
 ## Model classes ##
 
@@ -16,7 +15,6 @@ __discrete__. As we will see, things are usually more nuanced than
 this. We will illustrate this and also include brief descriptions of
 other model classes and paradigms, some of which have their own
 chapters.
-
 
 ### Continuous versus discrete ###
 
@@ -196,10 +194,9 @@ modeling using differential equations. One such class is networked
 systems which consists of entities coupled by edges in graph. An
 example of this is a supply chain network. The edges encode
 dependencies among the vertices. This class of models can directly
-encode complex, non-heterogenous dependencies among system
-constitutent. Analyzing this class of systems requires its own set of
-tools, something we address in {ref}`gds-page-comes-here`.
-
+encode complex, inhomogeneous dependencies among system
+constituents. Analyzing this class of systems requires its own set of
+tools, something we address in {ref}`sec:network_models`.
 
 ### Agent-based models (ABMs) ###
 
@@ -213,10 +210,28 @@ actions. (Reference BDI {cite}`bdi`) We note that an ABM may be
 networked.  An agent-based model where all agents perform a fixed
 action is called a __micro-simulation__.
 
-
 ### Finite state machines ###
 
-A mini introduction
+Finite State Machines (FSMs) provide a robust framework for systems that exist in distinct, discrete modes of operation.
+
+At its core, an FSM is a mathematical model of computation defined by a limited number of states, transitions between those states, and inputs (or events) that trigger those transitions. The system can only be in exactly one state at any given time.
+
+```{}
+:label: ex:fsm_turnstile
+
+Consider a mechanical subway turnstile. It effectively has two states:
+1.  **Locked:** The barrier prevents entry.
+2.  **Unlocked:** The barrier allows one person to pass.
+
+The logic of the system is governed by specific inputs:
+* **Input "Coin":** Transitions the system from **Locked** $\to$ **Unlocked**.
+* **Input "Push":** Transitions the system from **Unlocked** $\to$ **Locked**.
+```
+
+Crucially, FSMs also define what happens with invalid inputs. If you "Push" while the system is Locked, the state does not change. If you insert a "Coin" while it is already Unlocked, the state remains *Unlocked* (and the coin is wasted). FSMs are frequently used to model the internal logic of agents in Agent-Based Models (ABMs) or entities in Discrete Event Simulation (DES). Some simplified examples are:
+
+  - Manufacturing: A machine entity might cycle through states such as IDLE, PROCESSING, FAILURE, and REPAIR.
+  - Biology: A cell in a biological simulation might transition between G1, S, G2, and M phases based on internal timers or external signals.
 
 
 ### Modeling and scale ###
@@ -227,7 +242,7 @@ single-scale models fueled by moderately sized data? 🙃
 
 
 
-## Techniques for analysing models ##
+## Techniques for analyzing models ##
 
 Models based on ordinary- and partial differential equations have a
 long history dating back to Newton and Leibniz. They represent a
@@ -252,8 +267,6 @@ through computations (aka simulation). A stochastic queueing model,
 which one would likely regard as a "discrete" model, would similarly
 be analyzed computationally through approaches such as discrete event
 simulation, see {ref}`sec:queuing_systems`.
-
-
 
 ## Modeling in the real world ##
 
@@ -284,7 +297,7 @@ about the system $S$. Verification, on the other hand, seeks to ensure
 that the model $M$ is accurately committed to code. One may regard
 verification and validation as conceptually separate processes. This
 point of view is perfectly fine for basic models. However, as one
-seeks to analyze complex system, one will often find that the modeling
+seeks to analyze complex systems, one will often find that the modeling
 paradigms that one chooses to apply will have to be done with a keen
 eye on what the simulation models will look like as well as the
 hardware on which they will run.

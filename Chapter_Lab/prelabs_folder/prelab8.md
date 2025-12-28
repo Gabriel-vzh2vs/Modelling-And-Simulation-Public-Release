@@ -499,7 +499,7 @@ heat throughout a 1-D rod.
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import spdiags
-from scipy.sparse.linalg import spsolveKernel
+from scipy.sparse.linalg import spsolve
 import ipywidgets as widgets
 from IPython.display import display
 

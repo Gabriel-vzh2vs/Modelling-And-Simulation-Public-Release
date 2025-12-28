@@ -10,7 +10,7 @@ Carlo, and this algorithm is a common sight in simulation. Moreover, this form o
 often in the context of {ref}`sec:random_variates`
 which are usually sampled using Monte Carlo from a variate, $X$, with
 sample size, $N$. And generally, it is considered a problem of evaluating a multidimensional
-integral with different parameters of interest, $\theta$ through an indicator function, $\mathbb{I}$.
+integral with different parameters of interest, $\theta$ through an indicator function, $\mathbb{I}$. 
 
 __Algorithm:__
 
@@ -22,7 +22,8 @@ This algorithm is commonly called Monte Carlo, but a more proper name
 would be the Crude Monte Carlo Method (CMC). Instances of the CMC have the following characteristics:
 
 1. The estimator _asymptotically_ converges into the expected value of the parameter $\hat{\theta} \rightarrow \theta$ if and only
-if there is a sufficient number of samples (Law of Large Numbers).
+if there is a sufficient number of samples (Law of Large Numbers). And estimator is often in this form:
+$$\hat{\theta}= \frac{1}{N} \sum^{N}_{J_1} g(X_{j})$$
 
 2) If the $\text{var}(g(X)) = \sigma^2$, the estimate of the standard deviation is:
 $$s^2 = \frac{(\sum_{j=1}^{N}g(X_j)-\hat{\theta})^2}{N-1}$$

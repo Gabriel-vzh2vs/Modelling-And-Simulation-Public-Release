@@ -496,8 +496,6 @@ For the data in {ref}`ex:chi2`, run a KS-test. Does the
 conclusion stay the same as for the $\chi^2$-test?
 ```
 
-
-
 #### Serial test
 
 We are again considering a sample as in {ref}`eq:sample` but now form
@@ -547,8 +545,6 @@ takeaway from this is the property that the test targets: one should
 expect certain frequencies of runs-up and runs-down. If this is not
 present, one may question if there is dependence.  You will see a
 variant of this in Homework 3 for the Fibonacci generator.
-
-
 
 
 (sec:autocorr)=

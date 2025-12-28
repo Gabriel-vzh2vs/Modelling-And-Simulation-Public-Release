@@ -64,7 +64,7 @@ curable).
 
 Many models expand upon the SIR model either through adding additional states (as seen in
 some of the models here), adding bayesian details (like in {ref}`prelab-8`), or abstracted
-into a Multi-Compartmental Model (system dynamics as seen in {ref}`prelab-3`). 
+into a Multi-Compartmental Model (system dynamics as seen in {ref}`prelab-3`).
 
 ## Tasks
 

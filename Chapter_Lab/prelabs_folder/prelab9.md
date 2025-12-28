@@ -3,7 +3,7 @@
 
 The overall goal of simulation projects is to determine the
 impact of inputs on a system, $S$, and to interpret the outputs
-of said system. Most simulations taking an naive view
+of said system. Most simulations taking a naive view
 of experimental and simulation design, meaning that the
 goal of the simulation is to observe the influence of
 a factor through either changing one factor at a time
@@ -99,7 +99,7 @@ is covered.
 This example is based on {cite}`olver2010nist`, a commonly-cited source for
 engineers using statistical concepts:
 
-Suppose there is a polishing operations with three factors:
+Suppose there is a polishing operation with three factors:
 Speed ($X_a$), Feed, ($X_b$) and Depth ($X_c$),
 and one response variable: Yield, $Y$. Speed, Feed, and Depth, the three factors
 each have three levels (Low, Medium, and High). In this case, we want to determine
@@ -230,9 +230,7 @@ a new variable defined as the interaction term of $x_a$ and $x_b$: $x_c$.
 The limitation of this approach this that it is going cover less
 of the event space than a full-factorial. This leads to averages of the
 main effect only being based on four runs instead of the eight of the full
-fractional. But this also has the benefit of requiring half of the runs.
-of a full-factorial, making it possible to understand a part of an
-extremely complex or large event space in a reasonable amount of time.
+fractional. But this also has the benefit of requiring half of the runs of a full-factorial, making it possible to understand a part of a complex event space in a finite amount of time.
 
 ### Response Surface (Central-composite)
 
@@ -253,7 +251,6 @@ more details on obtaining information from this design.
 ### Randomized Design (Latin-Hypercube)
 
 <example>
-
 
 (sec:Types_Sensitivity_Analysis)=
 ## Types of Sensitivity Analysis
@@ -283,8 +280,7 @@ is fully factorial instead of partial factorial.
 
 This is usually used for either small simulations, screening possible variables
 of interest, and debugging (and unit testing). However, it does not and cannot
-establish causality by itself nor can it be used to support causality outside
-of a single-factor model.
+establish causality by itself nor can it be used to support causality outside a single-factor model.
 
 :::
 
@@ -295,13 +291,14 @@ a transformation of variables (represented as a vector) into another state space
 while losing some information (error in the regression estimator).
 
 In this case, regression typically means to fit a linear model to the data using
-pearson correlation ($r$), 
+Pearson correlation ($r$), 
 
 :::
 
 :::{tab-item} Sobol (Variance-Based) Method
 The Sobol method decomposes the variance of the model into fractions that belong
-to different factors or set of factors, which allows for quantification of the size
+to different factors or set of factors. By this method, the Sobol method provides
+information about quantification of the size
 of the factor and the interaction between factors in the system.
 
 It is defined as the following mathematical formulation:
@@ -318,7 +315,7 @@ The Sobol Method is often used within the context of Quasi-Monte Carlo
 :::{tab-item} Fractional Factorial Method
 The Fractional Factorial method builds a design matrix and then uses this design
 matrix to run simulations of the original model. This design matrix
-then is evaluated through the  dot products of the linear combination
+then is evaluated through the dot products of the linear combination
 of the parameters
 
 :::

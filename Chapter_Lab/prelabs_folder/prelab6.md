@@ -224,11 +224,11 @@ and resting.
 
 A workstation is limited to holding four bread loafs, if the workstation is full then any
 arriving loaves fall onto the floor and are thrown away due to health code regulations. If a bread loaf
-completes service at a workstation but there is no room on the next workstation's belt, the bread remains at
+completes service at a workstation, but there is no room on the next workstation's belt, the bread remains at
 the workstation until the belt is available once more (to prevent semi-finished bread from being wasted), and
 the workstation must stop work until the offending bread is removed through standard processes.
 
-Each time a bread is wasted, it costs the factory 50 cents in potential profit. In this case, the factory
+Each time bread is wasted, it costs the factory 50 cents in potential profit. In this case, the factory
 would like to know how many breads are being wasted to potentially reduce the hourly costs of this process.
 Hint: it is possible to model this system as a restricted Jackson system of queues.
 

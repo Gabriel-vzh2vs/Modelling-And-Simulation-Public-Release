@@ -33,6 +33,6 @@ replaces $\alpha_i$.
 ## An Example of Bonferroni 
 Insert Simulated Results for the Bonferroni Correction from Monte Carlo.
 
-## Problem 1 Related to Bonferroni in Output Analysis
+## Example 1 Related to Bonferroni in Output Analysis
 
 ## Problem 2 related to Bonferroni in Output Analysis

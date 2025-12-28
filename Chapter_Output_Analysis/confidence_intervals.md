@@ -1,3 +1,4 @@
+(sec:confidence_intervals)=
 # Confidence Intervals
 
 It is highly likely that you have done some form of statistics course
@@ -273,8 +274,6 @@ samples is severe. For example, a sample size of n = 5 produces 126 samples
 while n = 10 gives us 92,378. However, this is also what makes
 a bootstrap sample value for calculating confidence intervals (the lack
 of repeats).
-
-3) a
 
 Like other sampling methods, the naive bootstrap is particularly vulnerable to heavy tails.
 

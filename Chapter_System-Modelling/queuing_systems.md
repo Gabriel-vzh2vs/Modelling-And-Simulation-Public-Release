@@ -1,17 +1,47 @@
 (sec:queuing_systems)=
-# Queueing Systems #
+# Queuing Systems 
 
-:::{note} Import from Pre-Lab
-To Henning, I have moved some of my Pre-Lab Materials into this chapter as suggested on
-May 30th. All of the existing content in this chapter should be considered provisional
-at best.
+:::{note} Note to the Reader
+More application of these concepts can be seen in the
+associated prelab, {ref}`prelab-6` along with the labs
+{ref}`lab-5`, and {ref}`lab-6`.
+
+Additionally, there are excellent resources on Queuing
+Theory such as {cite}`smith2018introduction`, {cite}`zwillinger2021handbook`, if the reader
+needs a reference that is more in-depth than this review.
 :::
 
-## The Exponential Distribution
+## Introduction to Queues
 
-In probability courses and textbooks you may have heard about the exponential
-distribution, one of the most prototypical queuing systems ($M/M/1$) relies on the
-exponential distribution for its service times and inter-arrival rates.
+We have previously introduced the concept of discrete event simulation and various modeling paradigms. Queueing systems represent a fundamental class of models used to analyze congestion, waiting lines, and resource sharing.
+
+At its core, a queuing system is defined by three components:
+
+- The Input Process: How customers (or jobs, packets) arrive at the system.
+- The Service Mechanism: How long it takes to serve a customer and how many servers are available.
+- The Queue Discipline: The rules describing how customers are selected for service (e.g., First-Come, First-Served).
+
+Why do queues form? For example, if the average service rate is faster than the average arrival rate, why is there a queue? The answer lies in variability. If arrivals and service times were perfectly deterministic (e.g., exactly one customer every 5 minutes, and service takes exactly 4 minutes), no queue would ever form. Queues arise because of the stochastic nature in when customers arrive and how long it takes to serve them.
+
+### The Exponential and Poisson Distributions
+
+In probability courses and textbooks you may have heard about
+the exponential distribution, one of the most prototypical
+queuing systems ($M/M/1$) relies on the
+Poisson and Exponential Distributions for its inter-arrival times and service rates respectively.
+
+#### Poisson Distribution
+
+The Poisson process is the most common mathematical model for "random" arrivals. If we say *singular* arrivals follow a Poisson process with rate $\lambda$, we imply:
+
+- Independence: An arrival occurring now does not influence when the next arrival will occur.
+- Stationarity: The average rate $\lambda$ is constant over time.
+
+The probability of seeing exactly k arrivals in a time period t is given by the Poisson distribution's PMF:
+
+```{math}
+P(N(t) = k) = \frac{e^{-\lambda t}(\lambda t)^k}{k!}
+```
 
 The exponential distribution's CDF is defined as the following:
 
@@ -19,7 +49,7 @@ The exponential distribution's CDF is defined as the following:
 1-e^{x \lambda}
 :::
 
-Now, what are the properties that make exponential distributions useful for queuing?
+Now, what are the properties that make exponential distributions useful for queuing's service rates?
 
 :::{table}
 
@@ -33,12 +63,45 @@ Now, what are the properties that make exponential distributions useful for queu
 
 :::
 
-## Kendall's Notation for Queues
+## Little's Law
 
-How are queues formally represented? For example, what does $M/M/1$ mean?
+Before diving into specific queue configurations, we must
+introduce one of the most powerful theorems in queuing theory:
+Little's Law.
 
-In general, every queue can be represented in the format A/B/c/K/N/D
-with the last three often excluded in most literature.
+It states that for any _stable_ queuing system, the average
+number of customers in the system (L) is equal to the average
+effective arrival rate ($\lambda$) multiplied by the average
+time a customer spends in the system (W).
+
+```{math}
+L = \lambda W
+```
+
+Which we can extend to the Queue itself through $L_q$:
+
+```{math}
+L_q = \lambda W_q
+```
+
+In this case, a stable queuing system means that the average
+arrival rate of customers is lower than the average service
+rate of the system ($W < \lambda$).
+
+Intuition: Imagine a crowded nightclub. If people are arriving
+at a rate of 50 per hour ($λ=50$) and every person stays inside
+for an average of 2 hours ($W=2$), then at any given time, you
+can expect to find $50 \cdot 2=100$ people inside ($L=100$).
+
+This law allows us to calculate waiting times if we know the queue length, or vice versa, without knowing the complex probability distributions involved.
+
+## Specifying the System
+
+To mathematically analyze a queue, we must rigorously define its characteristics. This is standardized through a shorthand known as Kendall's Notation.
+
+### Kendall's Notation for Queues
+
+How do we formally represent a queue? For example, what does $M/M/1$ actually signify? In general, every queue is described by the format $A/B/c/K/N/D$, though the last three parameters are often omitted when they assume default values (infinite capacity, infinite population, FIFO).
 
 :::{table}
 :label: Kendall-Notation
@@ -54,12 +117,20 @@ with the last three often excluded in most literature.
 
 :::
 
+### M/M/1 Queue Example
+
 Using the {ref}`Kendall-Notation` above, we can determine that a $M/M/1$ queue is a
-queue with a Markovian Arrival Process, a Service time that is Markovian,
-and one server. Moreover, using this information, we know that the inter-arrival
-times are exponential, and the time it takes to serve someone the queue is
-also exponential, and that means we can calculate queue behaviors through
-closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
+queue with a Markovian Arrival Process, a Service time that is Markovian, and one server.
+
+Consider a basic server where jobs arrive and are processed one by one. If we assume the inter-arrival times and service times are exponentially distributed, we can calculate system behaviors using closed-form formulas.
+
+Key parameters include:
+
+- $\lambda$: The arrival rate (customers per unit time).
+- $\mu$: The service rate (customers served per unit time).
+- $\rho$: The utilization factor, defined as $\lambda / \mu$.
+
+For the system to be stable (i.e., the queue does not grow infinitely), we must assume $\rho < 1$.
 
 :::{table}
 :label: MM1Performance-Metrics
@@ -80,3 +151,19 @@ closed-form formulas, as seen below in {ref}`MM1Performance-Metrics`.
 | Probability that the system time is greater than *t* (for $t \ge 0$) | $P(T_s > t)$ | $e^{-(\mu-\lambda)t}$|
 
 :::
+
+### Extensions
+
+In the real world, systems are often more complex than
+$M/M/1$, some examples of common systems and queuing networks
+are:
+
+- M/M/c (Multi-Server): Queues like bank tellers or airport check-in counters have multiple servers fed by a single line. The math becomes more complex (using the [Erlang-C formula](https://en.wikipedia.org/wiki/Erlang_(unit)#Erlang_C_formula)), but the concept of pooling resources generally reduces waiting times compared to separate lines for each server.
+
+- M/G/1 (General Service): Often, service times are not exponential (memoryless). If service times are tightly clustered around a mean (low variance), queues are smaller. If service times have a high variance, queues are longer. The [Pollaczek–Khinchine](https://en.wikipedia.org/wiki/Pollaczek%E2%80%93Khinchine_formula) formula is used here, showing that queue length depends on the variance of the service time, not just the mean.
+
+- G/G/1 (General Arrival & Service): When neither arrivals nor service times fit standard distributions, we cannot use simple formulas. This is where Discrete Event Simulation (DES) becomes the primary tool for analysis.
+
+## Summary
+
+Queuing systems provide a powerful framework for analyzing delays and resource utilization. While this chapter focused on the analytical tractability of the M/M/1 queue, more complex systems (like those with general distributions G/G/1) often require the simulation techniques discussed in previous chapters.

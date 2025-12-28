@@ -1,51 +1,44 @@
 
 (sec:differential_equations)=
-# Differential Equations #
+# Differential Equations
 
-:::{note} Import from Pre-Lab
-To Henning, I have moved some of my Pre-Lab Materials into this chapter as suggested on
-May 30th. All of the existing content in this chapter should be considered provisional
-at best. Also, the tables might be aggressive, so be aware of that.
+:::{note} Note to the Reader
+More application of these concepts can be seen in the
+associated prelab, {ref}`prelab-8` along with the labs
+{ref}`lab-5`, and {ref}`lab-7`.
+
+Additionally, there are excellent resources on Differential
+Equations such as {cite}`braun1983differential`, {cite}`zwillinger2021handbook`, if the reader
+needs a reference that is more in-depth than this review.
 :::
 
-Previously in this text, we discussed and worked with queuing networks, the
-Monte Carlo Method, System Dynamics, Distribution Modelling,
-Random Variates, Random Number Generation, and Output Analysis
-which are ubiquitous throughout simulation; however, these are
-required but not sufficient for understanding the field of simulation,
-because you will often see ODEs, SDEs, and PDEs being used to model behavior,
-and a simulation practitioner (or any engineer) should be familiar
-with them. This pre-lab focuses on giving a basic review of
-ODEs and their application in simulation and modelling.
+## The Language of Change
 
-In general, DEs can be used to approximate real-world behaviors into
-deterministic (ODE/PDE) or Stochastic behaviors (SDEs/IDEs);
-however, even the deterministic models may have unresolved behaviors
-(as most PDEs and higher-order ODEs do not have closed-form solutions).
+We have previously discussed techniques such as System Dynamics, Monte Carlo methods, and Discrete Event Simulation. While these tools are powerful, the fundamental language of engineering exists as Differential Equations (DEs).
 
-### What are DEs (i.e: ODEs, PDEs, SDEs, and IDEs)?
+A standard algebraic equation tells you what a variable is (e.g., position $x=5$). A differential equation tells you how a variable changes (e.g., velocity $\frac{dt}{dx}​=2$). In simulation, we rarely care about the static state of a system; we care about its evolution over time. Therefore, understanding DEs is required to approximate real-world behaviors, whether they are deterministic (ODEs/PDEs) or stochastic (SDEs).
 
-In general, a differential equation (DE) is an equation that relates
-a function to its derivatives, an example is the canonical ordinary
-differential equation:
+### The Initial Value Problem (IVP)
+
+A crucial concept for the reader to review is that a differential equation alone usually does not have a unique solution. It describes a family of possible behaviors.
+
+- The General Solution: $\frac{dt}{dy}​=y \rightarrow y(t)=Ce^t$. This describes an family of solutions in the form of  curves.
+- The Initial Condition: To simulate a specific scenario, we need a starting point, known as the Initial Condition (e.g., $y(0)=10$).
+- The Simulation: Solving the IVP allows us to trace the unique trajectory of the system from that starting point forward.
+
+## The Classification of Differential Equations
+
+In general, a differential equation relates a function to its derivatives. The canonical Ordinary Differential Equation (ODE) takes the form:
 
 ```{math}
 y^{'} + p(x)y = q(x)
 ```
 
-ODEs by definition are a differential equation (DE) dependent
-on a independent variable with its unknowns consisting of
-of at least one function and the derivatives of those function(s).
+However, the landscape of differential equations is broad. We can classify them based on the nature of their independent variables and the presence of stochastic elements.
 
-Additionally, there are other types of DEs that expand on the idea of
-ODEs, the first one of which you are likely familiar with:
+### Differential Equations Overview
 
-- PDEs (Partial Differential Equations)
-- SDEs (Stochastic Differential Equations)
-- IDEs (Integro-differential equations)
-
-Here is a table describing the differences between the several types of DEs (non-ODE)
-with further examples given throughout the rest of the pre-lab:
+While you are likely familiar with ODEs, other types expand on this concept significantly.
 
 :::{table}
 :label: DEs-Types
@@ -61,12 +54,27 @@ with further examples given throughout the rest of the pre-lab:
 
 :::
 
-### ODEs for Modelling
+### Ordinary Differential Equations (ODEs)
 
-Additionally, ODEs come within several different types of ODEs that are solved
-differently analytically - however, most automated solvers will usually use the
-same methods and are instead limited by stiffness or the lack of a closed-form
-solution. Here's a summary of the different forms of ODE and their analytic solution:
+ODEs are the most common form encountered in system modeling. The canonical first-order ODE takes the form that we saw earlier:
+
+```{math}
+y^{'} + p(x)y = q(x)
+```
+
+#### Analytic vs. Numerical Solutions
+
+In calculus class, you most likely learned about analytic methods to find an exact formula for y(t), which include the following methods:
+
+- Separable Equations: Rearranging terms to integrate both sides independently.
+- Integrating Factors: Using a multiplier I(x) to simplify linear equations.
+- Characteristic Equations: Using roots of a polynomial to solve higher-order linear ODEs.
+
+However, in most of the field of simulation, analytic solutions are rare. Most real-world systems are non-linear or too complex for closed-form formulas. This is why we rely on Numerical Methods.
+
+#### Analytic Solution Methods
+
+For a simulation practitioner, understanding the type of ODE helps in selecting the correct numerical method.
 
 :::{table}
 :label: ODE-Types
@@ -87,5 +95,55 @@ solution. Here's a summary of the different forms of ODE and their analytic solu
 | **Systems of ODEs** | $\frac{d\mathbf{y}}{dt} = \mathbf{F}(t, \mathbf{y})$, where $\mathbf{y}$ is a vector of functions | Describes the interaction of multiple dependent variables. Linear systems with constant coefficients can be solved using eigenvalues and eigenvectors.                |
 | **Non-linear ODEs (General)** |                                                                                           | Equations that do not satisfy the conditions for linearity. Often difficult to solve analytically; may require qualitative analysis, numerical methods, or series solutions. |
 | Autonomous Equations          | $\frac{dy}{dx} = f(y)$  |  Autonomous differential equations are separable and can be solved by direct integration.
-
 :::
+
+#### Numerical Solutions: The Logic of Automated Solvers
+
+When you use a software tool (like Python's scipy.integrate.odeint or MATLAB's ode45), it is not doing algebra. It is performing series of simulations.
+
+1. Euler's Method: If we know the current value $y_{t}$​ and the rate of change $f(t,y)$ we can predict the next step:
+
+```{math}
+y_{t}+ \delta_{t}​ \approx y_{t}​+f(t,y_{t}​) \cdot \delta_{t}
+```
+
+This is essentially "simulating" the curve by taking small linear steps.
+
+2. Runge-Kutta Methods (The Standard): The industry standard for general-purpose solving is the Runge-Kutta (RK) family, most notably RK4. Instead of taking one naive step based on the slope at the start, RK4 takes four "test steps" (one at the start, two in the middle, and one at the end of the interval) and averages their slopes.
+
+- Why it matters: RK4 provides significantly higher accuracy for the same step size compared to Euler, making it the default choice for non-stiff problems.
+
+3. Explicit Multistep Methods: While single-step methods discard previous data, Multistep Methods (like Adams-Bashforth) are efficient. They utilize the history of the system—using the points calculated in the last few steps ($y_{t−1}​,y_{t−2}​,…$)to predict the next trajectory.
+
+ - Pros: These are computationally cheaper per step because they reuse old evaluations rather than computing new "test steps" like RK4.
+ - Cons: They are difficult to start (since there is no history at t=0) and generally handle rapid changes (discontinuities) poorly compared to single-step methods.
+
+However, this method faces a major challenge in solving ODEs, _stiffness_. A stiff equation has terms that change very rapidly (fast dynamics) alongside terms that change slowly. Standard solvers often fail or become incredibly slow on stiff systems, requiring specialized implicit methods. And some modern
+ODE solvers like the ones found in `scipy` detect stiffness through a change in stability or based on the error rate of
+their predictions against the ODE.
+
+### Stochastic Differential Equations (SDEs)
+
+For students of simulation, SDEs are particularly interesting because they bridge the gap between deterministic calculus and random processes (like Monte Carlo).
+
+An SDE generally looks like this:
+
+```{math}
+dX_t = \underbrace{a(t, X_t)dt}_{\text{Drift (Deterministic)}} + \underbrace{b(t, X_t)dW_t}_{\text{Diffusion (Random)}}
+```
+
+- Drift (dt): This represents the deterministic trend of the system (e.g., expected return on a stock).
+- Diffusion (dWt​): This represents "white noise" or Brownian motion. It injects randomness at every time step.
+
+Unlike ODEs, SDEs do not result in a smooth curve; they result
+in a jagged path that is different every time you run the
+simulation. Solving these requires Stochastic Calculus
+(specifically Itô calculus), as standard calculus rules (like
+the Chain Rule) break down in the presence of infinite noise.
+
+## Modeling in the Real World
+
+In practice, the choice between using an ODE, SDE, or PDE depends on the fidelity required by the model. While
+closed-form solutions (like those for the M/M/1 queue
+from {sec}`sec:queueing_systems`) are easy, real-world systems often require the numerical approximation of these differential
+equations, bridging the gap between mathematics and computational simulation.
