@@ -8,7 +8,7 @@ associated prelab, {ref}`prelab-8` along with the labs
 {ref}`lab-5`, and {ref}`lab-7`.
 
 Additionally, there are excellent resources on Differential
-Equations such as {cite}`braun1983differential`, {cite}`zwillinger2021handbook`, if the reader
+Equations such as {cite}`braun1983differential`, {cite}`weilkiens2011systems`, if the reader
 needs a reference that is more in-depth than this review.
 :::
 

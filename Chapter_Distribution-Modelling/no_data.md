@@ -77,7 +77,7 @@ The following Python code demonstrates how to generate and compare these distrib
 
 ![](figs/CommonDistributions.png)
 
-```{code-block}
+```{code} python
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import uniform, triang, beta
