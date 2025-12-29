@@ -72,7 +72,7 @@ We can visualize this relationship by simulating paths and plotting the Asian pa
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{control_variate_asian_euro.png}
+    \includegraphics[width=\textwidth]{figs/control_variate_asian_euro.png}
     \caption{\textbf{Left:} Scatter plot showing the strong positive correlation ($\rho \approx 0.76$) between the European payoff (Control) and Asian payoff (Target). \textbf{Right:} Convergence plot showing the Control Variate estimator (Blue) stabilizing much faster than the Crude Monte Carlo estimator (Gray).}
     \label{fig:cv_asian_euro}
 \end{figure}
@@ -142,7 +142,7 @@ We can simulate two correlated paths using Antithetic Variates to reduce varianc
 \end{itemize}
 
 \begin{center}
-    \includegraphics[width=0.6\textwidth]{figs/AntiVariate.png}
+    \includegraphics[width=textwidth]{figs/AntiVariate.png}
 \end{center}
 
 \textbf{Conclusion:} By averaging these two variates, the "bad luck" of rapid arrivals in Variate 1 is offset by the "good luck" of sparse arrivals in Variate 2. The combined estimator converges to the true $W_q$ with significantly lower variance than two independent simulations could perform alone.
@@ -174,7 +174,7 @@ Sampling](https://xuk.ai/blog/stratified-sampling.html).
 We start by partitioning the domain $\mathbb{X}$ into $H$ disjoint strata such that $\mathbb{X} = \bigcup_{h=1}^H \mathbb{X}_h$. In the simplest form of Stratified Sampling, we draw $n_h$ independent samples uniformly from each stratum $\mathbb{X}_h$.
 
 \begin{center}
-    \includegraphics[width=0.6\textwidth]{figs/Strata.png}
+    \includegraphics[width=\textwidth]{figs/Strata.png}
 \end{center}
 
 The stratified estimator is given by the weighted sum of the estimators from each stratum:
