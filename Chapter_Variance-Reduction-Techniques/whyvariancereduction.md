@@ -92,25 +92,7 @@ If a "high" U causes a high output, then a "low" 1−U should cause a low output
 
 ## Sampling Methods
 
-### Correlated Sampling
-
-Correlated Sampling (often called Common Random Numbers or CRN) is the opposite of Antithetic Variates. It is used when comparing two different system designs (e.g., System A vs. System B).
-
-If we want to know if System A is better than System B, we care about the difference $D=X_A​−X_B$​.
-
-To minimize the variance of the difference, we want positive correlation (maximize $Cov(X_A​,X_B​)$).
-
-- Use the exact same seeds for both System A and System B.
-
-- If you want to compare the aerodynamics of two cars, you drive them both on the same day with the same wind conditions (correlated environment). You don't drive Car A on a calm day and Car B during a hurricane.
-
-:::{prf:definition} Correlated Sampling
-placeholder
-:::
-
-:::{prf:example} Correlated Sampling
-placeholder
-:::
+ These Sampling methods depart from simple random sampling by incorporating prior knowledge about the system's structure. By sampling with our prior knowledge, we can drastically improve the precision of our estimators through reducing the variance. In this section, we examine strategies such as Stratified Sampling and Importance Sampling, demonstrating how modifying the sampling distribution itself can yield faster, more stable convergence.
 
 ### Stratified Sampling
 
@@ -190,6 +172,7 @@ Notice that $\text{Var}[\hat{I}_{\text{strat, prop}}]$ is exactly equal to \text
     \item Stratified Sampling \textit{eliminates} \textbf{Term B} (the variation between stratum means).
     \item Since Term B is always non-negative, $\text{Var}[\hat{I}_{\text{strat, prop}}] \le \text{Var}[\hat{I}_{\text{CMC}}]$.
 \end{itemize}
+```
 
 Therefore, under proportional allocation, Stratified Sampling can never be worse than Crude Monte Carlo. 
 :::
@@ -234,13 +217,12 @@ And this example is based on {cite}`voss2013introduction`:
 Suppose we want to estimate the probability that a standard normal variable exceeds 4. Let $X \sim \mathcal{N}(0, 1)$. We are interested in the quantity:
 \[ \theta = \mathbb{P}(X > 4) = \mathbb{E}[\mathbb{I}_{[4, \infty)}(X)] \]
 
-\subsection*{The Failure of Crude Monte Carlo}
 A crude Monte Carlo (CMC) estimator samples $X_i \sim \mathcal{N}(0, 1)$ directly:
 \[ \hat{\theta}_n^{\text{CMC}} = \frac{1}{n} \sum_{i=1}^{n} \mathbb{I}_{[4, \infty)}(X_i) \]
 
 However, $X > 4$ is an extremely rare event (occurring roughly 3 times in 100,000 samples). As a result, for finite $n$, the estimator is likely to be exactly 0, or if a sample does hit, the variance is enormous relative to the mean.
 
-\subsection*{Importance Sampling Strategy}
+\subsubsection*{Importance Sampling Strategy}
 To reduce variance, we sample from a \textbf{proposal distribution} $g(y)$ that places more mass in the region of interest ($y > 4$). 
 
 \begin{center}
@@ -253,7 +235,7 @@ We choose a shifted normal distribution $Y \sim \mathcal{N}(4, 1)$ as our propos
     g(y) &= \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}(y-4)^2} \quad &&(\text{Proposal: } \mathcal{N}(4,1))
 \end{align*}
 
-\subsection*{Deriving the Importance Weights}
+\subsubsection*{Deriving the Importance Weights}
 The Importance Sampling estimator re-weights samples from $g(y)$ by the likelihood ratio $w(y) = f(y)/g(y)$. We derive the weight as follows:
 
 \begin{align*}
@@ -264,7 +246,7 @@ w(y) = \frac{f(y)}{g(y)} &= \frac{\exp\left(-\frac{1}{2}y^2\right)}{\exp\left(-\
 &= e^{-4y + 8}
 \end{align*}
 
-\subsection*{The Final Estimator}
+\subsubsection*{The Final Estimator}
 Substituting these weights into the IS equation, our new estimator is:
 \[ \hat{\theta}_n^{\text{IS}} = \frac{1}{n} \sum_{i=1}^{n} w(Y_i) \mathbb{I}_{[4, \infty)}(Y_i) = \frac{1}{n} \sum_{i=1}^{n} e^{-4Y_i + 8} \mathbb{I}_{[4, \infty)}(Y_i) \]
 
