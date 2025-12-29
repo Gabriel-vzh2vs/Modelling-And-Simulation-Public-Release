@@ -87,12 +87,7 @@ If a "high" U causes a high output, then a "low" 1−U should cause a low output
 :::{prf:example} Antithetic Variates
 :label: ex:antithetic_queue
 
-Consider a simulation of an M/M/1 queue to find the average waiting time.
 
-- **Run 1 (Crude):** We generate inter-arrival times using $U$. If $U$ is small (e.g., 0.05), inter-arrival times are short, customers arrive fast, and the queue builds up (High Waiting Time).
-- **Run 2 (Antithetic):** We use $1-U$. If $U=0.05$, then $1-U=0.95$. This generates long inter-arrival times. Customers arrive slowly, and the queue stays empty (Low Waiting Time).
-
-By averaging Run 1 (High Wait) and Run 2 (Low Wait), we get a more stable estimate of the true average waiting time than two independent runs would provide.
 :::
 
 ## Sampling Methods
@@ -128,12 +123,75 @@ Instead of hoping the random generator samples the tails of a distribution, we f
 
 This ensures that rare but important events are represented in the sample exactly as often as they should be, eliminating some variance in sampling distributions. This is the foundational principle behind Quasi-Monte Carlo (QMC) methods (see {ref}`sec:QuasiMC`), which use deterministic sequences to cover the domain evenly.
 
-:::{prf:definition} Stratified Sampling
-
-:::
-
 :::{prf:example} Stratified Sampling
-placeholder
+The following example is based on [Kai Xu's notes on Stratified
+Sampling](https://xuk.ai/blog/stratified-sampling.html).
+```{raw} latex
+
+We start by partitioning the domain $\mathbb{X}$ into $H$ disjoint strata such that $\mathbb{X} = \bigcup_{h=1}^H \mathbb{X}_h$. In the simplest form of Stratified Sampling, we draw $n_h$ independent samples uniformly from each stratum $\mathbb{X}_h$.
+
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{figs/Strata.png}
+\end{center}
+
+The stratified estimator is given by the weighted sum of the estimators from each stratum:
+
+\[
+\hat{I}_{\text{strat}} = \sum_{h=1}^{H} \frac{|\mathbb{X}_h|}{n_h} \sum_{i=1}^{n_h} f(x_h^i)
+\]
+
+where $x_h^i \sim \text{Uniform}(\mathbb{X}_h)$ is the $i$-th sample in stratum $h$, and $|\mathbb{X}_h|$ is the volume of that stratum.
+
+First, we verify that this is an unbiased estimator of the true integral $I$. The expected value of the estimator is:
+
+\begin{align*}
+\mathbb{E}[\hat{I}_{\text{strat}}] &= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|}{n_h} \sum_{i=1}^{n_h} \mathbb{E}[f(x_h^i)] \\
+&= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|}{n_h} \cdot n_h \cdot \underbrace{\left( \frac{1}{|\mathbb{X}_h|} \int_{\mathbb{X}_h} f(x) \, \mathrm{d}x \right)}_{\text{Mean in stratum } h} \\
+&= \sum_{h=1}^{H} \int_{\mathbb{X}_h} f(x) \, \mathrm{d}x \\
+&= \int_{\mathbb{X}} f(x) \, \mathrm{d}x = I
+\end{align*}
+
+Since samples are independent between strata, the variance of the sum is the sum of the variances. Let $\sigma_h^2$ denote the variance of $f(x)$ within stratum $h$:
+\[
+\sigma_h^2 = \frac{1}{|\mathbb{X}_h|} \int_{\mathbb{X}_h} (f(x) - \mu_h)^2 \, \mathrm{d}x
+\]
+The variance of the stratified estimator is derived as:
+
+\begin{align*}
+\text{Var}[\hat{I}_{\text{strat}}] &= \sum_{h=1}^{H} \text{Var} \left[ \frac{|\mathbb{X}_h|}{n_h} \sum_{i=1}^{n_h} f(x_h^i) \right] \\
+&= \sum_{h=1}^{H} \left( \frac{|\mathbb{X}_h|}{n_h} \right)^2 \sum_{i=1}^{n_h} \text{Var}[f(x_h^i)] \\
+&= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|^2}{n_h^2} \cdot n_h \sigma_h^2 \\
+&= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|^2}{n_h} \sigma_h^2
+\end{align*}
+
+Does this reduce variance compared to Crude Monte Carlo (CMC)? Yes, specifically when we use \textbf{Proportional Allocation}, where the number of samples $n_h$ is proportional to the stratum size ($n_h = n|\mathbb{X}_h|$).
+
+We can decompose the total variance of $f(x)$ (which drives the CMC error) using the \textit{Law of Total Variance}:
+\[
+\text{Var}[f(X)] = \underbrace{\mathbb{E}[\text{Var}(f(X)|h)]}_{\text{Within-Stratum Variance}} + \underbrace{\text{Var}(\mathbb{E}[f(X)|h])}_{\text{Between-Stratum Variance}}
+\]
+Mathematically, this expands to:
+\[
+\sigma^2_{\text{total}} = \sum_{h=1}^{H} |\mathbb{X}_h|\sigma_h^2 + \sum_{h=1}^{H} |\mathbb{X}_h|(\mu_h - I)^2
+\]
+
+The variance of the Crude Monte Carlo estimator is simply $\frac{\sigma^2_{\text{total}}}{n}$. Substituting the decomposition above:
+\[
+\text{Var}[\hat{I}_{\text{CMC}}] = \underbrace{\frac{1}{n} \sum_{h=1}^{H} |\mathbb{X}_h|\sigma_h^2}_{\text{Term A}} + \underbrace{\frac{1}{n} \sum_{h=1}^{H} |\mathbb{X}_h|(\mu_h - I)^2}_{\text{Term B}}
+\]
+
+However, if we use Stratified Sampling with proportional allocation ($n_h = n|\mathbb{X}_h|$), the variance becomes:
+\[
+\text{Var}[\hat{I}_{\text{strat, prop}}] = \sum_{h=1}^{H} \frac{|\mathbb{X}_h|^2}{n|\mathbb{X}_h|} \sigma_h^2 = \frac{1}{n} \sum_{h=1}^{H} |\mathbb{X}_h|\sigma_h^2
+\]
+
+Notice that $\text{Var}[\hat{I}_{\text{strat, prop}}]$ is exactly equal to \textbf{Term A} from the CMC variance.
+\begin{itemize}
+    \item Stratified Sampling \textit{eliminates} \textbf{Term B} (the variation between stratum means).
+    \item Since Term B is always non-negative, $\text{Var}[\hat{I}_{\text{strat, prop}}] \le \text{Var}[\hat{I}_{\text{CMC}}]$.
+\end{itemize}
+
+Therefore, under proportional allocation, Stratified Sampling can never be worse than Crude Monte Carlo. 
 :::
 
 ### Importance Sampling
@@ -170,16 +228,53 @@ Then $\widehat{\mu}_h \xrightarrow{a.s.} \mathbb{E}_f[h(X)]$ as $n \to \infty$.
 :::{prf:example} Importance Sampling
 :label: ex:importance_sampling
 
-Suppose you are simulating a bridge failure.
-* **Standard MC:** You simulate standard wind speeds. The bridge almost never fails. Variance is high because you have mostly 0s and one rare 1.
-* **Importance Sampling:** You simulate from a distribution where "hurricane" wind speeds are common. The bridge fails often (the event is no longer rare).
-* **Correction:** When the bridge fails under hurricane conditions, you weight that observation by a very small number (because hurricanes are actually rare).
+And this example is based on {cite}`voss2013introduction`:
 
-This drastically reduces the variance for estimating very small probabilities.
+```{raw} latex
+Suppose we want to estimate the probability that a standard normal variable exceeds 4. Let $X \sim \mathcal{N}(0, 1)$. We are interested in the quantity:
+\[ \theta = \mathbb{P}(X > 4) = \mathbb{E}[\mathbb{I}_{[4, \infty)}(X)] \]
+
+\subsection*{The Failure of Crude Monte Carlo}
+A crude Monte Carlo (CMC) estimator samples $X_i \sim \mathcal{N}(0, 1)$ directly:
+\[ \hat{\theta}_n^{\text{CMC}} = \frac{1}{n} \sum_{i=1}^{n} \mathbb{I}_{[4, \infty)}(X_i) \]
+
+However, $X > 4$ is an extremely rare event (occurring roughly 3 times in 100,000 samples). As a result, for finite $n$, the estimator is likely to be exactly 0, or if a sample does hit, the variance is enormous relative to the mean.
+
+\subsection*{Importance Sampling Strategy}
+To reduce variance, we sample from a \textbf{proposal distribution} $g(y)$ that places more mass in the region of interest ($y > 4$). 
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{figs/ISVIS.png}
+\end{center}
+
+We choose a shifted normal distribution $Y \sim \mathcal{N}(4, 1)$ as our proposal. The PDFs are:
+\begin{align*}
+    f(x) &= \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}x^2} \quad &&(\text{Target: } \mathcal{N}(0,1)) \\
+    g(y) &= \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}(y-4)^2} \quad &&(\text{Proposal: } \mathcal{N}(4,1))
+\end{align*}
+
+\subsection*{Deriving the Importance Weights}
+The Importance Sampling estimator re-weights samples from $g(y)$ by the likelihood ratio $w(y) = f(y)/g(y)$. We derive the weight as follows:
+
+\begin{align*}
+w(y) = \frac{f(y)}{g(y)} &= \frac{\exp\left(-\frac{1}{2}y^2\right)}{\exp\left(-\frac{1}{2}(y-4)^2\right)} \\
+&= \exp\left( -\frac{1}{2}y^2 + \frac{1}{2}(y-4)^2 \right) \\
+&= \exp\left( \frac{1}{2} \left[ -y^2 + (y^2 - 8y + 16) \right] \right) \\
+&= \exp\left( \frac{1}{2} (-8y + 16) \right) \\
+&= e^{-4y + 8}
+\end{align*}
+
+\subsection*{The Final Estimator}
+Substituting these weights into the IS equation, our new estimator is:
+\[ \hat{\theta}_n^{\text{IS}} = \frac{1}{n} \sum_{i=1}^{n} w(Y_i) \mathbb{I}_{[4, \infty)}(Y_i) = \frac{1}{n} \sum_{i=1}^{n} e^{-4Y_i + 8} \mathbb{I}_{[4, \infty)}(Y_i) \]
+
+where $Y_i$ are drawn from $\mathcal{N}(4, 1)$. This estimator yields a stable result (approx $3.16189 \times 10^{-5}$) even with a sample size of 100,000, whereas the CMC estimator fluctuates wildly with the same sample size.
+```
 :::
 
 
-# Problems Left to the Reader
+
+## Problems Left to the Reader
 
 :::{seealso} Problem 1 (Monte Carlo: Antithetic Variables)
    It is desired to estimate the value of an integral:
@@ -196,17 +291,7 @@ This drastically reduces the variance for estimating very small probabilities.
 :::
 
 :::{seealso} Problem 2 (Monte Carlo: Sampling for Variance Reduction)
-    It is desired to estimate the value of an integral
-
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
-
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+ 
 :::
 
 :::{seealso} Problem 3 (Monte Carlo: Importance Sampling)
