@@ -53,13 +53,46 @@ where c is a constant.
 :::{prf:example} Control Variates
 :label: ex:control_variates
 
-Imagine you are trying to use simulation to price a complex Asian Option ($X$) where no closed-form formula exists. However, a standard European Option ($Y$) behaves very similarly and *does* have a known closed-form price through the [Black-Scholes formula](https://www.columbia.edu/~mh2078/FoundationsFE/BlackScholes.pdf).
+```{raw} latex
+Let's try to estimate the price of an \textbf{Arithmetic Asian Call Option}, $\mathbb{E}[V_{\text{Asian}}]$. The payoff depends on the average price of the asset over time, $\bar{S}$:
+\[ V_{\text{Asian}} = e^{-rT} \max(\bar{S} - K, 0) \]
+Because the arithmetic average of log-normally distributed variables has no simple distribution, there is no closed-form formula. We could use Crude Monte Carlo:
+\[ \hat{\theta}_{\text{CMC}} = \frac{1}{n} \sum_{i=1}^n V_{\text{Asian}}^{(i)} \]
 
-Instead of just simulating the Asian Option, you simulate both using the same random numbers (CRN).
+However, we can do better if we find a Control Variate.
 
-- If the simulated European Option comes out \$5 higher than its known Black-Scholes price, it's likely your random numbers were positively biased.
-- Therefore, your Asian Option estimate is most likely overestimating the value of the option.
-- You subtract a portion of that \$5 error from your Asian Option estimate to correct it.
+Consider a standard \textbf{European Call Option} on the same asset. Its payoff depends only on the final price $S_T$:
+\[ V_{\text{European}} = e^{-rT} \max(S_T - K, 0) \]
+These two options are driven by the same underlying asset volatility. If the stock price ends high ($S_T$ is high), the average price ($\bar{S}$) was likely high as well.
+
+Fortunately, the expected value of the European Option is known exactly via the \textbf{Black-Scholes formula}:
+\[ \mathbb{E}[V_{\text{European}}] = \text{BS}(S_0, K, T, r, \sigma) \]
+
+We can visualize this relationship by simulating paths and plotting the Asian payoff against the European payoff for each path, as shown below.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{control_variate_asian_euro.png}
+    \caption{\textbf{Left:} Scatter plot showing the strong positive correlation ($\rho \approx 0.76$) between the European payoff (Control) and Asian payoff (Target). \textbf{Right:} Convergence plot showing the Control Variate estimator (Blue) stabilizing much faster than the Crude Monte Carlo estimator (Gray).}
+    \label{fig:cv_asian_euro}
+\end{figure}
+
+The scatter plot reveals that the European option contains significant information about the variance in our random numbers. The convergence plot shows how leveraging this information allows the Control Variate estimator to converge to the true price much faster than Crude Monte Carlo.
+
+\subsubsection*{The Logic of the Correction}
+Since they move together, we can use the variance in the European estimate to correct the Asian estimate:
+\begin{enumerate}
+    \item \textbf{Simulate} both options using the same random numbers (Common Random Numbers).
+    \item \textbf{Check the Error:} If your simulated European price comes out \$5 higher than the known Black-Scholes price, your random numbers were likely "lucky" (positively biased).
+    \item \textbf{Correct:} Since the options are correlated, your Asian estimate is likely overestimated, too. You subtract a portion of that \$5 error from your Asian estimate to fix it.
+\end{enumerate}
+
+\subsubsection*{The Estimator}
+Our new estimator is:
+\[ \hat{\theta}_{\text{CV}} = \frac{1}{n} \sum_{i=1}^n \left( V_{\text{Asian}}^{(i)} - c^* (V_{\text{European}}^{(i)} - \mathbb{E}[V_{\text{European}}]) \right) \]
+where $c^*$ is the optimal weight determined by the covariance between the two options.
+```
+
 :::
 
 ### Antithetic Variates
@@ -87,7 +120,35 @@ If a "high" U causes a high output, then a "low" 1−U should cause a low output
 :::{prf:example} Antithetic Variates
 :label: ex:antithetic_queue
 
+```{raw} latex
+Consider a simulation of an $M/M/1$ queue to find the average waiting time, $W_q$. We generate inter-arrival times using the Inverse Transform Method with the formula $X = -\frac{1}{\lambda}\ln(1-U)$.
 
+We can simulate two correlated paths using Antithetic Variates to reduce variance:
+
+\begin{itemize}
+    \item \textbf{Variate 1 (Standard):} We generate arrivals using random numbers $U$.
+    \begin{itemize}
+        \item If we draw a small number (e.g., $U = 0.05$), then $(1-U) = 0.95$.
+        \item Since $-\ln(0.95)$ is very small, the generated inter-arrival time is short.
+        \item \textbf{Result:} Customers arrive in rapid succession, causing the queue to build up and resulting in a large estimated $W_q$.
+    \end{itemize}
+    
+    \item \textbf{Variate 2 (Antithetic):} We generate arrivals using $1-U$.
+    \begin{itemize}
+        \item Using the same seed, the input becomes $1 - 0.05 = 0.95$.
+        \item The formula now sees $(1 - 0.95) = 0.05$. Since $-\ln(0.05)$ is large positive number, the generated inter-arrival time is long.
+        \item \textbf{Result:} Customers arrive sparsely, giving the server time to clear the queue, resulting in a small (or zero) $W_q$.
+    \end{itemize}
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{figs/AntiVariate.png}
+\end{center}
+
+\textbf{Conclusion:} By averaging these two variates, the "bad luck" of rapid arrivals in Variate 1 is offset by the "good luck" of sparse arrivals in Variate 2. The combined estimator converges to the true $W_q$ with significantly lower variance than two independent simulations could perform alone.
+```
+
+\end{document}
 :::
 
 ## Sampling Methods
