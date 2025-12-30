@@ -174,7 +174,7 @@ Sampling](https://xuk.ai/blog/stratified-sampling.html).
 We start by partitioning the domain $\mathbb{X}$ into $H$ disjoint strata such that $\mathbb{X} = \bigcup_{h=1}^H \mathbb{X}_h$. In the simplest form of Stratified Sampling, we draw $n_h$ independent samples uniformly from each stratum $\mathbb{X}_h$.
 
 \begin{center}
-    \includegraphics[width=\textwidth]{figs/Strata.png}
+\includegraphics[width=\textwidth]{figs/Strata.png}
 \end{center}
 
 The stratified estimator is given by the weighted sum of the estimators from each stratum:
@@ -321,60 +321,147 @@ where $Y_i$ are drawn from $\mathcal{N}(4, 1)$. This estimator yields a stable r
 
 :::{seealso} Problem 1 (Monte Carlo: Antithetic Variables)
    It is desired to estimate the value of an integral:
-
+```{raw} latex
     \begin{equation*}
         \hat{y} = \int_0^1 x^2 \, dx
     \end{equation*}
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
+    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$.
+    \begin{enumerate}
+    \item Define the Monte Carlo Estimator, $\hat{y}$.
+    \item Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
+    \item For $Z \sim U[0,1]$, use the results:
         $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+    \end{enumerate}
+```
 :::
 
-:::{seealso} Problem 2 (Monte Carlo: Sampling for Variance Reduction)
- 
+:::{seealso} Problem 2 (Monte Carlo: Sampling for Variance Reduction, Old Practice Exam Question)
+``` {raw} latex
+Let $A$ be the disk with radius~1 centered at~$(0,0)$, that intersects with a square $B$ that has  lower left corner at~$(0,0)$ and side of length $R$ where~$R < 1$ and $\sqrt{2} R > 1$.  We want to calculate the area of $A \cap B$.
+
+Let $X$ and $Y$ be independent $U(0,1)$ random variables with joint probability density function~$f_{XY}(x,y) = 1$ for $x,y\in[0,1]$ and $f_{XY}(x,y) = $ otherwise. Define the indicator random variable $I(X,Y)$ to be 1 if $(x,y) \in A \cap B$ and 0 otherwise.
+
+\begin{enumerate}[label=\Alph*]
+\item[\textbf{(a)}] Explain how the indicator random variable $I(X,Y)$ can be used to estimate the area of $A \cap B$ using Crude Monte Carlo.
+    
+    \item[\textbf{(b)}] Determine the variance of the estimator $\hat{I}_{\text{CMC}}$ for the area.
+
+    \item[\textbf{(c)}] Suppose we partition the sample space (the unit square used to generate random numbers for $X$ and $Y$) into two strata:
+    \begin{itemize}
+        \item Stratum 1: $S_1 = [0, \frac{1}{\sqrt{2}R}] \times [0, \frac{1}{\sqrt{2}R}]$
+        \item Stratum 2: $S_2 = [0,1]^2 \setminus S_1$ (The remainder of the unit square)
+    \end{itemize}
+    Explain qualitatively why this specific stratification might significantly reduce variance compared to Crude Monte Carlo. (Hint: Consider the geometry of the disk $A$ relative to the stratum boundary).
+
+    \item[\textbf{(d)}] Consider the following proposed estimator. Instead of generating $2n$ independent samples, we generate $n$ pairs. For each pair $i$, we draw $(U_i, V_i) \sim U(0,1)^2$ to generate the first point $P_1 = (RU_i, RV_i)$. We then generate a second ``antithetic'' point $P_2 = (R(1-U_i), R(1-V_i))$.
+    
+    Explain the mechanism by which this method could reduce variance in this specific geometric context. Specifically, if a generated point $P_1$ is close to the origin $(0,0)$, where will its antithetic pair $P_2$ likely be located, and how does this affect the covariance between the two estimates?
+\end{enumerate}
+```
+
 :::
+
 
 :::{seealso} Problem 3 (Monte Carlo: Importance Sampling)
-    It is desired to estimate the value of an integral
 
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
+```{raw} latex
+We wish to estimate the integral $I$, which represents the expectation of $x^2$ over the tail of a standard normal distribution:
+\[ I = \int_{1}^{\infty} \frac{x^2}{\sqrt{2\pi}} e^{-x^2/2} \, dx \]
+Let the integrand be denoted by $h(x) = \frac{x^2}{\sqrt{2\pi}} e^{-x^2/2}$ for $x > 1$.
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+In Importance Sampling, the goal is to choose a proposal distribution (importance function) $\phi(x)$ that is ``close'' to the shape of $|h(x)|$ to minimize the variance of the estimator.
+
+Part (a): Analysis of the Integrand
+
+Before selecting a proposal distribution, we must understand the ``important'' regions of the integrand.
+\begin{enumerate}
+    \item Find the mode of the function $h(x)$ for $x > 1$ by differentiating and setting to zero.
+    \item Based on the mode, where is the ``mass'' of the integral concentrated? (i.e., around which value should our importance sampling function be centered?)
+\end{enumerate}
+
+Part (b): Selection of Proposal Distributions
+
+Based on your analysis in Part (a), propose two distinct importance functions, $\phi_1(x)$ and $\phi_2(x)$, that are supported on $(1, \infty)$.
+\begin{itemize}
+    \item \textbf{Hint 1:} Consider a \textit{Shifted Exponential distribution} $\text{Exp}(\lambda)$ shifted to start at $1$.
+    \item \textbf{Hint 2:} Consider a \textit{Truncated Normal distribution} restricted to $x > 1$ with a mean parameter $\mu$ close to the mode you found in Part (a).
+\end{itemize}
+Explicitly write down the PDFs for your chosen $\phi_1(x)$ and $\phi_2(x)$.
+
+Part (c): Visual Inspection of ``Closeness''
+
+Ideally, the ratio $w(x) = \frac{h(x)}{\phi(x)}$ should be as constant as possible.
+\begin{enumerate}
+    \item Create a plot showing the integrand $h(x)$ overlayed with your two proposal PDFs $\phi_1(x)$ and $\phi_2(x)$ on the interval $x \in [1, 5]$.
+    \item Create a second plot showing the \textbf{likelihood ratio} (weight function) $w(x) = \frac{h(x)}{\phi(x)}$ for both proposals.
+    \item Based strictly on these plots, which function do you hypothesize will produce the lower variance estimator? Explain your reasoning.
+\end{enumerate}
+
+Part (d): Monte Carlo Estimation
+
+\begin{enumerate}
+    \item Implement an Importance Sampling estimator using $N=10,000$ samples for both $\phi_1$ and $\phi_2$.
+    \item Report the estimated value of the integral $\hat{I}$.
+    \item Calculate the \textbf{variance} of your estimator for both cases:
+    \[ \widehat{\text{Var}}(\hat{I}) = \frac{1}{N^2} \sum_{i=1}^N (w(X_i) - \hat{I})^2 \]
+    \item Compare your empirical variances with your hypothesis from Part (c). Did the visual inspection of the weight function correctly predict the better estimator?
+\end{enumerate}
+```
+
 :::
 
 :::{seealso} Problem 4 (Monte Carlo: Importance Sampling)
-    It is desired to estimate the value of an integral
+```{raw} latex
+Importance sampling is particularly powerful for ``rare event'' simulation, where standard Monte Carlo methods require an infeasibly large number of samples to observe even a single non-zero value.
 
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
+Consider the problem of estimating the following expectation for a large threshold $x \ge 1$:
+\[ \theta(x) = \mathbb{E}[e^{\sqrt{Z}} \mathbb{I}_{\{Z \ge x\}}] \]
+where $Z \sim N(0,1)$ is a standard normal random variable. Let $X := e^{\sqrt{Z}} \mathbb{I}_{\{Z \ge x\}}$ denote the single-sample estimator for Crude Monte Carlo.
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
-:::
+Part (a): The Failure of Crude Monte Carlo
 
-:::{seealso} Problem 5 (Monte Carlo: Importance Sampling)
-    It is desired to estimate the value of an integral
+Before seeking a better method, we must quantify the difficulty of the direct approach.
+\begin{enumerate}
+    \item Using the fact that the integrand is non-negative, show that the true value is bounded below by:
+    \[ \theta(x) \ge (1 - \Phi(x))e^{\sqrt{x}} \]
+    where $\Phi(\cdot)$ is the CDF of the standard normal distribution.
+    \item Similarly, show that the second moment of the Crude estimator satisfies:
+    \[ \mathbb{E}[X^2] \ge (1 - \Phi(x))e^{2\sqrt{x}} \]
+\end{enumerate}
 
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
+\textit{Implication:} As $x$ increases, the event $\{Z \ge x\}$ becomes exponentially rare. This causes the Crude estimator $X$ to be zero for the vast majority of samples, leading to high variance relative to the mean.
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+Part (b): Designing the Importance Sampler
+
+We introduce a new sampling distribution $W \sim N(\mu_x, 1)$, which is a normal distribution with the same variance but shifted by a mean $\mu_x$.
+\begin{enumerate}
+    \item Ideally, we want to center our samples where the product of the integrand and the original density is maximized. Argue why shifting the mean to the threshold, $\mu_x = x$, is a logical choice for this problem.
+    \item Write down the likelihood ratio (weight function) $L(w) = \frac{f_Z(w)}{f_W(w)}$ for the specific case where $\mu_x = x$.
+\end{enumerate}
+
+Part (c): The Importance Sampling Estimator
+
+Let $Y$ be the Importance Sampling estimator using the shift $\mu_x = x$.
+\begin{enumerate}
+    \item Show that the estimator can be written as:
+    \[ Y = e^{x^2/2} e^{\sqrt{W}} e^{-Wx} \mathbb{I}_{\{W > x\}} \]
+    \item Show that the expected value of this estimator is bounded by:
+    \[ \mathbb{E}[Y] \le e^{-x^2/2} \mathbb{E}[e^{\sqrt{W}} \mathbb{I}_{\{W > x\}}] \]
+\end{enumerate}
+
+Part (d): Asymptotic Variance Analysis
+
+We now demonstrate that the improvement factor of Importance Sampling over Crude Monte Carlo tends to infinity as the event becomes rarer ($x \to \infty$).
+\begin{enumerate}
+    \item Using the relation $W = Z + x$, show that the target value decays as:
+    \[ \theta(x) \le e^{1 - (x-1)^2/2} \]
+    and consequently, $\theta(x) \to 0$ as $x \to \infty$.
+    \item Develop an upper bound for the second moment of the IS estimator, $\mathbb{E}[Y^2]$, and show that:
+    \[ \mathbb{E}[Y^2] \le e^{-(x-1)^2} e^3 \]
+    \item \textbf{Conclusion:} Using L'Hôpital's rule (or dominant terms analysis), compute the limit of the ratio of variances:
+    \[ \lim_{x \to \infty} \frac{\text{Var}(X)}{\text{Var}(Y)} \]
+    Show that this limit is $\infty$, proving that Importance Sampling becomes infinitely more efficient than Crude Monte Carlo as the problem gets harder.
+\end{enumerate}
+```
 :::
