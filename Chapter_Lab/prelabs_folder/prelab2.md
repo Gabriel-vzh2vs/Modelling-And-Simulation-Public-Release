@@ -11,9 +11,9 @@ and PyMC (for Python users).
 
 ---
 
-## Part 1: Theoretical Concepts
+## Theoretical Concepts
 
-### 1. Modeling Dependencies: The Correlation Problem
+### Modeling Dependencies: The Correlation Problem
 
 In the real world, variables rarely move independently.
 For example, if fuel prices rise, shipping costs likely rise with them.
@@ -42,7 +42,7 @@ Where:
 \end{itemize}
 ```
 
-### 2. Measuring Risk: Skewness and Kurtosis
+### Measuring Risk: Skewness and Kurtosis
 
 When analyzing the results of a simulation, the looking at the common stats: Mean and Variance only tell part of the story.
  To understand the likelihood of extreme events (often discussed as risk), we look at the shape of the distribution.
@@ -59,18 +59,18 @@ When analyzing the results of a simulation, the looking at the common stats: Mea
 
 ---
 
-## Part 2: Implementation & Tools
+## Implementation & Tools
 
 :::{tab-set}
 
 :::{tab-item} Python (PyMC & Scipy)
 
-### 1. Generating Correlations
+### Generating Correlations
 
 Python users have two ways to handle correlations: the manual approach,
 way and using a package like PyMC way which is easier to use for modelling.
 
-#### Method A: The Manual Cholesky Approach
+#### The Manual Cholesky Approach
 
 This demonstrates the mathematical concept defined in Part 1.
 
@@ -100,7 +100,7 @@ plt.show()
 
 ```
 
-#### Method B: The PyMC Workflow
+#### The Premade Method
 
 In PyMC, correlations are often handled by
 defining a **Multivariate Normal**[^3] distribution,
@@ -110,7 +110,7 @@ which handles the Cholesky decomposition internally.
 2. **Define Covariance:** Set up the covariance matrix based on desired correlations.
 3. **Sample:** Use `pm.MvNormal` or similar constructs to sample dependent values.
 
-### 2. Case Study: The Monty Hall Problem
+### Case Study: The Monty Hall Problem
 
 We can use simulation to solve the classic probability puzzle: *Should you switch doors?*
  We will also analyze the skewness of the results to understand the distribution of wins.
@@ -183,7 +183,7 @@ Game 5: Prize is behind door 2. Contestant chose 2. Monty opened 0. Switching go
 
 :::{tab-item} Excel (XLRisk)
 
-### 1. Functions for Correlations
+### Functions for Correlations
 
 XLRisk hides the linear algebra (Cholesky) behind specific functions.
 Instead of multiplying matrices manually, you define a correlation matrix in the spreadsheet and apply it to your random variates.
@@ -191,7 +191,7 @@ Instead of multiplying matrices manually, you define a correlation matrix in the
 * `=RiskCorMat(MatrixRange)`: Defines the correlation structure for a set of inputs.
 * `=RiskNormal(Mean, StdDev, RiskCorMat(...))`: Generates a normal variable that respects the correlation defined in the matrix.
 
-### 2. Simulation Workflow
+### Simulation Workflow
 
 A trial in XLrisk follows this Latin Hypercube process:
 
@@ -200,7 +200,7 @@ A trial in XLrisk follows this Latin Hypercube process:
 3. **Calculate:** The spreadsheet updates, calculating your outputs (e.g., Total Profit).
 4. **Repeat:** This happens thousands of times to build a distribution.
 
-### 3. Analyzing Tails
+### Analyze Tails
 
 Once the simulation is complete, XLRisk provides Skewness and Kurtosis in the statistics report.
 
