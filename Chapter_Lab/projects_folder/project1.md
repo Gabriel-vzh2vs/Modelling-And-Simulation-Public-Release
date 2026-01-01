@@ -124,7 +124,7 @@ Compare the Standard Deviation of the Total Cost for both scenarios. (Dr. Radema
 
 ## Project 1, Model Example Output
 
-![](figs/Project1ExampleOutput.png)
+![](figs/Project1ExampleImage.png)
 
 ![](figs/Project1TornadoPlot.png)
 
