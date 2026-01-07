@@ -4,7 +4,8 @@
 This project focuses on developing the following skills:
 
 1. How to structure \& create a simulation study;
-2. And learning how to use Monte Carlo Methods to build basic simulations.
+2. Learning how to use Monte Carlo Methods to build basic simulations;
+3. Comparative Analysis between alternative solutions and configurations.
 
 ## Project 2 Prerequisites
 
@@ -31,7 +32,7 @@ This Cyber Risk Analysis Project builds on the following prerequisites:
 You are a junior analyst at Sandy Cyber Defense, a specialized consultancy in Alberta.
 Your client is AQ Bank, a regional bank that is digitizing its operations.
 The bank's CTO is worried about the rising tide of cyberattacks and is considering purchasing an
-expensive AI-driven security suite called "Sentinel."
+expensive AI-driven security suite called Sentinel.
 
 However, the CFO refuses to approve the budget unless you can substantiate
 that the potential losses from cyberattacks exceed the cost of the software.
@@ -80,12 +81,15 @@ Severity: If this happens, the costs are massive (data recovery, legal fees, PR 
 
 The "Sentinel" software promises to reduce the probability of attacks succeeding,
 but it comes with its own implementation costs
-and downsides as attackers will know that you have valuable information. increasing the
+and downsides as attackers will know that you have valuable information increasing the
 risk of a randomware attack.
 
-- Implementation Cost: The vendor quotes $150,000, but implementation often goes over budget.
-Model the annual cost of the software as a Uniform Distribution between $140,000 and $180,000.
-- Effectiveness:It reduces the Phishing success probability ($p$) from 0.04 to 0.005.
+- Implementation Cost: The vendor quotes 150,000 dollars yearly for the systems=
+but implementation often goes over budget.
+Model the annual cost of the software as a Uniform Distribution between 140,000 and 180,000
+dollars.
+
+- Effectiveness: It reduces the Phishing success probability ($p$) from 0.04 to 0.005.
 It increases the Ransomware daily probability ($p$) from 0.005 to 0.02.
 
 ## Metrics for Project 2
@@ -98,15 +102,15 @@ wants you to focus on the tails of the distribution.
 ```{raw} latex
 \begin{enumerate}
     \item \textbf{Annual Loss Exposure (ALE):}
-    Simulate 1,000 years of operation for the \textbf{Status Quo}. Calculate the \textbf{Average Annual Loss} and the \textbf{95\% Value at Risk (VaR)}. (The 95\% VaR is the loss amount that will not be exceeded in 95\% of years).
+    Simulate 1,000 years of operation for the Status Quo. Calculate the Average Annual Loss and the 95\% Value at Risk (VaR). (The 95\% VaR is the loss amount that will not be exceeded in 95\% of years).
 
     \item \textbf{The ``Sentinel'' Simulation:}
-    Simulate 1,000 years of operation \textbf{With Sentinel} (incorporating the reduced probabilities AND the cost of the software). Calculate the new \textbf{Average Annual Total Cost} (Losses + Software Cost).
+    Simulate 1,000 years of operation With Sentinel (incorporating the reduced probabilities AND the cost of the software). Calculate the new average Annual Total Cost (Losses + Software Cost).
 
     \item \textbf{Return on Security Investment (ROSI):}
     For each of the 1,000 simulations, calculate the savings:
     \[ \text{Savings} = (\text{Status Quo Loss}) - (\text{Sentinel Loss} + \text{Sentinel Cost}) \]
-    What is the \textbf{probability} that the savings are positive? (i.e., How often does the software pay for itself?)
+    What is the probability that the savings are positive? (i.e., How often does the software pay for itself?)
 
     \item \textbf{Visual Deliverables:}
     \begin{itemize}
