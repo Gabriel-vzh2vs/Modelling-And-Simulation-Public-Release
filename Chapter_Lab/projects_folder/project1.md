@@ -1,3 +1,4 @@
+(project-1)=
 ## Project 1: Budget Modelling with Monte Carlo 
 
 This Budgeting Project builds on the following prerequisites:
@@ -142,5 +143,3 @@ EXAMPLE RISK SOLUTIONS - ANALYSIS OUTPUT
    - CVaR (Avg cost of worst 5%): 1654.36 kUSD
 ----------------------------------------
 ```
-
-
