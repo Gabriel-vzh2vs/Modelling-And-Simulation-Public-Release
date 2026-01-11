@@ -34,8 +34,8 @@ system is as follows.
 
 
 __Question 1a:__ Determine the expected time to failure using
-simulation. Seeing the numerical estimate, hypothesize the exact
-value for the expected time to failure.
+simulation. Seeing the numerical estimate, can you hypothesize the exact
+value for the expected time to failure?
 
 __Comment:__ Before tackling __(1a)__ you will need to carefully write
 down a formal model $M$ capturing how the system evolves. You will
@@ -43,11 +43,12 @@ have to introduce the required variables, parameters, preferably using
 standard notation.
 
 __Question 1b:__ Determine the expected time to failure
-analytically. Does it match your hypothesis from 1a?
+analytically. Does it match your hypothesis from __(1a)__?
 
 
-The system operator seeks to increase longevity, and schedules
-maintenance taking place at the beginning of each yearly cycle. Note
+After seeing the presentation of your of your analyses,
+the system operator seeks to increase longevity: they  schedule
+maintenance which is to take place at the beginning of each yearly cycle. Note
 that no maintenance is scheduled for the beginning of year 1 (that
 would conincide with deployment time). The  maintenance protocol is
 as follows:
@@ -79,6 +80,9 @@ __scaled version__ of the problem. And that is why $\tau$ equals $1$
 and not some quantity $\tau_{\text{critical}}$. For mathematical
 modeling, re-scaling the original model like this is par for the
 course and an established practice.
+
+__Comments on analytic versus simulation:__
+
 
 __Broader application context__: This kind of buildup can arise in
 many systems. You can look up topics such as stochastic threshold

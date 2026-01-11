@@ -2,14 +2,15 @@
 # Software Installation
  <!-- FUTURE: Remove/Censor Product Keys. -->
 
-:::{admonition} Software Advisory
+:::{admonition} Disclaimer
 :class: warning dropdown
 
-We, the writers do not endorse nor are funded, supported, or have any relation to the software products
-throughout this book.
+We have no affiliation or relation with the companies and products
+mentioned below, nor have we received any funds or other support.
+While the instructions provided have been tested, anything arising
+from the installation or use of any of these software products is
+solely your responsibility.
 
-Additionally, the use and acquisition of these software products is solely the responsibility of the student, user,
-or instructor and by reading this advisory, the reader acknowledges this advisory and its consequences.
 :::
 
 In this section, we will describe how to install a discrete event simulation software and XLRisk
@@ -45,7 +46,7 @@ Note: it might be required to reinstall or reactivate XLrisk once in a while on 
 :align: center
 :label: XLRiskWin
 :::
-3. Open Excel, and go to Options, and click on Add-ins, and you should get this screen: 
+3. Open Excel, and go to Options, and click on Add-ins, and you should get this screen:
 :::{image} ../Figs/Chapter_Lab/ExcelAddinsDialogue.png
 :width: 20 %
 :align: center
@@ -116,13 +117,13 @@ Note: it might be required to reinstall or reactivate XLrisk once in a while on 
 (SIMIO-Install)=
 ### SIMIO Installation
 ```{warning}
-This first set of instructions is for Microsoft Windows! If you do not have Microsoft Windows, skip this section until otherwise instructed. 
+This first set of instructions is for Microsoft Windows! If you do not have Microsoft Windows, skip this section until otherwise instructed.
 ```
 
 ::::{admonition} Windows, SIMIO Install
 :class: tip dropdown
-1. If you are reading this as a student, go to this link, https://forms.simio.com/f/student-license, 
-use your school email in the academic email section and fill it out with your name 
+1. If you are reading this as a student, go to this link, https://forms.simio.com/f/student-license,
+use your school email in the academic email section and fill it out with your name
 (if your name is complex, aka more than three names, use your given and first family name); Use the claim code that your instructor provides you in the form.
 
 :::{image} ../Figs/Chapter_Lab/StudentLicenseRequest.png
@@ -156,7 +157,7 @@ use your school email in the academic email section and fill it out with your na
 :align: center
 :label: UTMStep1
 :::
-3. Now, Download Windows from a reputable source, in this example, we used the University's provided Windows 11 File. 
+3. Now, Download Windows from a reputable source, in this example, we used the University's provided Windows 11 File.
 4. Once, you have downloaded Microsoft Windows, go to your spotlight/Launchpad and click on UTM, as the following image shows:
 :::{image} ../Figs/Chapter_Lab/UTM2.png
 :width: 20 %
@@ -175,19 +176,19 @@ use your school email in the academic email section and fill it out with your na
 :align: center
 :label: UTMStep4
 :::
-7. After you click “Windows”, a new screen will appear, on this screen click browse and go into downloads and click the Windows 11 installation file you downloaded earlier (en-us… .iso), then press continue after you have the .iso file. 
+7. After you click “Windows”, a new screen will appear, on this screen click browse and go into downloads and click the Windows 11 installation file you downloaded earlier (en-us… .iso), then press continue after you have the .iso file.
 :::{image} ../Figs/Chapter_Lab/UTM5.png
 :width: 20 %
 :align: center
 :label: UTMStep5
 :::
-8. On the next page, “Hardware”, make sure you give your machine 8 GB of RAM (if you have a lower end Mac, give it 4 GB) and give it at least 2 CPU cores - press the up arrow to allocate cores, then press continue and then press continue again as the default of 64 GB should be enough for Windows, and then press continue and save until the popup window closes. 
+8. On the next page, “Hardware”, make sure you give your machine 8 GB of RAM (if you have a lower end Mac, give it 4 GB) and give it at least 2 CPU cores - press the up arrow to allocate cores, then press continue and then press continue again as the default of 64 GB should be enough for Windows, and then press continue and save until the popup window closes.
 :::{image} ../Figs/Chapter_Lab/UTM6.png
 :width: 20 %
 :align: center
 :label: UTMStep6
 :::
-9. Wait until the pending task completes, and then press the “play” button and then install Windows, it will give you instructions on how to do so.  
+9. Wait until the pending task completes, and then press the “play” button and then install Windows, it will give you instructions on how to do so.
 :::{image} ../Figs/Chapter_Lab/UTM7.png
 :width: 20 %
 :align: center
@@ -201,7 +202,7 @@ use your school email in the academic email section and fill it out with your na
 :class: tip dropdown
 ##### VirtualBox (Apple Silcon with Arm Version \& Intel Macs)
 
-1. Download VirtualBox from here: https://download.virtualbox.org/virtualbox/7.1.4/VirtualBox-7.1.4-165100-OSX.dmg 
+1. Download VirtualBox from here: https://download.virtualbox.org/virtualbox/7.1.4/VirtualBox-7.1.4-165100-OSX.dmg
 2. Once downloaded, click on the .dmg file in downloads, which is boxed in this image:
 :::{image} ../Figs/Chapter_Lab/VirtualBox1.png
 :width: 20 %
@@ -255,7 +256,7 @@ use your school email in the academic email section and fill it out with your na
 :::
 ### AnyLogic Installation (Windows, Mac, and Linux)
 
-1. Go to https://www.anylogic.com/downloads/personal-learning-edition-download/, and fill out the form with your school or professional email and details. 
+1. Go to https://www.anylogic.com/downloads/personal-learning-edition-download/, and fill out the form with your school or professional email and details.
 2. After doing this, you will receive an email from Anylogic (check your spam) that looks like this - click on download:
 :::{image} ../Figs/Chapter_Lab/Anylogic1.png
 :width: 20 %
