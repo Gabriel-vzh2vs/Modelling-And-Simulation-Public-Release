@@ -17,20 +17,27 @@ project:
     - file: Front-Matter/splash.md
     - title: Front Matter
       children:
-        - file: Front-Matter/book-structure.md
+        #- file: Front-Matter/book-structure.md
         - file: Front-Matter/preface.md
         - file: Front-Matter/toc.md
-        - file: Front-Matter/pedagogy.md
-        - file: Front-Matter/tooluse.md
+	#- file: Front-Matter/pedagogy.md
+        #- file: Front-Matter/tooluse.md
     - title: Introduction To Simulation
       children:
-        - file: Chapter_Introduction-to-Simulation/section_warmup.md
         - file: Chapter_Introduction-to-Simulation/section_introduction.md
+        - file: Chapter_Introduction-to-Simulation/section_warmup.md
         - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
         - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
         - file: Chapter_Introduction-to-Simulation/monte_carlo_method.md
-        - file: Chapter_Introduction-to-Simulation/vacation_planning.md
+#	- file: Chapter_Introduction-to-Simulation/vacation_planning.md
         - file: Chapter_Introduction-to-Simulation/summary_and_roadmap.md
+    - file: Chapter_Output_Analysis/introduction.md
+      children:
+        - file: Chapter_Output_Analysis/mean_variance.md
+        - file: Chapter_Output_Analysis/confidence_intervals.md
+        - file: Chapter_Output_Analysis/sample_size_estimation.md
+        - file: Chapter_Output_Analysis/bonferroni.md
+        - file: Chapter_Output_Analysis/dependent_variables.md
     - title: Probability And Statistics
       children:
         - file: Chapter_Probability-and-Stats/probability_statistics.md
@@ -42,13 +49,6 @@ project:
         - file: Chapter_System-Modelling/network_models.md
         - file: Chapter_System-Modelling/queuing_systems.md
         - file: Chapter_System-Modelling/finite_state_machines.md
-    - file: Chapter_Output_Analysis/introduction.md
-      children:
-        - file: Chapter_Output_Analysis/mean_variance.md
-        - file: Chapter_Output_Analysis/confidence_intervals.md
-        - file: Chapter_Output_Analysis/sample_size_estimation.md
-        - file: Chapter_Output_Analysis/bonferroni.md
-        - file: Chapter_Output_Analysis/dependent_variables.md
     - title: Random Numbers and Variates
       children:
         - file: Chapter_Random-Number-And-Variate-Generation/introduction.md

@@ -1,13 +1,15 @@
 
 (sec:intro_warmup)=
-# Preview, prerequisites, and preparation  #
+# Preview, prerequisites, preparation, pronto!  #
 
 Do you already know modeling and simulation? Do you have the required
-prerequisites for this book? Give the following problems a try to see
-where you stand. If you have already tackled very similar problems and
-feel confident, feel free to skip. If not, we recommend that you break
-out your pen, paper, and computer. Give them a good effort. Do not use
-Copilot, ChatGPT, or similar tools. That would be utterly pointless.
+prerequisites for this book? We will work through a few problems to
+see where things stand. If you have already tackled very similar
+problems and feel confident, feel free to skip. If not, we recommend
+that you break out your pen, paper, and computer. Give them a good
+effort. Hold off on using Copilot, ChatGPT, and similar tools for
+now. We are not trying to assess those tools!
+
 
 (sec:intro_breakdown)=
 ## System Breakdown ##
@@ -17,7 +19,8 @@ Copilot, ChatGPT, or similar tools. That would be utterly pointless.
 :enumerator: (System breakdown)
 
 __Description__: a mechanical system $S$ accumulates fatigue over
-time. If the accumulated level of fatigue exceeds a threshold the
+time. If the accumulated level of fatigue exceeds a specified
+threshold the
 system will experience a critical failure. A basic model of this
 system is as follows.
 
@@ -33,6 +36,11 @@ system is as follows.
 __Question 1a:__ Determine the expected time to failure using
 simulation. Seeing the numerical estimate, hypothesize the exact
 value for the expected time to failure.
+
+__Comment:__ Before tackling __(1a)__ you will need to carefully write
+down a formal model $M$ capturing how the system evolves. You will
+have to introduce the required variables, parameters, preferably using
+standard notation.
 
 __Question 1b:__ Determine the expected time to failure
 analytically. Does it match your hypothesis from 1a?
