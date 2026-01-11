@@ -240,9 +240,78 @@ csv_data = """Date,Polling firm,Erdoğan,Kılıçdaroğlu,Oğan,İnce
 14-Mar,AR-G,43.1,46.2,3.1,7.6"""
 
 df = pd.read_csv(io.StringIO(csv_data))
+
 ```
 
+The next step after we get the data and do some basic processing
+(obtaining the means and getting standard deviations
+with np.mean and np.std for example),
+to it is to use these parameters to define random variables.
 
+After that, we can set up the randomization method for QMC
+through the Sobol Sampler based on completing the following
+set of code based on what is known about Quasi-Monte Carlo
+Methods.
 
+```{code} python
+num_days = 30
+daily_drift_volatility = 0.2
+
+# TODO: Define num_universes and m
+num_universes = ___
+m = ___
+num_samples_per_universe = 2**m
+
+# TODO: Initialize current_means using np.tile
+current_means = ___
+
+# Initialize storage for stats (Days, Metrics, Candidates)
+history_stats = np.zeros((num_days, 3, 4))
+
+# Create the Quasi-Monte Carlo Sampler (Sobol Sequence)
+sampler = qmc.Sobol(d=4, scramble=True)
+```
+
+Then we build the main body of the simulation
+along with defining the drift of the population
+overtime:
+
+```{code} python
+for day in range(num_days):
+    
+    # APPLY DRIFT
+    # TODO: Generate drift noise of shape (num_universes, 4)
+    drift = np.random.normal(0, daily_drift_volatility, size=(___, ___))
+    current_means += drift
+    
+    # GENERATE QMC ESTIMATOR
+    # TODO: Get uniform samples
+    u_samples = sampler.random(___)
+    
+    # TODO: Convert to Normal distribution using norm.ppf
+    z_scores = norm.ppf(___)
+    
+    # CALCULATE VOTE SHARES (Provided)
+    # This broadcasts (100, 1, 4) against (1, 8192, 4)
+    # Result shape: (100, 8192, 4)
+    sim_votes = current_means[:, None, :] + (base_stds[None, None, :] * z_scores[None, :, :])
+    
+    # DETERMINE WINNERS
+    # Find the index of the max vote in the last axis
+    winners = np.argmax(sim_votes, axis=2)
+    
+    # Calculate win percentage for each universe
+    win_probs_per_universe = (np.arange(4) == winners[..., None]).mean(axis=1) * 100
+    
+    # We calculate the Median, 5th percentile, and 95th percentile across universes
+    history_stats[day, 0, :] = np.median(win_probs_per_universe, axis=0)
+    history_stats[day, 1, :] = np.percentile(win_probs_per_universe, 5, axis=0)
+    history_stats[day, 2, :] = np.percentile(win_probs_per_universe, 95, axis=0)
+
+print("Simulation Complete.")
+```
+
+Then visualize the results similarly to the following output:
+
+![](figs/CILAB8.png)
 :::
-
