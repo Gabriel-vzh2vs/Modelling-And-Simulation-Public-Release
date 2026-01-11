@@ -18,9 +18,8 @@ between topics and introduce different topics.
 
 Grading for the Pre-Labs is at the instructor's discretion as described in
 {ref}`sec:labs`; additionally, we recommend completing a pre-lab for each lab
-at a 1 to 1 ratio. However, if you are self-studying, 
+at a 1 to 1 ratio. However, if you are self-studying,
 you can choose which pre-labs you do dependent on your knowledge level.
-
 
 List of Pre-labs:
 
