@@ -30,7 +30,7 @@ __License and disclaimer:__ The material in this book, the source
 code, Jupyter notebooks, as well as other materials, are made
 available to you for free. While we have taken care writing the source
 code, you, the user of the code or materials, assume all risks,
-responsibilities and liabilities thereof. You may not, wowever, post
+responsibilities and liabilities of such use. You may not post
 or reproduce these materials or any portions of it without prior
 permission from the authors.  That being said, we welcome feedback,
 error reports, and suggestions that can help improve the textbook.
