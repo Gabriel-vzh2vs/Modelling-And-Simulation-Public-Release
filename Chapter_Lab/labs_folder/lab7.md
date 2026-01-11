@@ -1,5 +1,5 @@
 :::{admonition} Lab 7
-:class: attention dropdown
+:class: attention
 (lab-7)=
 # Lab 7: Expanding Modelling Methods: Compartmental Models Lab
 
@@ -12,10 +12,10 @@
 
 ### Required Chapters
 
-- 
--
--
--
+- {ref}``
+- {ref}``
+- {ref}``
+- {ref}``
 
 
 ## Background Information
@@ -68,6 +68,6 @@ into a Multi-Compartmental Model (system dynamics as seen in {ref}`prelab-3`).
 
 ## Tasks
 
-### SIRD
+### 
 
 :::
