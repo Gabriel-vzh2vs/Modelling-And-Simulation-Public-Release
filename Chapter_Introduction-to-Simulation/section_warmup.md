@@ -81,7 +81,13 @@ and not some quantity $\tau_{\text{critical}}$. For mathematical
 modeling, re-scaling the original model like this is par for the
 course and an established practice.
 
-__Comments on analytic versus simulation:__
+__Comments on analytic solution versus simulation:__ Did you manage to
+find the analytic solution in 1a? If so, very good! However, we think
+you would agree that extending the analytic
+solution to incorporate the maintenance plan would be hard. And even if you somehow
+managed (we would be very impressed), it is plain obvious that most
+non-trivial models must be approached through simulation and
+computational methods.
 
 
 __Broader application context__: This kind of buildup can arise in
@@ -89,6 +95,7 @@ many systems. You can look up topics such as stochastic threshold
 systems, trigger phenomena, and cascading failures.
 ```
 
+<!--
 
 ::::::{solution} ex:breakdown
 :label: sol_breakdown
@@ -505,3 +512,5 @@ help with verification of the simulation model.
 
 
 ::::
+
+-->

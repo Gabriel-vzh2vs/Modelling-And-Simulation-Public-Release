@@ -27,10 +27,10 @@ project:
         - file: Chapter_Introduction-to-Simulation/section_introduction.md
         - file: Chapter_Introduction-to-Simulation/section_warmup.md
 #        - file: Chapter_Introduction-to-Simulation/problem_three_chefs.md
-        - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
-        - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
-        - file: Chapter_Introduction-to-Simulation/monte_carlo_method.md
-#	- file: Chapter_Introduction-to-Simulation/vacation_planning.md
+#        - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
+#        - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
+#        - file: Chapter_Introduction-to-Simulation/monte_carlo_method.md
+####	- file: Chapter_Introduction-to-Simulation/vacation_planning.md # Seems to crash the server!!!
         - file: Chapter_Introduction-to-Simulation/summary_and_roadmap.md
     - file: Chapter_Output_Analysis/introduction.md
       children:
