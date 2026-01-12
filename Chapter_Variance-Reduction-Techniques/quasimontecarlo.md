@@ -8,6 +8,8 @@ differs from Crude Monte Carlo's stochastic selection of samples from a random v
 Monte Carlo method, QMC is a method for finding the
 approximate value of a function as an average of the function.
 
+## What is Quasi-Monte Carlo?
+
 In general, the generic Quasi-Monte Carlo method takes the
 same form as {ref}`sec:CrudeMC`:
 
@@ -18,8 +20,11 @@ I = \hat{\theta}_N(f) = \frac{1}{N} \sum^{N}_{J_1} g(X_{j})
 However, for Quasi-Monte Carlo to work, these deterministic
 sequences must be patternless (aka have a uniform-like density
 across a space). In mathematics, this property is often referred
-to as a low discrepancy sequence. In this section, we use the digital net method of Sobol's Sequences as our low-discrepancy
+to as a low discrepancy sequence. In this section, we use the digital net
+method of Sobol's Sequences as our low-discrepancy
 sequence.
+
+### Sobol's Sequences
 
 ```{raw} latex
 To calculate Sobol's sequences, we can use a recursive
@@ -312,7 +317,9 @@ problems.
 ```
 
 Randomized QMC does fix the limitations of Error Estimation
-and Smoothness at the cost of even more complexity for implementation. And this trade off is the reason many commercial packages (atRisk, XLRisk, SIMIO, etc) use R-QMC over crude Monte Carlo.
+and Smoothness at the cost of even more complexity for implementation.
+And this trade off is the reason many commercial packages (atRisk, XLRisk, SIMIO, etc)
+use R-QMC over crude Monte Carlo.
 
 [^1]: At that point, you might as well use MCMC to generate
 a Bayesian Credible Interval like in {ref}`sec:MCMC` as

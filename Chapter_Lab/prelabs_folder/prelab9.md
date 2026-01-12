@@ -230,7 +230,9 @@ a new variable defined as the interaction term of $x_a$ and $x_b$: $x_c$.
 The limitation of this approach this that it is going cover less
 of the event space than a full-factorial. This leads to averages of the
 main effect only being based on four runs instead of the eight of the full
-fractional. But this also has the benefit of requiring half of the runs of a full-factorial, making it possible to understand a part of a complex event space in a finite amount of time.
+fractional. But this also has the benefit of requiring half of the runs of a
+full-factorial, making it possible to understand a part of a complex event
+space in a finite amount of time.
 
 ### Response Surface (Central-composite)
 
@@ -238,19 +240,56 @@ A Central Composite Design is composed on top of a two-level ($2^k$)
 full or fractional factorial design, with center points (median of values
 from the factorial design) and axial points (runs the same as the center
 points with one factor change to be below and above the median of the factorial
-levels.)
+levels).
 
-This creates a matrix called the _design matrix_
+This creates a matrix called the \textit{design matrix},
+representing the specific coordinates for each simulation run.
+Below is an example for a 2-factor experiment (e.g., Temperature and Pressure):
 
-<example>
+```{raw} latex
+\begin{table}[h!]
+    \centering
+    \caption{Design Matrix for a Central Composite Design ($k=2$, $\alpha=\sqrt{2}$)}
+    \begin{tabular}{|c|l|c|c|}
+        \hline
+        \textbf{Run} & \textbf{Point Type} & \textbf{$x_1$ (Temp)} & \textbf{$x_2$ (Pressure)} \\
+        \hline
+        \multicolumn{4}{|c|}{\textit{Factorial Points (Corners)}} \\
+        \hline
+        1 & Factorial & $-1$ & $-1$ \\
+        2 & Factorial & $+1$ & $-1$ \\
+        3 & Factorial & $-1$ & $+1$ \\
+        4 & Factorial & $+1$ & $+1$ \\
+        \hline
+        \multicolumn{4}{|c|}{\textit{Axial Points (Star Points)}} \\
+        \hline
+        5 & Axial & $-\sqrt{2}$ & $0$ \\
+        6 & Axial & $+\sqrt{2}$ & $0$ \\
+        7 & Axial & $0$ & $-\sqrt{2}$ \\
+        8 & Axial & $0$ & $+\sqrt{2}$ \\
+        \hline
+        \multicolumn{4}{|c|}{\textit{Center Points}} \\
+        \hline
+        9 & Center & $0$ & $0$ \\
+        10 & Center & $0$ & $0$ \\
+        11 & Center & $0$ & $0$ \\
+        \hline
+    \end{tabular}
+    \label{tab:ccd_design_matrix}
+\end{table}
+
+In this matrix:
+\begin{itemize}
+    \item \textbf{$\pm 1$} represents the low/high levels of the standard factorial design.
+    \item \textbf{$0$} represents the median (center) value.
+    \item \textbf{$\pm \sqrt{2}$} (approx $\pm 1.414$) represents the axial distance $\alpha$, which allows 
+    curvature estimation.
+\end{itemize}
+```
 
 Often a Regression (linear) is used to obtain results from
 the central composite design see: {ref}`sec:Types_Sensitivity_Analysis` for
 more details on obtaining information from this design.
-
-### Randomized Design (Latin-Hypercube)
-
-<example>
 
 (sec:Types_Sensitivity_Analysis)=
 ## Types of Sensitivity Analysis
@@ -269,7 +308,23 @@ OAT is the typical method when most people think about sensitivity analysis,
 it is changing a variable across a range over a series of simulations for
 each variable, *independent* of all other variables.
 
---Example --
+For example, consider an ER simulation where the output of
+interest is Average Patient Wait Time. You have three input factors:
+
+1. Number of Doctors
+2. Number of Nurses
+3. Patient Arrival Rate
+
+To perform an OAT analysis, you would establish a baseline scenario
+(e.g., 3 Doctors, 6 Nurses, 10 Patients/hr).
+You then vary the Number of Doctors from 1 to 5
+while holding the Nurses and Arrival Rate strictly constant at
+their baseline values. Once that is complete,
+you reset the Doctors to 3 and vary the Number of Nurses
+while holding the other two constant.
+
+Because you move only one at a time, you never observe a scenario where
+both the Number of Doctors is low, and the Patient Arrival Rate is high simultaneously.
 
 However, this approach has some issues and limitations because of the independence
 of factors, and because it requires _at least_ one simulation per factor change:
@@ -290,8 +345,65 @@ The reader is likely familiar with the concept of regression, most likely as
 a transformation of variables (represented as a vector) into another state space
 while losing some information (error in the regression estimator).
 
-In this case, regression typically means to fit a linear model to the data using
-Pearson correlation ($r$), 
+In this case, regression typically means to fit a
+generalized linear model to the data using the coefficient of determination ($r^2$)
+as the measure of quality of the predictive power of the
+regression against the original data.
+
+However, for our purposes we use regression not
+merely for prediction, but for inference. We treat the simulation model
+as a black box function $f(x)$ and approximate it using
+ a linear metamodel (or response surface). By analyzing
+ the coefficients of this linear approximation,
+ we can determine which input factors carry the most weight
+ in influencing the output.
+
+```{raw} latex
+The goal is to approximate the simulation output $Y$ using a linear combination of the inputs $x_1, x_2, \dots, x_k$:
+
+\begin{equation}
+    Y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_k x_k + \epsilon
+\end{equation}
+
+\noindent Where:
+\begin{itemize}
+    \item $Y$ is the simulation output variable.
+    \item $x_i$ are the input parameters (factors).
+    \item $\beta_i$ are the regression coefficients.
+    \item $\epsilon$ is the error term (residuals), representing the non-linear behavior 
+    or stochastic noise not captured by the linear model.
+\end{itemize}
+
+A raw regression model is often misleading for sensitivity analysis because the
+input variables likely have different units and scales (e.g., comparing Pressure
+in Pascals vs. Temperature in Celsius). A large coefficient $\beta$ might simply mean
+the unit of $x$ is small, not that the system is sensitive to it.
+
+To resolve this, we use Standardized Regression Coefficients (SRCs).
+This involves standardizing the input data (often to a mean of 0 and variance of 1,
+or coding them between -1 and +1) before fitting the model. This is similar to the
+methods used when constructing a factorial design.
+
+When the model is standardized, the magnitude of the coefficient $|\beta_i|$ becomes a direct measure of sensitivity:
+\begin{itemize}
+    \item \textbf{High $|\beta_i|$}: The output $Y$ is highly sensitive to input $x_i$.
+    \item \textbf{Positive/Negative Sign}: Indicates the direction of the relationship (e.g., $+ \beta$ means $Y$ increases as $x$ increases).
+\end{itemize}
+
+
+As noted in the introduction, the quality of this analysis relies on the
+correlation. In multiple regression, we utilize the Coefficient of Determination ($R^2$):
+
+\begin{equation}
+    R^2 = \frac{\text{Variance explained by the model}}{\text{Total Variance of } Y}
+\end{equation}
+
+\noindent The $R^2$ value can have specific implications for your sensitivity analysis:
+\begin{itemize}
+    \item \textbf{If $R^2 \approx 1$}: The simulation is predominantly linear. The SRCs are highly reliable indicators of sensitivity.
+    \item \textbf{If $R^2$ is low (e.g., $< 0.5$)}: The simulation is driven by strong non-linearities or interactions that the linear model cannot capture. In this case, linear regression sensitivity analysis is \textbf{invalid}, and you must move to non-linear methods (like variance-based sensitivity analysis).
+\end{itemize}
+```
 
 :::
 
@@ -308,7 +420,40 @@ Y = f_0 + \sum_{i=1}^{d} f_i(X_i) + \sum_{i<j} f_{ij}(X_i, X_j) + \dots + f_{1,2
 \text{Var}(Y) = \sum_{i=1}^{d} V_i + \sum_{i<j} V_{ij} + \dots + V_{1,2\dots,d}
 \end{gather*}
 
-The Sobol Method is often used within the context of Quasi-Monte Carlo
+The Sobol Method is often used within the context of Quasi-Monte Carlo (QMC) methods.
+Calculating these variances requires computing high-dimensional integrals, which is
+computationally expensive using standard Monte Carlo sampling ($O(1/\sqrt{N})$ convergence). Using QMC sequences
+(specifically Sobol sequences) improves the convergence rate to approximately $O(1/N)$, making the calculation of
+indices feasible for complex models.
+
+To make the variance decomposition of the Sobol sequence interpretable,
+we normalize the partial variances by the total variance $V = \text{Var}(Y)$.
+This results in two primary metrics for each factor $X_i$:
+
+```{raw} latex
+\begin{enumerate}
+    \item \textbf{First-Order Index ($S_i$):}
+    \begin{equation}
+        S_i = \frac{V_i}{\text{Var}(Y)}
+    \end{equation}
+    This measures the \textbf{main effect} of factor $X_i$ alone, excluding any interactions.
+    It represents the reduction in variance you would achieve if you could fix $X_i$ to its true value.
+
+    \item \textbf{Total-Order Index ($S_{Ti}$):}
+    \begin{equation}
+        S_{Ti} = \frac{E_{\mathbf{X}_{\sim i}}[\text{Var}_{X_i}(Y|\mathbf{X}_{\sim i})]}{\text{Var}(Y)} = 1 - \frac{\text{Var}_{\mathbf{X}_{\sim i}}(E_{X_i}[Y|\mathbf{X}_{\sim i}])}{\text{Var}(Y)}
+    \end{equation}
+    This measures the contribution of factor $X_i$ \textbf{including all its interactions} with other parameters. 
+    Mathematically, it is the sum of all sensitivity indices where index $i$ appears (e.g., $S_i + S_{ij} + S_{ijk} + \dots$).
+\end{enumerate}
+
+By comparing $S_i$ and $S_{Ti}$, we can derive deep insights into the model structure:
+\begin{itemize}
+    \item \textbf{If $S_{Ti} \approx S_i$}: The factor $X_i$ acts independently. There are no significant interactions with other parameters.
+    \item \textbf{If $S_{Ti} \gg S_i$}: The factor $X_i$ is heavily involved in interactions. Changing $X_i$ alone might have a small effect, but changing it in combination with other specific factors has a large effect.
+    \item \textbf{If $S_{Ti} \approx 0$}: The factor is non-influential (unimportant) and can be fixed to a constant value to simplify the model (Dimensionality Reduction).
+\end{itemize}
+```
 
 :::
 
@@ -316,7 +461,48 @@ The Sobol Method is often used within the context of Quasi-Monte Carlo
 The Fractional Factorial method builds a design matrix and then uses this design
 matrix to run simulations of the original model. This design matrix
 then is evaluated through the dot products of the linear combination
-of the parameters
+of the parameters.
+
+While a Full Factorial design ($2^k$) provides information on all possible main
+effects and interactions, it becomes computationally prohibitive as the number
+of factors $k$ increases. The Fractional Factorial design ($2^{k-p}$) solves this by
+selecting a specific subset of the runs (a fraction $\frac{1}{2^p}$ of the total) to
+estimate the most important effects efficiently.
+
+The evaluation mentioned typically refers to the calculation of Contrasts or Effects.
+Since the columns of the design matrix are orthogonal, the effect of any specific factor $j$ can be
+calculated as the normalized dot product of the response vector $\mathbf{Y}$ and the column vector of
+signs for that factor $\mathbf{x}_j$:
+
+\begin{equation}
+    \text{Effect}_j = \frac{2}{N} (\mathbf{x}_j \cdot \mathbf{Y}) = \frac{2}{N} \sum_{i=1}^{N} x_{ij} y_i
+\end{equation}
+
+\noindent Where:
+\begin{itemize}
+    \item $N$ is the total number of runs in the fractional design.
+    \item $x_{ij} \in \{-1, +1\}$ is the level of factor $j$ in run $i$.
+    \item $y_i$ is the simulation output for run $i$.
+\end{itemize}
+
+The trade-off for running fewer simulations is \textbf{Aliasing}.
+Because we do not run all combinations, certain effects become
+mathematically indistinguishable from one another. For example, the
+main effect of Factor A might be aliased with the interaction of
+Factors B and C ($A = BC$).
+
+We categorize these designs by their \textbf{Resolution}, which tells us how bad"the aliasing is:
+\begin{itemize}
+    \item \textbf{Resolution III:} Main effects are aliased with 2-factor interactions. (Good for screening many variables for their impact,
+    bad for detailed information on how the input interacts wit the rest of the system).
+    \item \textbf{Resolution IV:} Main effects are clear, but 2-factor interactions are aliased with other 2-factor interactions.
+    \item \textbf{Resolution V:} Main effects and 2-factor interactions are clear; 2-factor interactions are aliased
+    with 3-factor interactions (which are usually negligible).
+\end{itemize}
+
+Fractional designs rely on the \textit{Sparsity of Effects Principle}, which states that the system
+is likely driven by main effects and low-order interactions. High-order interactions (e.g., 3-way, 4-way)
+are usually rare and negligible, allowing us to sacrifice them to save computational time.
 
 :::
 

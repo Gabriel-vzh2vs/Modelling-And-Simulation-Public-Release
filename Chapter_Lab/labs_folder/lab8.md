@@ -9,12 +9,16 @@
 ### Pre-labs
 
 - {ref}`prelab-3`
+- {ref}`prelab-7`
+- {ref}`prelab-4`
+- {ref}`prelab-5`
 
 ### Chapters
 
-- {ref}`sec:preface`
-- Simulation and Modelling
-- Buffon's Needle
+- {ref}`sec:QuasiMC`
+- {ref}`sec:agent_based_models`
+- {ref}`sec:CrudeMC`
+- {ref}`sec:distribution_modeling`
 
 ## Background Information
 
@@ -29,7 +33,7 @@ and {cite}`pasek2015predicting`.
 As discussed in {ref}`prelab-3`, Agent-Based Modelling is a modelling technique that focuses on how agents
 interact with other agents in a system. For example, in a swarm of bees, a simulation based on ABM will represent
 them as agents with a limited set of possible interactions with the environment and other agents
-such as move, collide, and avoid. This approach allows for an agent to influence the environment around them.
+such as move, collide, and avoid. This approach allows for an agent to influence the surrounding environment.
 
 ### Monte Carlo (MC) Review
 
@@ -52,7 +56,8 @@ be a relatively simple swap.
 Then, we have to consider the distribution that fits the behavior of the data. A reasonable hypothesis
 using Phitter is the beta distribution, although other distributions match the data sufficiently well.
 
-For example, if we fit the data for the 1992 elections for the top five parties using phitter,
+For example, if we fit the data for the 1992 elections for the top five parties using distfit
+from {},
 we get a set of parameters pretty similar to the original paper.
 
 ```{raw} latex
@@ -69,7 +74,7 @@ year & org\_id & party & alpha & beta & n & mean\_share \\
 \end{tabular}
 ```
 
-Now, a common ABM model for the beta distribution is the 
+Now, a common ABM model for the beta distribution is the
 Kirman Two State Model, which is expressed as a Markov
 Chain with specific state transitions probabilities:
 
@@ -178,17 +183,135 @@ we used the Reform party and compare it against the beta distribution fit.
 ![](figs/ReformPartyLit.png)
 This model had the following parameters: 2,000,000 steps, h = 1, agents = 500.
 
-### Implementing an Monte Carlo-Based Simulation Model
+### Implementing a Quasi-Monte Carlo-Based Simulation Model
 
-In this lab, we will be using election and demographic data from the 2008 Bangladeshi Election[^1]
+In this lab, we will be using polling data from the 2023 Turkish Election
+from <https://en.wikipedia.org/wiki/Opinion_polling_for_the_2023_Turkish_presidential_election>
 to do three things:
 
-1) Construct the random variables defining the estimator (vote)
-2) 
+1) Construct the random variables defining the estimators for voting
+percentages per major party candidate
+based on a Gaussian Distribution based on the opinion polling data;
+2) Then we need to consider that opinions can shift because of the
+data's margin of error and natural, Gaussian shifts in the environment
+informed through polling changes overtime;
+3) Finally, then we can use this information to make a randomized
+Quasi-Monte Carlo Simulation of the data and get a confidence interval
+for the probability of victory for the candidates.
 
+```{code} python
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime
+import io
+from scipy.stats import qmc, norm
 
+# Starting Code (CSV)
+csv_data = """Date,Polling firm,Erdoğan,Kılıçdaroğlu,Oğan,İnce
+15-20 Apr,AREDA,51.4,41.8,2.2,4.6
+14-16 Apr,Yöneylem,43.0,48.6,2.8,5.8
+10-16 Apr,SONAR,46.1,44.1,2.1,7.7
+10-16 Apr,AKSOY,38.4,47.9,4.8,9.0
+10-16 Apr,MAK,43.7,47.8,1.1,3.4
+12-14 Apr,AREDA,50.8,43.1,1.6,4.5
+13-Apr,AR-G,45.6,49.2,1.3,3.9
+8-12 Apr,ALF,43.9,47.4,2.2,6.5
+7-11 Apr,ORC,41.5,48.9,2.4,7.2
+6-10 Apr,Avrasya,42.3,50.9,2.0,4.8
+09-Apr,SAROS,46.8,45.7,1.6,6.0
+3-8 Apr,TAG,42.9,51.4,1.6,4.1
+1-8 Apr,Optimar,47.45,45.9,1.7,8.3
+1-4 Apr,TekAr,45.8,46.2,2.4,5.6
+1-3 Apr,MetroPoll,41.1,42.6,2.2,5.0
+1-2 Apr,Gezici,43.2,53.4,1.3,2.1
+25 Mar-2 Apr,ASAL,46.8,42.2,2.6,8.4
+28 Mar-1 Apr,AREDA,50.6,41.8,2.1,5.5
+31-Mar,MetroPoll,42.0,44.6,0.0,0.0
+28-30 Mar,Ankara Analitik,44.5,39.7,1.5,14.3
+27-29 Mar,Yöneylem,41.6,46.4,2.9,9.1
+13-21 Mar,Artıbir,44.0,51.3,1.2,3.5
+20-Mar,SAROS,44.3,45.5,0.0,3.1
+13-18 Mar,Optimar,47.4,45.3,0.7,6.5
+12-17 Mar,Avrasya,39.7,53.5,1.4,2.9
+13-15 Mar,TAG,43.2,45.4,3.6,5.5
+11-15 Mar,ORC,42.3,53.1,1.5,3.1
+17-Mar,Themis,32.1,36.8,12.2,7.9
+15-Mar,MAK,45.7,51.1,0.0,0.0
+14-Mar,AR-G,43.1,46.2,3.1,7.6"""
+
+df = pd.read_csv(io.StringIO(csv_data))
+
+```
+
+The next step after we get the data and do some basic processing
+(obtaining the means and getting standard deviations
+with np.mean and np.std for example),
+to it is to use these parameters to define random variables.
+
+After that, we can set up the randomization method for QMC
+through the Sobol Sampler based on completing the following
+set of code based on what is known about Quasi-Monte Carlo
+Methods.
+
+```{code} python
+num_days = 30
+daily_drift_volatility = 0.2
+
+# TODO: Define num_universes and m
+num_universes = ___
+m = ___
+num_samples_per_universe = 2**m
+
+# TODO: Initialize current_means using np.tile
+current_means = ___
+
+# Initialize storage for stats (Days, Metrics, Candidates)
+history_stats = np.zeros((num_days, 3, 4))
+
+# Create the Quasi-Monte Carlo Sampler (Sobol Sequence)
+sampler = qmc.Sobol(d=4, scramble=True)
+```
+
+Then we build the main body of the simulation
+along with defining the drift of the population
+overtime:
+
+```{code} python
+for day in range(num_days):
+    
+    # APPLY DRIFT
+    # TODO: Generate drift noise of shape (num_universes, 4)
+    drift = np.random.normal(0, daily_drift_volatility, size=(___, ___))
+    current_means += drift
+    
+    # GENERATE QMC ESTIMATOR
+    # TODO: Get uniform samples
+    u_samples = sampler.random(___)
+    
+    # TODO: Convert to Normal distribution using norm.ppf
+    z_scores = norm.ppf(___)
+    
+    # CALCULATE VOTE SHARES (Provided)
+    # This broadcasts (100, 1, 4) against (1, 8192, 4)
+    # Result shape: (100, 8192, 4)
+    sim_votes = current_means[:, None, :] + (base_stds[None, None, :] * z_scores[None, :, :])
+    
+    # DETERMINE WINNERS
+    # Find the index of the max vote in the last axis
+    winners = np.argmax(sim_votes, axis=2)
+    
+    # Calculate win percentage for each universe
+    win_probs_per_universe = (np.arange(4) == winners[..., None]).mean(axis=1) * 100
+    
+    # We calculate the Median, 5th percentile, and 95th percentile across universes
+    history_stats[day, 0, :] = np.median(win_probs_per_universe, axis=0)
+    history_stats[day, 1, :] = np.percentile(win_probs_per_universe, 5, axis=0)
+    history_stats[day, 2, :] = np.percentile(win_probs_per_universe, 95, axis=0)
+
+print("Simulation Complete.")
+```
+
+Then visualize the results similarly to the following output:
+
+![](figs/CILAB8.png)
 :::
-
-[^1]: This was chosen to make sure that this lab is broadly applicable, as the parties and
-government structure that surrounds it no longer exist, and there is reliable data for the
-election and demographics in question.

@@ -32,6 +32,7 @@ Before applying formal statistical tests, it is best practice to visually inspec
 
     - Circular patterns may indicate cyclic behavior.
 
+![a](figs/ACFfig.png)
 
 ```{code-cell}
 :tags: [hide-input]
@@ -99,7 +100,7 @@ Visual inspection is often subjective. To formally test the hypothesis $H_0$​:
 
 The Runs Test is a non-parametric statistical test that checks a hypothesis of randomness for a two-valued data sequence. In the context of distribution modeling, we typically test for runs above and below the median or mean.
 
-A "run" is defined as a succession of identical symbols which are followed and preceded by different symbols or by no symbol at all.
+A "run" is defined as a succession of identical symbols which are followed and preceded by different symbols or by no symbol at all. 
 
 Hypothesis: $H_0$​: The sequence of observations is random.
 
@@ -112,6 +113,10 @@ Procedure:
 - Count R, the total number of runs (clusters of consecutive + or −).
 
 - Let $n_1$​ be the count of + and $n_2$​ be the count of −.
+
+Visually, this procedure can look like the following image:
+
+![a](figs/runs_test_visualization.png)
 
 Under the null hypothesis of randomness, if the sample size $N=n_1​+n_2​$ is large (usually $N \ge 20$), the distribution of the number of runs R approximates a normal distribution with:
 

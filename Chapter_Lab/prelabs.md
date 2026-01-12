@@ -13,27 +13,13 @@ helps the reader comprehend the tasks they need to do for the associated lab. Ad
 Pre-labs marked with "Do" may not be as theory-based as labs marked with "Read".
 
 Some pre-labs might be marked with "short", this means that they are pre-labs
-that rely on the rest of the book for support - often these are used to transition
+that rely on the rest of the book for support and often these are used to transition
 between topics and introduce different topics.
 
 Grading for the Pre-Labs is at the instructor's discretion as described in
 {ref}`sec:labs`; additionally, we recommend completing a pre-lab for each lab
-at a 1 to 1 ratio (meaning, if a reader does 8 labs, they should do 8 pre-labs,
-which is the expected number of pre-labs and labs for a course) However, if you
-are self-studying, you can choose which pre-labs you do based on your knowledge level.
-
-:::{note} Pre-Lab Status
-To Henning, this section is getting content at a decent speed. It should be
-fully-drafted by June 25th at the current rate of improvement. The topics are
-all there, along with basic information and sections.
-
-Pre-Lab Completion Tracker (66% done with pre-labs):
-
-- Pre-lab 9 (Consolidating Pre-lab 5 into it) *at some point*
-- Pre-lab 10 (Topic Okay!) *secondary focus*
-- Pre-lab 11 (Topic Okay!) *secondary focus*
-- Pre-lab 12 (Topic Okay!) *secondary focus*
-:::
+at a 1 to 1 ratio. However, if you are self-studying,
+you can choose which pre-labs you do dependent on your knowledge level.
 
 List of Pre-labs:
 

@@ -56,9 +56,6 @@ We will talk about systems, models and simulations. Here we typically
 use $S$ to denote systems, and $M$ to denote models. We do not have a
 good symbol for simulations, $S$ being taken already.
 
-```{note} A reference slide set with terminology for military context:
-[overview](https://ndia.dtic.mil/wp-content/uploads/2019/systems/Mon_Coolahan.pdf)
-```
 
 ## Mathematical models ##
 
@@ -70,8 +67,8 @@ evoluation may be captured through ordinary- or partial differential
 equations, or they may evolve in discrete time steps. Naturally, there
 are also hybrid models involving both paradigms.
 
-```{note}
-Reference/link to chapter with background on modeling paradigms.
+```{note} We will add a reference here later to a chapter on modeling.
+(In progress)
 ```
 
 
@@ -80,10 +77,8 @@ components_. Analysis of such models is a central part of this book,
 and a good foundation in probability theory and statistics will
 definitely be helpful. We have included a chapter that tersely covers
 this background material, but it is no substitute for an actual course
-or a book on this topic.
+or a book on this topic. You can find that here {ref}`sec:prob_stats`.
 
-```{note} add references here and link to prob/stats.
-```
 
 We should also clarify that when we say mathematical model we really
 mean a formally specified model. A precise, algorithmic description of
@@ -96,17 +91,16 @@ this reason, we stick with the term mathematical model, and we take
 this to also include algorithmic descriptions.
 
 What is a good model? We address that briefly later in this section
-under {ref}`sec:intro_validation` and in more detail in
-```{note}
-Link to V&V
-```
+under {ref}`sec:intro_validation`.
 
 For some mathematical models you may be able to derive an analytic or
 _closed form solution_, perhaps with help of software performing
-symbolic computations such as Mathematica and SageMath. While one
-should certainly embrace and take advantage of this whenever possible,
-this situation is relatively rare. This is where simulations come into
-play.
+symbolic computations such as
+[Mathematica](https://www.wolfram.com/mathematica/) and
+[SageMath](https://www.sagemath.org/). While one should certainly
+embrace and take advantage of this situation whenever possible, it is
+relatively rare in practie. This is precisely where simulations come
+into play.
 
 
 (sec:intro_simulation)=
@@ -140,9 +134,9 @@ take? Here are some examples:
     using technologies such as [Open MPI](https://www.open-mpi.org/)
     and [OpenMP](https://en.wikipedia.org/wiki/OpenMP)
 
-In this book we will focus mostly on Python and Excel/XLRisk.
-```{note} add reference to chapter.
-```
+In this book we will focus mostly on Python and Excel/XLRisk, see also
+{ref}`sec:lab`.
+
 
 ## Stochastic models, uncertainties and distribution modeling ##
 
@@ -267,6 +261,13 @@ models that rely on access to HPC facilities, nor how to run software
 on such architectures.
 
 
+```{note} Optional reading
+Modeling and simulation is central to the Department of Defense and its many contractors. There is a large body of work that seeks to ensure that simulation models are well-specified, well-behaved, and work together. There are also several standards that have been developed for this, some of which we may include in later chapters. For a small taste of this, you can view the following
+[slide deck](https://ndia.dtic.mil/wp-content/uploads/2019/systems/Mon_Coolahan.pdf). It is not a "standard document" but its modules will give you some sense of the breadth and depth involved.
+```
+
+<!--
+
 ## Roadmap ##
 
 The following is an annotated outline of chapters and modules in the book.
@@ -316,6 +317,8 @@ See [link](#sec:intro_sim) for more information
 
 _mathematical model_ $M$ describing the system. How
 precise does the model have to be?
+
+-->
 
 
 ```{bibliography}

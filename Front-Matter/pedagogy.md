@@ -3,24 +3,52 @@
 (sec:pedagogy)=
 
 This chapter discusses how an instructor can use this work in their courses.
+Central to this text is the concept of **Instructional Scaffolding**.
+We structure the learning experience to progressively move students toward greater independence:
+
+1. **Pre-Labs (Low Stakes):** Focus on knowledge retrieval and setup. The scaffold provides heavy support
+(e.g., starter code, direct reading prompts) to ensure students are prepared for the next step, labs.
+2. **Labs (Medium Stakes):** Focus on application and analysis. The scaffold is slightly removed;
+students must combine concepts to solve specific problems with some guidance during the lab lecture.
+3. **Projects (High Stakes):** Focus on creation and evaluation. The scaffold is largely removed,
+requiring students to synthesize the material to model open-ended systems within small to large groups.
 
 ## Undergraduate Pedagogy
 
-a
+For undergraduate students (e.g., those in SYS 3062), the primary learning objective is
+technical competency and model literacy. Students should leave the course capable of translating
+a description of a system into a working simulation code (using tools like SimPy or Salabim)
+and understanding the statistical outputs.
 
 ### Undergrad Lab Section
 
-a
+In the undergraduate lab sections, instruction should prioritize active coding and immediate feedback.
 
+- **Code Skeletons:** Provide partially completed code ("fill-in-the-blanks")
+for complex logic, allowing students to focus on the simulation mechanics
+(e.g., resource requests, process interaction) rather than boilerplate syntax.
+- **Visualization:** Encourage the use of trace logs or simple visualizations early on.
+Undergraduates often struggle to debug simulation errors; seeing the entities move helps
+bridge the gap between code and concept.
+- **Statistical Guardrails:** When dealing with input modeling or output analysis, provide
+clear checklists. For example, rather than asking "Validate this model," ask
+"Compare the model's average wait time to the theoretical M/M/1 result."
 
 ## Graduate Pedagogy
 
-a
+For graduate students, the learning objective shifts toward Model Abstraction and Theoretical Rigor.
+Beyond getting code to run, graduate students must justify *why* a specific modeling approach
+(e.g., Agent-Based vs. Discrete Event) was chosen and defend their statistical assumptions.
 
 ### Grad Lab Section
 
-a
+Graduate labs should function more like workshops.
 
+- **Problem Formulation:** Instead of giving a pre-defined problem statement, provide a messy dataset or
+a vague system description. Require the students to formulate the assumptions themselves.
+- **Theoretical Deep-Dives:** When discussing Random Variate Generation (RVG), graduate students should not just use the library functions; they should implement at least one generator from scratch (e.g., Inverse Transform or Acceptance-Rejection) to understand the computational cost and precision trade-offs.
+- **Research Connection:** Labs should explicitly connect to current literature. Discussion questions
+should ask students to critique how the week's method is applied in recent papers.
 
 ## Grading Standards
 
@@ -181,6 +209,56 @@ Writing is unclear, awkward, or difficult to follow. Frequent or significant err
 
 ### Suggested Grading Standards for Exercises
 
+Exercises differ from labs in that they are often shorter, more focused on mathematical
+derivation or specific coding concepts, and are completed individually.
+
 #### For Advanced Undergraduate-Level and First-Year Masters Students
 
+At this level, grading focuses on the correct application of methods
+and the ability to interpret the results within the context of the problem.
+
+```{raw} latex
+\begin{tabular}{l >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth}}
+\toprule
+\textbf{Criteria} & \textbf{Excellent (A)} & \textbf{Proficient (B/C)} & \textbf{Needs Improvement (D/F)} \\
+\cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(l){4-4}
+
+\textbf{Criterion 1: Methodology} &
+Correctly identifies and applies the appropriate simulation or statistical method (e.g., choosing the right t-test or variance reduction technique). Steps are shown clearly. &
+Selects the correct method but makes minor errors in application or calculation. &
+Selects an inappropriate method for the problem type or fails to show work. \\
+
+\textbf{Criterion 2: Interpretation} &
+Interprets the numerical result correctly in the context of the system (e.g., "The system is unstable because $\rho > 1$"). &
+Provides a generic interpretation of the number without connecting it back to the specific system context. &
+Fails to interpret the result or provides an interpretation that contradicts the calculated data. \\
+
+\bottomrule
+\end{tabular}
+```
+
 #### For Intermediate to Advanced Graduate Students
+
+At the doctoral or advanced graduate level, grading shifts to justification,
+optimality, and critique. Correct answers are expected; the grade depends
+on the depth of the approach.
+
+```{raw} latex
+\begin{tabular}{l >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth}}
+\toprule
+\textbf{Criteria} & \textbf{Excellent (A)} & \textbf{Proficient (B/C)} & \textbf{Needs Improvement (D/F)} \\
+\cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(l){4-4}
+
+\textbf{Criterion 1: Theoretical Justification} &
+Derivations are rigorous and complete. State variables and assumptions are explicitly defined and justified. Discusses edge cases or limitations of the chosen approach. &
+Derivations are correct but lack explicit justification for assumptions. State variables are used but not formally defined. &
+Derivations contain logical gaps or errors. Relies on intuition rather than formal proof or calculation. \\
+
+\textbf{Criterion 2: Synthesis \& Extension} &
+Demonstrates awareness of alternative approaches and explains why the chosen method is superior (e.g., computational efficiency vs. precision). Connects the exercise to broader theory (e.g., Lyapunov stability). &
+Solves the problem as stated but does not discuss alternatives or broader implications. &
+Treats the problem in isolation with no attempt to connect it to the course theory. \\
+
+\bottomrule
+\end{tabular}
+```

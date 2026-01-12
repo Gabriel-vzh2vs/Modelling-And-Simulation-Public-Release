@@ -53,13 +53,46 @@ where c is a constant.
 :::{prf:example} Control Variates
 :label: ex:control_variates
 
-Imagine you are trying to use simulation to price a complex Asian Option ($X$) where no closed-form formula exists. However, a standard European Option ($Y$) behaves very similarly and *does* have a known closed-form price through the [Black-Scholes formula](https://www.columbia.edu/~mh2078/FoundationsFE/BlackScholes.pdf).
+```{raw} latex
+Let's try to estimate the price of an \textbf{Arithmetic Asian Call Option}, $\mathbb{E}[V_{\text{Asian}}]$. The payoff depends on the average price of the asset over time, $\bar{S}$:
+\[ V_{\text{Asian}} = e^{-rT} \max(\bar{S} - K, 0) \]
+Because the arithmetic average of log-normally distributed variables has no simple distribution, there is no closed-form formula. We could use Crude Monte Carlo:
+\[ \hat{\theta}_{\text{CMC}} = \frac{1}{n} \sum_{i=1}^n V_{\text{Asian}}^{(i)} \]
 
-Instead of just simulating the Asian Option, you simulate both using the same random numbers (CRN).
+However, we can do better if we find a Control Variate.
 
-- If the simulated European Option comes out \$5 higher than its known Black-Scholes price, it's likely your random numbers were positively biased.
-- Therefore, your Asian Option estimate is most likely overestimating the value of the option.
-- You subtract a portion of that \$5 error from your Asian Option estimate to correct it.
+Consider a standard \textbf{European Call Option} on the same asset. Its payoff depends only on the final price $S_T$:
+\[ V_{\text{European}} = e^{-rT} \max(S_T - K, 0) \]
+These two options are driven by the same underlying asset volatility. If the stock price ends high ($S_T$ is high), the average price ($\bar{S}$) was likely high as well.
+
+Fortunately, the expected value of the European Option is known exactly via the \textbf{Black-Scholes formula}:
+\[ \mathbb{E}[V_{\text{European}}] = \text{BS}(S_0, K, T, r, \sigma) \]
+
+We can visualize this relationship by simulating paths and plotting the Asian payoff against the European payoff for each path, as shown below.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figs/control_variate_asian_euro.png}
+    \caption{\textbf{Left:} Scatter plot showing the strong positive correlation ($\rho \approx 0.76$) between the European payoff (Control) and Asian payoff (Target). \textbf{Right:} Convergence plot showing the Control Variate estimator (Blue) stabilizing much faster than the Crude Monte Carlo estimator (Gray).}
+    \label{fig:cv_asian_euro}
+\end{figure}
+
+The scatter plot reveals that the European option contains significant information about the variance in our random numbers. The convergence plot shows how leveraging this information allows the Control Variate estimator to converge to the true price much faster than Crude Monte Carlo.
+
+\subsubsection*{The Logic of the Correction}
+Since they move together, we can use the variance in the European estimate to correct the Asian estimate:
+\begin{enumerate}
+    \item \textbf{Simulate} both options using the same random numbers (Common Random Numbers).
+    \item \textbf{Check the Error:} If your simulated European price comes out \$5 higher than the known Black-Scholes price, your random numbers were likely "lucky" (positively biased).
+    \item \textbf{Correct:} Since the options are correlated, your Asian estimate is likely overestimated, too. You subtract a portion of that \$5 error from your Asian estimate to fix it.
+\end{enumerate}
+
+\subsubsection*{The Estimator}
+Our new estimator is:
+\[ \hat{\theta}_{\text{CV}} = \frac{1}{n} \sum_{i=1}^n \left( V_{\text{Asian}}^{(i)} - c^* (V_{\text{European}}^{(i)} - \mathbb{E}[V_{\text{European}}]) \right) \]
+where $c^*$ is the optimal weight determined by the covariance between the two options.
+```
+
 :::
 
 ### Antithetic Variates
@@ -87,35 +120,40 @@ If a "high" U causes a high output, then a "low" 1−U should cause a low output
 :::{prf:example} Antithetic Variates
 :label: ex:antithetic_queue
 
-Consider a simulation of an M/M/1 queue to find the average waiting time.
+```{raw} latex
+Consider a simulation of an $M/M/1$ queue to find the average waiting time, $W_q$. We generate inter-arrival times using the Inverse Transform Method with the formula $X = -\frac{1}{\lambda}\ln(1-U)$.
 
-- **Run 1 (Crude):** We generate inter-arrival times using $U$. If $U$ is small (e.g., 0.05), inter-arrival times are short, customers arrive fast, and the queue builds up (High Waiting Time).
-- **Run 2 (Antithetic):** We use $1-U$. If $U=0.05$, then $1-U=0.95$. This generates long inter-arrival times. Customers arrive slowly, and the queue stays empty (Low Waiting Time).
+We can simulate two correlated paths using Antithetic Variates to reduce variance:
 
-By averaging Run 1 (High Wait) and Run 2 (Low Wait), we get a more stable estimate of the true average waiting time than two independent runs would provide.
+\begin{itemize}
+    \item \textbf{Variate 1 (Standard):} We generate arrivals using random numbers $U$.
+    \begin{itemize}
+        \item If we draw a small number (e.g., $U = 0.05$), then $(1-U) = 0.95$.
+        \item Since $-\ln(0.95)$ is very small, the generated inter-arrival time is short.
+        \item \textbf{Result:} Customers arrive in rapid succession, causing the queue to build up and resulting in a large estimated $W_q$.
+    \end{itemize}
+    
+    \item \textbf{Variate 2 (Antithetic):} We generate arrivals using $1-U$.
+    \begin{itemize}
+        \item Using the same seed, the input becomes $1 - 0.05 = 0.95$.
+        \item The formula now sees $(1 - 0.95) = 0.05$. Since $-\ln(0.05)$ is large positive number, the generated inter-arrival time is long.
+        \item \textbf{Result:} Customers arrive sparsely, giving the server time to clear the queue, resulting in a small (or zero) $W_q$.
+    \end{itemize}
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=textwidth]{figs/AntiVariate.png}
+\end{center}
+
+\textbf{Conclusion:} By averaging these two variates, the "bad luck" of rapid arrivals in Variate 1 is offset by the "good luck" of sparse arrivals in Variate 2. The combined estimator converges to the true $W_q$ with significantly lower variance than two independent simulations could perform alone.
+```
+
+\end{document}
 :::
 
 ## Sampling Methods
 
-### Correlated Sampling
-
-Correlated Sampling (often called Common Random Numbers or CRN) is the opposite of Antithetic Variates. It is used when comparing two different system designs (e.g., System A vs. System B).
-
-If we want to know if System A is better than System B, we care about the difference $D=X_A​−X_B$​.
-
-To minimize the variance of the difference, we want positive correlation (maximize $Cov(X_A​,X_B​)$).
-
-- Use the exact same seeds for both System A and System B.
-
-- If you want to compare the aerodynamics of two cars, you drive them both on the same day with the same wind conditions (correlated environment). You don't drive Car A on a calm day and Car B during a hurricane.
-
-:::{prf:definition} Correlated Sampling
-placeholder
-:::
-
-:::{prf:example} Correlated Sampling
-placeholder
-:::
+ These Sampling methods depart from simple random sampling by incorporating prior knowledge about the system's structure. By sampling with our prior knowledge, we can drastically improve the precision of our estimators through reducing the variance. In this section, we examine strategies such as Stratified Sampling and Importance Sampling, demonstrating how modifying the sampling distribution itself can yield faster, more stable convergence.
 
 ### Stratified Sampling
 
@@ -128,12 +166,76 @@ Instead of hoping the random generator samples the tails of a distribution, we f
 
 This ensures that rare but important events are represented in the sample exactly as often as they should be, eliminating some variance in sampling distributions. This is the foundational principle behind Quasi-Monte Carlo (QMC) methods (see {ref}`sec:QuasiMC`), which use deterministic sequences to cover the domain evenly.
 
-:::{prf:definition} Stratified Sampling
-
-:::
-
 :::{prf:example} Stratified Sampling
-placeholder
+The following example is based on [Kai Xu's notes on Stratified
+Sampling](https://xuk.ai/blog/stratified-sampling.html).
+```{raw} latex
+
+We start by partitioning the domain $\mathbb{X}$ into $H$ disjoint strata such that $\mathbb{X} = \bigcup_{h=1}^H \mathbb{X}_h$. In the simplest form of Stratified Sampling, we draw $n_h$ independent samples uniformly from each stratum $\mathbb{X}_h$.
+
+\begin{center}
+\includegraphics[width=\textwidth]{figs/Strata.png}
+\end{center}
+
+The stratified estimator is given by the weighted sum of the estimators from each stratum:
+
+\[
+\hat{I}_{\text{strat}} = \sum_{h=1}^{H} \frac{|\mathbb{X}_h|}{n_h} \sum_{i=1}^{n_h} f(x_h^i)
+\]
+
+where $x_h^i \sim \text{Uniform}(\mathbb{X}_h)$ is the $i$-th sample in stratum $h$, and $|\mathbb{X}_h|$ is the volume of that stratum.
+
+First, we verify that this is an unbiased estimator of the true integral $I$. The expected value of the estimator is:
+
+\begin{align*}
+\mathbb{E}[\hat{I}_{\text{strat}}] &= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|}{n_h} \sum_{i=1}^{n_h} \mathbb{E}[f(x_h^i)] \\
+&= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|}{n_h} \cdot n_h \cdot \underbrace{\left( \frac{1}{|\mathbb{X}_h|} \int_{\mathbb{X}_h} f(x) \, \mathrm{d}x \right)}_{\text{Mean in stratum } h} \\
+&= \sum_{h=1}^{H} \int_{\mathbb{X}_h} f(x) \, \mathrm{d}x \\
+&= \int_{\mathbb{X}} f(x) \, \mathrm{d}x = I
+\end{align*}
+
+Since samples are independent between strata, the variance of the sum is the sum of the variances. Let $\sigma_h^2$ denote the variance of $f(x)$ within stratum $h$:
+\[
+\sigma_h^2 = \frac{1}{|\mathbb{X}_h|} \int_{\mathbb{X}_h} (f(x) - \mu_h)^2 \, \mathrm{d}x
+\]
+The variance of the stratified estimator is derived as:
+
+\begin{align*}
+\text{Var}[\hat{I}_{\text{strat}}] &= \sum_{h=1}^{H} \text{Var} \left[ \frac{|\mathbb{X}_h|}{n_h} \sum_{i=1}^{n_h} f(x_h^i) \right] \\
+&= \sum_{h=1}^{H} \left( \frac{|\mathbb{X}_h|}{n_h} \right)^2 \sum_{i=1}^{n_h} \text{Var}[f(x_h^i)] \\
+&= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|^2}{n_h^2} \cdot n_h \sigma_h^2 \\
+&= \sum_{h=1}^{H} \frac{|\mathbb{X}_h|^2}{n_h} \sigma_h^2
+\end{align*}
+
+Does this reduce variance compared to Crude Monte Carlo (CMC)? Yes, specifically when we use \textbf{Proportional Allocation}, where the number of samples $n_h$ is proportional to the stratum size ($n_h = n|\mathbb{X}_h|$).
+
+We can decompose the total variance of $f(x)$ (which drives the CMC error) using the \textit{Law of Total Variance}:
+\[
+\text{Var}[f(X)] = \underbrace{\mathbb{E}[\text{Var}(f(X)|h)]}_{\text{Within-Stratum Variance}} + \underbrace{\text{Var}(\mathbb{E}[f(X)|h])}_{\text{Between-Stratum Variance}}
+\]
+Mathematically, this expands to:
+\[
+\sigma^2_{\text{total}} = \sum_{h=1}^{H} |\mathbb{X}_h|\sigma_h^2 + \sum_{h=1}^{H} |\mathbb{X}_h|(\mu_h - I)^2
+\]
+
+The variance of the Crude Monte Carlo estimator is simply $\frac{\sigma^2_{\text{total}}}{n}$. Substituting the decomposition above:
+\[
+\text{Var}[\hat{I}_{\text{CMC}}] = \underbrace{\frac{1}{n} \sum_{h=1}^{H} |\mathbb{X}_h|\sigma_h^2}_{\text{Term A}} + \underbrace{\frac{1}{n} \sum_{h=1}^{H} |\mathbb{X}_h|(\mu_h - I)^2}_{\text{Term B}}
+\]
+
+However, if we use Stratified Sampling with proportional allocation ($n_h = n|\mathbb{X}_h|$), the variance becomes:
+\[
+\text{Var}[\hat{I}_{\text{strat, prop}}] = \sum_{h=1}^{H} \frac{|\mathbb{X}_h|^2}{n|\mathbb{X}_h|} \sigma_h^2 = \frac{1}{n} \sum_{h=1}^{H} |\mathbb{X}_h|\sigma_h^2
+\]
+
+Notice that $\text{Var}[\hat{I}_{\text{strat, prop}}]$ is exactly equal to \textbf{Term A} from the CMC variance.
+\begin{itemize}
+    \item Stratified Sampling \textit{eliminates} \textbf{Term B} (the variation between stratum means).
+    \item Since Term B is always non-negative, $\text{Var}[\hat{I}_{\text{strat, prop}}] \le \text{Var}[\hat{I}_{\text{CMC}}]$.
+\end{itemize}
+```
+
+Therefore, under proportional allocation, Stratified Sampling can never be worse than Crude Monte Carlo. 
 :::
 
 ### Importance Sampling
@@ -170,83 +272,196 @@ Then $\widehat{\mu}_h \xrightarrow{a.s.} \mathbb{E}_f[h(X)]$ as $n \to \infty$.
 :::{prf:example} Importance Sampling
 :label: ex:importance_sampling
 
-Suppose you are simulating a bridge failure.
-* **Standard MC:** You simulate standard wind speeds. The bridge almost never fails. Variance is high because you have mostly 0s and one rare 1.
-* **Importance Sampling:** You simulate from a distribution where "hurricane" wind speeds are common. The bridge fails often (the event is no longer rare).
-* **Correction:** When the bridge fails under hurricane conditions, you weight that observation by a very small number (because hurricanes are actually rare).
+And this example is based on {cite}`voss2013introduction`:
 
-This drastically reduces the variance for estimating very small probabilities.
+```{raw} latex
+Suppose we want to estimate the probability that a standard normal variable exceeds 4. Let $X \sim \mathcal{N}(0, 1)$. We are interested in the quantity:
+\[ \theta = \mathbb{P}(X > 4) = \mathbb{E}[\mathbb{I}_{[4, \infty)}(X)] \]
+
+A crude Monte Carlo (CMC) estimator samples $X_i \sim \mathcal{N}(0, 1)$ directly:
+\[ \hat{\theta}_n^{\text{CMC}} = \frac{1}{n} \sum_{i=1}^{n} \mathbb{I}_{[4, \infty)}(X_i) \]
+
+However, $X > 4$ is an extremely rare event (occurring roughly 3 times in 100,000 samples). As a result, for finite $n$, the estimator is likely to be exactly 0, or if a sample does hit, the variance is enormous relative to the mean.
+
+\subsubsection*{Importance Sampling Strategy}
+To reduce variance, we sample from a \textbf{proposal distribution} $g(y)$ that places more mass in the region of interest ($y > 4$). 
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{figs/ISVIS.png}
+\end{center}
+
+We choose a shifted normal distribution $Y \sim \mathcal{N}(4, 1)$ as our proposal. The PDFs are:
+\begin{align*}
+    f(x) &= \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}x^2} \quad &&(\text{Target: } \mathcal{N}(0,1)) \\
+    g(y) &= \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}(y-4)^2} \quad &&(\text{Proposal: } \mathcal{N}(4,1))
+\end{align*}
+
+\subsubsection*{Deriving the Importance Weights}
+The Importance Sampling estimator re-weights samples from $g(y)$ by the likelihood ratio $w(y) = f(y)/g(y)$. We derive the weight as follows:
+
+\begin{align*}
+w(y) = \frac{f(y)}{g(y)} &= \frac{\exp\left(-\frac{1}{2}y^2\right)}{\exp\left(-\frac{1}{2}(y-4)^2\right)} \\
+&= \exp\left( -\frac{1}{2}y^2 + \frac{1}{2}(y-4)^2 \right) \\
+&= \exp\left( \frac{1}{2} \left[ -y^2 + (y^2 - 8y + 16) \right] \right) \\
+&= \exp\left( \frac{1}{2} (-8y + 16) \right) \\
+&= e^{-4y + 8}
+\end{align*}
+
+\subsubsection*{The Final Estimator}
+Substituting these weights into the IS equation, our new estimator is:
+\[ \hat{\theta}_n^{\text{IS}} = \frac{1}{n} \sum_{i=1}^{n} w(Y_i) \mathbb{I}_{[4, \infty)}(Y_i) = \frac{1}{n} \sum_{i=1}^{n} e^{-4Y_i + 8} \mathbb{I}_{[4, \infty)}(Y_i) \]
+
+where $Y_i$ are drawn from $\mathcal{N}(4, 1)$. This estimator yields a stable result (approx $3.16189 \times 10^{-5}$) even with a sample size of 100,000, whereas the CMC estimator fluctuates wildly with the same sample size.
+```
 :::
 
 
-# Problems Left to the Reader
+
+## Problems Left to the Reader
 
 :::{seealso} Problem 1 (Monte Carlo: Antithetic Variables)
    It is desired to estimate the value of an integral:
-
+```{raw} latex
     \begin{equation*}
         \hat{y} = \int_0^1 x^2 \, dx
     \end{equation*}
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
+    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$.
+    \begin{enumerate}
+    \item Define the Monte Carlo Estimator, $\hat{y}$.
+    \item Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
+    \item For $Z \sim U[0,1]$, use the results:
         $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+    \end{enumerate}
+```
 :::
 
-:::{seealso} Problem 2 (Monte Carlo: Sampling for Variance Reduction)
-    It is desired to estimate the value of an integral
+:::{seealso} Problem 2 (Monte Carlo: Sampling for Variance Reduction, Old Practice Exam Question)
+``` {raw} latex
+Let $A$ be the disk with radius~1 centered at~$(0,0)$, that intersects with a square $B$ that has  lower left corner at~$(0,0)$ and side of length $R$ where~$R < 1$ and $\sqrt{2} R > 1$.  We want to calculate the area of $A \cap B$.
 
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
+Let $X$ and $Y$ be independent $U(0,1)$ random variables with joint probability density function~$f_{XY}(x,y) = 1$ for $x,y\in[0,1]$ and $f_{XY}(x,y) = $ otherwise. Define the indicator random variable $I(X,Y)$ to be 1 if $(x,y) \in A \cap B$ and 0 otherwise.
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+\begin{enumerate}[label=\Alph*]
+\item[\textbf{(a)}] Explain how the indicator random variable $I(X,Y)$ can be used to estimate the area of $A \cap B$ using Crude Monte Carlo.
+    
+    \item[\textbf{(b)}] Determine the variance of the estimator $\hat{I}_{\text{CMC}}$ for the area.
+
+    \item[\textbf{(c)}] Suppose we partition the sample space (the unit square used to generate random numbers for $X$ and $Y$) into two strata:
+    \begin{itemize}
+        \item Stratum 1: $S_1 = [0, \frac{1}{\sqrt{2}R}] \times [0, \frac{1}{\sqrt{2}R}]$
+        \item Stratum 2: $S_2 = [0,1]^2 \setminus S_1$ (The remainder of the unit square)
+    \end{itemize}
+    Explain qualitatively why this specific stratification might significantly reduce variance compared to Crude Monte Carlo. (Hint: Consider the geometry of the disk $A$ relative to the stratum boundary).
+
+    \item[\textbf{(d)}] Consider the following proposed estimator. Instead of generating $2n$ independent samples, we generate $n$ pairs. For each pair $i$, we draw $(U_i, V_i) \sim U(0,1)^2$ to generate the first point $P_1 = (RU_i, RV_i)$. We then generate a second ``antithetic'' point $P_2 = (R(1-U_i), R(1-V_i))$.
+    
+    Explain the mechanism by which this method could reduce variance in this specific geometric context. Specifically, if a generated point $P_1$ is close to the origin $(0,0)$, where will its antithetic pair $P_2$ likely be located, and how does this affect the covariance between the two estimates?
+\end{enumerate}
+```
+
 :::
+
 
 :::{seealso} Problem 3 (Monte Carlo: Importance Sampling)
-    It is desired to estimate the value of an integral
 
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
+```{raw} latex
+We wish to estimate the integral $I$, which represents the expectation of $x^2$ over the tail of a standard normal distribution:
+\[ I = \int_{1}^{\infty} \frac{x^2}{\sqrt{2\pi}} e^{-x^2/2} \, dx \]
+Let the integrand be denoted by $h(x) = \frac{x^2}{\sqrt{2\pi}} e^{-x^2/2}$ for $x > 1$.
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+In Importance Sampling, the goal is to choose a proposal distribution (importance function) $\phi(x)$ that is ``close'' to the shape of $|h(x)|$ to minimize the variance of the estimator.
+
+Part (a): Analysis of the Integrand
+
+Before selecting a proposal distribution, we must understand the ``important'' regions of the integrand.
+\begin{enumerate}
+    \item Find the mode of the function $h(x)$ for $x > 1$ by differentiating and setting to zero.
+    \item Based on the mode, where is the ``mass'' of the integral concentrated? (i.e., around which value should our importance sampling function be centered?)
+\end{enumerate}
+
+Part (b): Selection of Proposal Distributions
+
+Based on your analysis in Part (a), propose two distinct importance functions, $\phi_1(x)$ and $\phi_2(x)$, that are supported on $(1, \infty)$.
+\begin{itemize}
+    \item \textbf{Hint 1:} Consider a \textit{Shifted Exponential distribution} $\text{Exp}(\lambda)$ shifted to start at $1$.
+    \item \textbf{Hint 2:} Consider a \textit{Truncated Normal distribution} restricted to $x > 1$ with a mean parameter $\mu$ close to the mode you found in Part (a).
+\end{itemize}
+Explicitly write down the PDFs for your chosen $\phi_1(x)$ and $\phi_2(x)$.
+
+Part (c): Visual Inspection of ``Closeness''
+
+Ideally, the ratio $w(x) = \frac{h(x)}{\phi(x)}$ should be as constant as possible.
+\begin{enumerate}
+    \item Create a plot showing the integrand $h(x)$ overlayed with your two proposal PDFs $\phi_1(x)$ and $\phi_2(x)$ on the interval $x \in [1, 5]$.
+    \item Create a second plot showing the \textbf{likelihood ratio} (weight function) $w(x) = \frac{h(x)}{\phi(x)}$ for both proposals.
+    \item Based strictly on these plots, which function do you hypothesize will produce the lower variance estimator? Explain your reasoning.
+\end{enumerate}
+
+Part (d): Monte Carlo Estimation
+
+\begin{enumerate}
+    \item Implement an Importance Sampling estimator using $N=10,000$ samples for both $\phi_1$ and $\phi_2$.
+    \item Report the estimated value of the integral $\hat{I}$.
+    \item Calculate the \textbf{variance} of your estimator for both cases:
+    \[ \widehat{\text{Var}}(\hat{I}) = \frac{1}{N^2} \sum_{i=1}^N (w(X_i) - \hat{I})^2 \]
+    \item Compare your empirical variances with your hypothesis from Part (c). Did the visual inspection of the weight function correctly predict the better estimator?
+\end{enumerate}
+```
+
 :::
 
 :::{seealso} Problem 4 (Monte Carlo: Importance Sampling)
-    It is desired to estimate the value of an integral
+```{raw} latex
+Importance sampling is particularly powerful for ``rare event'' simulation, where standard Monte Carlo methods require an infeasibly large number of samples to observe even a single non-zero value.
 
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
+Consider the problem of estimating the following expectation for a large threshold $x \ge 1$:
+\[ \theta(x) = \mathbb{E}[e^{\sqrt{Z}} \mathbb{I}_{\{Z \ge x\}}] \]
+where $Z \sim N(0,1)$ is a standard normal random variable. Let $X := e^{\sqrt{Z}} \mathbb{I}_{\{Z \ge x\}}$ denote the single-sample estimator for Crude Monte Carlo.
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
-:::
+Part (a): The Failure of Crude Monte Carlo
 
-:::{seealso} Problem 5 (Monte Carlo: Importance Sampling)
-    It is desired to estimate the value of an integral
+Before seeking a better method, we must quantify the difficulty of the direct approach.
+\begin{enumerate}
+    \item Using the fact that the integrand is non-negative, show that the true value is bounded below by:
+    \[ \theta(x) \ge (1 - \Phi(x))e^{\sqrt{x}} \]
+    where $\Phi(\cdot)$ is the CDF of the standard normal distribution.
+    \item Similarly, show that the second moment of the Crude estimator satisfies:
+    \[ \mathbb{E}[X^2] \ge (1 - \Phi(x))e^{2\sqrt{x}} \]
+\end{enumerate}
 
-    \begin{equation*}
-        \hat{y} = \int_0^1 x^2 \, dx
-    \end{equation*}
+\textit{Implication:} As $x$ increases, the event $\{Z \ge x\}$ becomes exponentially rare. This causes the Crude estimator $X$ to be zero for the vast majority of samples, leading to high variance relative to the mean.
 
-    by Monte Carlo Integration using f(x) = $\mathbb{I}_{[0,1]}(x)$. This should be familiar territory from Homework 2 before transitioning into something new. 
-        1) Define the Monte Carlo Estimator, $\hat{y}$.
-        2) Explain how antithetic variables can be used here, and justify briefly why their use here is guaranteed to improve efficiency.
-        3) For $Z \sim U[0,1]$, use the results:
-        $\mathbb{E}[Z^2] = \frac{1}{3}, \, \mathbb{E}[U^4] = \frac{1}{5}, \mathbb{E}U^2 (1-U)^2 = \frac{1}{30}$ to find the correlation between $U^2 \text{ and } (1-U^2)$. Confirm that antithetic variables reduce the variance of the estimator to an eighth of the original value. 
+Part (b): Designing the Importance Sampler
+
+We introduce a new sampling distribution $W \sim N(\mu_x, 1)$, which is a normal distribution with the same variance but shifted by a mean $\mu_x$.
+\begin{enumerate}
+    \item Ideally, we want to center our samples where the product of the integrand and the original density is maximized. Argue why shifting the mean to the threshold, $\mu_x = x$, is a logical choice for this problem.
+    \item Write down the likelihood ratio (weight function) $L(w) = \frac{f_Z(w)}{f_W(w)}$ for the specific case where $\mu_x = x$.
+\end{enumerate}
+
+Part (c): The Importance Sampling Estimator
+
+Let $Y$ be the Importance Sampling estimator using the shift $\mu_x = x$.
+\begin{enumerate}
+    \item Show that the estimator can be written as:
+    \[ Y = e^{x^2/2} e^{\sqrt{W}} e^{-Wx} \mathbb{I}_{\{W > x\}} \]
+    \item Show that the expected value of this estimator is bounded by:
+    \[ \mathbb{E}[Y] \le e^{-x^2/2} \mathbb{E}[e^{\sqrt{W}} \mathbb{I}_{\{W > x\}}] \]
+\end{enumerate}
+
+Part (d): Asymptotic Variance Analysis
+
+We now demonstrate that the improvement factor of Importance Sampling over Crude Monte Carlo tends to infinity as the event becomes rarer ($x \to \infty$).
+\begin{enumerate}
+    \item Using the relation $W = Z + x$, show that the target value decays as:
+    \[ \theta(x) \le e^{1 - (x-1)^2/2} \]
+    and consequently, $\theta(x) \to 0$ as $x \to \infty$.
+    \item Develop an upper bound for the second moment of the IS estimator, $\mathbb{E}[Y^2]$, and show that:
+    \[ \mathbb{E}[Y^2] \le e^{-(x-1)^2} e^3 \]
+    \item \textbf{Conclusion:} Using L'Hôpital's rule (or dominant terms analysis), compute the limit of the ratio of variances:
+    \[ \lim_{x \to \infty} \frac{\text{Var}(X)}{\text{Var}(Y)} \]
+    Show that this limit is $\infty$, proving that Importance Sampling becomes infinitely more efficient than Crude Monte Carlo as the problem gets harder.
+\end{enumerate}
+```
 :::

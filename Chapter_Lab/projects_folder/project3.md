@@ -60,4 +60,4 @@ Your firm's resident mathematician, a Dane named Dr. Erlang, recommends that you
 
 - The average system utilization, average length of lines, and average delay.
 
-## Project 3, Example Model Output
+## Project 3, Example Model Output:

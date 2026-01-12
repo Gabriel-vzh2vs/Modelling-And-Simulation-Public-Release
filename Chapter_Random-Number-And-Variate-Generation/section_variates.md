@@ -133,7 +133,8 @@ P(X \le x) = \sum_{i} P(X \le x | I = i) \cdot P(I = i) \\
 
 :::
 
-__Question:__ The proof of the composition method above relies on the Law of Total Probability, $F(x) = \sum_{i} F_i(x) p_i$. What property of the $p_i$ weights is necessary for $F(x)$ to be a valid Cumulative Distribution Function (CDF)?
+__Question:__ The proof of the composition method above relies on the Law of Total Probability,
+$F(x) = \sum_{i} F_i(x) p_i$. What property of the $p_i$ weights is necessary for $F(x)$ to be a valid Cumulative Distribution Function (CDF)?
 
 :::{prf:example} Laplace Distribution
 A classical example of the composition method is the Laplace distribution,
@@ -198,11 +199,14 @@ __Definition__: Let $W = \sum_{i=1}^n X_i$, where $X_i \sim Bernoulli(p)$. Then 
 
 We want to find the probability $P(W=k)$ for $k \in \{0, 1, ..., n\}$. $W=k$ means that exactly $k$ of the $X_i$ variables are equal to 1 and $n-k$ are equal to 0.
 
-Consider one specific sequence of $k$ successes and $n-k$ failures (e.g., $k$ successes first, then $n-k$ failures). Because all $X_i$ are independent, the probability of this single sequence is:
+Consider one specific sequence of $k$ successes and $n-k$ failures (e.g., $k$ successes first, then $n-k$ failures).
+Because all $X_i$ are independent, the probability of this single sequence is:
 
 $$P(X_1=1, ..., X_k=1, X_{k+1}=0, ..., X_n=0) = p^k (1-p)^{n-k}$$
 
-The total number of such arrangements is given by $\binom{n}{k}$. Since each of these $\binom{n}{k}$ sequences is disjoint (a different outcome) and has the same probability $p^k (1-p)^{n-k}$, the total probability $P(W=k)$ is the sum of their probabilities. Thus
+The total number of such arrangements is given by $\binom{n}{k}$.
+Since each of these $\binom{n}{k}$ sequences is disjoint (a different outcome)
+and has the same probability $p^k (1-p)^{n-k}$, the total probability $P(W=k)$ is the sum of their probabilities. Thus
 $$P(W=k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
 This is the exact Probability Mass Function (PMF) of a Binomial($n, p$) random variable. Thus, $W$ is binomially distributed.

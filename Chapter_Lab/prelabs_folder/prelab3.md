@@ -47,8 +47,8 @@ expected system performance metrics from known parameter estimates.
 
 ### Statistical Inference and Prediction
 
-Looking back on {ref}`prelab-2`, this work discussed a method for using for constructing
-correlated variates (copula), and this is a common
+Looking toward to {ref}`prelab-5`, this pre-lab discussed a method for using for constructing
+correlated variates. Using correlated variates is a common
 method of improving statistical inferences and prediction using a Bayesian
 approach as a method of improving observations through contextualization.
 These methods are then combined with concepts from {ref}`sec:prob_stats` to

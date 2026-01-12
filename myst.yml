@@ -17,20 +17,28 @@ project:
     - file: Front-Matter/splash.md
     - title: Front Matter
       children:
-        - file: Front-Matter/book-structure.md
+        #- file: Front-Matter/book-structure.md
         - file: Front-Matter/preface.md
         - file: Front-Matter/toc.md
         - file: Front-Matter/pedagogy.md
-        - file: Front-Matter/tooluse.md
+        #- file: Front-Matter/tooluse.md
     - title: Introduction To Simulation
       children:
-        - file: Chapter_Introduction-to-Simulation/section_warmup.md
         - file: Chapter_Introduction-to-Simulation/section_introduction.md
-        - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
-        - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
-        - file: Chapter_Introduction-to-Simulation/monte_carlo_method.md
-        - file: Chapter_Introduction-to-Simulation/vacation_planning.md
+        - file: Chapter_Introduction-to-Simulation/section_warmup.md
+#        - file: Chapter_Introduction-to-Simulation/problem_three_chefs.md
+#        - file: Chapter_Introduction-to-Simulation/buffons_needle.ipynb
+#        - file: Chapter_Introduction-to-Simulation/section_buffons_needle.md
+#        - file: Chapter_Introduction-to-Simulation/monte_carlo_method.md
+####	- file: Chapter_Introduction-to-Simulation/vacation_planning.md # Seems to crash the server!!!
         - file: Chapter_Introduction-to-Simulation/summary_and_roadmap.md
+    - file: Chapter_Output_Analysis/introduction.md
+      children:
+        - file: Chapter_Output_Analysis/mean_variance.md
+        - file: Chapter_Output_Analysis/confidence_intervals.md
+        - file: Chapter_Output_Analysis/sample_size_estimation.md
+        - file: Chapter_Output_Analysis/bonferroni.md
+        - file: Chapter_Output_Analysis/dependent_variables.md
     - title: Probability And Statistics
       children:
         - file: Chapter_Probability-and-Stats/probability_statistics.md
@@ -42,13 +50,6 @@ project:
         - file: Chapter_System-Modelling/network_models.md
         - file: Chapter_System-Modelling/queuing_systems.md
         - file: Chapter_System-Modelling/finite_state_machines.md
-    - file: Chapter_Output_Analysis/introduction.md
-      children:
-        - file: Chapter_Output_Analysis/mean_variance.md
-        - file: Chapter_Output_Analysis/confidence_intervals.md
-        - file: Chapter_Output_Analysis/sample_size_estimation.md
-        - file: Chapter_Output_Analysis/bonferroni.md
-        - file: Chapter_Output_Analysis/dependent_variables.md
     - title: Random Numbers and Variates
       children:
         - file: Chapter_Random-Number-And-Variate-Generation/introduction.md
@@ -73,7 +74,6 @@ project:
         - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
     - file: Chapter_Lab/intro-to-labs.md # Restructuring
       children:
-        - file: Chapter_Lab/In-Class_Problem_Solving_Prototypes.md
         - file: Chapter_Lab/softwareinstall.md
         - file: Chapter_Lab/prelabs.md
           children:
@@ -86,9 +86,9 @@ project:
             - file: Chapter_Lab/prelabs_folder/prelab7.md
             - file: Chapter_Lab/prelabs_folder/prelab8.md
             - file: Chapter_Lab/prelabs_folder/prelab9.md
-            - file: Chapter_Lab/prelabs_folder/prelab10.md
-            - file: Chapter_Lab/prelabs_folder/prelab11.md
-            - file: Chapter_Lab/prelabs_folder/prelab12.md
+            # - file: Chapter_Lab/prelabs_folder/prelab10.md
+            # - file: Chapter_Lab/prelabs_folder/prelab11.md
+            # - file: Chapter_Lab/prelabs_folder/prelab12.md
         - file: Chapter_Lab/labs.md
           children:
               - file: Chapter_Lab/labs_folder/lab1.md
@@ -99,19 +99,19 @@ project:
               - file: Chapter_Lab/labs_folder/lab6.md
               - file: Chapter_Lab/labs_folder/lab7.md
               - file: Chapter_Lab/labs_folder/lab8.md
-              - file: Chapter_Lab/labs_folder/lab9.md
-              - file: Chapter_Lab/labs_folder/lab10.md
-              - file: Chapter_Lab/labs_folder/lab11.md
-              - file: Chapter_Lab/labs_folder/lab12.md
+              # - file: Chapter_Lab/labs_folder/lab9.md
+              # - file: Chapter_Lab/labs_folder/lab10.md
+              # - file: Chapter_Lab/labs_folder/lab11.md
+              # - file: Chapter_Lab/labs_folder/lab12.md
         - file: Chapter_Lab/projects.md
           children:
             - file: Chapter_Lab/projects_folder/project1.md
             - file: Chapter_Lab/projects_folder/project2.md
             - file: Chapter_Lab/projects_folder/project3.md
             - file: Chapter_Lab/projects_folder/project4.md
-            - file: Chapter_Lab/projects_folder/project5.md
-            - file: Chapter_Lab/projects_folder/project6.md
-        - file: Chapter_Lab/GMPforReports.ipynb
+            # - file: Chapter_Lab/projects_folder/project5.md
+            # - file: Chapter_Lab/projects_folder/project6.md
+        # - file: Chapter_Lab/GMPforReports.ipynb
         - file: Chapter_Lab/software-specifics.md
         - file: Chapter_Lab/hidden-lab-graphics.ipynb # Trying to find a way of hiding a page.
     - title: Advanced Topics
@@ -126,6 +126,7 @@ project:
         - file: Chapter_Appendix/glossary.md
         - file: Chapter_Appendix/index.md
         - file: Chapter_Appendix/supporting-material.md
+        - file: Chapter_Lab/In-Class_Problem_Solving_Prototypes.md
     - title: Agent Based Modelling
       children:
         - file: Chapter_Agent-Based-Modelling/introduction.md
