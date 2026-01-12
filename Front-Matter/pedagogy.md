@@ -34,7 +34,6 @@ bridge the gap between code and concept.
 clear checklists. For example, rather than asking "Validate this model," ask
 "Compare the model's average wait time to the theoretical M/M/1 result."
 
-
 ## Graduate Pedagogy
 
 For graduate students, the learning objective shifts toward Model Abstraction and Theoretical Rigor.
