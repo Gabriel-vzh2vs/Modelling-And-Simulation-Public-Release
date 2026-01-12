@@ -44,7 +44,7 @@ project:
         - file: Chapter_Probability-and-Stats/probability_statistics.md
     - title: System Modelling
       children:
-        - file: Chapter_System-Modelling/introduction.md
+        # - file: Chapter_System-Modelling/introduction.md
         # - file: Chapter_System-Modelling/differential_equations.md
         # - file: Chapter_System-Modelling/agent_based_models.md
         # - file: Chapter_System-Modelling/network_models.md
@@ -67,11 +67,11 @@ project:
     #   children:
     #     - file: Chapter_Simulation-In-Practice/introduction.md
     #     - file: Chapter_Simulation-In-Practice/validation.md
-    - file: Chapter_Variance-Reduction-Techniques/whyvariancereduction.md
-      children:
-        - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
-        - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
-        - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
+    # - file: Chapter_Variance-Reduction-Techniques/whyvariancereduction.md
+    #   children:
+    #     - file: Chapter_Variance-Reduction-Techniques/crudemontecarlo.md
+    #     - file: Chapter_Variance-Reduction-Techniques/quasimontecarlo.md
+    #     - file: Chapter_Variance-Reduction-Techniques/markovchainmontecarlo.md
     - file: Chapter_Lab/intro-to-labs.md # Restructuring
       children:
         - file: Chapter_Lab/softwareinstall.md
@@ -98,7 +98,7 @@ project:
               - file: Chapter_Lab/labs_folder/lab5.md
               - file: Chapter_Lab/labs_folder/lab6.md
               - file: Chapter_Lab/labs_folder/lab7.md
-              - file: Chapter_Lab/labs_folder/lab8.md
+              # - file: Chapter_Lab/labs_folder/lab8.md
               # - file: Chapter_Lab/labs_folder/lab9.md
               # - file: Chapter_Lab/labs_folder/lab10.md
               # - file: Chapter_Lab/labs_folder/lab11.md
