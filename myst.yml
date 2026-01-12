@@ -20,7 +20,7 @@ project:
         #- file: Front-Matter/book-structure.md
         - file: Front-Matter/preface.md
         - file: Front-Matter/toc.md
-        - file: Front-Matter/pedagogy.md
+        # - file: Front-Matter/pedagogy.md
         #- file: Front-Matter/tooluse.md
     - title: Introduction To Simulation
       children:
