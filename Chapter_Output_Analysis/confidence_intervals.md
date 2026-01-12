@@ -275,20 +275,3 @@ while n = 10 gives us 92,378. However, this is also what makes
 a bootstrap sample value for calculating confidence intervals (the lack
 of repeats).
 
-Like other sampling methods, the naive bootstrap is particularly vulnerable to heavy tails.
-
-There is a way to address this with the Bayesian Bootstrap, introduced by Rubin, 1981
-
-## Questions for the Reader
-
-:::{seealso} Problem 1 (Analytic Application: Machine Failure)
-:::
-
-:::{seealso} Problem 2 (Analytic Application: Machine Failure)
-:::
-
-:::{seealso} Problem 3 (Analytic Application: Machine Failure)
-:::
-
-:::{seealso} Problem 4 (Analytic Application: Machine Failure)
-:::

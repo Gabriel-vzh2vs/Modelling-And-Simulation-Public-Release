@@ -86,9 +86,9 @@ between Efficiency (High Occupancy) and Reliability (Low Cancellations).
         \item \textit{Note:} The International Critical Care Society recommends an occupancy of 60--70\% to safely handle surges. 
     \end{itemize}
 
-    \item \textbf{The ``Cost'' of Cancellations:} Each cancellation costs the hospital an estimated \pounds12,200 in lost revenue and administrative rework. Calculate the Total Annual Cost of Cancellations.
+    \item \textbf{The Cost of Cancellations:} Each cancellation costs the hospital an estimated \pounds12,200 in lost revenue and administrative rework. Calculate the Total Annual Cost of Cancellations.
 
-    \item \textbf{Scenario Analysis:} Dr. Nightingale specifically asks you to run the following ``What-If'' scenarios to present to the board:
+    \item \textbf{Scenario Analysis:} Dr. Nightingale specifically asks you to run the following What-If scenarios to present to the board:
     \begin{enumerate}
         \item \textbf{Status Quo:} Current system (24 Beds, Electives concentrated Tue-Fri).
         \item \textbf{Capacity Expansion:} Increment the bed count from 24 up to 29. Identify the point where cancellations drop to zero.

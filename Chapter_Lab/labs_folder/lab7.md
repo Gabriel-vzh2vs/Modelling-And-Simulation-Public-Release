@@ -12,7 +12,7 @@
 
 ### Required Chapters
 
-- {ref}``
+- {ref}`sec:differential_equations`
 - {ref}``
 - {ref}``
 - {ref}``
