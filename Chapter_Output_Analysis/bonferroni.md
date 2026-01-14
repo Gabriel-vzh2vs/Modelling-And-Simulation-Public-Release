@@ -22,7 +22,7 @@ control the FWER at a desired level (e.g., $\alpha=0.05$).
 Controlling the FWER makes the series of tests more conservative, ensuring that the overall
 confidence in the set of conclusions is maintained.
 
-### FWER-Controlling Method 1: The Bonferroni Correction
+### The Bonferroni Correction
 
 The theoretical basis for the Bonferroni correction is Bonferroni's Inequality
 (also known as the Union Bound or Boole's Inequality).

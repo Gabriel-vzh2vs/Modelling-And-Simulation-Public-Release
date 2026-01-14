@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 664.4 463.4">
+  <!-- Generator: Adobe Illustrator 29.6.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 207)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #1851d1;
+        font-size: 36px;
+      }
+
+      .st0, .st1 {
+        font-family: MyriadPro-SemiboldIt, 'Myriad Pro';
+        font-style: italic;
+      }
+
+      .st0, .st2, .st3, .st4, .st5, .st6 {
+        font-weight: 600;
+      }
+
+      .st7, .st8, .st9, .st10 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+      }
+
+      .st7, .st11, .st3, .st5, .st10 {
+        font-size: 12px;
+      }
+
+      .st8 {
+        letter-spacing: 0em;
+      }
+
+      .st2, .st12, .st3, .st4, .st5 {
+        font-family: MyriadPro-Semibold, 'Myriad Pro';
+      }
+
+      .st2, .st6 {
+        font-size: 14px;
+      }
+
+      .st13 {
+        fill: #fff;
+      }
+
+      .st13, .st3, .st14, .st15, .st10 {
+        stroke-miterlimit: 10;
+      }
+
+      .st13, .st14 {
+        stroke: #000;
+      }
+
+      .st3, .st15, .st10 {
+        stroke: #fff;
+      }
+
+      .st14 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="S_-_x3E__M_-_x3E__Sim">
+    <ellipse class="st15" cx="372.8" cy="177.6" rx="82" ry="117.1"/>
+    <ellipse class="st13" cx="369.8" cy="173.6" rx="82" ry="117.1"/>
+    <g>
+      <rect class="st13" x="326" y="90.8" width="87.3" height="26.5"/>
+      <text class="st6" transform="translate(343.6 107.5)"><tspan class="st12" x="0" y="0">System </tspan><tspan class="st1" x="47" y="0">S</tspan></text>
+    </g>
+    <g>
+      <rect class="st13" x="326" y="157.2" width="87.3" height="26.5"/>
+      <text class="st6" transform="translate(343.7 176.3)"><tspan class="st12" x="0" y="0">Model </tspan><tspan class="st1" x="41.3" y="0">M</tspan></text>
+    </g>
+    <g>
+      <rect class="st13" x="326" y="223.6" width="87.3" height="26.5"/>
+      <text class="st2" transform="translate(337.7 240.4)"><tspan x="0" y="0">Simulation</tspan></text>
+    </g>
+    <g>
+      <line class="st14" x1="369.7" y1="117.3" x2="369.7" y2="151.2"/>
+      <polygon points="366 148.4 369.7 150 373.4 148.4 369.7 157.2 366 148.4"/>
+    </g>
+    <g>
+      <line class="st14" x1="369.7" y1="183.7" x2="369.7" y2="217.6"/>
+      <polygon points="366 214.8 369.7 216.4 373.4 214.8 369.7 223.6 366 214.8"/>
+    </g>
+  </g>
+  <g id="V_x26_V">
+    <text class="st7" transform="translate(301.9 140.2)"><tspan x="0" y="0">Validation</tspan></text>
+    <text class="st7" transform="translate(301.9 206.7)"><tspan x="0" y="0">Verification</tspan></text>
+  </g>
+  <g id="Classes_and_types">
+    <text class="st7" transform="translate(193.2 104)"><tspan x="0" y="0">Types of systems</tspan></text>
+    <text class="st7" transform="translate(193.2 173.9)"><tspan x="0" y="0">Model classes</tspan></text>
+    <text class="st7" transform="translate(193.2 233.8)"><tspan x="0" y="0">Simulation </tspan><tspan x="0" y="14.4">architectures</tspan></text>
+  </g>
+  <g id="Output_analysis">
+    <ellipse class="st15" cx="364.9" cy="380.6" rx="90.2" ry="68.8"/>
+    <g>
+      <text class="st3" transform="translate(294 348.8)"><tspan x="0" y="0">Output analysis &amp; the</tspan><tspan x="0" y="14.4">Monte Carlo Method</tspan></text>
+      <text class="st10" transform="translate(294 383.7)"><tspan x="0" y="0">Estimating measures and</tspan><tspan x="0" y="14.4">properties of stochastic system</tspan></text>
+      <text class="st10" transform="translate(294 417.8)"><tspan x="0" y="0">Get your MC license!</tspan></text>
+    </g>
+    <ellipse class="st13" cx="361.9" cy="376.6" rx="90.2" ry="68.8"/>
+    <g>
+      <text class="st5" transform="translate(292 346.8)"><tspan x="0" y="0">Output analysis &amp; the</tspan><tspan x="0" y="14.4">Monte Carlo Method</tspan></text>
+      <text class="st7" transform="translate(292 381.7)"><tspan x="0" y="0">Estimating measures and</tspan><tspan x="0" y="14.4">properties of stochastic system</tspan></text>
+      <text class="st7" transform="translate(292 415.8)"><tspan x="0" y="0">Get your MC license here!</tspan></text>
+    </g>
+  </g>
+  <g id="Queuing_systems">
+    <ellipse class="st15" cx="96.4" cy="176.6" rx="59" ry="38.8"/>
+    <ellipse class="st13" cx="93.4" cy="172.6" rx="59" ry="38.8"/>
+    <text class="st5" transform="translate(52.6 162.2)"><tspan x="0" y="0">Queuing systems </tspan><tspan x="0" y="14.4">&amp; discrete event </tspan><tspan x="0" y="28.8" xml:space="preserve">  simulations</tspan></text>
+  </g>
+  <g id="Distribution_modeling">
+    <ellipse class="st15" cx="556.4" cy="68.4" rx="86.1" ry="60"/>
+    <ellipse class="st13" cx="553.4" cy="64.4" rx="86.1" ry="60"/>
+    <g>
+      <path class="st14" d="M550.2,111.6c6.6,60.7-29.4-2.1-47.1,26"/>
+      <polygon points="501.3 133.4 503.8 136.5 507.8 136.9 500.5 142.9 501.3 133.4"/>
+    </g>
+    <g>
+      <text class="st7" transform="translate(498.3 58.5)"><tspan x="0" y="0">System uncertainties </tspan><tspan x="0" y="14.4">&amp; stochastic aspects</tspan></text>
+      <text class="st7" transform="translate(504.8 102.3)"><tspan x="0" y="0">Systems measures </tspan></text>
+      <text class="st5" transform="translate(498.3 39)"><tspan x="0" y="0">Distribution modeling</tspan></text>
+      <text class="st5" transform="translate(548 88.6)"><tspan x="0" y="0">+</tspan></text>
+    </g>
+    <text class="st7" transform="translate(467.3 160.2)"><tspan x="0" y="0">Model RV’s </tspan></text>
+  </g>
+  <g id="Random_numbers_and_variates">
+    <g>
+      <path class="st14" d="M486.7,166.9c.8,29.1-2.6,67.3-56.4,69.9"/>
+      <polygon points="433 232.9 431.6 236.6 433.3 240.3 424.4 236.9 433 232.9"/>
+    </g>
+    <ellipse class="st15" cx="523.8" cy="221.8" rx="63.2" ry="39.9"/>
+    <ellipse class="st13" cx="520.8" cy="217.8" rx="63.2" ry="39.9"/>
+    <text class="st5" transform="translate(486.7 203.7)"><tspan x="0" y="0">RNGs &amp; Variates</tspan></text>
+    <text class="st7" transform="translate(486.7 218.1)"><tspan x="0" y="0">Theory</tspan><tspan x="0" y="14.4">Techniques </tspan><tspan x="0" y="28.8">Pitfalls</tspan></text>
+  </g>
+  <g id="Simulation_practice">
+    <ellipse class="st15" cx="569.2" cy="370.1" rx="89.3" ry="85.9"/>
+    <ellipse class="st13" cx="566.2" cy="366.1" rx="89.3" ry="85.9"/>
+    <g>
+      <g>
+        <text class="st5" transform="translate(506.4 322.7)"><tspan x="0" y="0">Spreadsheet simulations</tspan></text>
+        <text class="st7" transform="translate(506.4 339.4)"><tspan x="0" y="0" xml:space="preserve"> - Simulations using </tspan><tspan x="0" y="14.4" xml:space="preserve">    XLRisk and Excel</tspan></text>
+      </g>
+      <text class="st5" transform="translate(506.4 370.3)"><tspan x="0" y="0">Python simulations</tspan></text>
+      <text class="st7" transform="translate(506.4 385.8)"><tspan x="0" y="0" xml:space="preserve"> - Libraries, tools and design</tspan><tspan x="0" y="14.4" xml:space="preserve">   patterns for simulation</tspan></text>
+      <text class="st7" transform="translate(528.3 417.8)"><tspan x="0" y="0">(Lecture and Labs)</tspan></text>
+    </g>
+  </g>
+  <g id="Advanced_topics">
+    <ellipse class="st15" cx="115.7" cy="350.8" rx="105.6" ry="73.9"/>
+    <ellipse class="st13" cx="111.7" cy="346.8" rx="105.6" ry="73.9"/>
+    <g>
+      <text class="st11" transform="translate(37.2 326)"><tspan class="st4"><tspan x="0" y="0">Modeling: </tspan></tspan><tspan class="st4" x="0" y="14.4" xml:space="preserve">  </tspan><tspan class="st8" x="5" y="14.4">ABMs, agentic AI, state machines</tspan><tspan class="st4"><tspan x="0" y="28.8">Simulation paradigms: </tspan></tspan><tspan class="st9"><tspan x="0" y="43.2" xml:space="preserve">   SysML, MBSE, HLA</tspan></tspan><tspan class="st4"><tspan x="0" y="57.6">Data management</tspan></tspan><tspan class="st9"><tspan x="0" y="72" xml:space="preserve">  Digital enterprise systems</tspan></tspan></text>
+      <text class="st5" transform="translate(31.4 309.7)"><tspan x="0" y="0">Overview of advanced topics(*)</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_11">
+    <text class="st0" transform="translate(274.6 322.7)"><tspan x="0" y="0">1</tspan></text>
+    <text class="st0" transform="translate(20.7 137.2)"><tspan x="0" y="0">2</tspan></text>
+    <text class="st0" transform="translate(446.3 35.4)"><tspan x="0" y="0">3</tspan></text>
+    <text class="st0" transform="translate(600.6 196.7)"><tspan x="0" y="0">4</tspan></text>
+    <text class="st0" transform="translate(20.7 280.2)"><tspan x="0" y="0">5</tspan></text>
+  </g>
+</svg>

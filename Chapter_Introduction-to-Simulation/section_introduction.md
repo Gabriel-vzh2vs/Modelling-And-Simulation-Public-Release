@@ -138,7 +138,7 @@ In this book we will focus mostly on Python and Excel/XLRisk, see also
 {ref}`sec:lab`.
 
 
-## Stochastic models, uncertainties and distribution modeling ##
+## Stochastic elements, uncertainties and distribution modeling ##
 
 Complex systems, but also not-so-complex systems, often include
 stochastic elements. An example could be arrival times of customers to

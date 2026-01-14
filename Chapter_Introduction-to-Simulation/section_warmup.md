@@ -1,4 +1,3 @@
-
 (sec:intro_warmup)=
 # Preview, prerequisites, preparation, pronto!  #
 
@@ -15,8 +14,8 @@ now. We are not trying to assess those tools!
 ## System Breakdown ##
 
 ```{exercise}
-:label: ex:breakdown
-:enumerator: (System breakdown)
+:label: ex:breakdown1
+:enumerator: (System breakdown - part 1)
 
 __Description__: a mechanical system $S$ accumulates fatigue over
 time. If the accumulated level of fatigue exceeds a specified
@@ -45,60 +44,11 @@ standard notation.
 __Question 1b:__ Determine the expected time to failure
 analytically. Does it match your hypothesis from __(1a)__?
 
-
-After seeing the presentation of your of your analyses,
-the system operator seeks to increase longevity: they  schedule
-maintenance which is to take place at the beginning of each yearly cycle. Note
-that no maintenance is scheduled for the beginning of year 1 (that
-would conincide with deployment time). The  maintenance protocol is
-as follows:
-
-- Measure the current system fatigue $Y_k$ at the beginning of year
-  $k$.
-
-- If $Y_k$ exceeds $\tau_c$ where $\tau_c < 1$, limited maintenance
-  will take place. Maintenance in year $k$, if conducted, lowers the
-  accumulated fatigue by an amount captured by a random variable $R_k
-  \sim U(0.1, 0.3)$. Note that accumulated system fatigue can never
-  become negative.
-
-__Question 2a:__ Give a precise mathematical model for $Y_k$.
-
-__Question 2b:__ Using simulation, graph the expected time to failure
-as a function of $\tau_0$. We denote this by $E(\tau_0)$.
-
-__Question 2c:__ Using simulation, determine and graph the probability
-$p_{\tau_0}$ that the system fails prior to $E(\tau_0)$ as a function
-of $\tau_0$.
-
-__Question 3:__ Based on your findings, would you offer any
-recommendations to the system operator?
-
-__Comments on modeling:__ Why use $U(0,1)$ for the yearly fatigue and
-not $U(0,a)$ for some $a \in \mathbb{R}$? Because we are considering a
-__scaled version__ of the problem. And that is why $\tau$ equals $1$
-and not some quantity $\tau_{\text{critical}}$. For mathematical
-modeling, re-scaling the original model like this is par for the
-course and an established practice.
-
-__Comments on analytic solution versus simulation:__ Did you manage to
-find the analytic solution in 1a? If so, very good! However, we think
-you would agree that extending the analytic
-solution to incorporate the maintenance plan would be hard. And even if you somehow
-managed (we would be very impressed), it is plain obvious that most
-non-trivial models must be approached through simulation and
-computational methods.
-
-
-__Broader application context__: This kind of buildup can arise in
-many systems. You can look up topics such as stochastic threshold
-systems, trigger phenomena, and cascading failures.
 ```
 
-<!--
 
-::::::{solution} ex:breakdown
-:label: sol_breakdown
+::::::{solution} ex:breakdown1
+:label: sol_breakdown1
 :hidden: false
 
 :::::{tip} __1a__ Simulation approach
@@ -220,9 +170,10 @@ large, differences will disappear (strong law of large numbers).
 ```
 :::::
 
+
+
 :::::{tip} __1b__ Analytic approach
 :class:dropdown
-
 
 To derive the answer analytically, we set
 
@@ -238,7 +189,7 @@ random variable of the sequence:
 \mathbb{E}[N_x \mid X_1 = u] =
 \begin{cases}
 1,& u \ge x\\
-1 + E[N_{x-u}],& u < x
+1 + \mathbb{E}[N_{x-u}],& u < x
 \end{cases}
 \end{equation*}
 
@@ -248,7 +199,7 @@ We then have
 \mathbb{E}[N_x]
 &= \mathbb{E}[\mathbb{E}[N_x \mid X_1 = u]\\
 &= \int_0^1 \mathbb{E}[N_x \mid X_1 = u] du \\
-&= \int_0^x (1+E[N_x-u]) du  + \int_x^1 1 du\\
+&= \int_0^x (1+\mathbb{E}[N_x-u]) du  + \int_x^1 1 du\\
 &= 1 + \int_{0}^x \mathbb{E}[N_{x-u}] du \\
 &= 1 + \int_0^x \mathbb{E}[N_\xi] d\xi\;,
 \end{align*}
@@ -272,6 +223,53 @@ the latter following from the  equation upstairs. The sought after expectation v
 precisely as the simulation approach indicated in the previous problem.
 
 :::::
+
+
+::::::
+
+
+
+```{exercise}
+:label: ex:breakdown2
+:enumerator: (System breakdown - part 2)
+
+After seeing the presentation of your of your analyses,
+the system operator seeks to increase longevity: they  schedule
+maintenance which is to take place at the beginning of each yearly cycle. Note
+that no maintenance is scheduled for the beginning of year 1 (that
+would conincide with deployment time). The  maintenance protocol is
+as follows:
+
+- Measure the current system fatigue $Y_k$ at the beginning of year
+  $k$.
+
+- If $Y_k$ exceeds $\tau_c$ where $\tau_c < 1$, limited maintenance
+  will take place. Maintenance in year $k$, if conducted, lowers the
+  accumulated fatigue by an amount captured by a random variable $R_k
+  \sim U(0.1, 0.3)$. Note that accumulated system fatigue can never
+  become negative.
+
+__Question 2a:__ Give a precise mathematical model for $Y_k$.
+
+__Question 2b:__ Using simulation, graph the expected time to failure
+as a function of $\tau_c$. We denote this by $E(\tau_c)$.
+
+__Question 2c:__ Using simulation, determine and graph the probability
+$p_{\tau_c}$ that the system fails prior to $E(\tau_c)$ as a function
+of $\tau_c$.
+
+__Question 3:__ Based on your findings, would you offer any
+recommendations to the system operator?
+
+```
+
+<!--
+
+::::::{solution} ex:breakdown2
+:label: sol_breakdown2
+:hidden: false
+
+
 
 :::::{tip} __2a__ Model with added maintenance
 :class:dropdown
@@ -493,9 +491,32 @@ conjecture.
 
 :::::
 
-:::::{tip} Closing comments
-:class:dropdown
+::::::
 
+-->
+
+
+```{exercise}
+:label: ex:breakdown3
+:enumerator: (System breakdown - closing comments)
+
+
+__Comments on modeling:__ Why use $U(0,1)$ for the yearly fatigue and
+not $U(0,a)$ for some $a \in \mathbb{R}$? Because we are considering a
+__scaled version__ of the problem. And that is why $\tau$ equals $1$
+and not some quantity $\tau_{\text{critical}}$. For mathematical
+modeling, re-scaling the original model like this is par for the
+course and an established practice.
+
+__Comments on analytic solution versus simulation:__ Did you manage to
+find the analytic solution in 1a? If so, very good! However, we think
+you would agree that extending the analytic
+solution to incorporate the maintenance plan would be hard. And even if you somehow
+managed (we would be very impressed), it is plain obvious that most
+non-trivial models must be approached through simulation and
+computational methods.
+
+__Use of analytic results:__
 For some models like the one in part __1__, one can derive analytic
 solutions for the quantities of interest. In practice, that is
 relatively rare, and one will need to use techniques such as
@@ -504,13 +525,10 @@ insight we got from __1b__ is still helpful. From this, we know what
 to expect at a parameter border cases (i.e., $\tau_c = 1$). This can
 help with verification of the simulation model.
 
-:::::
 
-::::::
+__Broader application context__: This kind of buildup can arise in
+many systems. You can look up topics such as stochastic threshold
+systems, trigger phenomena, and cascading failures.
 
+```
 
-
-
-::::
-
--->
