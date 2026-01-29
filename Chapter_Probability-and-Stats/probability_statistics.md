@@ -941,26 +941,40 @@ set $T$ (the _index set_) defined over a common probability space
 $(\Omega, \mathcal{F}, \Pr)$ where $\Omega$, $\mathcal{F}$ and $\Pr$
 are as before. We write $\{X(t) : t \in T\}$. Often, $T$ represents
 time, and $X(t)$ is a random variable representing a value observed at
-time $t$.
-When one wants to be very precise, one may write the stochastic
-process as $\{X(\omega, t) : t \in T\}$ to point out that it is a
-function of two variables, namely $t\in T$ and $\omega \in \Omega$.
+time $t$.  When one wants to be very precise, one may write the
+stochastic process as $\{X(\omega, t) : t \in T\}$ to point out that
+it is a function of two variables, namely $t\in T$ and $\omega \in
+\Omega$.  The co-domain (or range) of the random variables are the
+same; this is the state space $S$.
 
-In this book, there are two main cases. The easiest case is when the
-random variables $X(t)$ are independent and identically
-distributed. This is the case for {ref}`sec:buffons_needle`.
+__Continuous/discrete:__ There are several classes of stochastic
+processes. A common distinction is between discrete ($T$ is countable)
+and continuous stochastic processes (e.g. $T = \mathbb{R}, or $T =
+\mathbb{R}^+$, the non-negative real numbers).
 
-The second case arises in for example queuing systems
-({ref}`queueing`). Here $X(t)$ could be the length of a queue at time
-$t$. In this case, the random variables $X(t)$ are generally not
-independent nor are they identically distributed. For this class, one
-may restrict attention to _stationary stochastic processes_ where all
-the random variables $X(t)$ are identically distributed. Or one may
-consider the class of _covariance stationary_ stochastic processes.
+__Dependence:__ The random variables $X_t$ may be independent as in
+the case of the Bernoulli process, or dependent as in the case of a
+discrete time Markov process (often abbreviated DTMC).
 
-```{note}
-Tie up pieces here.
-```
+Examples in this book include {ref}`sec:buffons_needle` which is a
+Bernoulli process. A second case arises in queuing systems
+({ref}`queueing` - references to be updated once we get to
+queuing). Here $X(t)$ could be the length of a queue at time $t$. For
+the queue example, one would expect dependence.
+
+__Distributions:__ One may also distinguish stochastic processes based
+on their distributions. For a __stationary__ stochastic process, all
+the $X_t$'s have the same probability distribution. There is also the
+class of __covariance stationary__ stochastic processes for which the
+covariance of $X_t$ and $X_{t+h}$ only depends on $h$ (and the $X_t$'s
+have finite second moment).
+
+The Bernoulli process (e.g., {ref}`sec:buffons_needle`) is thus the
+most basic stochastic process being stationary and with the $X_t$'s
+independent. DTMCs introduces "mild dependence" by having $X_t$ only
+depend on $X_{t-1}$ and no prior RVs. Queuing processes that "live
+outside textbooks" are quite complex being neither stationary nor
+covariance stationary.
 
 
 (sec:rv_extra)=
