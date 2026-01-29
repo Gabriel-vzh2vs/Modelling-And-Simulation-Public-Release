@@ -977,6 +977,12 @@ outside textbooks" are quite complex being neither stationary nor
 covariance stationary.
 
 
+<!--
+```{note}
+Tie up pieces here.
+```
+-->
+
 (sec:rv_extra)=
 ## Examples of slightly more advanced concepts ##
 
