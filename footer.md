@@ -14,14 +14,14 @@
 
 ::::{div}
 
-# Landing Pages
+# Modelling and Simulation
 
 ```{image} https://jupyterbook.org/en/stable/_images/logo-square.svg
 :width: 50px
 :align: left
 ```
 
-This is a description of our project. And a [link to its homepage](https://github.com/jupyter-book/example-landing-pages).
+© 2026, Henning Mortveit and Gabriel Lawrence
 ::::
 
 <!-- Spacer between project description and links columns -->
@@ -39,20 +39,20 @@ This is a description of our project. And a [link to its homepage](https://githu
 
 :::{div}
 
-- [About](https://mystmd.org/overview/ecosystem)
-- [Guide](https://mystmd.org/guide)
-- [Sandbox](https://mystmd.org/sandbox)
+- [Homepage](https://gabriel-vzh2vs.github.io/Modelling-And-Simulation-Public-Release/)
+- [Index](https://gabriel-vzh2vs.github.io/Modelling-And-Simulation-Public-Release/index-2/)
+- [Report Issues or Errors](https://github.com/Gabriel-vzh2vs/Modelling-And-Simulation-Public-Release/issues)
   :::
 
 :::{div}
 
-- A second column!
-- With multiple entries
+- This book is a work in progress!
+- We welcome contributions via GitHub or Email: GabeL@virginia.edu
   :::
 
 :::{div}
 
-- And what about a third
+- This is a Jupyter Book Project. Learn more here: [Jupyterbook](https://jupyterbook.org/)
   :::
 
 ::::
