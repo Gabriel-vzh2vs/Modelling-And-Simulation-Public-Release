@@ -1,12 +1,12 @@
 (sec:confidence_intervals)=
 # Confidence Intervals
 
-It is highly likely that you have done some form of statistics course
+You have likely done some form of statistics course
 or at least reviewed the first chapter {ref}`sec:prob_stats`. And therefore
 have heard the idea of a confidence interval before, most likely with a
 definition similar to: "A confidence interval (CI) is a range of values,
-calculated from sample data, that is likely to contain an unknown
-population parameter (i.e. location or scale parameter)" and that
+calculated from sample data, which is likely to contain an unknown
+population parameter (i.e,. location or scale parameter)" and that
 the confidence level represents the reliability of the method used to
 calculate this estimate in frequentist statistics.
 
@@ -26,16 +26,15 @@ $$\text{Pr}(X_{n} \le z) = F_{n,Z}(z) \rightarrow \psi(z)$$
 
 Where $\psi$ represents the CDF of the standard normal, $N(0,1)$.
 
-However, for practicable purposes, we need to find $\mu$ and a guarantee
+However, for practical purposes, we need to find $\mu$ and a guarantee
 of the quality of the estimate. This is where
-confidence intervals come into the picture as we need to determine values that bound the estimate of the mean within a prescribed probability.
+confidence intervals come into the picture, as we need to determine values that bound the estimate of the mean within a prescribed probability.
 
-Now that we have $Z_n$ with an unknown $\sigma^2$, we have to construct a random
-variable $t_n$ and estimator $S^2(n)$ in:
+Since the population variance $\sigma^2$ is unknown, we substitute it with the sample variance estimator $S^{2}(n)$ to construct the test statistic $t_n$​:
 
 $$t_n = (\bar{X}(n) - \mu) / \sqrt{S^2(n) / n}$$
 
-Which by the Classic CLT, asymptotically converges into $\psi$, and allowing for a approximation defined through:
+By the Classical Central Limit Theorem and Slutsky’s Theorem[^1], $t_n$​ converges in distribution to a standard normal distribution $N(0,1)$ as $n \rightarrow \infty$. This allows for an asymptotic approximation of the $1−\alpha$ confidence interval:
 
 \begin{align*}
  \Pr\Bigl(
@@ -57,7 +56,7 @@ $\alpha$ is often called the significance level, and $z_{1-\alpha/2}\sqrt{S^2(n)
 
 A confidence interval defines a probabilistic guarantee that a parameter
 will reside within an interval, and this probability level is
-provided by percentage of intervals that contain $\mu$ also
+provided by the percentage of intervals that contain $\mu$ also
 known as _coverage_. And if the underlying
 distribution is IID with finite variance, it will assume the form:
 
@@ -110,7 +109,7 @@ a Willink Confidence interval (WCI) to correct skewness, the third central momen
 ($\nu = \exp[(X-\mu)^3]/(\sigma^2)^{3/2}$).
 
 In general, WCI is a modified frequentist approach designed to correct positive skewness
-(i.e: the skewness found in Gamma, log-normal distributions) included coverage error by
+(i.e, the skewness found in Gamma, log-normal distributions) included coverage error by
 incorporating the sample skewness into the calculation.
 
 The WCI modifies the critical value used in the interval. Instead of using the
@@ -119,7 +118,7 @@ that accounts for the third central moment (skewness).
 
 The $(1-\alpha)$ in WCI is given by:
 
-$$\left[ \bar{X} - G\left(t_{crit}\right)\sqrt{\frac{S^2}{n}}, \quad \bar{X} + G\left(t_{crit}\right)\sqrt{\frac{S^2}{n}} \right]$$
+$$\left[ \bar{X} - G\left(t_{\text{crit}}\right)\sqrt{\frac{S^2}{n}}, \quad \bar{X} + G\left(t_{crit}\right)\sqrt{\frac{S^2}{n}} \right]$$
 
 To construct this interval, several statistics must be computed from the sample data $X_1, X_2, \dots, X_n$:
 
@@ -140,21 +139,21 @@ $$G(r) = \frac{1 + 6a(r - a)^{1/3} - 1}{2a}$$
 
 To Bayesians, there is a second concept that is often confused with
 the confidence interval, the Credible interval. This interval defines the
-possibility of a parameter residing in set of numbers within a given region
+possibility of a parameter residing in a set of numbers within a given region
 in the context of a posterior distribution. This is the concept
 most people popularly associate with a confidence interval.
 
-Credible intervals can be calculating using the simulation-sampling technique
+Credible intervals can be calculated using the simulation-sampling technique
 described as Markov Chain Monte Carlo, which is defined further in {ref}`sec:MCMC`.
 
-## Alterative Methods of Confidence Interval Construction
+## Alternative Methods of Confidence Interval Construction
 
 ### Bootstrapping Methods
 
 Bootstrapping methods are a family of methods
-that can assign a series of measures of accuracy (i.e: Confidence Intervals, Variance,
+that can assign a series of measures of accuracy (i.e, Confidence Intervals, Variance,
 Bias, Power, and Hypothesis Testing) to sample estimates. without relying on CLT.
-It will provide better results in cases where the CLT and LLN do not apply (i.e: no
+It will provide better results in cases where the CLT and LLN do not apply (i.e, no
 closed-form expression for the distribution or with small sample sizes). And bootstrapped
 confidence intervals with certain limits will be smaller or the same with
 the same level of accuracy and error as the confidence intervals generated with CLT.
@@ -267,11 +266,13 @@ parameter from a distribution, and it has some different and some similar limita
 
 2) It is impossible to fully and exactly sample the bootstrapping event space, often requiring
 a Monte Carlo method to approximate the distribution of $\hat{\theta}^{*}$ because the
-number of samples in the event space are defined through {cite:p}`hall2013bootstrap`:
+number of samples in the event space is defined through {cite:p}`hall2013bootstrap`:
 $$\binom{2n-1}{n} = \frac{(2n-1)!}{n!(n-1)!}$$
-As a binominal expansion, the growth of the event space in terms of
+As a binomial expansion, the growth of the event space in terms of
 samples is severe. For example, a sample size of n = 5 produces 126 samples
 while n = 10 gives us 92,378. However, this is also what makes
 a bootstrap sample value for calculating confidence intervals (the lack
 of repeats).
+
+[^1]: While the Central Limit Theorem establishes the asymptotic normality of the sample mean when the population variance $\sigma^2$ is known, Slutsky’s Theorem justifies replacing $\sigma$ with the consistent estimator $S(n)$. It ensures that if $\frac{\bar{X} - \mu}{\sigma  \sqrt{n}}​ \rightarrow ​N(0,1)$ and $S(n) \rightarrow​ \sigma$, then their ratio tn​ retains the same limiting distribution.
 
