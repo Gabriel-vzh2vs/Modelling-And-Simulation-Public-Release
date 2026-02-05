@@ -274,5 +274,5 @@ while n = 10 gives us 92,378. However, this is also what makes
 a bootstrap sample value for calculating confidence intervals (the lack
 of repeats).
 
-[^1]: While the Central Limit Theorem establishes the asymptotic normality of the sample mean when the population variance $\sigma^2$ is known, Slutsky’s Theorem justifies replacing $\sigma$ with the consistent estimator $S(n)$. It ensures that if $\frac{\bar{X} - \mu}{\sigma  \sqrt{n}}​ \rightarrow ​N(0,1)$ and $S(n) \rightarrow​ \sigma$, then their ratio tn​ retains the same limiting distribution.
+[^1]: While the Central Limit Theorem establishes the asymptotic normality of the sample mean when the population variance $\sigma^2$ is known, Slutsky’s Theorem justifies replacing $\sigma$ with the consistent estimator $S(n)$. It ensures that if $\frac{\bar{X} - \mu}{\sigma  \sqrt{n}}​ \rightarrow ​N(0,1)$ and $S(n) \rightarrow​ \sigma$, then their ratio $t_n$​ retains the same limiting distribution.
 
