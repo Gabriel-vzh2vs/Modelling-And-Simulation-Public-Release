@@ -111,7 +111,7 @@ $\equiv$ to form the quotient set
 \begin{equation*}
   (\mathbb{Z}/\!\!\equiv)\, = \{[0], [1], [2], \ldots,[n-1]\}
 \end{equation*}
-and show that that operations of addition and multiplication on
+and show that operations of addition and multiplication on
 $\mathbb{Z}$ behaves as they should on $\mathbb{Z}/\!\!\equiv$ by
 picking representatives. Forming such quotients is fairly standard
 construction in mathematics. You might find it in a course on discrete
@@ -294,11 +294,9 @@ The LCG defined by {ref}`eq:lcg` has full period _if and only
 (a) The greatest common divisor of $m$ and $c$ is $1$ (which we write
 $\gcd(m,c) = 1$);
 
+(b) All the prime factors of $m$ divide $a - 1$;
 
-(b) If $q$ is a prime with $q|m$ ($q$ divides $m$ with remainder $0$),
-then $q|(a-1)$;
-
-(c) If $4|m$ then $4|(a-1)$.
+(c) if $4$ divides $m$, then $4$ divides $a - 1$.
 
 :::
 
