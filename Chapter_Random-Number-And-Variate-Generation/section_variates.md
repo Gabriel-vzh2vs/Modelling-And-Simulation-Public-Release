@@ -3,45 +3,45 @@
 # Generating Random Variates
 
 In {ref}`sec:random_number_generation` we covered generating random
-number from from the standard uniform distribution $U(0,1)$. In this
-section we will see that once you are armed with this, you can
-generate variates from a range of distributions. Here we will go
-through four techniques for this:
+number from the standard uniform distribution $U(0,1)$. In this
+section, we will see that once you are armed with an awesome, high
+quality $U(0,1)$ RNG, you can generate variates from many other
+distributions as well. We cover four main techniques:
 
 - The Inverse Transform Method
 - Composition
 - Convolution
 - Rejection sampling
 
-:::{important} Why should you care about Random Variates?
-Stochastic simulation methods, including Discrete Event Simulation and System Dynamics, depend on the generation of
-random variates to model the stochaticity of real-world phenomena. A random variate such as the failure time of a
-mechanical component or the arrival time of a customer is a realization of a random variable.
-This value is typically produced by applying a transformation to a stream of uniform random numbers (drawn
-from $U(0, 1)$).
+:::{important} Why should you care about techniques for generating random variates?
 
-Consequently, a proficient understanding of probability distributions and their associated variate
-generation techniques is essential for the valid construction and interpretation of any stochastic model.
+Stochastic simulation methods, including discrete event simulation and
+system dynamics depend on the generation of variates to sample from
+the distributions of the random variables involved. Examples of
+include the time to failure for the mechanical component, and the arrival
+times of customers at a service location. A good understanding of
+probability distributions and the associated techniques for generating
+variates is essential for modeling, implementation of simulations
+models, analytics, as well as validation and verification.
 :::
 
 (sec:inverse_transform_method)=
 # The Inverse Transform Method
 
 The setting is the following: we are given a univariate statistical
-distribution with cumulative distribution function $F(x)$. The goal is
-to generate variates (or sample) from this statistical
-distribution. In the basic version we require that $F(x)$ is strictly
-increasing for $0 < F(x) < 1$. We will later see how this can be
-relaxed.
+distribution with cumulative distribution function $F$. For now, we
+assume that $F$ is strictly increasing across $0 < F(x) < 1$. Later,
+we will see how this can be relaxed. Our goal is to generate variates
+from this statistical distribution.
 
-__Algorithm:__
+__Algorithm:__ (Inverse transform method - ITM)
 
   1. Generate $u$ from $U(0,1)$
   2. Return $x=F^{-1}(u)$
 
-How do we know this is correct? What do we have to demonstrate? We
-need to demonstrate that the random variable $X$ given by $F^{-1}(U)$
-has CDF given by $F$.
+How do we know this is correct, and what do we have to demonstrate? We
+need to show that the algorithm, viewed as a random variable $X =
+F^{-1}(U)$ has CDF given by $F$.
 
 \begin{align*}
  \Pr(X \le x) &= \Pr\bigl(F^{-1}(U) \le x \bigr)\\
@@ -49,49 +49,233 @@ has CDF given by $F$.
 	  &= F(x)\;.
 \end{align*}
 
-__Question:__ where was the monotonicity of $F$ used?
+:::{important} Questions for thought:
 
-Is there any intuition behind the method?
+1. What does it mean that $F$ is strictly increasing across the
+   interval $0 < F(x) < 1$? Can you find an example of a CDF for which
+   this is not the case? What does its PDF look like in this case?
 
-Here are some examples of using the inverse transform method in
-the continuous and discrete cases.
-
-:::{prf:example} Exponential Distribution: Continuous
-The Exponential Distribution has the CDF:
-
-$$1-e^{\lambda \cdot x}, \text{ } x > 0$$
-
-Solving $F(X) = U$ for $X$ gives us:
-
-$$X = \frac{1}{\lambda} \cdot (-ln(1-U))$$
+2. Where was the assumption of "strictly increasing" used in the proof?
 
 :::
 
-:::{prf:example} Triangular Distribution: Discrete
-The triangular distribution (0, 1, 2) has pdf:
 
-$$f(x) =
+:::{prf:example} Exponential distribution
+
+The exponential distribution is the mandatory example that every
+textbook on ITM will include. Recall that the exponential distribution
+with rate $\lambda$ has PDF
+
+\begin{equation*}
+f(x) =
 \begin{cases}
-    x       & \quad \text{if } 0 \leq x < 1 \\
-    2-x     & \quad \text{if } 1 \leq x \leq 2.
-\end{cases}$$
+ \lambda e^{-\lambda x},& x \ge 0\\
+ 0, & \text{otherwise}\;,
+\end{cases}
+\end{equation*}
 
-And the CDF:
+and CDF
 
-$$F(x) =
+\begin{equation*}
+f(x) =
 \begin{cases}
-    x^2/2     & \quad \text{if } 0 \leq x < 1 \\
-    1 - (x-2)^2/2 & \quad \text{if } 1 \leq x \leq 2.
-\end{cases}$$
+ 1 - e^{-\lambda x},& x \ge 0\\
+ 0, & \text{otherwise}\;.
+\end{cases}
+\end{equation*}
 
-If $U < \frac{1}{2}$, we solve $\frac{X^2}{2} = U$ to obtain
+In this case, solving $F(x) = u$ for $u$ gives $1-u = e^{-\lambda x}$
+which after taking (natural) logarithms and sorting out terms leads to
+$x = -\frac{1}{\lambda}\ln(1-u)$. The ITM applied to the exponential
+distribution therefore becomes:
 
-$$X = \sqrt{2U}$$
-
-If $U \le \frac{1}{2}$, the root of $1-\frac{(X-2)^2}{2} = U$ in $[1, 2] is
-
-$$X = 2 \sqrt{2(1-U)}$$
+1. Sample $u$ from $U(0,1)$
+2. Return $-\frac{1}{\lambda}\ln(1-u)$
 :::
+
+
+:::{exercise}
+
+If you look in textbooks or online, you will find the following
+alternative to the ITM for the exponential distributions:
+
+1. Sample $u$ from $U(0,1)$
+2. Return $-\frac{1}{\lambda}\ln(u)$
+
+How can this also be correct?
+:::
+
+
+### Visualizing the inverse transform method
+
+What is the intuition behind the method? Consider the PDF $f$ in the
+figure below.
+
+:::{figure} figs/itm-visual-pdf.svg
+:width: 600
+:::
+
+We expect that the ITM should produce more samples where $f$ is
+large. And that is exactly what happens. For the ITM, we "shoot" from
+the $y$-axis using the value $u$ we sampled from $U(0,1)$ as shown in
+the the following figure:
+
+:::{figure} figs/itm-visual-cdf-ai.svg
+:width: 600
+:::
+
+The CDF is vertically more stretched out where $f$ is large, which is
+precisely what increases the chance of generating samples where
+$f$ is large.
+
+:::{prf:example} Triangular distribution
+
+The triangular distribution with parameters $(0, 1, 2)$ has PDF
+
+\begin{equation*}
+f(x) =
+\begin{cases}
+    x,       & \text{if } 0 \leq x < 1 \\
+    2-x,     & \text{if } 1 \leq x \leq 2 \;,
+\end{cases}
+\end{equation*}
+
+and CDF
+
+\begin{equation*}
+F(x) =
+\begin{cases}
+    x^2/2,     &  \text{if } 0 \leq x < 1 \\
+    1 - (x-2)^2/2, &  \text{if } 1 \leq x \leq 2 \;.
+\end{cases}
+\end{equation*}
+
+For the ITM, we see that the range $0 \le u < 1/2$ corresponds to $0
+\le x < 1$ and the range $1/2 \le u <= 1$ corresponds to $1 \le x \le 2$.
+
+To construct $F^{-1}$ we have to invert the two parts of $F$. For $u <
+\frac{1}{2}$ we solve $\frac{x^2}{2} = u$ to obtain $X = \sqrt{2u}$;
+for $u \ge \frac{1}{2}$ we get the equation $1-\frac{(x-2)^2}{2} = u$
+which has solution $x = 2 \sqrt{2(1-u)}$. Here we had to choose the
+sign so that the solution falls in $[1, 2]$.
+
+The ITM algorithm for the triangular distribution is:
+  1. Generate $u$ from $U(0,10)$
+  1. If $0\le u < 1/2$ return $\sqrt{2u}$; if $1/2 \le u \le 1$ return $2 \sqrt{2(1-u)}$
+:::
+
+
+
+### What if the CDF $F$ is not stricly increaing?
+
+For the ITM we requried that $F$ be strictly increasing for $0 < F(x)
+< 1$. What does $F$ look like if this is not the case? What does its
+PDF $f$ look like? It happens if the interval defined by $0 < F(x) <
+1$ contains intervals $I = [x_1,x_2]$ such that $f(x) = 0$ whenever
+$x\in I$. We have illustrated one such case below:
+
+:::{figure}
+:width: 400
+Figure to be added.
+:::
+
+In this case if $u=1/2$ we obtain $F^{-1}(u) = [1,2]$. How do we solve
+this? Rather than using $F^{-1}$ as before, we take
+\begin{equation*}
+F^{-1}(u) = \inf \{x \in \mathbb{R} \mid F(x) \ge u\}\;.
+\end{equation*}
+
+In this example $\{x\in\mathbb{R} \mid F(x) \ge 1/2\} = [1,\infty)$
+and thus $F^{-1}(u) = \inf [1,\infty) = 1$. Here $\inf$ denotes the
+infimum, see [https://en.wikipedia.org/wiki/Infimum_and_supremum].
+
+
+### The discrete distribution
+
+Here we show how the ITM can be used with the discrete distribution
+$X$ with sample space
+
+\begin{equation*}
+  \Omega = \{x_1, x_2, \ldots, x_n\}\;,
+\end{equation*}
+
+where $x_1 < x_2 < \cdots < x_n$, and the probability mass function
+(PMF) is given by $p_i = \Pr(X = x_i)$ for $1 \le i \le n$. To be a valid
+PMF, we require that $p_1 + p_2 + \cdots + p_n = 1$.
+
+The CDF of the PMF is given by
+
+\begin{equation*}
+F(x) = \Pr(X \le x) = \sum_{i \atop \text{s.t. } x_i \le u } p_i
+\end{equation*}
+
+Looking at the generalized inverse from earlier
+
+\begin{equation*}
+F^{-1}(u) = \inf \{x \in \mathbb{R} \mid F(x) \ge u\}\;,
+\end{equation*}
+
+we see that $u$ is mapped to the $x_i$ where $i$ is the smalles index
+such that $p_1 + p_2 + \cdots p_i$ exceedes $u$.
+
+
+There is a very intuitive way to see how this works. Consider the
+following diagram, where we have stacked the $p_i$ intervals
+left-to-right.
+
+:::{figure} figs/discrete-distribution.svg
+:width: 600
+:::
+
+The ITM in this case generates $u$ from $U(0,1)$. We now determine
+which interval the $u$ falls into and pick the corresponding value of
+$x$. If $u$ falls precisely on the boundary between $x_i$ and
+$x_{i+1}$ we pick the larger value $x_i$ to match $F^{-1}(u)$.
+
+
+
+:::{prf:example} Sampling from a custom distribution
+
+We have the following PDF f:
+
+\begin{equation*}
+f(x) =
+\begin{cases}
+x^2,& 0 \le x < 1\;,\\
+\frac{2}{3},& 1\le x \le 2\;,\\
+0,& \text{otherwise.}
+\end{cases}
+\end{equation*}
+
+How can such a distribution arise? As we will see in the chapter on
+distribution modeling, it may be the result of mapping a sample
+(observations of a random variable) into a PDF that does not any of
+the standard distribution. It may be the result of domain expertise,
+system insights, and distribution modeling handywork.
+
+
+(This example will be completed in class on 17 Feb 2026)
+
+:::
+
+
+
+
+
+__Python__: in Python you can use [scipy.stats.rv_discrete](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_discrete.html) for this.
+
+
+
+### Challenges for the inverse transform method
+
+The ITM relies on being able to invert the CDF $F$. In many cases,
+analytically deriving $F^{-1}$ may be challenging, and one may have to
+resort to numerical methods. If the numerical method is complex, one
+may incur a time penalty, and one should perhaps consider
+alternatives. As we will see, generating variates from the triangular
+distribution can also be done using the convolution method, which we
+cover later.
+
 
 (sec:composition_method)=
 # The Composition Method
@@ -137,7 +321,7 @@ __Question:__ The proof of the composition method above relies on the Law of Tot
 $F(x) = \sum_{i} F_i(x) p_i$. What property of the $p_i$ weights is necessary for $F(x)$ to be a valid Cumulative Distribution Function (CDF)?
 
 :::{prf:example} Laplace Distribution
-A classical example of the composition method is the Laplace distribution,
+A classic example of the composition method is the Laplace distribution,
 which is the composition between two exponential distributions reflected off
 of the $y$-axis.
 
@@ -152,7 +336,7 @@ Next, we need to sum them together (composition) with a 50-50 chance of sampling
 
 $$F(x) = \frac{1}{2} F_1(x) + \frac{1}{2} F_2(x)$$
 
-Equation 10 gives us two process that we need to do to use $F(x)$:
+Equation 10 gives us two processes that we need to do to use $F(x)$:
 
 1) Generate a choice variable: Generate $U_1 \sim \text{Uniform}(0, 1)$.
 2) Generate an inversion variable: Generate $U_2 \sim \text{Uniform}(0, 1)$.
@@ -179,7 +363,7 @@ $$X \leftarrow \begin{cases} \ln(U) & p = 1/2 \\ -\ln(U) & p = 1/2 \end{cases}$$
 Convolutions are used when a random variable can be expressed as the sum
 of two or more random variables, $Y_i$, and then this sum needs to be sampled as a random variate, $X$.
 This is similar to the composition method, but expresses
-the random variable as a sum of other random variates instead of the CDF as a weighted sum of other CDFs.
+the random variable as a sum of other random variables instead of the CDF as a weighted sum of other CDFs.
 
 __Algorithm:__
 
@@ -190,9 +374,9 @@ How do we use convolution?
 
 :::{prf:example} Binomial as a Convolution of Bernoullis
 
-A common use of convolution is hidden in of the most common
-distributions, the binominal distribution. Fundamentally, all
-binominal random variates are just a sum of i.i.d
+A common use of convolution is hidden in one of the most common
+distributions, the binomial distribution. Fundamentally, all
+binomial random variates are just a sum of i.i.d
 Bernoulli random variates.
 
 __Definition__: Let $W = \sum_{i=1}^n X_i$, where $X_i \sim Bernoulli(p)$. Then $W \sim \text{Binomial}(n, p)$.
@@ -213,7 +397,7 @@ This is the exact Probability Mass Function (PMF) of a Binomial($n, p$) random v
 
 And if you don't believe this result, we can also show a comparable result
 using the Crude Monte Carlo method (CMC) to simulate a series of Bernoulli
-Random Variates into a Binominal Random Variate, $W \sim Binominal(6, 0.4)$.
+Random Variates into a Binomial Random Variate, $W \sim Binomial (6, 0.4)$.
 
 ![image](../Figs/Figure_1.png)
 
@@ -286,14 +470,14 @@ __Algorithm:__
   2. Generate $U$ from $U(0,1)$, independent of $Y$
   3. If $U \le \frac{f(Y)}{t(Y)}$, return $X = Y$ and stop (accept), else return to step 1 (reject)
 
-The proof below shows how the algorithm given enough samples will converge into $f(x)$ using the
+The proof below shows how the algorithm, given enough samples, will converge into $f(x)$ using the
 definition of conditional probabilities, law of total probability, calculus, and basic algebra.
 
 :::{prf:proof} Long Proof: Rejection Sampling
 :class: dropdown
 This proof is based on the Rejection Sampling method from {cite:t}`liu2001monte`.
 
-We get a $X$ conditional on acceptance from step 3, therefore, by the definition of conditional probabilities:
+We get a $X$ conditional on acceptance from step 3; therefore, by the definition of conditional probabilities:
 
 $$P(X \le x) = \frac{P(\text{acceptance}, Y \le x)}{P(\text{acceptance})}$$
 
@@ -306,7 +490,7 @@ Because in step 2, we defined $U \sim U(0,1)$, and $Y$ is independent of $U$, an
 P(\text{acceptance, } Y \le x)= \int^{\infty}_{-\infty} P(\text{acceptance, } Y \le x| Y = y) \cdot r(y) dy
 ```
 
-When then spilt this into the sum of two integration regions, the acceptance range and the rejection range
+When this is spilt this into the sum of two integration regions, the acceptance range and the rejection range
 (aka what is below X and what is above X, respectively).
 
 ```{math}
@@ -325,7 +509,7 @@ Which simplifies to
 
 $$\frac{F(x)}{C}$$
 
-However, we need to show how to reobtain $F(x)$, our original function from this simplification.
+However, we need to show how to reobtain $F(x)$, our original function, from this simplification.
 In this case, we can obtain $\frac{1}{c}$ from our probability of acceptance after substituting our
 $r(y)$ and performing simplification.
 
@@ -335,7 +519,7 @@ Which becomes
 
 $$\frac{1}{c} \int^{\infty}_{-\infty} \frac{f(y)}{t(y)} t(y) dy$$
 
-Then we apply the multiplication of reciprocals (which always become 1), and simplify $\int^{\infty}_{-\infty} F(x)$
+Then we apply the multiplication of reciprocals (which always becomes 1), and simplify $\int^{\infty}_{-\infty} F(x)$
 as one because it is a density, and therefore also equal to one, to get $\frac{1}{c}$.
 
 Finally, we substitute our $P(\text{acceptance, } Y \le x)$ and $P(\text{acceptance})$ into the our definition of the
@@ -351,7 +535,7 @@ Now, how can we use rejection sampling?
 
 :::{prf:example} Half-Normal Random Variable
 
-This example is based off {cite}`ross2022simulation`. In this example, we
+This example is based on {cite}`ross2022simulation`. In this example, we
 wish to generate a standard half-normal RV with PDF using rejection sampling:
 
 $$f(x) = \frac{2}{\sqrt{2\pi}}e^{-x^2/2}, \quad x \geq 0.$$
@@ -472,5 +656,5 @@ sampling.
 
 c) Use your function from part (b) to generate 10,000 accepted samples. Plot a histogram of your samples. On the same plot, overlay the true, normalized PDF $g(x)$.
 
-d) Analyze Efficiency:Keep track of the total number of proposals $N_{total}$ and the number of accepted samples $N_{accepted}$. Calculate the empirical acceptance rate $\frac{N_{accepted}}{N_{total}}$. Compare this to the theoretical acceptance rate, which is $\frac{1}{M}$.
+d) Analyze Efficiency: Keep track of the total number of proposals $N_{total}$ and the number of accepted samples $N_{accepted}$. Calculate the empirical acceptance rate $\frac{N_{accepted}}{N_{total}}$. Compare this to the theoretical acceptance rate, which is $\frac{1}{M}$.
 :::
