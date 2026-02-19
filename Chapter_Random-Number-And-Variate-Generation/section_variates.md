@@ -3,8 +3,8 @@
 # Generating Random Variates
 
 In {ref}`sec:random_number_generation` we covered generating random
-number from the standard uniform distribution $U(0,1)$. In this
-section, we will see that once you are armed with an awesome, high
+number from from the standard uniform distribution $U(0,1)$. In this
+section we will see that once you are armed with an awesome, high
 quality $U(0,1)$ RNG, you can generate variates from many other
 distributions as well. We cover four main techniques:
 
@@ -16,13 +16,13 @@ distributions as well. We cover four main techniques:
 :::{important} Why should you care about techniques for generating random variates?
 
 Stochastic simulation methods, including discrete event simulation and
-system dynamics depend on the generation of variates to sample from
-the distributions of the random variables involved. Examples of
-include the time to failure for the mechanical component, and the arrival
-times of customers at a service location. A good understanding of
+system dynamics, depend on the generation of variates to sample from
+the distributions of the random variables that involved. Examples of
+include the time to failure for mechanical component, and arrival
+times of customers at a service locations. A good understanding of
 probability distributions and the associated techniques for generating
 variates is essential for modeling, implementation of simulations
-models, analytics, as well as validation and verification.
+models, analytics as well as validation and verification.
 :::
 
 (sec:inverse_transform_method)=
@@ -102,7 +102,9 @@ alternative to the ITM for the exponential distributions:
 1. Sample $u$ from $U(0,1)$
 2. Return $-\frac{1}{\lambda}\ln(u)$
 
-How can this also be correct?
+How can this also be correct? Hint: show that if $U \sim U(0,1)$ then
+the random variable $1-U$ is also $U(0,1)$.
+
 :::
 
 
@@ -166,21 +168,23 @@ The ITM algorithm for the triangular distribution is:
 
 
 
-### What if the CDF $F$ is not stricly increaing?
+### What if the CDF $F$ is not strictly increasing?
 
-For the ITM we requried that $F$ be strictly increasing for $0 < F(x)
+For the ITM we required that $F$ be strictly increasing for $0 < F(x)
 < 1$. What does $F$ look like if this is not the case? What does its
 PDF $f$ look like? It happens if the interval defined by $0 < F(x) <
 1$ contains intervals $I = [x_1,x_2]$ such that $f(x) = 0$ whenever
 $x\in I$. We have illustrated one such case below:
 
-:::{figure}
-:width: 400
-Figure to be added.
+:::{figure} figs/cdf-not-strictly-increasing.svg
+:width: 600
+An example where the CDF $F$ is not strictly increasing across the interval $1 < F(x) < 1$.
 :::
 
 In this case if $u=1/2$ we obtain $F^{-1}(u) = [1,2]$. How do we solve
-this? Rather than using $F^{-1}$ as before, we take
+this? Rather than using $F^{-1}$ as before, we take the generalized
+inverse defined as
+
 \begin{equation*}
 F^{-1}(u) = \inf \{x \in \mathbb{R} \mid F(x) \ge u\}\;.
 \end{equation*}
@@ -215,28 +219,33 @@ Looking at the generalized inverse from earlier
 F^{-1}(u) = \inf \{x \in \mathbb{R} \mid F(x) \ge u\}\;,
 \end{equation*}
 
-we see that $u$ is mapped to the $x_i$ where $i$ is the smalles index
-such that $p_1 + p_2 + \cdots p_i$ exceedes $u$.
+we see that $u$ is mapped to the $x_i$ where $i$ is the smallest index
+such that $p_1 + p_2 + \cdots + p_i$ equals or exceeds $u$.
 
 
-There is a very intuitive way to see how this works. Consider the
-following diagram, where we have stacked the $p_i$ intervals
+There is a very intuitive way to see how this work. Consider the
+following diagram where we have stacked the $p_i$ intervals
 left-to-right.
 
 :::{figure} figs/discrete-distribution.svg
 :width: 600
 :::
 
-The ITM in this case generates $u$ from $U(0,1)$. We now determine
+The ITM in this case generates $u$ from $U(0,1)$. We then determine
 which interval the $u$ falls into and pick the corresponding value of
 $x$. If $u$ falls precisely on the boundary between $x_i$ and
-$x_{i+1}$ we pick the larger value $x_i$ to match $F^{-1}(u)$.
+$x_{i+1}$ we pick the larger value $x_{i+1}$ to match $F^{-1}(u)$, see
+the previous subsection.
+
+
+__Python__: in Python you can use [scipy.stats.rv_discrete](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_discrete.html) for this.
 
 
 
-:::{prf:example} Sampling from a custom distribution
 
-We have the following PDF f:
+::::{prf:example} Sampling from a custom distribution
+
+We have the following probability density function $f$:
 
 \begin{equation*}
 f(x) =
@@ -247,23 +256,58 @@ x^2,& 0 \le x < 1\;,\\
 \end{cases}
 \end{equation*}
 
-How can such a distribution arise? As we will see in the chapter on
+How can a such a distribution arise? As we will see in the chapter on
 distribution modeling, it may be the result of mapping a sample
-(observations of a random variable) into a PDF that does not any of
-the standard distribution. It may be the result of domain expertise,
-system insights, and distribution modeling handywork.
+(observations of a random variable) into a PDF that does not match any of
+the standard distributions. It may have been derived through a
+combination of domain expertise, system insights, and distribution
+modeling handy-work. Regardless, we have a the probability density
+function $f$ and we would like to generate variates from its
+distribution.
+
+Before we start, it is always fair to ask if this a valid PDF. Is this the case?
+
+\begin{equation*}
+\int_\Omega f(x)\, dx
+= \int_0^1 x^2\,dx + \int_{1}^2 \frac{2}{3} dx
+= [\frac{x^3}{3}]_0^1 + [\frac{2x}{3}]_1^2
+= 1/3 + 2/3 = 1
+\end{equation*}
+
+(Here $\Omega = [0,2]$ is the sample space.)
+
+To use the ITM we first need to determine the CDF $F$. For a split
+function like $f$, we break this up as follows:
+
+- For $x < 0$ we have $F(x) = 0$.
+- For $0 \le x < 1$ we have
+\begin{equation*}
+F(x) = \int_0^x f(\xi)\, d\xi = \int_0^x \xi^2\, d\xi = [\frac{\xi^3}{3}]_0^x = \frac{1}{3}x^3\;.
+\end{equation*}
+- For $1 \le x <= 2$ we have
+\begin{equation*}
+F(x)
+= \int_0^x f(\xi)\, d\xi
+= \frac{1}{3} + \int_1^x \frac{2}{3}\, d\xi
+= \frac{1}{3} + [\frac{2\xi}{3}]_1^x
+= \frac{2}{3}x - \frac{1}{3}\;.
+\end{equation*}
+- If $x\ge 2$ then $F(x) = 1$.
+
+For $0 \le u < \frac{1}{3}$ we have $F^{-1}(u) = \sqrt[3]{3u}$. Why
+this $u$-range? Because $F$ at the rightmost point of $[0,1]$ equals
+$\frac{1}{3}$. Similarly, for $\frac{1}{3} \le u \le 1$ we invert $F$
+to obtain $F^{-1}(u) = \frac{3}{2} u + \frac{1}{2}$.
+
+The ITM-based method for generating variates for the distribution with PDF given by $f$ is:
 
 
-(This example will be completed in class on 17 Feb 2026)
-
+:::{prf:algorithm}
+- Generate $u$ from $U(0,1)$
+- If $u \in [0, \frac{1}{3})$ return $\sqrt[3]{3u}$
+- Else If $u\in[\frac{1}{3},1]$ return $\frac{3}{2} u + \frac{1}{2}$
 :::
-
-
-
-
-
-__Python__: in Python you can use [scipy.stats.rv_discrete](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_discrete.html) for this.
-
+::::
 
 
 ### Challenges for the inverse transform method
@@ -273,28 +317,58 @@ analytically deriving $F^{-1}$ may be challenging, and one may have to
 resort to numerical methods. If the numerical method is complex, one
 may incur a time penalty, and one should perhaps consider
 alternatives. As we will see, generating variates from the triangular
-distribution can also be done using the convolution method, which we
+distribution can also be done using the convolution method which we
 cover later.
 
+
+<!-- ---------------------------------------------------------------------- -->
 
 (sec:composition_method)=
 # The Composition Method
 
-The composition method is a technique used to generate random variates from a target distribution $F(x)$ that can be
-expressed as a mixture (or "composition") of several simpler (and ideally convex) component distributions.
+The composition method is a technique that can be used to generate
+random variates from a target distribution with CDF $F$ that can be
+expressed as a weighted sum (or "composition") of other CDFs $F_1,
+F_2,\ldots, F_n$. Specifically,
 
-And our target distribution must be able to be written in the form:
+\begin{equation*}
+F(x) = \sum_{i=1}^n p_i F_i(x) \;,
+\end{equation*}
 
-$$F(x) = \sum_i p_i \cdot F_i(x)$$
+where $p_1 + p_2 + \cdots + p_n = 1$.
 
-Where each $F_i(x)$ is a Cumulative Distribution Function (CDF) and $p_i$ represents the weights that
-ensure $\sum_i P_i = 1$.
 
-__Algorithm:__
+:::{prf:algorithm} Composition
+  1. Generate a variate $k$ from the discrete distribution over
+     $\{1,2,\ldots, n\}$ where $\Pr(k) = p_k$, see the discrete
+     distribution in the section on the inverse transform method.
 
-  1. Generate a positive, random integer $I$ such that $P(I = i) = p_i$
-  2. Return $X$ with CDF $F_i$ (given $I = i$, $X$ is independent of $I$).
+  2. Generate a variate $x$ from the distribution with  CDF $F_k$.
+:::
 
+Why does this work? The algorithm defines a random variable, $X$
+say. To demonstrate that it is valid, we must show that the $X$ has
+the correct CDF. For a two-step sequential algorithm like this, it is
+natural to reach for a tool like the Law of Total Probability, where
+we also introduce conditional probabilities through the relation
+$\Pr(A \cap B) = \Pr(A | B)\Pr(B)$. This is a very standard approach
+well worth knowing. Armed with this, we want to condition on the
+outcome of Step 1, which we capture as a random variable $\text{Idx}$.
+
+\begin{equation*}
+\Pr(X \le x) = \sum_{k=i}^n \Pr(X \le x \mid \text{Idx} = k) \Pr(\text{Idx} = k)
+\end{equation*}
+
+The first factor in the sum equals $F_k(x)$; the second factor is
+simply $p_k$.  We can therefore conclude that
+
+\begin{equation*}
+\Pr(X \le x) &= \sum_{k=i}^n p_k F_k(x) = F(x)
+\end{equation*}
+
+which is what we wanted.
+
+<!--
 The following proof demonstrates that the variate $X$ generated by the algorithm above
 does converge into $F(x)$ when (2) is met when using the law of total probability and the
 definition of a CDF.
@@ -314,32 +388,105 @@ P(X \le x) = \sum_{i} P(X \le x | I = i) \cdot P(I = i) \\
 
 = F(x) \\
 ```
-
 :::
+-->
 
-__Question:__ The proof of the composition method above relies on the Law of Total Probability,
-$F(x) = \sum_{i} F_i(x) p_i$. What property of the $p_i$ weights is necessary for $F(x)$ to be a valid Cumulative Distribution Function (CDF)?
+
+__Question:__ Why do we require that $p_1 + p_2 + \cdots + p_n = 1$?
+Would anything else work?
+
+<!--
+Law of Total Probability, $F(x) = \sum_{i} F_i(x) p_i$. What property
+of the $p_i$ weights is necessary for $F(x)$ to be a valid Cumulative
+Distribution Function (CDF)? -->
 
 :::{prf:example} Laplace Distribution
-A classic example of the composition method is the Laplace distribution,
-which is the composition between two exponential distributions reflected off
-of the $y$-axis.
 
-Let's define the exponential distribution using it's PDF and CDF:
+The general Laplace distribution is a continuous distribution over
+$\Omega = \mathbb{R}$ defined by
 
-$$ f(x) \equiv \begin{cases} \frac{1}{2}e^x, & x < 0 \\ \frac{1}{2}e^{-x}, & x > 0 \end{cases} \quad \text{and} \quad F(x) \equiv \begin{cases} \frac{1}{2}e^x, & x < 0 \\ 1-\frac{1}{2}e^{-x}, & x > 0 \end{cases}$$
+\begin{equation*}
+f(x) = \frac{1}{2b} e^{-\frac{|x-\mu|}{b}} \;,
+\end{equation*}
 
-Then decompose $X$ into negative and positive exponential distributions:
-$$ F_1(x) \equiv \begin{cases} e^x & \text{if } x < 0 \\ 1 & \text{if } x > 0 \end{cases} \quad \text{and} \quad F_2(x) \equiv \begin{cases} 0 & \text{if } x < 0 \\ 1-e^{-x} & \text{if } x > 0 \end{cases} $$
+where $\mu$ is its __location parameter__ and $b$ is its __scale
+parameter__. One can show that $\mathbb{E}[X] = \mu$ and
+$\mathbb{V}[X] = 2b^2$. The PDF is clearly symmetric about its mean
+$x=\mu$.
 
-Next, we need to sum them together (composition) with a 50-50 chance of sampling from either distribution.
+To demonstrate the composition method for the Laplace distribution we
+limit ourselves to the case where $\mu=0$ and $b = 1$. The PDF is the
+sum of an exponential distribution with rate parameter $\lambda = 1$
+and its "reflection" about the second axis, both weighted by a factor
+$\frac{1}{2}$. Formally, its PDF and CDF are
 
-$$F(x) = \frac{1}{2} F_1(x) + \frac{1}{2} F_2(x)$$
+\begin{equation*}
+f(x) =
+\begin{cases}
+\frac{1}{2}e^x, & x < 0 \\
+\frac{1}{2}e^{-x}, & x \ge 0
+\end{cases}
+\quad \text{and} \quad
+F(x) =
+\begin{cases}
+\frac{1}{2}e^x, & x < 0 \\
+1-\frac{1}{2}e^{-x}, & x \ge 0 \;.
+\end{cases}
+\end{equation*}
 
-Equation 10 gives us two processes that we need to do to use $F(x)$:
+How do we write this as a weighted sum of CDFs? With some experience
+and some use of the "staring method" you will see that
 
-1) Generate a choice variable: Generate $U_1 \sim \text{Uniform}(0, 1)$.
-2) Generate an inversion variable: Generate $U_2 \sim \text{Uniform}(0, 1)$.
+\begin{equation*}
+F_1(x) =
+\begin{cases}
+e^x, & \text{if } x < 0\;, \\
+1, & \text{if } x \ge 0\;,
+\end{cases}
+\quad \text{and} \quad
+F_2(x) =
+\begin{cases}
+0, & \text{if } x < 0\;, \\
+1-e^{-x}, & \text{if } x \ge 0\;,
+\end{cases}
+\end{equation*}
+
+where $F_1$ is the CDF of the negative exponential distribution. You
+can now verify that
+
+\begin{equation*}
+F(x) = \frac{1}{2} F_1(x) + \frac{1}{2} F_2(x) \;
+\end{equation*}
+
+How do we sample from the distributions with CDFs $F_1$ and $F_2$? We
+can use the inverse transform method for this, seeing that they are
+both easy to invert: for $F_1$ we get $F^{-1}(u) = \ln u$ and for
+$F_2$ we get $F_2^{-1}(u) = -\ln(1-u)$.
+
+The composition method applied to the Laplace distribution
+gives us the following algorithm for generating variates:
+
+__Algorithm:__
+
+- Generate $u$ from $U(0,1)$.
+- If $u < 1/2$ generate a variate from the distribution given by the CDF $F_1$:
+   - Generate $u_1$ from $U(0,1)$
+   - Return $F_2^{-1}(u_1) = \ln u_1$
+- If $u \ge 1/2$ generate a variate from the distribution given by the CDF $F_2$:
+   - Generate $u_2$ from $U(0,1)$
+   - Return $F_2^{-1}(u_2) = -\ln (1- u_2)$
+
+It is important to realize that you first generate $u \in U(0,1)$ to
+determine which of the distributions/CDFs to use. In this case, we
+could also have used the discrete distribution with values $\{1,2\}$
+and $p_1 = p_2 = \frac{1}{2}$, but here that simplifies to
+precisely what we used. Following the random selection of
+distribution, you will also have to generate additional variates when
+you sample from the respective distributions. The composite method,
+unlike the inverse transform method, therefore requires one to
+generate at least two variates.
+
+<!--
 
 We then apply the inverse transform method:
 If $U_1 < 0.5$, We sample from $F_1$.
@@ -355,53 +502,68 @@ Notice that if $U_2$ is a $\text{Uniform}(0, 1)$ variable, the term $1 - U_2$ is
 This simplifies our algorithm to: If $U_1 < 0.5$: $X = \ln(U_2)$; otherwise, $U_1 \ge 0.5$: $X = -\ln(U_2)$.
 
 $$X \leftarrow \begin{cases} \ln(U) & p = 1/2 \\ -\ln(U) & p = 1/2 \end{cases}$$
+-->
+
 :::
+
+
+<!-- ---------------------------------------------------------------------- -->
 
 (sec:convolution_method)=
 # The Convolution Method
 
-Convolutions are used when a random variable can be expressed as the sum
-of two or more random variables, $Y_i$, and then this sum needs to be sampled as a random variate, $X$.
-This is similar to the composition method, but expresses
-the random variable as a sum of other random variables instead of the CDF as a weighted sum of other CDFs.
+Sometimes we can express a random variable $X$ as a sum of independent
+random variables $X_1, X_2, \ldots, X_n$:
+
+\begin{equation}
+\label{eq:convolution}
+ X = X_1 + X_2 + \cdots + X_n \;
+\end{equation}
+
+Note that the distribution for the sum of random variables is called a
+convolution of their distributions, hence the name for this
+method. Once we have decomposed our random variable as in
+{ref}`eq:convolution` we can use the following algorithm to generate
+variates from the distribution of $X$:
+
 
 __Algorithm:__
 
-  1. Generate $Y_1, Y_2, ... Y_m$ independently using their distribution
-  2. Return $X = Y_1 + Y_2 + ... Y_m$
+  1. Generate a variate $x_k$ from the distribution for $X_k$ for $1\le
+     k \le n$ independently.
 
-How do we use convolution?
+  2. Return $X = X_1 + X_2 + \cdots + X_n$
 
-:::{prf:example} Binomial as a Convolution of Bernoullis
+The idea behind using this method is that we know how to generate
+variates from the distributions for the $X_i$'s, preferably in an
+efficient way. When do we use convolution? Insight comes with
+practice.  The close to mandatory example of this method is to show
+how one can sample from the binomial distribution using its
+decomposition into a sum of independent Bernoulli random variables.
 
-A common use of convolution is hidden in one of the most common
-distributions, the binomial distribution. Fundamentally, all
-binomial random variates are just a sum of i.i.d
-Bernoulli random variates.
+:::::{prf:example} The binomial distribution
 
-__Definition__: Let $W = \sum_{i=1}^n X_i$, where $X_i \sim Bernoulli(p)$. Then $W \sim \text{Binomial}(n, p)$.
+Let $X_k$ with $1\le k \le n$ be IID Bernoulli random variables with
+parameter $p$. We are interested in their sum, and it is natural to
+consider $X = \sum_{i=1}^n X_i$. From probability, we know $X$ is
+binomial with parameters $n$ and $p$.
 
-We want to find the probability $P(W=k)$ for $k \in \{0, 1, ..., n\}$. $W=k$ means that exactly $k$ of the $X_i$ variables are equal to 1 and $n-k$ are equal to 0.
+In case you do not remember this, here is a quick reminder. To derive
+the PMF of $X$ we reason as follows: for $\Pr(X = m)$, precisely $m$
+of the random variable $X_k$. By basic combinatorics, there are
+$\binom{n}{m}$ such configurations of values, each of which has
+probability $p^m (1-p)^{n-m}$. It then follows $P(X=m) = \binom{n}{m}
+p^m (1-p)^{n-m}$ for $0 \le m \le n$, which is precisely the PMF of
+the binomial distribution with parameters $n$ and $p$.
 
-Consider one specific sequence of $k$ successes and $n-k$ failures (e.g., $k$ successes first, then $n-k$ failures).
-Because all $X_i$ are independent, the probability of this single sequence is:
 
-$$P(X_1=1, ..., X_k=1, X_{k+1}=0, ..., X_n=0) = p^k (1-p)^{n-k}$$
-
-The total number of such arrangements is given by $\binom{n}{k}$.
-Since each of these $\binom{n}{k}$ sequences is disjoint (a different outcome)
-and has the same probability $p^k (1-p)^{n-k}$, the total probability $P(W=k)$ is the sum of their probabilities. Thus
-$$P(W=k) = \binom{n}{k} p^k (1-p)^{n-k}$$
-
-This is the exact Probability Mass Function (PMF) of a Binomial($n, p$) random variable. Thus, $W$ is binomially distributed.
-
-And if you don't believe this result, we can also show a comparable result
-using the Crude Monte Carlo method (CMC) to simulate a series of Bernoulli
-Random Variates into a Binomial Random Variate, $W \sim Binomial (6, 0.4)$.
+As an illustration, we can apply the algorithm listed upstairs to
+generate a sample of size $N$ and show its normalized histogram
+(effectively the Monte Carlo method). The example uses $n=6$ and $p=0.4$.
 
 ![image](../Figs/Figure_1.png)
 
-:::{admonition} Simulation Code
+::::{admonition} Simulation Code
 :class: dropdown
 
 ```{code} python
@@ -449,11 +611,93 @@ p = (ggplot(df_w, aes(x='w'))
 p.show()
 ```
 
-:::
+::::
+
+:::::
+
+
+:::{prf:example} Poisson process
+
+From queuing theory under a Poisson process with parameter $\lambda$,
+you know that the inter-arrival times are independent and exponentially
+distributed with parameter $\lambda$. You may recall that the
+inter-arrival time $W_n$ for the $n$-th inter-arrivals are Erlang with
+parameter $n$ and $\lambda$, $W_n$ being a sum of IID exponentially
+distributed random variables:
+
+\begin{equation*}
+W_n = X_1 + X_2 + \cdots + X_n
+\end{equation*}
+
+To sample from the Erlang distribution $W_n(\lambda)$ we may therefore
+use the convolution method. Whether one should do this is another
+matter: it may be all right when $n$ is small (e.g., $\le 5$), but for
+large $n$ one may have to consider the computational cost and other
+methods.
 
 :::
 
+
+::::{prf:example} Triangular distribution
+
+We already saw the symmetric triangular distribution $(0,1,2)$ in the
+section on the inverse transform method. Here we consider its cousin
+given by $(-1,0,1)$, and will show how we can use the method of
+convolution. Here is the algorithm:
+
+__Algorithm:__
+  1. Sample $u_1, u_2$ independently from $U(0,1)$
+  2. Return $u_1 + u_2 - 1$.
+
+Does that really work? Let's do some convolutions! Consider the random
+variable $X = Y_1 + Y_2$ where $Y_1, Y_2$ are IID $U(0,1)$ with sample
+space $\Omega_X = [0,2]$.  The joint PDF of $Y_1$ and $Y_2$ is given
+by $f_{Y_1,Y_2}(y_1, y_2) = 1$ if $(y_1, y_2) \in [0,1]^2$ and equals
+zero otherwise. We want to determine the CDF for $X$ which is given by
+
+\begin{equation*}
+F_X(x) = \Pr(X = Y_1 + Y_2 \le x)
+= \int_R f(y_1,y_2)\, dy_2 dy_1 \;,
+\end{equation*}
+
+where $R$ is the region "under the the line $y_1 + y_2 = x$. Some care
+is required to distinguish the cases $x \le 1$ and $x>1$.
+
+:::{figure} figs/triangle-distribution-convolution.svg
+:width: 400
 :::
+
+For the case $x \le 1$ we see that the integral is just the area of a
+right triangle with side $x$, that is $\frac{1}{2} x^2$, and $F(x) =
+\frac{1}{2} x^2$.
+
+For $x>1$, the area we are looking for is that of the unit square, but
+with the upper right corner chopped off. How large is the area of this
+upper right corner? Answer: $1 - \frac{1}{2} (2-x)^2 = 2x -1 -
+\frac{1}{2} x^2$, and thus $F(x) = 2x -1 - \frac{1}{2} x^2$. This gives us the PDF $f$ of $X$:
+
+\begin{equation*}
+f(x) =
+\begin{cases}
+x,& 0 \le 0 \le x < 1\;,\\
+-x + 2, & x \le 2\;
+\end{cases}
+\end{equation*}
+
+This matches exactly what we had under the inverse transform method,
+which is worrisome: this is the $(0,1,2)$ triangular distribution. We
+want $(-1,0,1)$. Subtracting $1$ takes care of that, neatly shifting
+the PDF to the left centering it at $x=0$, justifying the algorithm
+given at the beginning of the example.
+
+For reference, we note that this is a special case of the
+[Irwin-Hall  distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution). This
+distribution is given by $X = \sum_{k=1}^n Y_k$ where the $Y_k$'s for
+$1\le k \le n$ are IID $U(0,1).$ We looked at the special case
+$n=2$.
+
+::::
+
 
 (sec:rejection_sampling)=
 # Rejection Sampling
@@ -470,14 +714,14 @@ __Algorithm:__
   2. Generate $U$ from $U(0,1)$, independent of $Y$
   3. If $U \le \frac{f(Y)}{t(Y)}$, return $X = Y$ and stop (accept), else return to step 1 (reject)
 
-The proof below shows how the algorithm, given enough samples, will converge into $f(x)$ using the
+The proof below shows how the algorithm given enough samples will converge into $f(x)$ using the
 definition of conditional probabilities, law of total probability, calculus, and basic algebra.
 
 :::{prf:proof} Long Proof: Rejection Sampling
 :class: dropdown
 This proof is based on the Rejection Sampling method from {cite:t}`liu2001monte`.
 
-We get a $X$ conditional on acceptance from step 3; therefore, by the definition of conditional probabilities:
+We get a $X$ conditional on acceptance from step 3, therefore, by the definition of conditional probabilities:
 
 $$P(X \le x) = \frac{P(\text{acceptance}, Y \le x)}{P(\text{acceptance})}$$
 
@@ -490,7 +734,7 @@ Because in step 2, we defined $U \sim U(0,1)$, and $Y$ is independent of $U$, an
 P(\text{acceptance, } Y \le x)= \int^{\infty}_{-\infty} P(\text{acceptance, } Y \le x| Y = y) \cdot r(y) dy
 ```
 
-When this is spilt this into the sum of two integration regions, the acceptance range and the rejection range
+When then split this into the sum of two integration regions, the acceptance range and the rejection range
 (aka what is below X and what is above X, respectively).
 
 ```{math}
@@ -509,7 +753,7 @@ Which simplifies to
 
 $$\frac{F(x)}{C}$$
 
-However, we need to show how to reobtain $F(x)$, our original function, from this simplification.
+However, we need to show how to reobtain $F(x)$, our original function from this simplification.
 In this case, we can obtain $\frac{1}{c}$ from our probability of acceptance after substituting our
 $r(y)$ and performing simplification.
 
@@ -519,7 +763,7 @@ Which becomes
 
 $$\frac{1}{c} \int^{\infty}_{-\infty} \frac{f(y)}{t(y)} t(y) dy$$
 
-Then we apply the multiplication of reciprocals (which always becomes 1), and simplify $\int^{\infty}_{-\infty} F(x)$
+Then we apply the multiplication of reciprocals (which always become 1), and simplify $\int^{\infty}_{-\infty} F(x)$
 as one because it is a density, and therefore also equal to one, to get $\frac{1}{c}$.
 
 Finally, we substitute our $P(\text{acceptance, } Y \le x)$ and $P(\text{acceptance})$ into the our definition of the
@@ -535,7 +779,7 @@ Now, how can we use rejection sampling?
 
 :::{prf:example} Half-Normal Random Variable
 
-This example is based on {cite}`ross2022simulation`. In this example, we
+This example is based off {cite}`ross2022simulation`. In this example, we
 wish to generate a standard half-normal RV with PDF using rejection sampling:
 
 $$f(x) = \frac{2}{\sqrt{2\pi}}e^{-x^2/2}, \quad x \geq 0.$$
@@ -656,5 +900,5 @@ sampling.
 
 c) Use your function from part (b) to generate 10,000 accepted samples. Plot a histogram of your samples. On the same plot, overlay the true, normalized PDF $g(x)$.
 
-d) Analyze Efficiency: Keep track of the total number of proposals $N_{total}$ and the number of accepted samples $N_{accepted}$. Calculate the empirical acceptance rate $\frac{N_{accepted}}{N_{total}}$. Compare this to the theoretical acceptance rate, which is $\frac{1}{M}$.
+d) Analyze Efficiency:Keep track of the total number of proposals $N_{total}$ and the number of accepted samples $N_{accepted}$. Calculate the empirical acceptance rate $\frac{N_{accepted}}{N_{total}}$. Compare this to the theoretical acceptance rate, which is $\frac{1}{M}$.
 :::
