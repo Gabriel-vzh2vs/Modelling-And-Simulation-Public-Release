@@ -723,6 +723,20 @@ The __median__ of a random variable is any value $\nu$ that satisfies
 \end{equation*}
 ```
 
+:::{prf:definition} Law of Total Expectation
+
+```{raw} latex
+Let $X$ be a random variable with expected value $\operatorname{E}(X)$ and let $Y$ be any 
+random variable defined on the same probability space. 
+Then, the expected value of the conditional expectation of $X$ given $Y$ is the same as the expected value of $X$:
+
+\begin{equation}
+\operatorname{E}(X) = \operatorname{E}[\operatorname{E}(X|Y)] \;.
+\end{equation}
+```
+
+:::
+
 
 We also incorporate some other quantities that we may encounter in the course:
 
