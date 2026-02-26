@@ -127,8 +127,7 @@ the the following figure:
 :::
 
 The CDF is vertically more stretched out where $f$ is large, which is
-precisely what increases the chance of generating samples where
-$f$ is large.
+precisely what increases the chance of generating samples in these regions.
 
 :::{prf:example} Triangular distribution
 
@@ -664,7 +663,7 @@ where $R$ is the region "under the the line $y_1 + y_2 = x$. Some care
 is required to distinguish the cases $x \le 1$ and $x>1$.
 
 :::{figure} figs/triangle-distribution-convolution.svg
-:width: 400
+:width: 300
 :::
 
 For the case $x \le 1$ we see that the integral is just the area of a
@@ -690,6 +689,10 @@ want $(-1,0,1)$. Subtracting $1$ takes care of that, neatly shifting
 the PDF to the left centering it at $x=0$, justifying the algorithm
 given at the beginning of the example.
 
+Note that we may view this case as a convolution of three random
+variables, namely $Y_1$, $Y_2$ and the constant $1$. We may also view
+it as a sum of two IID RVs, $Y_1' = Y_1 - 1/2$ and $Y_2' = Y_2 - 1/2$.
+
 For reference, we note that this is a special case of the
 [Irwin-Hall  distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution). This
 distribution is given by $X = \sum_{k=1}^n Y_k$ where the $Y_k$'s for
@@ -701,6 +704,331 @@ $n=2$.
 
 (sec:rejection_sampling)=
 # Rejection Sampling
+
+Rejection sampling (also called acceptance-rejection sampling) is a
+remarkable technique for generating variates, a fact that is more
+easily appreciated after examples. We first need to introduce some
+concepts and terminology.
+
+We again address the case of a univariate continuous random variable
+with probability density function $f$ and cumulative distribution
+function $F$, the goal being construct an algorithm for sampling.
+
+## Rejection sampling algorithm
+
+*  Determine a function $ \phi$ that __majorizes__ the PDF $f$: for all
+   $x$ we have $\phi(x) \ge f(x)$. Note that $ \phi$ is generally not a PDF since
+   \begin{equation*}
+     \phi_0 = \int_\Omega \phi(x)\,dx \ge \int_\Omega f(x)\, dx = 1 \;.
+   \end{equation*}
+* Define the PDF $ \rho$ by $\rho(x) = \phi(x)/\phi_0$.
+
+We remark that $ \phi$ is chosen with foresight so that it is
+relatively easy to generate variates from the distribution belonging
+to $ \rho$. This will be illustrated in examples.
+
+
+__Algorithm__
+
+  1. Generate $y$ from the distribution with PDF $ \rho$
+  2. Generate $u$ from $U(0,1)$
+  3. __If__ $u\le f(y)/\phi(y)$  __return__ $x = y$; __Else__: Go to step 1.
+
+In other words, we repeatedly go through steps 1 and 2 until the
+condition $u \le f(y)/\phi(y)$ is satisfied and then return the
+corresponding value of $y$. After the example that follow, we will
+return to the algorithm, its interpretation as a random variable, and
+give its proof along with insights on the quantities involved.
+
+::::{prf:example}
+
+The Beta distribution with (shape) parameteres $ \alpha$ and $ \beta$ has probability density function
+\begin{equation*}
+f_{\alpha,\beta}(x) =
+\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1}
+\end{equation*}
+
+where $x\in[0,1]$ and $\alpha,\beta > 0$ are real-valued
+parameters. Also, $ \Gamma$ is the
+[https://en.wikipedia.org/wiki/Gamma_function], a generalization of
+the factorial function. For example, for non-negative integers $n$ we
+have $\Gamma(n+1) = n!$. The reciprocal of the coefficient of
+$x^{\alpha-1}(1-x)^{\beta-1}$ is the beta function evaluated at
+$(\alpha,\beta)$. We write $\text{Beta}(\alpha,\beta)$ for the
+[https://en.wikipedia.org/wiki/Beta_distribution].
+
+Clearly, the inverse transform method looks rather cumbersome in this
+case. We focus on the special case $\alpha = 4$ and $\beta = 3$ in which case we have
+
+\begin{equation*}
+ f(x) = f_{4,3}(x) = 60 x^3 (1-x)^2, \quad\text{for $x\in[0,1]$.}
+\end{equation*}
+
+To find a majorizing function $ \phi$, we can here use $\phi(x) =
+f_{\max}$. For a well-behaved function defined over a bounded interval
+$[a,b]$ this choice always works. However, as we will see, it may not
+be the smartest choice.
+
+A function like this attains its maximal value where $\frac{df}{dx}$
+equals zero or at the end-points of $[0,1]$. Clearly, $f(0) = f(1) =
+0$, and thus $f_{\max}$ is not attained at those. We see that
+
+\begin{align*}
+\frac{df}{dx}
+&= 180 x^2(1-x)^2 - 120 x^3(1-x)\\
+&= 60x^2(1-x)[3(1-x)-2x]\\
+&= 60x^2(3-5x)
+\end{align*}
+
+whose only interesting root is $x = \frac{3}{5} = 0.6$, giving $\phi_0
+= f_{\max} = \left(\frac{6}{5}\right)^4 = 2.0736$ and $\rho(x) = 1$,
+the PDF of $U(0,1)$. The algorithm therefore becomes:
+
+__Algorithm:__
+1. Sample $y$ from $U(0,1)$
+2. Sample $u$ from $U(0,1)$
+3. __If__ $u\le 60y^3(1-y)^2/\phi_0$ __return__ $y$; __Else__ Go to 1.
+
+
+
+:::{tip} Python code
+:class:dropdown
+
+```{code-block} python
+#!/usr/bin/env python3
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import beta
+
+plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Computer Modern Roman"],
+    "text.latex.preamble": r"\usepackage{amsfonts}\usepackage{amsmath}"
+})
+
+def rejection_sampling_beta(n_samples, a=4, b=3):
+    # Calculate \phi_0 (Max value of Beta PDF)
+    mode = (a - 1) / (a + b - 2)
+    phi_0 = beta.pdf(mode, a, b)
+
+    Z = []
+    while len(Z) < n_samples:
+        y = np.random.uniform(0, 1)
+        u = np.random.uniform(0, 1)
+        if u <= beta.pdf(y, a, b) / phi_0:
+            Z.append(y)
+    return np.array(Z), phi_0
+
+
+bins = 60
+x_split=500
+n = 25000
+a=5
+b=3
+Z, phi_0 = rejection_sampling_beta(n, a=a, b=b)
+x = np.linspace(0.0, 1.0, x_split)
+
+plt.figure(figsize=(8, 5))
+plt.hist(Z, bins=bins, density=True, color='steelblue',
+         edgecolor='black', alpha=0.7, label=r'Empirical, normalized histogram')
+
+plt.plot(x, beta.pdf(x, a, b), 'k-', lw=2,
+         label=r'$f(x) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1}(1-x)^{\beta-1}$')
+
+plt.axhline(phi_0, color='black', linestyle='--', alpha=0.6,
+            label=r'Envelope $\phi_0 \rho(x)$ with $\phi_0 = %f$' % phi_0)
+
+plt.title(r'\textbf{Acceptance-Rejection Sampling for} $\text{Beta}(4,3)$', fontsize=14)
+plt.xlabel(r'$x \in [0, 1]$', fontsize=12)
+plt.ylabel(r'Density $f(x)$',  fontsize=12)
+plt.legend(fontsize=12)
+
+plt.savefig("beta_4_3_rejection-sampling_plot.pdf")
+plt.savefig("beta_4_3_rejection-sampling_plot.svg")
+plt.show()
+```
+:::
+
+
+:::{figure} figs/beta_4_3_rejection-sampling_plot.svg
+:width: 750
+:label: fig_beta_4_3_rejection
+:::
+
+::::
+
+<!-- ---------------------------------------------------------------------- -->
+
+:::{prf:example} Half-Normal Random Variable
+
+This example is motivated by {cite}`ross2022simulation` and considers
+the RV over $\Omega = [0,\infty)$ with PDF $f$ given by
+
+\begin{equation*}
+f(x) = \frac{1}{\sqrt{\pi/2}}e^{-x^2/2} \;.
+\end{equation*}
+
+For the rejection sampling we claim that $\phi$ given by
+
+\begin{equation*}
+\phi(x) = \sqrt{\frac{2e}{\pi}} e^{-x}
+\end{equation*}
+
+is a majorizing function. How does one show that? Examine the ration $\phi/f$:
+
+\begin{equation*}
+\frac{\phi(x)}{f(x)}
+= \sqrt{\pi/2} \sqrt{2/\pi} e^{1/2-x+x^2/2} = e^{1/2-x+x^2/2}
+\end{equation*}
+
+At $x=0$ the ration is $\sqrt{e}$. Since the exponential function is
+monotone, the ratio is minimal where the exponent is minimal which
+takes place at $x=1$ where the ratio is $1$, establishing the claim.
+By ocular inspection, it is clear that $\rho(x) = e^{-x}$, the PDF of
+the exponential distribution with rate $\lambda = 1$. Clearly, the
+coefficient of $e^{-1}$ in $\phi(x)$ was very carefully chosen.
+
+We already determined the ratio $f/\phi$ and obtain:
+
+__Algorithm:__
+
+1) Generate $y$ from $y$ from the exponential distribution  $\text{Exp}(1)$
+2) Generate $u$ from $U(0, 1)$
+3) __If__ $u \le e^{(x-1)^/2}$ __return__ y; __Else__ Go to step 1.
+
+You should be able to quickly adapt the code from the previous example
+to generate a normalized histogram as in
+{ref}`fig_beta_4_3_rejection`.
+
+::::
+
+<!-- ---------------------------------------------------------------------- -->
+
+## Under the hood of rejection sampling
+
+Here we take a look at different component of rejection sampling. At
+the end, we puzzle together these pieces and prove that the general
+algorithm, viewed as a random variable, does indeed have prescribed
+PDF.
+
+__Question 1__: What is the probability of acceptance for the
+rejection sampling algorithm once we have generated $y$ from the
+distribution of $ \rho$? Clearly, we have
+
+\begin{equation*}
+\Pr(\text{Accept} | Y = y)
+= \Pr\bigl(U \le f(y)/\phi(y)\bigr)
+= f(y)/\phi(y) \;,
+\end{equation*}
+
+showing that acceptance is more likely where $f$ comes close to the
+majorizing function $ \phi$.
+
+__Question 2:__ What is $\Pr(\text{Accept})$, the probability of
+accept for a single pass of the algorithm? For this, we need the joint
+PDF of $U(0,1)$ and $ \rho$ which equals $ \rho$. We denote the
+common sample space of $f$ and $ \rho$ by $\Omega_1$.
+
+\begin{align*}
+\Pr(\text{Accept})
+&= \int_{\Omega_1} \int_0^{f(y)/\phi(y)} \rho(y)\,du\, dy\\
+&= \int_{\Omega_1} \frac{f(y)}{\phi(y)} \rho(y)\, dy\\
+&= \frac{1}{\phi_0} \int_{\Omega_1} f(y)\, dy\\
+&= \frac{1}{\phi_0}\;.
+\end{align*}
+
+__Question 3:__ What is the expected number of iterations in the
+algorithm until success? By design, the passes (or trials) in the
+algorithm are independent.  The random variable $N$ giving the number
+of passes until acceptance therefore has a geometric distribution with
+parameter $p = 1/\phi_0$ and $\mathbb{E}[N] = 1/p = \phi_0$. The
+lesson here is that the more "generous" we are when selecting the
+majorizing function $ \phi$, the more we have to "pay" in terms of the
+number of passes in the algorithm. If one can closely "wrap" the
+majorizing function $\phi$ around the PDF $f$, the expected number of
+passes in the algorithm ($\phi_0$) drops.
+
+
+
+::::{prf:example} A good, representative illustration of rejection sampling
+
+In this example we have a probability density function $f$ given by
+
+\begin{equation*}
+ f(x) \propto e^{-x^/2} \sin^2 x
+\end{equation*}
+
+where the sample space is $\Omega = \mathbb{R}$. Here $\propto$ means
+"proportional to"; $f$ is as prescribed up to some constant $c$ that
+ensures it is a valid PDF. As we will see, we do not need to determine
+$c$ when we apply the rejection method for generating variates
+following the corresponding distribution. Neat, yes?
+
+If we were forced to determine $c$ we would use
+
+\begin{equation*}
+ 1 = \int_{-\infty}^\infty f(x)\, dx = c \int_{-\infty}^\infty e^{-x^2/2}\sin^2 x\, dx \;,
+\end{equation*}
+
+and, perhaps after using some symbolic software (e.g., Sage or
+Mathematica) or dusting off old integration skills, find that $c =
+(1-\frac{1}{e^2})\sqrt{\frac{\pi}{2}}$. Again, not necessary.
+
+
+At this stage, experience and ocular inspection is needed.
+
+__Observations:__
+1. The factor $e^{-x^2/2}$ of $f$ is, up to a constant, the PDF of
+   $N(0,1)$, the standard normal distribution.
+
+2. For the other factor of $f$ we have $0 \le \sin^2 x \le 1$ for all $x$.
+
+__Implication:__
+
+1. The function $\phi(x) \propto e^{-x^2/2}$ majorizes $f$. Here we
+   would use the same constant for $\phi$ as we would  for $f$, namely
+   $c$. Again, we do not need to specify $c$.
+
+2. The PDF $\rho$ is that of the standard normal distribution.
+   Technically, we have not shown how to sample from $N(0,1)$, but we
+   may include that as an exercise.
+
+__Summary:__
+1. $f(x) \propto e^{-x^2/2} \sin^2 x$
+2. $\phi(x) \propto e^{-x^2/2}$
+3. $\rho(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2}$
+
+This leads to $\frac{f(y)}{\phi(y)} = \sin^2 y$ and the rejection sampling algorithm:
+
+__Algorithm:__
+1. Generate variate $y$ from $N(0,1)$
+2. Generate $u$ from $U(0,1)$
+3. __If__ $u \le \sin^2 y$ __return__ y __Else__ go to Step 1.
+
+
+__Question:__ What is the expected number of iteration of the
+algorithm in this case? In other words, what is $\phi_0$? For this, we
+actually need the normalization constant $c$. Here
+
+\begin{equation*}
+\phi(x)
+= \frac{1}{c} \int_{-\infty}^{\infty} e^{-x^2/2} \, dx
+= \frac{2}{1-1/e^2}\;,
+\end{equation*}
+
+which is approximately $2.313$. The probability of acceptance is $1/\phi_0$.
+
+::::
+
+Returning to the general case, how do we prove that the rejection
+sampling algorithm, viewed as a random variable, has PDF $f$? There
+are several ways to do this, but it is quite natural to ...
+
+
+
+<!--
 
 Acceptance-rejection sampling is usually used when there is not a tractable, closed-form
 expression for the target distribution's CDF $F(x)$. The goal is to generate variates $X$ from the density function $f
@@ -777,58 +1105,36 @@ __Question__: The method requires an "envelope" $c \cdot g(x)$ such that $f(x) \
 
 Now, how can we use rejection sampling?
 
-:::{prf:example} Half-Normal Random Variable
+-->
 
-This example is based off {cite}`ross2022simulation`. In this example, we
-wish to generate a standard half-normal RV with PDF using rejection sampling:
+## Problems
 
-$$f(x) = \frac{2}{\sqrt{2\pi}}e^{-x^2/2}, \quad x \geq 0.$$
+:::{seealso} Problem 1
+A random variable $B$ has the following PDF:
 
-Then we use the majorizing function:
-$$t(x) = \sqrt{\frac{2e}{\pi}} e^{-x} \text{ } \forall x \text{ } \ge 0$$
-
-When we calculate $c$, we take the integral of $t(x)$ upon x:
-$$c = \sqrt{\frac{2e}{\pi}} \int_{0}^{\infty} e^{-x} dx \rightarrow  \sqrt{\frac{2e}{\pi}}  = 1.3155$$
-
-Then we get the proposed density function $h(y)$ through dividing $t(y)$ over $c$:
-
-$$h(y) \equiv \frac{t(y)}{c} = e^{-y}$$
-
-And then we need $g(y)$, the ratio of $f(y)$ and $t(y)$, which represents the rejection ratio.
-$$g(y) = \frac{f(y)}{t(y)} = e^{-\frac{(y-1)^2}{2}}$$
-
-Once we have our functions, we can then apply the algorithm which allows us to have a random variate representing the half-normal r.v:
-
-1) Generate $Y$ from the "proposed density" $h(y) = e^{-y}$.
-2) Generate $U \sim \text{Uniform}(0, 1)$.
-3) Accept/Reject: Check if $U \le g(Y)$, where $g(Y)$ is the ratio from Equation (32):
-
-$$U \le e^{-\frac{(Y-1)^2}{2}}$$
-if it passes, accept, return $X$ = $Y$; otherwise reject. Go back to step 1.
-:::
-
-# Problems Left to the Reader
-
-:::{seealso} Problem 1 (Software Implementation of Random Variate)
-Supposed that a Random Variable, $B$ has the following p.d.f:
-
-$$f(x) = \begin{cases}
+\begin{equation*}
+f(x) = \begin{cases}
     0 & \text{if } x < 0 \text{ or } x > 2 \\
     x & \text{if } 0 \le x \le 1 \\
     \frac{1}{2} & \text{if } 1 \le x \le 2
-\end{cases}$$
+\end{cases}
+\end{equation*}
 
-a) Use a method for generating realizations $B$ through any of the four methods, some are likely to
-be easier than others.
+a) Which of the form techniques for generating variates from the
+distribution of $B$ seems most appropriate?
 
-b) Write code that implements the inverse transform method for this p.d.f.
+b) Write an algorithm for generating variates from the distribution of
+$B$ based on the inverse transform method.
 
-c) How would you computationally verify that your simulation method is correct?
+c) Computationally, how can you verify that your algorithm is correct?
 
-d) Compare the Inverse Transform method and the Rejection Sampling method for this specific p.d.f.
+d) Compare the inverse transform method and the rejection sampling
+method for this random variable.
+
 :::
 
 :::{seealso} Problem 2 (Analytic Application: Machine Failure)
+
 A machine is taken out of production either if it fails or after a period of 7 hours. By running
 similar machines until failure, it has been found that time to failure, $F$, has the Weibull distribution with
 $\alpha = 9, \beta = 0.55, \text{ and } \nu = 0$.
@@ -867,20 +1173,6 @@ inverse transform method.
 c) Explain how you could use the convolution method to
 construct an algorithm for sampling.
 
-d) A second random variable $Y$ for the model is given by the
-probability density function
-
-\begin{equation*}
- g(x) \propto f(x) \sin^2(x), \qquad x\in\mathbb{R} \;.
-\end{equation*}
-
-Here $g(x) \propto f(x) \sin^2(x)$ means that $g(x)$ is given by
-$f(x)\sin^2(x)$ up to a multiplicative constant. For rejection
-sampling, explain why you do not need to determine this constant.
-
-e) Prepare an algorithm for generating variates from the
-distribution of $Y$ in (c) using rejection sampling, basing it
-on the sampling method you developed in (b).
 :::
 
 :::{warning} Problem 4 (Computational Exam-Style Question: Rejection Sampling)
