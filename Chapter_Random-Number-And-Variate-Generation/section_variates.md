@@ -17,12 +17,12 @@ distributions as well. We cover four main techniques:
 
 Stochastic simulation methods, including discrete event simulation and
 system dynamics, depend on the generation of variates to sample from
-the distributions of the random variables that involved. Examples of
-include the time to failure for mechanical component, and arrival
-times of customers at a service locations. A good understanding of
+the distributions of the random variables involved. Examples of
+include the time to failure for the mechanical component, and the arrival
+times of customers at a service location. A good understanding of
 probability distributions and the associated techniques for generating
 variates is essential for modeling, implementation of simulations
-models, analytics as well as validation and verification.
+models, analytics, as well as validation and verification.
 :::
 
 (sec:inverse_transform_method)=
@@ -157,7 +157,7 @@ For the ITM, we see that the range $0 \le u < 1/2$ corresponds to $0
 To construct $F^{-1}$ we have to invert the two parts of $F$. For $u <
 \frac{1}{2}$ we solve $\frac{x^2}{2} = u$ to obtain $X = \sqrt{2u}$;
 for $u \ge \frac{1}{2}$ we get the equation $1-\frac{(x-2)^2}{2} = u$
-which has solution $x = 2 \sqrt{2(1-u)}$. Here we had to choose the
+which has solution $x = 2 + \sqrt{2 * (1-u)}$. Here we had to choose the
 sign so that the solution falls in $[1, 2]$.
 
 The ITM algorithm for the triangular distribution is:
