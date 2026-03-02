@@ -17,12 +17,12 @@ distributions as well. We cover four main techniques:
 
 Stochastic simulation methods, including discrete event simulation and
 system dynamics, depend on the generation of variates to sample from
-the distributions of the random variables involved. Examples of
-include the time to failure for the mechanical component, and the arrival
-times of customers at a service location. A good understanding of
+the distributions of the random variables that involved. Examples of
+include the time to failure for mechanical component, and arrival
+times of customers at a service locations. A good understanding of
 probability distributions and the associated techniques for generating
 variates is essential for modeling, implementation of simulations
-models, analytics, as well as validation and verification.
+models, analytics as well as validation and verification.
 :::
 
 (sec:inverse_transform_method)=
@@ -157,7 +157,7 @@ For the ITM, we see that the range $0 \le u < 1/2$ corresponds to $0
 To construct $F^{-1}$ we have to invert the two parts of $F$. For $u <
 \frac{1}{2}$ we solve $\frac{x^2}{2} = u$ to obtain $X = \sqrt{2u}$;
 for $u \ge \frac{1}{2}$ we get the equation $1-\frac{(x-2)^2}{2} = u$
-which has solution $x = 2 + \sqrt{2 * (1-u)}$. Here we had to choose the
+which has solution $x = 2 \sqrt{2(1-u)}$. Here we had to choose the
 sign so that the solution falls in $[1, 2]$.
 
 The ITM algorithm for the triangular distribution is:
@@ -531,12 +531,12 @@ __Algorithm:__
   1. Generate a variate $x_k$ from the distribution for $X_k$ for $1\le
      k \le n$ independently.
 
-  2. Return $X = X_1 + X_2 + \cdots + X_n$
+  2. Return $x = x_1 + x_2 + \cdots + x_n$
 
 The idea behind using this method is that we know how to generate
 variates from the distributions for the $X_i$'s, preferably in an
 efficient way. When do we use convolution? Insight comes with
-practice.  The close to mandatory example of this method is to show
+practice.  The more-or-less mandatory example of this method is to show
 how one can sample from the binomial distribution using its
 decomposition into a sum of independent Bernoulli random variables.
 
@@ -549,7 +549,7 @@ binomial with parameters $n$ and $p$.
 
 In case you do not remember this, here is a quick reminder. To derive
 the PMF of $X$ we reason as follows: for $\Pr(X = m)$, precisely $m$
-of the random variable $X_k$. By basic combinatorics, there are
+of the random variable $X_k$ must be one. By basic combinatorics, there are
 $\binom{n}{m}$ such configurations of values, each of which has
 probability $p^m (1-p)^{n-m}$. It then follows $P(X=m) = \binom{n}{m}
 p^m (1-p)^{n-m}$ for $0 \le m \le n$, which is precisely the PMF of
@@ -617,22 +617,22 @@ p.show()
 
 :::{prf:example} Poisson process
 
-From queuing theory under a Poisson process with parameter $\lambda$,
+From the theory of a Poisson process with parameter $\lambda$,
 you know that the inter-arrival times are independent and exponentially
 distributed with parameter $\lambda$. You may recall that the
 inter-arrival time $W_n$ for the $n$-th inter-arrivals are Erlang with
 parameter $n$ and $\lambda$, $W_n$ being a sum of IID exponentially
-distributed random variables:
+distributed random variables
 
 \begin{equation*}
-W_n = X_1 + X_2 + \cdots + X_n
+W_n = X_1 + X_2 + \cdots + X_n \;.
 \end{equation*}
 
 To sample from the Erlang distribution $W_n(\lambda)$ we may therefore
 use the convolution method. Whether one should do this is another
 matter: it may be all right when $n$ is small (e.g., $\le 5$), but for
-large $n$ one may have to consider the computational cost and other
-methods.
+large $n$ you will to weigh the computational cost and possibly
+consider other methods.
 
 :::
 
@@ -659,8 +659,11 @@ F_X(x) = \Pr(X = Y_1 + Y_2 \le x)
 = \int_R f(y_1,y_2)\, dy_2 dy_1 \;,
 \end{equation*}
 
-where $R$ is the region "under the the line $y_1 + y_2 = x$. Some care
-is required to distinguish the cases $x \le 1$ and $x>1$.
+where $R$ is the region "under the the line $y_1 + y_2 = x$. However,
+$f$ is non-zero only for the region inside $[0,1]^2$ where it equals
+$1$. The integral therefore equals the are under $y_1 + y_2 = x$ that
+falls inside $[0,1]^2$.  Some care is required to distinguish the
+cases $x \le 1$ and $x>1$.
 
 :::{figure} figs/triangle-distribution-convolution.svg
 :width: 300
@@ -673,7 +676,8 @@ right triangle with side $x$, that is $\frac{1}{2} x^2$, and $F(x) =
 For $x>1$, the area we are looking for is that of the unit square, but
 with the upper right corner chopped off. How large is the area of this
 upper right corner? Answer: $1 - \frac{1}{2} (2-x)^2 = 2x -1 -
-\frac{1}{2} x^2$, and thus $F(x) = 2x -1 - \frac{1}{2} x^2$. This gives us the PDF $f$ of $X$:
+\frac{1}{2} x^2$, and thus $F(x) = 2x -1 - \frac{1}{2} x^2$. This
+gives us the PDF $f$ of $X$:
 
 \begin{equation*}
 f(x) =
@@ -684,20 +688,19 @@ x,& 0 \le 0 \le x < 1\;,\\
 \end{equation*}
 
 This matches exactly what we had under the inverse transform method,
-which is worrisome: this is the $(0,1,2)$ triangular distribution. We
-want $(-1,0,1)$. Subtracting $1$ takes care of that, neatly shifting
-the PDF to the left centering it at $x=0$, justifying the algorithm
-given at the beginning of the example.
+which is worrisome: that evaluation was for the $(0,1,2)$ triangular
+distribution. We want $(-1,0,1)$. Subtracting $1$ takes care of that,
+neatly shifting the PDF to the left centering it at $x=0$, thereby
+justifying the algorithm given at the beginning of this example.
 
 Note that we may view this case as a convolution of three random
 variables, namely $Y_1$, $Y_2$ and the constant $1$. We may also view
 it as a sum of two IID RVs, $Y_1' = Y_1 - 1/2$ and $Y_2' = Y_2 - 1/2$.
 
-For reference, we note that this is a special case of the
-[Irwin-Hall  distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution). This
-distribution is given by $X = \sum_{k=1}^n Y_k$ where the $Y_k$'s for
-$1\le k \le n$ are IID $U(0,1).$ We looked at the special case
-$n=2$.
+For reference, we note that this is a special case of the [Irwin-Hall
+distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution). This
+distribution is given by $X = \sum_{k=1}^n Y_k$ where the $Y_k$'s are
+IID $U(0,1)$ for $1\le k \le n$.  Here we looked at the special case $n=2$.
 
 ::::
 
@@ -707,35 +710,37 @@ $n=2$.
 
 Rejection sampling (also called acceptance-rejection sampling) is a
 remarkable technique for generating variates, a fact that is more
-easily appreciated after examples. We first need to introduce some
-concepts and terminology.
-
-We again address the case of a univariate continuous random variable
-with probability density function $f$ and cumulative distribution
-function $F$, the goal being construct an algorithm for sampling.
+easily appreciated after examples. Note that we are still addressing
+the case of a univariate, continuous random variable with probability
+density function $f$ and cumulative distribution function $F$, where the
+goal is to construct an algorithm for sampling.
 
 ## Rejection sampling algorithm
 
-*  Determine a function $ \phi$ that __majorizes__ the PDF $f$: for all
-   $x$ we have $\phi(x) \ge f(x)$. Note that $ \phi$ is generally not a PDF since
+__Setup:__
+*  Determine a function $ \phi$ that __majorizes__ the PDF $f$: for
+   all $x \in \Omega$ we must have $\phi(x) \ge f(x)$. Note that $
+   \phi$ is generally not a PDF since
+
    \begin{equation*}
      \phi_0 = \int_\Omega \phi(x)\,dx \ge \int_\Omega f(x)\, dx = 1 \;.
    \end{equation*}
+
 * Define the PDF $ \rho$ by $\rho(x) = \phi(x)/\phi_0$.
 
 We remark that $ \phi$ is chosen with foresight so that it is
 relatively easy to generate variates from the distribution belonging
-to $ \rho$. This will be illustrated in examples.
+to $ \rho$. You will see this illustrated in the examples below.
 
 
 __Algorithm__
 
-  1. Generate $y$ from the distribution with PDF $ \rho$
-  2. Generate $u$ from $U(0,1)$
+  1. Generate $y$ from the distribution with PDF $ \rho$.
+  2. Generate $u$ from $U(0,1)$.
   3. __If__ $u\le f(y)/\phi(y)$  __return__ $x = y$; __Else__: Go to step 1.
 
 In other words, we repeatedly go through steps 1 and 2 until the
-condition $u \le f(y)/\phi(y)$ is satisfied and then return the
+condition $u \le f(y)/\phi(y)$ in Step 3 is satisfied and then return the
 corresponding value of $y$. After the example that follow, we will
 return to the algorithm, its interpretation as a random variable, and
 give its proof along with insights on the quantities involved.
@@ -749,7 +754,7 @@ f_{\alpha,\beta}(x) =
 \end{equation*}
 
 where $x\in[0,1]$ and $\alpha,\beta > 0$ are real-valued
-parameters. Also, $ \Gamma$ is the
+parameters. Here, $ \Gamma$ is the
 [https://en.wikipedia.org/wiki/Gamma_function], a generalization of
 the factorial function. For example, for non-negative integers $n$ we
 have $\Gamma(n+1) = n!$. The reciprocal of the coefficient of
@@ -757,8 +762,9 @@ $x^{\alpha-1}(1-x)^{\beta-1}$ is the beta function evaluated at
 $(\alpha,\beta)$. We write $\text{Beta}(\alpha,\beta)$ for the
 [https://en.wikipedia.org/wiki/Beta_distribution].
 
-Clearly, the inverse transform method looks rather cumbersome in this
-case. We focus on the special case $\alpha = 4$ and $\beta = 3$ in which case we have
+Clearly, it look cumbersome to use the inverse transform methodin this
+case. (Why is that?) We focus on the special case $\alpha = 4$ and
+$\beta = 3$ in which case we have
 
 \begin{equation*}
  f(x) = f_{4,3}(x) = 60 x^3 (1-x)^2, \quad\text{for $x\in[0,1]$.}
@@ -766,18 +772,19 @@ case. We focus on the special case $\alpha = 4$ and $\beta = 3$ in which case we
 
 To find a majorizing function $ \phi$, we can here use $\phi(x) =
 f_{\max}$. For a well-behaved function defined over a bounded interval
-$[a,b]$ this choice always works. However, as we will see, it may not
-be the smartest choice.
+$[a,b]$ this choice always works. However, we will see that it may not
+always be the smartest or most efficient choice.
 
-A function like this attains its maximal value where $\frac{df}{dx}$
-equals zero or at the end-points of $[0,1]$. Clearly, $f(0) = f(1) =
-0$, and thus $f_{\max}$ is not attained at those. We see that
+A function like this attains its maximal value either where
+$\frac{df}{dx}$ equals zero, or at the boundaries of the domain
+$[0,1]$. Clearly, $f(0) = f(1) = 0$, and thus $f_{\max}$ is not
+attained at those. We see that
 
 \begin{align*}
 \frac{df}{dx}
 &= 180 x^2(1-x)^2 - 120 x^3(1-x)\\
 &= 60x^2(1-x)[3(1-x)-2x]\\
-&= 60x^2(3-5x)
+&= 60x^2(3-5x) \;,
 \end{align*}
 
 whose only interesting root is $x = \frac{3}{5} = 0.6$, giving $\phi_0
@@ -876,30 +883,32 @@ For the rejection sampling we claim that $\phi$ given by
 \phi(x) = \sqrt{\frac{2e}{\pi}} e^{-x}
 \end{equation*}
 
-is a majorizing function. How does one show that? Examine the ration $\phi/f$:
+is a majorizing function. How does one show that? Examine the ratio $\phi/f$:
 
 \begin{equation*}
 \frac{\phi(x)}{f(x)}
 = \sqrt{\pi/2} \sqrt{2/\pi} e^{1/2-x+x^2/2} = e^{1/2-x+x^2/2}
 \end{equation*}
 
-At $x=0$ the ration is $\sqrt{e}$. Since the exponential function is
+At $x=0$ the ratio is $\sqrt{e}$. Since the exponential function is
 monotone, the ratio is minimal where the exponent is minimal which
-takes place at $x=1$ where the ratio is $1$, establishing the claim.
-By ocular inspection, it is clear that $\rho(x) = e^{-x}$, the PDF of
-the exponential distribution with rate $\lambda = 1$. Clearly, the
-coefficient of $e^{-1}$ in $\phi(x)$ was very carefully chosen.
+takes place at $x=1$ where the ratio is $1$, establishing the claim
+that $ \phi$ majorizes $f$. Clearly, the coefficient of $e^{-x}$ in
+$\phi(x)$ was very carefully chosen.  By ocular inspection, it follows
+that $\rho(x) = e^{-x}$, the PDF of the exponential distribution with
+rate $\lambda = 1$.
 
-We already determined the ratio $f/\phi$ and obtain:
+We already determined the ratio $f/\phi$ and can write down the
+following for rejection sampling:
 
 __Algorithm:__
 
 1) Generate $y$ from $y$ from the exponential distribution  $\text{Exp}(1)$
 2) Generate $u$ from $U(0, 1)$
-3) __If__ $u \le e^{(x-1)^/2}$ __return__ y; __Else__ Go to step 1.
+3) __If__ $u \le e^{(x-1)^2/2}$ __return__ y; __Else__ Go to step 1.
 
-You should be able to quickly adapt the code from the previous example
-to generate a normalized histogram as in
+You should be able to quickly adapt the Python code from the previous example
+to generate a normalized histogram as similar to
 {ref}`fig_beta_4_3_rejection`.
 
 ::::
@@ -928,8 +937,9 @@ majorizing function $ \phi$.
 
 __Question 2:__ What is $\Pr(\text{Accept})$, the probability of
 accept for a single pass of the algorithm? For this, we need the joint
-PDF of $U(0,1)$ and $ \rho$ which equals $ \rho$. We denote the
-common sample space of $f$ and $ \rho$ by $\Omega_1$.
+PDF of $U(0,1)$ and $ \rho$ which equals $ \rho$. The sample space is
+$\Omega = \Omega_1 \times [0,1]$ where the common sample space of $f$
+and $ \rho$ by $\Omega_1$.
 
 \begin{align*}
 \Pr(\text{Accept})
@@ -940,15 +950,16 @@ common sample space of $f$ and $ \rho$ by $\Omega_1$.
 \end{align*}
 
 __Question 3:__ What is the expected number of iterations in the
-algorithm until success? By design, the passes (or trials) in the
+algorithm until success? By design, the passes (or trials) inside the
 algorithm are independent.  The random variable $N$ giving the number
 of passes until acceptance therefore has a geometric distribution with
-parameter $p = 1/\phi_0$ and $\mathbb{E}[N] = 1/p = \phi_0$. The
-lesson here is that the more "generous" we are when selecting the
-majorizing function $ \phi$, the more we have to "pay" in terms of the
-number of passes in the algorithm. If one can closely "wrap" the
-majorizing function $\phi$ around the PDF $f$, the expected number of
-passes in the algorithm ($\phi_0$) drops.
+parameter $p = 1/\phi_0$ and $\mathbb{E}[N] = 1/p = \phi_0$.
+
+A lesson here is that the more "generous" we are when selecting the
+majorizing function $ \phi,$ the more we have to "pay" in terms of the
+number of expacted iterations inside the algorithm. If one can closely
+"wrap" the majorizing function $\phi$ around the PDF $f$, the expected
+number of passes in the algorithm ($\phi_0$) drops.
 
 
 
@@ -957,27 +968,29 @@ passes in the algorithm ($\phi_0$) drops.
 In this example we have a probability density function $f$ given by
 
 \begin{equation*}
- f(x) \propto e^{-x^/2} \sin^2 x
+ f(x) \propto e^{-x^/2} \sin^2 x \;,
 \end{equation*}
 
 where the sample space is $\Omega = \mathbb{R}$. Here $\propto$ means
-"proportional to"; $f$ is as prescribed up to some constant $c$ that
-ensures it is a valid PDF. As we will see, we do not need to determine
-$c$ when we apply the rejection method for generating variates
-following the corresponding distribution. Neat, yes?
+"proportional to", meaning that $f$ is as prescribed up to a
+normalization constant $c$ that ensures it is a valid PDF. As we will
+see, we do not need to determine $c$ when we apply the rejection
+method for generating variates following the corresponding
+distribution. Neat, yes?
 
-If we were forced to determine $c$ we would use
+That being said, if we were forced to determine $c$ we get
 
 \begin{equation*}
  1 = \int_{-\infty}^\infty f(x)\, dx = c \int_{-\infty}^\infty e^{-x^2/2}\sin^2 x\, dx \;,
 \end{equation*}
 
 and, perhaps after using some symbolic software (e.g., Sage or
-Mathematica) or dusting off old integration skills, find that $c =
-(1-\frac{1}{e^2})\sqrt{\frac{\pi}{2}}$. Again, not necessary.
+Mathematica) or dusting off old integration skills, and find that $c =
+(1-\frac{1}{e^2})\sqrt{\frac{\pi}{2}}$. Again, for constructing the
+sampling algorithm, carrying out this computation is not necessary.
 
+Using experience and ocular inspection&trade; leads to the following:
 
-At this stage, experience and ocular inspection is needed.
 
 __Observations:__
 1. The factor $e^{-x^2/2}$ of $f$ is, up to a constant, the PDF of
@@ -988,7 +1001,7 @@ __Observations:__
 __Implication:__
 
 1. The function $\phi(x) \propto e^{-x^2/2}$ majorizes $f$. Here we
-   would use the same constant for $\phi$ as we would  for $f$, namely
+   would use the same constant for $ \phi$ as we would  for $f$, namely
    $c$. Again, we do not need to specify $c$.
 
 2. The PDF $\rho$ is that of the standard normal distribution.
@@ -1003,9 +1016,67 @@ __Summary:__
 This leads to $\frac{f(y)}{\phi(y)} = \sin^2 y$ and the rejection sampling algorithm:
 
 __Algorithm:__
-1. Generate variate $y$ from $N(0,1)$
+1. Generate a variate $y$ from $N(0,1)$
 2. Generate $u$ from $U(0,1)$
 3. __If__ $u \le \sin^2 y$ __return__ y __Else__ go to Step 1.
+
+
+:::{figure} figs/exp-sin_rejection-sampling_plot.svg
+:width: 750
+:label: fig_exp-sin_rejection
+:::
+
+
+:::{tip} Python code
+:class:dropdown
+
+```{code-block} python
+#!/usr/bin/env python3
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+import math
+
+plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Computer Modern Roman"],
+    "text.latex.preamble": r"\usepackage{amsfonts}\usepackage{amsmath}"
+})
+
+def rejection_sampling_exp_sin(n_samples):
+
+    Z = []
+    while len(Z) < n_samples:
+        y = norm.rvs(size=1)[0]
+        u = np.random.uniform(0, 1)
+        if u <= math.sin(y)**2 :
+            Z.append(y)
+    return np.array(Z)
+
+
+bins = 60
+x_split=500
+n = 25000
+
+Z = rejection_sampling_exp_sin(n)
+x = np.linspace(0.0, 1.0, x_split)
+
+plt.figure(figsize=(8, 5))
+plt.hist(Z, bins=bins, density=True, color='steelblue',
+         edgecolor='black', alpha=0.7, label=r'Empirical, normalized histogram for $f(x) \propto e^{-x^2/2} \sin^2 x$')
+
+plt.xlabel(r'$x \in [0, 1]$', fontsize=12)
+plt.ylabel(r'Density $f(x) \propto e^{-x^2/2} \sin^2 x$',  fontsize=12)
+plt.legend(fontsize=12)
+
+plt.savefig("exp-sin_rejection-sampling_plot.pdf")
+plt.savefig("exp-sin_rejection-sampling_plot.svg")
+plt.show()
+```
+
+:::
 
 
 __Question:__ What is the expected number of iteration of the
@@ -1018,13 +1089,35 @@ actually need the normalization constant $c$. Here
 = \frac{2}{1-1/e^2}\;,
 \end{equation*}
 
-which is approximately $2.313$. The probability of acceptance is $1/\phi_0$.
+where we used the value from $\phi_0$ from earlier. This is
+approximately $2.313$. The probability of acceptance is $1/\phi_0$
+which is approximately $0.43$. We emphasize that for constructing the
+rejection-based sampling algorithm, you do not need the normalization
+constant $c$. However, if you want to determine the expected number of
+iterations, you will need it. (Or you can determine it by sampling
+using a slight modification of the algorithm.)
 
 ::::
 
+### A proof of the rejection sampling algorithm
+
 Returning to the general case, how do we prove that the rejection
-sampling algorithm, viewed as a random variable, has PDF $f$? There
-are several ways to do this, but it is quite natural to ...
+sampling algorithm, viewed as a random variable $X$, has PDF $f$? There
+are several ways to do this, but it is quite natural to consider
+__first step analysis__ and use the law of total proability. We can
+consider the random variable $N$ that tracks the number of iteration
+in the algorithm until acceptance.
+
+\begin{align*}
+\Pr(X \le x)
+&= \Pr( X\le x \text{ and } N = 1) + \Pr( X\le x \text{ and } N > 1) \\
+&= \Pr( X\le x | N = 1)\Pr(N=1) + \Pr(X\le x | \Pr(N>1))\Pr(N>1) \\
+&= \frac{1}{\phi_0} \int_{-\infty}^{x} \int_{0}^{f(y)/\phi(y)} \rho(y)\,dy
+  + (1-\frac{1}{\phi_0}) \Pr( X \le x)\\
+&= \frac{1}{\phi_0} \int_{-\infty}^{x} f(y)\,dy  + (1-\frac{1}{\phi_0}) \Pr( X \le x)\\
+\end{align*}
+
+Solving for $\Pr(X \le x)$ gives $\Pr(X \le x) = \int_{-\infty}^{x} f(y)\,dy = F_X(x)$.
 
 
 
@@ -1120,36 +1213,55 @@ f(x) = \begin{cases}
 \end{cases}
 \end{equation*}
 
-a) Which of the form techniques for generating variates from the
+(a) Which of the form techniques for generating variates from the
 distribution of $B$ seems most appropriate?
 
-b) Write an algorithm for generating variates from the distribution of
+(b) Write an algorithm for generating variates from the distribution of
 $B$ based on the inverse transform method.
 
-c) Computationally, how can you verify that your algorithm is correct?
+(c) Computationally, how can you verify that your algorithm is correct?
 
-d) Compare the inverse transform method and the rejection sampling
+(d) Compare the inverse transform method and the rejection sampling
 method for this random variable.
 
 :::
 
-:::{seealso} Problem 2 (Analytic Application: Machine Failure)
+::::{seealso} Problem 2 (Analytic Application: Machine Failure)
 
-A machine is taken out of production either if it fails or after a period of 7 hours. By running
-similar machines until failure, it has been found that time to failure, $F$, has the Weibull distribution with
-$\alpha = 9, \beta = 0.55, \text{ and } \nu = 0$.
+A machine is taken out of production either if (1) it fails or (2)
+after 7 hours of service. Through experiments running similar machines
+until failure, it has been determined that time to failure, denoted by
+$X$, has a Weibull distribution with $\alpha = 9$, $\beta = 0.55$, and
+$\nu = 0$.
 
-a) Write out a step-by-step procedure for generating the time, $X$, until the machine is out of production. _Hint_: This can be expressed through $X = min(F, 7)$.
+:::{warning} Gabriel
 
-b) Calculate the probability is the machine is taken out of production exactly at 7 hours, $P(X=7)$, then the expected time that machine is in production, $E[X]$.
-
-c) Using Crude Monte Carlo, Empirically Estimate $E[X]$ and $P(X=7)$ using $n = 1,000$ samples.
-
-d) Compare your Empirical Estimate to your Analytical Answer from (b).
+Specify which parameter is what using location, scale and shape
+terminology. I assume $\nu$ is the location parameter.
 
 :::
 
-:::{warning} Problem 3 (Analytic Exam-Style Question)
+(a) Prepare a sampling algorithm for the random variable $X'$
+capturing the time until the machine is out of production under the
+above protocol. _Hint_: This can be expressed through $X' = \min(X,
+7)$.
+
+(b) Analytically deterimine the probability is the machine is taken
+out of production exactly at 7 hours, $\Pr(X' = 7)$ and the expected
+time that machine is in production $\mathbb{E}[X']$.
+
+(c) Use the Monte Carlo method to estimate $\mathbb{E}[X']$ and
+$\Pr(X' = 7)$ using $n = 1000$ samples. Do you think $n=1000$ is
+adequate? Explain how you would determine this and give a quantitative
+answer.
+
+(d) Compare your estimate from (c) and the analytic answer from (b).
+
+::::
+
+
+::::{warning} Problem 3 (Analytic exam-style question)
+
 Domain experts have provided their insights regarding a random
 variable that is part of a stochastic model. The insight comes in the
 form of the following probability density function
@@ -1164,33 +1276,60 @@ form of the following probability density function
 
 that captures the associated random variable $X$ of your model.
 
-a) Determine the constant $c$. _Hint_: Use symmetry to
-save yourself some work.
+(a) Determine the constant $c$. _Hint_: Use symmetry to save yourself
+some work.
 
-b) Construct an algorithm for sampling from $X$ using the
-inverse transform method.
+(b) Construct an algorithm for sampling from $X$ using the inverse
+transform method.
 
-c) Explain how you could use the convolution method to
-construct an algorithm for sampling.
+(c) Explain how you could use the convolution method to construct an
+algorithm for sampling.
 
-:::
+(d) Explain how you would approach this problem if you were to use
+existing software libraries.
 
-:::{warning} Problem 4 (Computational Exam-Style Question: Rejection Sampling)
-You need to generate samples from a target distribution $g(x)$ on the interval $x \in [-\pi, \pi]$.
+::::
 
-The distribution is proportional to a "cosine bump":
-$$g(x) \propto 1 + \cos(x), \quad x \in [-\pi, \pi]$$
 
-You decide to use a uniform majorizing distribution, $f(x)$, which is the PDF for $U(-\pi, \pi)$:
+
+:::{warning} Problem 4 (Computational exam-style question for rejection sampling)
+
+You need to generate samples from a target distribution whose PDF $g$
+across $ \Omega = [-\pi, \pi]$ is given by
+
+\begin{equation*}
+g(x) \propto 1 + \cos(x), \quad x \in [-\pi, \pi] \;.
+\end{equation*}
+
+Reaching for the distribution on the bottom shelf, you decide to use a
+constant majorizing function $ \phi$.
+
+<!--
+whose associated PDF $ \rho$  which is the PDF for $U(-\pi,
+\pi)$:
 
 $$f(x) = \frac{1}{2\pi}, \quad x \in [-\pi, \pi]$$
+-->
 
-a) Analytically find the smallest constant $M$ such that $g(x) \le M \cdot f(x)$ for all $x$. _Hint_: The non-normalized target is $h(x) = 1 + \cos(x)$. You need to find $M = \sup_x \frac{h(x)}{f(x)}$.
 
-b) Write Code that generates a single accepted sample $Y$ using rejection
-sampling.
+(a) Analytically determine the smallest (constant) value that you can
+use for $ \phi$.
 
-c) Use your function from part (b) to generate 10,000 accepted samples. Plot a histogram of your samples. On the same plot, overlay the true, normalized PDF $g(x)$.
+(b) Write a Python function that generates a single variate from the
+distribution given by $g$ using rejection sampling.
 
-d) Analyze Efficiency:Keep track of the total number of proposals $N_{total}$ and the number of accepted samples $N_{accepted}$. Calculate the empirical acceptance rate $\frac{N_{accepted}}{N_{total}}$. Compare this to the theoretical acceptance rate, which is $\frac{1}{M}$.
+(c) Use your function from part (b) to generate a sample of size
+$n=10,000$. Visualize your sample as a normalized histogram. In your plot,
+overlay the (normalized) PDF $g$.
+
+(d) Computational efficiency: modify your function from (b) to track
+the number of iterations in the rejection sampling sampling. Use this
+to estimate $\phi_0$, the integral
+
+\begin{equation*}
+\int_{\Omega} 1 + \cos x \, dx\;.
+\end{equation*}
+
+and compare to analytic solution.
+
 :::
