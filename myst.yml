@@ -45,6 +45,8 @@ project:
         - file: Chapter_Probability-and-Stats/probability_statistics.md
     - title: System Modelling
       children:
+        - file: Chapter_System-Modelling/discrete_event.md
+        - file: Chapter_System-Modelling/queuing_systems.md
         # - file: Chapter_System-Modelling/introduction.md
         # - file: Chapter_System-Modelling/differential_equations.md
         # - file: Chapter_System-Modelling/agent_based_models.md
