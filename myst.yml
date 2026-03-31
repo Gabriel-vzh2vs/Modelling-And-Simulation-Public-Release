@@ -101,7 +101,7 @@ project:
               - file: Chapter_Lab/labs_folder/lab5.md
               - file: Chapter_Lab/labs_folder/lab6.md
               - file: Chapter_Lab/labs_folder/lab7.md
-              # - file: Chapter_Lab/labs_folder/lab8.md
+              - file: Chapter_Lab/labs_folder/lab8.md
               # - file: Chapter_Lab/labs_folder/lab9.md
               # - file: Chapter_Lab/labs_folder/lab10.md
               # - file: Chapter_Lab/labs_folder/lab11.md
