@@ -133,6 +133,9 @@ project:
         - file: Chapter_State-Machines/deterministic-finite-automata.md
         - file: Chapter_State-Machines/nondeterministic-finite-automata.md
         - file: Chapter_State-Machines/cellular-automata.md
+    - title: Complex Systems and Agent Based Modelling
+      children:
+        - file: Chapter_Agent-Based-Modelling/introduction.md
     - title: Appendix
       children:
         - file: Chapter_Appendix/glossary.md
